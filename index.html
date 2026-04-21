@@ -3,36 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RadarLat - RADIO</title>
+    <title>RADARLAT RADIO</title>
     <style>
-        body {
-            background-color: #000;
-            color: #00ff00; /* Tu verde radar */
-            font-family: 'Courier New', Courier, monospace;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            border: 2px solid #00ff00;
-            border-radius: 15px;
-            padding: 30px;
-            max-width: 800px;
-            margin: auto;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
-        }
-        h1 { font-size: 2em; letter-spacing: 5px; }
-        .status { color: #fff; font-size: 0.9em; margin-bottom: 20px; }
-    </style>
-
-    </head>
-<body>
-    <div class="container">
-        <h1>RADARLAT RADIO</h1>
-        <div class="status">ESTADO: CONSOLA INDEPENDIENTE ACTIVA</div>
-        <p>Selecciona una frecuencia en el menú inferior de tu Radar.</p>
+        body { background-color: #000; color: #0f0; font-family: monospace; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
         
+        /* Reproductor Fijo Arriba */
+        .player-container { width: 100%; max-width: 500px; border: 2px solid #0f0; padding: 15px; text-align: center; margin-bottom: 20px; box-sizing: border-box; }
+        #radio-title { font-size: 1.2em; margin-bottom: 10px; text-transform: uppercase; }
+        audio { width: 100%; filter: invert(100%) hue-rotate(90deg) brightness(1.5); }
+
+        /* Grilla de Radios (Iconos Cuadrados) */
+        .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; width: 100%; max-width: 500px; }
+        .radio-card { border: 1px solid #0f0; aspect-ratio: 1/1; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; text-decoration: none; color: #0f0; font-size: 0.8em; text-align: center; padding: 5px; }
+        .radio-card:hover { background: #0f0; color: #000; }
+        .radio-card img { width: 60%; height: auto; margin-bottom: 5px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="player-container">
+        <div id="radio-title">Seleccione una emisora</div>
+        <audio id="audio-player" controls autoplay>
+            <source id="audio-source" src="" type="audio/mpeg">
+            Tu navegador no soporta audio.
+        </audio>
+    </div>
+
+    <div class="grid-container">
+        <div class="radio-card" onclick="playRadio('Radio Mitre', 'https://cienradios-stream.com/mitre.mp3')">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR07fJ06jE7PIm0E9o6iO8V_Xz7f6E_Yf0vZA&s" alt="Mitre">
+            <span>MITRE</span>
         </div>
-    <script src="https://pl29216392.profitablecpmratenetwork.com/3a/8d/7f/3a8d7fe0fbbb500772dcf370ff6b85bf.js"></script>
-</body>
+
+        <div class="radio-card" onclick="playRadio('La 100', 'https://cienradios-stream.com/la100.mp3')">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8Xh_p9QjOQYp6I2U6mX_9vH3r_v4eN6E9gA&s" alt="La 100">
+            <span>LA 100</span>
+        </div>
+
+        <div class="radio-card" onclick="playRadio('Rivadavia', 'https://streaming.latam.pro/8024/stream')">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7yqP5kG9X4p0Rz_fL5H3e6L9v7g6E_9f0vZA&s" alt="Rivadavia">
+            <span>RIVADAVIA</span>
+        </div>
+        
+        <div class="radio-card" onclick="playRadio('Aspen 102.3', 'https://streaming.latam.pro/8014/stream')">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8n0e_J9z8e0v-G_pX0uH9G4J6f0e_6f0vZA&s" alt="Aspen">
+            <span>ASPEN</span>
+        </div>
+    </div>
+
+    <script>
+        function playRadio(name, url) {
+            const player = document.getElementById('audio-player');
+            const source = document.getElementById('audio-source');
+            const title = document.getElementById('radio-title');
+            
+            title.innerText = "Reproduciendo: " + name;
+            source.src = url;
+            player.load();
+            player.play();
+        }
+    </script>
+<script src="https://pl29216392.profitablecpmratenetwork.com/3a/8d/7f/3a8d7fe0fbbb500772dcf370ff6b85bf.js"></script>
+  </body>
 </html>
