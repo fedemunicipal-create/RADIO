@@ -5,15 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RADARLAT RADIO</title>
     <style>
-        body { 
-            background-color: #000; 
-            color: #fff; 
-            font-family: sans-serif; 
-            margin: 0; 
-            padding: 0; 
+        /* Este permite el scroll hacia el costado */
+        .grid-radios { 
+            display: flex; 
+            overflow-x: auto; 
+            gap: 15px; 
+            width: 100%;
+            padding: 10px 0;
+            scrollbar-width: none; /* Oculta barra en Firefox */
+        }
+
+        .grid-radios::-webkit-scrollbar { display: none; } /* Oculta barra en Chrome/Celu */
+
+        .radio-item { 
+            flex: 0 0 110px; /* Obliga a los iconos a no achicarse y mantener su tamaño */
             display: flex; 
             flex-direction: column; 
             align-items: center; 
+        }
+
+        /* Estilo para que el título parezca un link */
+        .category-label {
+            display: block;
+            font-weight: bold;
+            font-size: 14px;
+            color: #888;
+            margin: 20px 0 10px 0;
+            text-decoration: none; /* Por ahora sin subrayado */
+            text-transform: uppercase;
+        }
+
+        .category-label:hover {
+            color: #fff; /* Se ilumina al pasar el mouse o tocarlo */
         }
 
         /* REPRODUCTOR FIJO ARRIBA */
