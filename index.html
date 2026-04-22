@@ -5,65 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RADARLAT RADIO</title>
     <style>
-        /* Estética RadarLat Original */
         body { 
             background-color: #000; 
             color: #fff; 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            font-family: sans-serif; 
             margin: 0; 
-            padding: 20px; 
+            padding: 0; 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
         }
 
-        /* Reproductor Superior Minimalista */
+        /* REPRODUCTOR FIJO ARRIBA */
         .player-header {
+            position: sticky;
+            top: 0;
             width: 100%;
-            max-width: 500px;
             background: #111;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 30px;
+            padding: 20px 0;
+            z-index: 1000;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            border-bottom: 1px solid #333;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.8);
         }
 
         #radio-title { 
-            font-size: 14px; 
-            color: #aaa; 
+            font-size: 12px; 
+            color: #888; 
             text-transform: uppercase; 
-            margin-bottom: 15px;
-            letter-spacing: 1px;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
         }
 
-        audio { width: 100%; height: 40px; }
+        audio { width: 90%; max-width: 400px; height: 35px; filter: invert(100%); }
 
-        /* Estilo de Etiquetas de Categoría */
-        .category-label {
+        /* CONTENIDO DESLIZABLE */
+        .content {
             width: 100%;
             max-width: 500px;
-            font-weight: bold;
-            font-size: 16px;
-            color: #888;
-            margin: 20px 0 15px 0;
-            text-align: left;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
-        /* Grilla de Iconos Redondeados (Idéntica a tu captura) */
+        .category-label {
+            font-weight: bold;
+            font-size: 14px;
+            color: #555;
+            margin: 20px 0 15px 5px;
+            text-transform: uppercase;
+        }
+
         .grid-radios { 
             display: grid; 
             grid-template-columns: repeat(3, 1fr); 
             gap: 15px; 
-            width: 100%; 
-            max-width: 500px; 
         }
 
         .radio-item { 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
-            text-decoration: none; 
             cursor: pointer;
         }
 
@@ -71,27 +72,23 @@
             background-color: #fff; 
             width: 100%; 
             aspect-ratio: 1/1; 
-            border-radius: 18px; /* El redondeado exacto de tu foto */
+            border-radius: 20px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             overflow: hidden;
             margin-bottom: 8px;
-            transition: transform 0.2s;
         }
 
-        .icon-box:active { transform: scale(0.95); }
-
         .icon-box img { 
-            width: 80%; 
+            width: 75%; 
             height: auto; 
             object-fit: contain; 
         }
 
         .radio-name { 
             color: #fff; 
-            font-size: 11px; 
-            font-weight: 500;
+            font-size: 10px; 
             text-align: center;
         }
     </style>
@@ -99,42 +96,39 @@
 <body>
 
     <div class="player-header">
-        <div id="radio-title">Selecciona una emisora</div>
+        <div id="radio-title">ESCUCHANDO: SELECCIONA UNA RADIO</div>
         <audio id="audio-player" controls autoplay>
             <source id="audio-source" src="" type="audio/mpeg">
         </audio>
     </div>
 
-    <div class="category-label">RADIOS ARGENTINAS</div>
-
-    <div class="grid-radios">
-        <div class="radio-item" onclick="playRadio('Radio Mitre', 'https://cienradios-stream.com/mitre.mp3')">
-            <div class="icon-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR07fJ06jE7PIm0E9o6iO8V_Xz7f6E_Yf0vZA&s"></div>
-            <div class="radio-name">Radio Mitre</div>
+    <div class="content">
+        <div class="category-label">RADIOS ARGENTINAS</div>
+        <div class="grid-radios">
+            <div class="radio-item" onclick="playRadio('RADIO MITRE', 'https://cienradios-stream.com/mitre.mp3')">
+                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Logo_Radio_Mitre.png/250px-Logo_Radio_Mitre.png"></div>
+                <div class="radio-name">Radio Mitre</div>
+            </div>
+            <div class="radio-item" onclick="playRadio('LA 100', 'https://cienradios-stream.com/la100.mp3')">
+                <div class="icon-box"><img src="https://mir-s3-cdn-cf.behance.net/projects/404/69666729.547900b99217a.png"></div>
+                <div class="radio-name">La 100</div>
+            </div>
+            <div class="radio-item" onclick="playRadio('ASPEN', 'https://streaming.latam.pro/8014/stream')">
+                <div class="icon-box"><img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/33215b24346903.563332467657d.png"></div>
+                <div class="radio-name">Aspen</div>
+            </div>
         </div>
 
-        <div class="radio-item" onclick="playRadio('La 100', 'https://cienradios-stream.com/la100.mp3')">
-            <div class="icon-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8Xh_p9QjOQYp6I2U6mX_9vH3r_v4eN6E9gA&s"></div>
-            <div class="radio-name">La 100</div>
-        </div>
-
-        <div class="radio-item" onclick="playRadio('Aspen 102.3', 'https://streaming.latam.pro/8014/stream')">
-            <div class="icon-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8n0e_J9z8e0v-G_pX0uH9G4J6f0e_6f0vZA&s"></div>
-            <div class="radio-name">Aspen</div>
-        </div>
-    </div>
-
-    <div class="category-label">LATINOAMÉRICA</div>
-
-    <div class="grid-radios">
-        <div class="radio-item" onclick="playRadio('RPP Noticias', 'https://18543.live.streamtheworld.com/RPP_SC')">
-            <div class="icon-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAtC1P54_1_Vf6I6_p_2o8M_5mH_WpX_f_VA&s"></div>
-            <div class="radio-name">RPP</div>
-        </div>
-
-        <div class="radio-item" onclick="playRadio('Caracol Radio', 'https://20813.live.streamtheworld.com/CARACOL_RADIO_SC')">
-            <div class="icon-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXA_hZpU0A3Lz4_Y4I_7R8pG_A_f_H_f_VA&s"></div>
-            <div class="radio-name">Caracol Radio</div>
+        <div class="category-label">LATINOAMÉRICA</div>
+        <div class="grid-radios">
+            <div class="radio-item" onclick="playRadio('RPP NOTICIAS', 'https://18543.live.streamtheworld.com/RPP_SC')">
+                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Logo_RPP_2017.png"></div>
+                <div class="radio-name">RPP</div>
+            </div>
+            <div class="radio-item" onclick="playRadio('CARACOL RADIO', 'https://20813.live.streamtheworld.com/CARACOL_RADIO_SC')">
+                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Caracol_Radio_logo.svg/1200px-Caracol_Radio_logo.svg.png"></div>
+                <div class="radio-name">Caracol Radio</div>
+            </div>
         </div>
     </div>
 
@@ -143,12 +137,12 @@
             const player = document.getElementById('audio-player');
             const source = document.getElementById('audio-source');
             const title = document.getElementById('radio-title');
-            title.innerText = "Escuchando: " + name;
+            title.innerText = "ESCUCHANDO: " + name;
             source.src = url;
             player.load();
             player.play();
         }
     </script>
 <script src="https://pl29216392.profitablecpmratenetwork.com/3a/8d/7f/3a8d7fe0fbbb500772dcf370ff6b85bf.js"></script>
-   </body>
+ </body>
 </html>
