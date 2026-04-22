@@ -22,69 +22,63 @@
             display: flex; 
             flex-direction: column; 
             align-items: center; 
+ <style>
+        /* 1. FONDO Y CUERPO */
+        body { 
+            background-color: #000 !important; 
+            color: #fff; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
         }
 
-        /* Estilo para que el título parezca un link */
-        .category-label {
-            display: block;
-            font-weight: bold;
-            font-size: 14px;
-            color: #888;
-            margin: 20px 0 10px 0;
-            text-decoration: none; /* Por ahora sin subrayado */
-            text-transform: uppercase;
-        }
-
-        .category-label:hover {
-            color: #fff; /* Se ilumina al pasar el mouse o tocarlo */
-        }
-
-        /* REPRODUCTOR FIJO ARRIBA */
+        /* 2. REPRODUCTOR FIJO ARRIBA */
         .player-header {
             position: sticky;
             top: 0;
             width: 100%;
             background: #111;
-            padding: 20px 0;
+            padding: 15px 0;
             z-index: 1000;
             text-align: center;
-            border-bottom: 1px solid #333;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.8);
+            border-bottom: 1px solid #222;
         }
 
         #radio-title { 
-            font-size: 12px; 
+            font-size: 11px; 
             color: #888; 
             text-transform: uppercase; 
-            margin-bottom: 10px;
-            letter-spacing: 2px;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
         }
 
-        audio { width: 90%; max-width: 400px; height: 35px; filter: invert(100%); }
+        audio { width: 90%; max-width: 400px; height: 30px; filter: invert(100%); }
 
-        /* CONTENIDO DESLIZABLE */
+        /* 3. CONTENEDOR DE SCROLL HORIZONTAL */
         .content {
             width: 100%;
-            max-width: 500px;
-            padding: 20px;
+            max-width: 600px;
+            padding: 15px;
             box-sizing: border-box;
         }
 
-        .category-label {
-            font-weight: bold;
-            font-size: 14px;
-            color: #555;
-            margin: 20px 0 15px 5px;
-            text-transform: uppercase;
-        }
-
         .grid-radios { 
-            display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
+            display: flex; 
+            overflow-x: auto; 
             gap: 15px; 
+            width: 100%;
+            padding: 10px 0;
+            scrollbar-width: none; /* Oculta barra en Firefox */
         }
 
+        .grid-radios::-webkit-scrollbar { display: none; } /* Oculta barra en Chrome/Celu */
+
+        /* 4. ICONOS Y CATEGORÍAS */
         .radio-item { 
+            flex: 0 0 105px; /* Tamaño fijo para que no se achiquen al scrollear */
             display: flex; 
             flex-direction: column; 
             align-items: center; 
@@ -103,17 +97,21 @@
             margin-bottom: 8px;
         }
 
-        .icon-box img { 
-            width: 75%; 
-            height: auto; 
-            object-fit: contain; 
+        .icon-box img { width: 75%; height: auto; object-fit: contain; }
+
+        .radio-name { color: #fff; font-size: 10px; text-align: center; }
+
+        .category-label {
+            display: inline-block;
+            font-weight: bold;
+            font-size: 14px;
+            color: #888;
+            margin: 20px 0 5px 0;
+            text-decoration: none;
+            text-transform: uppercase;
         }
 
-        .radio-name { 
-            color: #fff; 
-            font-size: 10px; 
-            text-align: center;
-        }
+        .category-label:hover { color: #fff; }
     </style>
 </head>
 <body>
