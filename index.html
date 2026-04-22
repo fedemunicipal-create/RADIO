@@ -5,29 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RADARLAT RADIO</title>
     <style>
-        /* Este permite el scroll hacia el costado */
-        .grid-radios { 
-            display: flex; 
-            overflow-x: auto; 
-            gap: 15px; 
-            width: 100%;
-            padding: 10px 0;
-            scrollbar-width: none; /* Oculta barra en Firefox */
-        }
-
-        .grid-radios::-webkit-scrollbar { display: none; } /* Oculta barra en Chrome/Celu */
-
-        .radio-item { 
-            flex: 0 0 110px; /* Obliga a los iconos a no achicarse y mantener su tamaño */
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
- <style>
-        /* 1. FONDO Y CUERPO */
+        /* BASE Y FONDO */
         body { 
             background-color: #000 !important; 
             color: #fff; 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            font-family: -apple-system, system-ui, sans-serif; 
             margin: 0; 
             padding: 0; 
             display: flex; 
@@ -35,7 +17,7 @@
             align-items: center; 
         }
 
-        /* 2. REPRODUCTOR FIJO ARRIBA */
+        /* REPRODUCTOR FIJO ARRIBA */
         .player-header {
             position: sticky;
             top: 0;
@@ -44,41 +26,42 @@
             padding: 15px 0;
             z-index: 1000;
             text-align: center;
-            border-bottom: 1px solid #222;
+            border-bottom: 1px solid #333;
         }
 
-        #radio-title { 
-            font-size: 11px; 
-            color: #888; 
-            text-transform: uppercase; 
-            margin-bottom: 8px;
-            letter-spacing: 1px;
+        #radio-title { font-size: 11px; color: #888; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+        audio { width: 90%; max-width: 400px; height: 35px; filter: invert(100%); }
+
+        /* CONTENEDOR PRINCIPAL */
+        .content { width: 100%; max-width: 600px; padding: 10px; box-sizing: border-box; }
+
+        /* ESTILO DE TÍTULOS (LINKS) */
+        .category-label {
+            display: inline-block;
+            font-weight: bold;
+            font-size: 14px;
+            color: #aaa;
+            margin: 25px 0 10px 10px;
+            text-decoration: none;
+            text-transform: uppercase;
         }
+        .category-label:hover { color: #fff; }
 
-        audio { width: 90%; max-width: 400px; height: 30px; filter: invert(100%); }
-
-        /* 3. CONTENEDOR DE SCROLL HORIZONTAL */
-        .content {
-            width: 100%;
-            max-width: 600px;
-            padding: 15px;
-            box-sizing: border-box;
-        }
-
+        /* CARRUSEL DE SCROLL LATERAL */
         .grid-radios { 
             display: flex; 
             overflow-x: auto; 
             gap: 15px; 
             width: 100%;
-            padding: 10px 0;
-            scrollbar-width: none; /* Oculta barra en Firefox */
+            padding: 5px 10px 15px 10px;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE */
         }
+        .grid-radios::-webkit-scrollbar { display: none; } /* Chrome/Safari */
 
-        .grid-radios::-webkit-scrollbar { display: none; } /* Oculta barra en Chrome/Celu */
-
-        /* 4. ICONOS Y CATEGORÍAS */
+        /* CADA BOTÓN DE RADIO */
         .radio-item { 
-            flex: 0 0 105px; /* Tamaño fijo para que no se achiquen al scrollear */
+            flex: 0 0 100px; /* Tamaño del cuadrado */
             display: flex; 
             flex-direction: column; 
             align-items: center; 
@@ -87,9 +70,9 @@
 
         .icon-box { 
             background-color: #fff; 
-            width: 100%; 
-            aspect-ratio: 1/1; 
-            border-radius: 20px; 
+            width: 100px; 
+            height: 100px; 
+            border-radius: 18px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
@@ -97,63 +80,125 @@
             margin-bottom: 8px;
         }
 
-        .icon-box img { width: 75%; height: auto; object-fit: contain; }
+        .icon-box img { width: 80%; height: 80%; object-fit: contain; }
 
-        .radio-name { color: #fff; font-size: 10px; text-align: center; }
-
-        .category-label {
-            display: inline-block;
-            font-weight: bold;
-            font-size: 14px;
-            color: #888;
-            margin: 20px 0 5px 0;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .category-label:hover { color: #fff; }
+        .radio-name { color: #fff; font-size: 10px; text-align: center; font-weight: 500; line-height: 1.2; }
+        .radio-country { color: #666; font-size: 9px; text-align: center; margin-top: 2px; }
     </style>
 </head>
 <body>
 
     <div class="player-header">
-        <div id="radio-title">ESCUCHANDO: SELECCIONA UNA RADIO</div>
+        <div id="radio-title">Selecciona una emisora</div>
         <audio id="audio-player" controls autoplay>
             <source id="audio-source" src="" type="audio/mpeg">
         </audio>
     </div>
 
     <div class="content">
-        <div class="category-label">RADIOS ARGENTINAS</div>
+
+        <a href="#" class="category-label">ARGENTINA ></a>
         <div class="grid-radios">
-            <div class="radio-item" onclick="playRadio('RADIO MITRE', 'https://playerservices.streamtheworld.com/api/livestream-redirect/AM790_56AAC_SC')">
-                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Logo_Mitre_SA.svg/1280px-Logo_Mitre_SA.svg.png"></div>
+            <div class="radio-item" onclick="playRadio('Radio Mitre', 'https://cienradios-stream.com/mitre.mp3')">
+                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Logo_Radio_Mitre.png/250px-Logo_Radio_Mitre.png"></div>
                 <div class="radio-name">Radio Mitre</div>
+                <div class="radio-country">Argentina</div>
             </div>
-            <div class="radio-item" onclick="playRadio('LA 100', 'https://playerservices.streamtheworld.com/api/livestream-redirect/FM999_56.mp3')">
-                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/5/52/Logo_La100_Verde.JPG"></div>
-                <div class="radio-name">La 100</div>
             </div>
-            <div class="radio-item" onclick="playRadio('ASPEN', 'https://playerservices.streamtheworld.com/api/livestream-redirect/ASPEN.mp3')">
-                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Aspen102.jpg"></div>
-                <div class="radio-name">Aspen</div>
+
+        <a href="#" class="category-label">CHILE ></a>
+        <div class="grid-radios">
+            <div class="radio-item" onclick="playRadio('Radio Bio Bio', 'https://unlimited11-us.streamakaci.com/biobioweb')">
+                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Radio_B%C3%ADo-B%C3%ADo.svg/1200px-Radio_B%C3%ADo-B%C3%ADo.svg.png"></div>
+                <div class="radio-name">Bio Bio</div>
+                <div class="radio-country">Chile</div>
             </div>
         </div>
 
-        <div class="category-label">LATINOAMÉRICA</div>
+        <a href="#" class="category-label">URUGUAY ></a>
         <div class="grid-radios">
-            <div class="radio-item" onclick="playRadio('RPP NOTICIAS', 'https://mdstrm.com/audio/5fab3416b5f9ef165cfab6e9/icecast.audio')">
-                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Radio_Programas_del_Per%C3%BA_logo.svg/960px-Radio_Programas_del_Per%C3%BA_logo.svg.png"></div>
-                <div class="radio-name">RPP Peru</div>
+            <div class="radio-item" onclick="playRadio('Radio Sarandí', 'https://shoutcast.sarandi690.com.uy/sarandi690')">
+                <div class="icon-box"><img src="https://www.sarandi690.com.uy/wp-content/uploads/2018/11/logo_sarandi.png"></div>
+                <div class="radio-name">Sarandí</div>
+                <div class="radio-country">Uruguay</div>
             </div>
-            <div class="radio-item" onclick="playRadio('CARACOL RADIO', 'https://20813.live.streamtheworld.com/CARACOL_RADIO_SC')">
-                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/5/52/CaracolRadio2026.png"></div>
-                <div class="radio-name">Caracol Radio Colombia</div>
-            </div>
-            <div class="radio-item" onclick="playRadio('ADN', 'https://playerservices.streamtheworld.com/api/livestream-redirect/ADNAAC.aac')">
-                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/ADN_Radio_Chile.svg/1920px-ADN_Radio_Chile.svg.png"></div>
-                <div class="radio-name">ADN Chile</div>
         </div>
+
+        <a href="#" class="category-label">PARAGUAY ></a>
+        <div class="grid-radios">
+             <div class="radio-item" onclick="playRadio('ABC Cardinal', 'https://streaming.abc.com.py:8000/cardinal')">
+                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7f/Logo_ABC_Cardinal_730_AM.png"></div>
+                <div class="radio-name">ABC Cardinal</div>
+                <div class="radio-country">Paraguay</div>
+            </div>
+        </div>
+
+        <a href="#" class="category-label">BRASIL ></a>
+        <div class="grid-radios">
+            <div class="radio-item" onclick="playRadio('Jovem Pan', 'https://26503.live.streamtheworld.com/JP_SAO_PAULO_SC')">
+                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/2/23/Logo_Jovem_Pan.png"></div>
+                <div class="radio-name">Jovem Pan</div>
+                <div class="radio-country">Brasil</div>
+            </div>
+        </div>
+
+        <a href="#" class="category-label">PERÚ ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">BOLIVIA ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">ECUADOR ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">VENEZUELA ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">COLOMBIA ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">MÉXICO ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">PANAMÁ ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">GUATEMALA ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">EL SALVADOR ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">NICARAGUA ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">HONDURAS ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">COSTA RICA ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">CUBA ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">DOMINICANA ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">PUERTO RICO ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">EEUU ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">ESPAÑA ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">FRANCIA ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">ALEMANIA ></a>
+        <div class="grid-radios"></div>
+
     </div>
 
     <script>
@@ -161,12 +206,12 @@
             const player = document.getElementById('audio-player');
             const source = document.getElementById('audio-source');
             const title = document.getElementById('radio-title');
-            title.innerText = "ESCUCHANDO: " + name;
+            title.innerText = "Escuchando: " + name;
             source.src = url;
             player.load();
             player.play();
         }
     </script>
-<script src="https://pl29216392.profitablecpmratenetwork.com/3a/8d/7f/3a8d7fe0fbbb500772dcf370ff6b85bf.js"></script>
- </body>
+    <script src="https://pl29216392.profitablecpmratenetwork.com/3a/8d/7f/3a8d7fe0fbbb500772dcf370ff6b85bf.js"></script>
+</body>
 </html>
