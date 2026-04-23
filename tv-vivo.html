@@ -1,1 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RADARLAT RADIO</title>
+    <style>
+      /* Pantalla de TV fija arriba */
+.pantalla-tv {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    z-index: 1000;
+    border-bottom: 2px solid #333;
+}
+.pantalla-tv iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
 
+/* Ajuste para que el contenido no se pegue al reproductor */
+body {
+    padding-top: 0;
+}
+        /* BASE Y FONDO */
+        body { 
+            background-color: #000 !important; 
+            color: #fff; 
+            font-family: -apple-system, system-ui, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+        }
+
+        /* REPRODUCTOR FIJO ARRIBA */
+        .player-header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: #111;
+            padding: 15px 0;
+            z-index: 1000;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+
+        #radio-title { font-size: 11px; color: #888; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
+        audio { width: 90%; max-width: 400px; height: 35px; filter: invert(100%); }
+
+        /* CONTENEDOR PRINCIPAL */
+        .content { width: 100%; max-width: 600px; padding: 10px; box-sizing: border-box; }
+
+        /* ESTILO DE TÍTULOS (LINKS) */
+        .category-label {
+            display: inline-block;
+            font-weight: bold;
+            font-size: 14px;
+            color: #aaa;
+            margin: 25px 0 10px 10px;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+        .category-label:hover { color: #fff; }
+
+        /* CARRUSEL DE SCROLL LATERAL */
+        .grid-radios { 
+            display: flex; 
+            overflow-x: auto; 
+            gap: 15px; 
+            width: 100%;
+            padding: 5px 10px 15px 10px;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE */
+        }
+        .grid-radios::-webkit-scrollbar { display: none; } /* Chrome/Safari */
+
+        /* CADA BOTÓN DE RADIO */
+        .radio-item { 
+            flex: 0 0 100px; /* Tamaño del cuadrado */
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            cursor: pointer;
+        }
+
+        .icon-box { 
+            background-color: #fff; 
+            width: 100px; 
+            height: 100px; 
+            border-radius: 18px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .icon-box img { width: 80%; height: 80%; object-fit: contain; }
+
+        .radio-name { color: #fff; font-size: 10px; text-align: center; font-weight: 500; line-height: 1.2; }
+        .radio-country { color: #666; font-size: 9px; text-align: center; margin-top: 2px; }
+        .dot {
+  height: 9px;
+  width: 9px;
+  background-color: #ff0000;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 7px;
+  box-shadow: 0 0 8px #ff0000;
+  animation: parpadeo 1.5s infinite;
+}
+
+@keyframes parpadeo {
+  0% { opacity: 0.4; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 12px #ff0000; }
+  100% { opacity: 0.4; transform: scale(0.9); }
+}
+
+.radar-nav-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background: #000;
+  padding: 20px 0;
+  z-index: 9999;
+}
+
+.nav-btn a {font-size:18px;
+            font-weight: bold;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  display: flex;
+  align-items: center;
+}
+    </style>
+</head>
+<body>
+
+    <div class="player-header">
+        <div id="radio-title">Selecciona una emisora</div>
+        <audio id="audio-player" controls autoplay>
+            <source id="audio-source" src="" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <div class="content">
+
+        <a href="#" class="category-label">ARGENTINA ></a>
+        <div class="grid-radios">
+            <div class="radio-item" onclick="playRadio('Radio Mitre', 'https://playerservices.streamtheworld.com/api/livestream-redirect/AM790_56AAC_SC')">
+                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Logo_Mitre_SA.svg/1280px-Logo_Mitre_SA.svg.png"></div>
+                <div class="radio-name">Radio Mitre</div>
+                <div class="radio-country">Argentina</div>
+            </div>
+            <div class="radio-item" onclick="playRadio('LA 100', 'https://playerservices.streamtheworld.com/api/livestream-redirect/FM999_56.mp3')">
+    <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/5/52/Logo_La100_Verde.JPG"></div>
+    <div class="radio-name">La 100</div>
+    <div class="radio-country">Argentina</div>
+            </div>
+            <div class="radio-item" onclick="playRadio('Radio Rivadavia', 'https://playerservices.streamtheworld.com/api/livestream-redirect/RIVADAVIAAAC.aac')">
+    <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/LS5Rivadavia2023.svg/1920px-LS5Rivadavia2023.svg.png"></div>
+    <div class="radio-name">Radio Rivadavia</div>
+    <div class="radio-country">Argentina</div>
+            </div>
+            <div class="radio-item" onclick="playRadio('Radio 10', 'https://radio10.stweb.tv/radio10/live/playlist.m3u8')">
+    <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Logo-radio10.svg/1280px-Logo-radio10.svg.png"></div>
+    <div class="radio-name">Radio 10</div>
+    <div class="radio-country">Argentina</div>
+            </div>
+            <div class="radio-item" onclick="playRadio('La Red AM910', 'https://playerservices.streamtheworld.com/api/livestream-redirect/LA_RED_AM910AAC.aac')">
+    <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Radio_La_Red_AM_910.png"></div>
+    <div class="radio-name">La Red AM910</div>
+    <div class="radio-country">Argentina</div>
+            </div>
+            <div class="radio-item" onclick="playRadio('AM 750', 'https://streaming1.locucionar.com:8114/stream')">
+    <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/AM_750_logo.svg/1920px-AM_750_logo.svg.png"></div>
+    <div class="radio-name">AM 750</div>
+    <div class="radio-country">Argentina</div>
+            </div>
+            <div class="radio-item" onclick="playRadio('Radio Boing', 'https://streaming.redboing.com/radio/8000/radio.aac')">
+    <div class="icon-box"><img src="https://cdn-profiles.tunein.com/s240988/images/logod.png?t=637560119770000000"></div>
+    <div class="radio-name">Radio Boing</div>
+    <div class="radio-country">Argentina</div>
+            </div>
+        </div>
+
+        <a href="#" class="category-label">CHILE ></a>
+        <div class="grid-radios">
+            <div class="radio-item" onclick="playRadio('Radio Bio Bio', 'https://unlimited3-cl.dps.live/biobiosantiago/mp3/icecast.audio')">
+                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Logo_Biob%C3%ADo_Chile.png/960px-Logo_Biob%C3%ADo_Chile.png"></div>
+                <div class="radio-name">Bio Bio</div>
+                <div class="radio-country">Chile</div>
+              </div>
+                <div class="radio-item" onclick="playRadio('ADN', 'https://playerservices.streamtheworld.com/api/livestream-redirect/ADNAAC.aac')">
+                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/ADN_Radio_Chile.svg/1920px-ADN_Radio_Chile.svg.png"></div>
+                <div class="radio-name">ADN</div>
+                <div class="radio-country">Chile</div>
+              </div>
+                <div class="radio-item" onclick="playRadio('Radio Cooperativa', 'https://unlimited3-cl.dps.live/cooperativafm/mp3/icecast.audio')">
+                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Radio_Cooperativa_Logo.svg/1920px-Radio_Cooperativa_Logo.svg.png"></div>
+                <div class="radio-name">Radio Cooperativa</div>
+                <div class="radio-country">Chile</div>
+              </div>
+                <div class="radio-item" onclick="playRadio('Tele 13', 'https://mdstrm.com/audio/5c915613519bce27671c4caa/live.m3u8')">
+                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Tele13Radio2025.png"></div>
+                <div class="radio-name">Tele 13</div>
+                <div class="radio-country">Chile</div>
+              </div>
+                <div class="radio-item" onclick="playRadio('Radio Agricultura', 'https://unlimited4-us.dps.live/agricultura/gotardis/audio/now/livestream1.m3u8')">
+                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9c/Logotipo_radio_Agricultura.jpg"></div>
+                <div class="radio-name">Radio Agricultura</div>
+                <div class="radio-country">Chile</div>
+            </div>
+        </div>
+
+        <a href="#" class="category-label">URUGUAY ></a>
+        <div class="grid-radios">
+            <div class="radio-item" onclick="playRadio('Radio Sarandí', 'https://radiolatina.live:10977/sarandi')">
+                <div class="icon-box"><img src="https://alba-uy-sarandi.cdn.mediatiquepress.com/wp-content/uploads/2019/04/Logo-Sarand%c3%ad.jpg"></div>
+                <div class="radio-name">Sarandí</div>
+                <div class="radio-country">Uruguay</div>
+            </div>
+        </div>
+
+        <a href="#" class="category-label">PARAGUAY ></a>
+        <div class="grid-radios">
+             <div class="radio-item" onclick="playRadio('ABC Cardinal', 'https://sc.abc.com.py:8000/stream')">
+                <div class="icon-box"><img src="https://cdn-profiles.tunein.com/s17748/images/logod.png?t=635893379280830000"></div>
+                <div class="radio-name">ABC Cardinal</div>
+                <div class="radio-country">Paraguay</div>
+            </div>
+        </div>
+
+        <a href="#" class="category-label">BRASIL ></a>
+        <div class="grid-radios">
+            <div class="radio-item" onclick="playRadio('Jovem Pan', 'https://26503.live.streamtheworld.com/JP_SAO_PAULO_SC')">
+                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/2/23/Logo_Jovem_Pan.png"></div>
+                <div class="radio-name">Jovem Pan</div>
+                <div class="radio-country">Brasil</div>
+            </div>
+        </div>
+
+        <a href="#" class="category-label">PERÚ ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">BOLIVIA ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">ECUADOR ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">VENEZUELA ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">COLOMBIA ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">MÉXICO ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">PANAMÁ ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">GUATEMALA ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">EL SALVADOR ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">NICARAGUA ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">HONDURAS ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">COSTA RICA ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">CUBA ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">DOMINICANA ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">PUERTO RICO ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">EEUU ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">ESPAÑA ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">FRANCIA ></a>
+        <div class="grid-radios"></div>
+
+        <a href="#" class="category-label">ALEMANIA ></a>
+        <div class="grid-radios"></div>
+
+    </div>
+
+   <script>
+function cargar(url) {
+    // Esto busca el iframe de video arriba
+    const reproductor = document.getElementById('reproductor-tv');
+    
+    // Esto carga la URL del canal de TV (YouTube o m3u8)
+    reproductor.src = url;
+    
+    // Esto hace que la página suba suavemente para ver el video
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>
+
+    <script src="https://pl29216392.profitablecpmratenetwork.com/3a/8d/7f/3a8d7fe0fbbb500772dcf370ff6b85bf.js"></script>
+    <div class='radar-nav-bottom'>
+  <div class='nav-btn active'><a href='https://radarlat.blogspot.com/'><span class="dot"></span> VOLVER</a></div>
+  <div class='nav-btn'><a href='https://radarlat.blogspot.com/p/tv-vivo.html'><span class="dot"></span> TV VIVO</a></div>
+  <div class='nav-btn'><a href='https://radarlat.blogspot.com/p/noticias.html'><span class="dot"></span> PORTALES</a></div>
+</div>
+</body>
+  <div class="pantalla-tv">
+    <iframe id="reproductor-tv" src="about:blank" allowfullscreen></iframe>
+</div>
+</html>
