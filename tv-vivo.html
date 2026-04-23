@@ -144,12 +144,10 @@ body {
 </head>
 <body>
 
-    <div class="player-header">
-        <div id="radio-title">Selecciona una emisora</div>
-        <audio id="audio-player" controls autoplay>
-            <source id="audio-source" src="" type="audio/mpeg">
-        </audio>
-    </div>
+    <div class="pantalla-tv" style="position: sticky; top: 0; width: 100%; aspect-ratio: 16/9; background: #000; z-index: 1000; border-bottom: 2px solid #333;">
+    <iframe id="reproductor-tv" src="about:blank" style="width: 100%; height: 100%; border: none;" allowfullscreen></iframe>
+</div>
+
 
     <div class="content">
 
