@@ -21,25 +21,79 @@
     <div class="r1-carrusel-centrado" style="display: flex !important; flex-direction: row !important; overflow-x: auto !important; white-space: nowrap !important; gap: 15px; padding: 0 15px; align-items: center; -webkit-overflow-scrolling: touch;">
         
         <style>
-            /* Esto oculta la barra de scroll pero permite deslizar */
-            .r1-carrusel-centrado::-webkit-scrollbar { display: none; }
-            .btn-pais { 
-                display: flex !important; 
-                flex-direction: column !important; 
-                align-items: center !important; 
-                flex-shrink: 0 !important; 
-                cursor: pointer; 
-                min-width: 55px;
-            }
-            .btn-pais img { width: 35px; height: 22px; object-fit: cover; border-radius: 2px; }
-            .btn-pais span { color: #fff; font-size: 10px; margin-top: 4px; font-family: sans-serif; }
-            .world-icon { font-size: 24px; color: #00aaff; }
-        </style>
+           /* Contenedor del Banner */
+.r1-carrusel-centrado {
+  display: flex !important;
+  flex-direction: row !important;
+  overflow-x: auto !important;
+  white-space: nowrap !important;
+  gap: 12px;                  /* Espaciado igual a tu captura */
+  padding: 10px 15px;
+  background-color: #000;
+  align-items: center;
+  scrollbar-width: none;
+}
 
-        <div class="btn-pais" onclick="filtrarRadar('all', this)">
-            <div class="world-icon">🌐</div>
-            <span>TODOS</span>
-        </div>
+.r1-carrusel-centrado::-webkit-scrollbar { display: none; }
+
+/* Botón de cada País */
+.btn-pais {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+  cursor: pointer;
+  padding: 5px;
+  border: 2px solid transparent; /* Espacio para el borde verde */
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+/* El borde verde cuando está seleccionado (clase active) */
+.btn-pais.active {
+  border: 2px solid #39FF14 !important; /* Verde Neón / Radar */
+  background: rgba(57, 255, 20, 0.1);    /* Fondo tenue verde */
+}
+
+/* Tamaño de las Banderas */
+.btn-pais img {
+  width: 45px;       /* Ajustado para que se vea igual a la foto */
+  height: 30px;
+  object-fit: cover;
+  border-radius: 3px;
+  margin-bottom: 4px;
+}
+
+/* Estilo del Texto (ARG, CHI, etc) */
+.btn-pais span {
+  color: #888;       /* Gris por defecto */
+  font-size: 9px;
+  font-family: 'Arial', sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.btn-pais.active span {
+  color: #39FF14;    /* Texto verde si está activo */
+}
+
+/* Icono Mundo (TODOS) */
+.world-icon {
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+        <div class="r1-carrusel-centrado">
+    <div class="btn-pais active" onclick="filtrarRadar('all', this)">
+        <div class="world-icon">🌐</div>
+        <span>TODOS</span>
+    </div>
+
+    <div class="btn-pais" onclick="filtrarRadar('ar', this)">
+        <img src="https://flagcdn.com/w80/ar.png">
+        <span>ARG</span>
+    </div>
+    
+    </div>
 
         <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://flagcdn.com/w80/ar.png"><span>ARG</span></div>
         <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://flagcdn.com/w80/cl.png"><span>CHI</span></div>
