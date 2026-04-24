@@ -16,70 +16,56 @@
             overflow-x: hidden;
         }
 
-        /* 1. BANNER DE BANDERAS (FORMATO BLOGGER) */
-        #rl-container-fuerza {
-            width: 100%;
-            background: #000;
-            padding: 12px 0;
-            border-bottom: 1px solid #111;
-        }
+       <div id="rl-container-fuerza">
+    <div class="rl-carrusel-centrado">
+        <div class="btn-pais active" onclick="filtrarRadar('all', this)">
+            <div class="world-icon">🌎</div>
+            <span>Todos</span>
+        </div>
 
-        .rl-carrusel-centrado {
-            display: flex;
-            overflow-x: auto;
-            white-space: nowrap;
-            gap: 10px;
-            padding: 0 15px;
-            scrollbar-width: none;
-        }
+        <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://flagcdn.com/w80/ar.png" /><span>ARG</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://flagcdn.com/w80/cl.png" /><span>CHI</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="https://flagcdn.com/w80/uy.png" /><span>URU</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="https://flagcdn.com/w80/py.png" /><span>PAR</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('br', this)"><img src="https://flagcdn.com/w80/br.png" /><span>BRA</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('pe', this)"><img src="https://flagcdn.com/w80/pe.png" /><span>PER</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('bo', this)"><img src="https://flagcdn.com/w80/bo.png" /><span>BOL</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('ec', this)"><img src="https://flagcdn.com/w80/ec.png" /><span>ECU</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('ve', this)"><img src="https://flagcdn.com/w80/ve.png" /><span>VEN</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('co', this)"><img src="https://flagcdn.com/w80/co.png" /><span>COL</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('mx', this)"><img src="https://flagcdn.com/w80/mx.png" /><span>MEX</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('pa', this)"><img src="https://flagcdn.com/w80/pa.png" /><span>PAN</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('gt', this)"><img src="https://flagcdn.com/w80/gt.png" /><span>GUA</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('sv', this)"><img src="https://flagcdn.com/w80/sv.png" /><span>SAL</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('ni', this)"><img src="https://flagcdn.com/w80/ni.png" /><span>NIC</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="https://flagcdn.com/w80/hn.png" /><span>HON</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('cr', this)"><img src="https://flagcdn.com/w80/cr.png" /><span>COS</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('cu', this)"><img src="https://flagcdn.com/w80/cu.png" /><span>CUB</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="https://flagcdn.com/w80/do.png" /><span>DOM</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('pr', this)"><img src="https://flagcdn.com/w80/pr.png" /><span>PUE</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('us', this)"><img src="https://flagcdn.com/w80/us.png" /><span>USA</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="https://flagcdn.com/w80/es.png" /><span>ESP</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="https://flagcdn.com/w80/fr.png" /><span>FRA</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://flagcdn.com/w80/de.png" /><span>ALE</span></div>
+    </div>
+</div>
 
-        .rl-carrusel-centrado::-webkit-scrollbar {
-            display: none;
-        }
-
-        .btn-pais {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            min-width: 65px;
-            height: 75px;
-            border-radius: 10px;
-            border: 2px solid transparent; /* El contorno que se vuelve verde */
-            opacity: 0.6;
-            transition: all 0.3s ease;
-        }
-
-        /* ESTADO ACTIVO (CONTORNO VERDE AL HACER CLICK) */
-        .btn-pais.active {
-            opacity: 1;
-            border-color: #2ecc71; /* Verde esmeralda de la captura */
-            background-color: rgba(46, 204, 113, 0.1);
-        }
-
-        .btn-pais img {
-            width: 38px;
-            height: auto;
-            border-radius: 4px;
-            margin-bottom: 6px;
-        }
-
-        .btn-pais span {
-            font-size: 10px;
-            font-weight: bold;
-            color: #fff;
-            text-transform: uppercase;
-        }
-
-        .btn-pais.active span {
-            color: #2ecc71;
-        }
-
-        .world-icon {
-            font-size: 24px;
-            margin-bottom: 6px;
-        }
+<script>
+    function filtrarRadar(code, el) {
+        // Estética de los botones
+        document.querySelectorAll('.btn-pais').forEach(b => b.classList.remove('active'));
+        el.classList.add('active');
+        
+        // Lógica de filtrado para RadarLat
+        const items = document.querySelectorAll('.rl-card');
+        items.forEach(item => {
+            if (code === 'all') {
+                item.style.display = 'flex';
+            } else {
+                item.style.display = item.classList.contains(code) ? 'flex' : 'none';
+            }
+        });
+    }
 
         /* 2. PANTALLA FIJA (ANCHO EXACTO CELULAR) */
         .video-container {
