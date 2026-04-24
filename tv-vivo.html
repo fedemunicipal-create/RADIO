@@ -154,35 +154,7 @@ function filtrarRadar(code, el) {
     });
 }
 </script>
-        
-
-    function filtrarRadar(code, el) {
-        // Estética de los botones
-        document.querySelectorAll('.btn-pais').forEach(b => b.classList.remove('active'));
-        el.classList.add('active');
-        
-        // Lógica de filtrado para RadarLat
-        const items = document.querySelectorAll('.rl-card');
-        items.forEach(item => {
-            if (code === 'all') {
-                item.style.display = 'flex';
-            } else {
-                item.style.display = item.classList.contains(code) ? 'flex' : 'none';
-            }
-        });
-    }
-
-        /* 2. PANTALLA FIJA (ANCHO EXACTO CELULAR) */
-        .video-container {
-            position: sticky;
-            top: 0;
-            width: 100vw;
-            aspect-ratio: 16 / 9;
-            background: #000;
-            z-index: 1000;
-            border-bottom: 1px solid #222;
-            overflow: hidden;
-        }
+ 
 
         .video-container iframe {
             width: 100%;
@@ -305,39 +277,6 @@ function filtrarRadar(code, el) {
     </style>
 </head>
 <body>
-
-    <div id="rl-container-fuerza">
-        <div class="rl-carrusel-centrado">
-            <div class="btn-pais active" onclick="filtrarRadar('all', this)">
-                <div class="world-icon">🌐</div>
-                <span>TODOS</span>
-            </div>
-            <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://flagcdn.com/w80/ar.png" /><span>ARG</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://flagcdn.com/w80/cl.png" /><span>CHI</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="https://flagcdn.com/w80/uy.png" /><span>URU</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="https://flagcdn.com/w80/py.png" /><span>PAR</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('br', this)"><img src="https://flagcdn.com/w80/br.png" /><span>BRA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pe', this)"><img src="https://flagcdn.com/w80/pe.png" /><span>PER</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('bo', this)"><img src="https://flagcdn.com/w80/bo.png" /><span>BOL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ec', this)"><img src="https://flagcdn.com/w80/ec.png" /><span>ECU</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ve', this)"><img src="https://flagcdn.com/w80/ve.png" /><span>VEN</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('co', this)"><img src="https://flagcdn.com/w80/co.png" /><span>COL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('mx', this)"><img src="https://flagcdn.com/w80/mx.png" /><span>MEX</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pa', this)"><img src="https://flagcdn.com/w80/pa.png" /><span>PAN</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('gt', this)"><img src="https://flagcdn.com/w80/gt.png" /><span>GUA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('sv', this)"><img src="https://flagcdn.com/w80/sv.png" /><span>SAL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ni', this)"><img src="https://flagcdn.com/w80/ni.png" /><span>NIC</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="https://flagcdn.com/w80/hn.png" /><span>HON</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cr', this)"><img src="https://flagcdn.com/w80/cr.png" /><span>COS</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cu', this)"><img src="https://flagcdn.com/w80/cu.png" /><span>CUB</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="https://flagcdn.com/w80/do.png" /><span>DOM</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pr', this)"><img src="https://flagcdn.com/w80/pr.png" /><span>PUE</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('us', this)"><img src="https://flagcdn.com/w80/us.png" /><span>USA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="https://flagcdn.com/w80/es.png" /><span>ESP</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="https://flagcdn.com/w80/fr.png" /><span>FRA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://flagcdn.com/w80/de.png" /><span>ALE</span></div>
-        </div>
-    </div>
 
     <div class="video-container">
         <iframe id="main-video-player" src="about:blank" allowfullscreen></iframe>
