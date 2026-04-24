@@ -21,78 +21,92 @@
     <div class="r1-carrusel-centrado" style="display: flex !important; flex-direction: row !important; overflow-x: auto !important; white-space: nowrap !important; gap: 15px; padding: 0 15px; align-items: center; -webkit-overflow-scrolling: touch;">
         
         <style>
-           /* Contenedor del Banner */
+          
+/* Contenedor Principal */
+#rl-container-fuerza {
+    position: relative;
+    width: 100%;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    background: #0b0e11;
+    border-bottom: 2px solid #4CAF50;
+    z-index: 9999;
+}
+
+/* Carrusel Horizontal */
 .r1-carrusel-centrado {
-  display: flex !important;
-  flex-direction: row !important;
-  overflow-x: auto !important;
-  white-space: nowrap !important;
-  gap: 12px;                  /* Espaciado igual a tu captura */
-  padding: 10px 15px;
-  background-color: #000;
-  align-items: center;
-  scrollbar-width: none;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    gap: 20px;
+    padding: 10px 15px;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-.r1-carrusel-centrado::-webkit-scrollbar { display: none; }
+/* Ocultar barra de scroll */
+.r1-carrusel-centrado::-webkit-scrollbar {
+    display: none;
+}
 
-/* Botón de cada País */
+/* Botones de Países */
 .btn-pais {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  flex-shrink: 0 !important;
-  cursor: pointer;
-  padding: 5px;
-  border: 2px solid transparent; /* Espacio para el borde verde */
-  border-radius: 8px;
-  transition: 0.3s;
+    flex: 0 0 auto;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center;
+    min-width: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-/* El borde verde cuando está seleccionado (clase active) */
-.btn-pais.active {
-  border: 2px solid #39FF14 !important; /* Verde Neón / Radar */
-  background: rgba(57, 255, 20, 0.1);    /* Fondo tenue verde */
+.btn-pais img, .btn-pais .world-icon {
+    width: 44px;
+    height: 32px;
+    border-radius: 6px;
+    border: 2px solid transparent;
+    object-fit: cover;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
 }
 
-/* Tamaño de las Banderas */
-.btn-pais img {
-  width: 45px;       /* Ajustado para que se vea igual a la foto */
-  height: 30px;
-  object-fit: cover;
-  border-radius: 3px;
-  margin-bottom: 4px;
+.world-icon {
+    background: #222;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
 }
 
-/* Estilo del Texto (ARG, CHI, etc) */
+/* Texto de los países */
 .btn-pais span {
-  color: #888;       /* Gris por defecto */
-  font-size: 9px;
-  font-family: 'Arial', sans-serif;
-  text-transform: uppercase;
-  font-weight: bold;
+    font-size: 10px;
+    color: #777;
+    margin-top: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: sans-serif;
+}
+
+/* ESTADO ACTIVO (Brillo Verde Radar) */
+.btn-pais.active img, .btn-pais.active .world-icon {
+    border-color: #4CAF50;
+    box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
 }
 
 .btn-pais.active span {
-  color: #39FF14;    /* Texto verde si está activo */
+    color: #4CAF50;
 }
+</style>
 
-/* Icono Mundo (TODOS) */
-.world-icon {
-  font-size: 22px;
-  margin-bottom: 4px;
-}
-        <div class="r1-carrusel-centrado">
-    <div class="btn-pais active" onclick="filtrarRadar('all', this)">
-        <div class="world-icon">🌐</div>
-        <span>TODOS</span>
-    </div>
-
-    <div class="btn-pais" onclick="filtrarRadar('ar', this)">
-        <img src="https://flagcdn.com/w80/ar.png">
-        <span>ARG</span>
-    </div>
-    
+<div id="rl-container-fuerza">
+    <div class="r1-carrusel-centrado">
+        <div class="btn-pais active" onclick="filtrarRadar('all', this)">
+            <div class="world-icon">🌐</div>
+            <span>TODOS</span>
+        </div>
 
         <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://flagcdn.com/w80/ar.png"><span>ARG</span></div>
         <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://flagcdn.com/w80/cl.png"><span>CHI</span></div>
@@ -106,19 +120,42 @@
         <div class="btn-pais" onclick="filtrarRadar('co', this)"><img src="https://flagcdn.com/w80/co.png"><span>COL</span></div>
         <div class="btn-pais" onclick="filtrarRadar('mx', this)"><img src="https://flagcdn.com/w80/mx.png"><span>MEX</span></div>
         <div class="btn-pais" onclick="filtrarRadar('pa', this)"><img src="https://flagcdn.com/w80/pa.png"><span>PAN</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="https://flagcdn.com/w80/do.png"><span>DOM</span></div>
         <div class="btn-pais" onclick="filtrarRadar('gt', this)"><img src="https://flagcdn.com/w80/gt.png"><span>GUA</span></div>
         <div class="btn-pais" onclick="filtrarRadar('sv', this)"><img src="https://flagcdn.com/w80/sv.png"><span>SAL</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="https://flagcdn.com/w80/hn.png"><span>HON</span></div>
         <div class="btn-pais" onclick="filtrarRadar('ni', this)"><img src="https://flagcdn.com/w80/ni.png"><span>NIC</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="https://flagcdn.com/w80/hn.png"><span>HON</span></div>
         <div class="btn-pais" onclick="filtrarRadar('cr', this)"><img src="https://flagcdn.com/w80/cr.png"><span>COS</span></div>
         <div class="btn-pais" onclick="filtrarRadar('cu', this)"><img src="https://flagcdn.com/w80/cu.png"><span>CUB</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="https://flagcdn.com/w80/do.png"><span>DOM</span></div>
         <div class="btn-pais" onclick="filtrarRadar('pr', this)"><img src="https://flagcdn.com/w80/pr.png"><span>PUE</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('us', this)"><img src="https://flagcdn.com/w80/us.png"><span>USA</span></div>
         <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="https://flagcdn.com/w80/es.png"><span>ESP</span></div>
-   
+        <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="https://flagcdn.com/w80/fr.png"><span>FRA</span></div>
+        <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://flagcdn.com/w80/de.png"><span>ALE</span></div>
+    </div>
 </div>
-        
+
 <script>
+function filtrarRadar(code, el) {
+    // 1. Cambiar estética de los botones (el brillo verde)
+    document.querySelectorAll('.btn-pais').forEach(b => b.classList.remove('active'));
+    el.classList.add('active');
+
+    // 2. Lógica de filtrado para las tarjetas de canales
+    // Asegúrate de que tus tarjetas tengan la clase 'rl-card' y la clase del país (ej: 'ar')
+    const items = document.querySelectorAll('.rl-card');
+    items.forEach(item => {
+        if (code === 'all') {
+            item.style.display = 'flex';
+        } else {
+            // Si la tarjeta contiene la clase del país seleccionado, se muestra
+            item.style.display = item.classList.contains(code) ? 'flex' : 'none';
+        }
+    });
+}
+</script>
+        
+
     function filtrarRadar(code, el) {
         // Estética de los botones
         document.querySelectorAll('.btn-pais').forEach(b => b.classList.remove('active'));
@@ -351,23 +388,6 @@
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        // Función para navegación por banderas
-        function filtrarRadar(pais, elemento) {
-            // Cambio de color verde (contorno)
-            document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
-            elemento.classList.add('active');
-
-            // Scroll al país seleccionado
-            if(pais !== 'all') {
-                const destino = document.getElementById('sec-' + pais);
-                if(destino) {
-                    const posicion = destino.offsetTop - 240; // Offset para que no tape la pantalla fija
-                    window.scrollTo({top: posicion, behavior: 'smooth'});
-                }
-            } else {
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            }
-        }
     </script>
 
 </body>
