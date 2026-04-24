@@ -5,22 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>RADARLAT TV-VIVO</title>
     <style>
-        /* BASE Y MINIMALISMO */
+        /* CONFIGURACIÓN BASE - ESTILO MINIMALISTA */
         body {
             background-color: #000;
             color: #fff;
-            font-family: -apple-system, system-ui, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             margin: 0;
             padding: 0;
-            padding-bottom: 90px;
+            padding-bottom: 90px; /* Espacio para el menú inferior */
             overflow-x: hidden;
         }
 
-        /* 1. BANNER DE BANDERAS (Integrado de tu imagen) */
+        /* 1. BANNER DE BANDERAS (FORMATO BLOGGER) */
         #rl-container-fuerza {
             width: 100%;
             background: #000;
-            padding: 10px 0;
+            padding: 12px 0;
             border-bottom: 1px solid #111;
         }
 
@@ -28,7 +28,7 @@
             display: flex;
             overflow-x: auto;
             white-space: nowrap;
-            gap: 18px;
+            gap: 10px;
             padding: 0 15px;
             scrollbar-width: none;
         }
@@ -41,36 +41,47 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             cursor: pointer;
-            min-width: 45px;
+            min-width: 65px;
+            height: 75px;
+            border-radius: 10px;
+            border: 2px solid transparent; /* El contorno que se vuelve verde */
             opacity: 0.6;
-            transition: opacity 0.3s;
+            transition: all 0.3s ease;
         }
 
+        /* ESTADO ACTIVO (CONTORNO VERDE AL HACER CLICK) */
         .btn-pais.active {
             opacity: 1;
+            border-color: #2ecc71; /* Verde esmeralda de la captura */
+            background-color: rgba(46, 204, 113, 0.1);
         }
 
         .btn-pais img {
-            width: 28px;
+            width: 38px;
             height: auto;
-            border-radius: 2px;
-            margin-bottom: 4px;
+            border-radius: 4px;
+            margin-bottom: 6px;
         }
 
         .btn-pais span {
-            font-size: 9px;
+            font-size: 10px;
             font-weight: bold;
             color: #fff;
             text-transform: uppercase;
         }
 
-        .world-icon {
-            font-size: 20px;
-            margin-bottom: 4px;
+        .btn-pais.active span {
+            color: #2ecc71;
         }
 
-        /* 2. PANTALLA FIJA SUPERIOR */
+        .world-icon {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        /* 2. PANTALLA FIJA (ANCHO EXACTO CELULAR) */
         .video-container {
             position: sticky;
             top: 0;
@@ -89,19 +100,19 @@
             display: block;
         }
 
-        /* 3. LISTADO DE PAÍSES Y CANALES */
+        /* 3. GRILLA DE CANALES Y PAÍSES */
         .main-content {
             padding: 10px 0;
         }
 
         .country-group {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         .country-header {
             font-size: 0.85rem;
             font-weight: bold;
-            color: #eee;
+            color: #ccc;
             margin: 15px 15px 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -119,33 +130,34 @@
             display: none;
         }
 
+        /* TARJETA DE CANAL (ESTILO CAPTURA RADIO) */
         .channel-item {
-            min-width: 110px;
+            min-width: 115px;
             text-align: center;
         }
 
         .logo-box {
-            width: 110px;
-            height: 110px;
-            background: #fff;
+            width: 115px;
+            height: 115px;
+            background: #fff; /* Fondo blanco para resaltar logos */
             border-radius: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 8px;
-            overflow: hidden;
             cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
         .logo-box img {
-            width: 75%;
+            width: 80%;
             height: auto;
             object-fit: contain;
         }
 
         .channel-name {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: bold;
             display: block;
             white-space: nowrap;
@@ -168,20 +180,21 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
-            border-top: 1px solid #111;
+            border-top: 1px solid #1a1a1a;
             z-index: 2000;
         }
 
         .nav-link {
             text-decoration: none;
             color: #fff;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: bold;
             display: flex;
             align-items: center;
             text-transform: uppercase;
         }
 
+        /* ANIMACIÓN PUNTO ROJO */
         .dot {
             height: 7px;
             width: 7px;
@@ -190,10 +203,10 @@
             display: inline-block;
             margin-right: 8px;
             box-shadow: 0 0 8px #ff0000;
-            animation: parpadeo 1.5s infinite;
+            animation: parpadeo_vivo 1.5s infinite;
         }
 
-        @keyframes parpadeo {
+        @keyframes parpadeo_vivo {
             0% { opacity: 1; box-shadow: 0 0 8px #ff0000; }
             50% { opacity: 0.2; box-shadow: 0 0 0px #ff0000; }
             100% { opacity: 1; box-shadow: 0 0 8px #ff0000; }
@@ -206,7 +219,7 @@
         <div class="rl-carrusel-centrado">
             <div class="btn-pais active" onclick="filtrarRadar('all', this)">
                 <div class="world-icon">🌐</div>
-                <span>Todos</span>
+                <span>TODOS</span>
             </div>
             <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://flagcdn.com/w80/ar.png" /><span>ARG</span></div>
             <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://flagcdn.com/w80/cl.png" /><span>CHI</span></div>
@@ -214,11 +227,29 @@
             <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="https://flagcdn.com/w80/py.png" /><span>PAR</span></div>
             <div class="btn-pais" onclick="filtrarRadar('br', this)"><img src="https://flagcdn.com/w80/br.png" /><span>BRA</span></div>
             <div class="btn-pais" onclick="filtrarRadar('pe', this)"><img src="https://flagcdn.com/w80/pe.png" /><span>PER</span></div>
-            </div>
+            <div class="btn-pais" onclick="filtrarRadar('bo', this)"><img src="https://flagcdn.com/w80/bo.png" /><span>BOL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ec', this)"><img src="https://flagcdn.com/w80/ec.png" /><span>ECU</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ve', this)"><img src="https://flagcdn.com/w80/ve.png" /><span>VEN</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('co', this)"><img src="https://flagcdn.com/w80/co.png" /><span>COL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('mx', this)"><img src="https://flagcdn.com/w80/mx.png" /><span>MEX</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pa', this)"><img src="https://flagcdn.com/w80/pa.png" /><span>PAN</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('gt', this)"><img src="https://flagcdn.com/w80/gt.png" /><span>GUA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('sv', this)"><img src="https://flagcdn.com/w80/sv.png" /><span>SAL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ni', this)"><img src="https://flagcdn.com/w80/ni.png" /><span>NIC</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="https://flagcdn.com/w80/hn.png" /><span>HON</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cr', this)"><img src="https://flagcdn.com/w80/cr.png" /><span>COS</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cu', this)"><img src="https://flagcdn.com/w80/cu.png" /><span>CUB</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="https://flagcdn.com/w80/do.png" /><span>DOM</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pr', this)"><img src="https://flagcdn.com/w80/pr.png" /><span>PUE</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('us', this)"><img src="https://flagcdn.com/w80/us.png" /><span>USA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="https://flagcdn.com/w80/es.png" /><span>ESP</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="https://flagcdn.com/w80/fr.png" /><span>FRA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://flagcdn.com/w80/de.png" /><span>ALE</span></div>
+        </div>
     </div>
 
     <div class="video-container">
-        <iframe id="main-player" src="about:blank" allowfullscreen></iframe>
+        <iframe id="main-video-player" src="about:blank" allowfullscreen></iframe>
     </div>
 
     <div class="main-content">
@@ -226,12 +257,12 @@
         <div class="country-group" id="sec-ar">
             <div class="country-header">ARGENTINA ></div>
             <div class="channels-scroll">
-                <div class="channel-item" onclick="loadVideo('URL_TN')">
+                <div class="channel-item" onclick="cambiarCanal('URL_EMBED_TN')">
                     <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Todo_Noticias_2023.png"></div>
-                    <span class="channel-name">TN</span>
+                    <span class="channel-name">TN Todo Noticias</span>
                     <span class="channel-origin">Argentina</span>
                 </div>
-                <div class="channel-item" onclick="loadVideo('URL_C5N')">
+                <div class="channel-item" onclick="cambiarCanal('URL_EMBED_C5N')">
                     <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/C5N_Logo_2015.svg/1200px-C5N_Logo_2015.svg.png"></div>
                     <span class="channel-name">C5N</span>
                     <span class="channel-origin">Argentina</span>
@@ -242,49 +273,45 @@
         <div class="country-group" id="sec-cl">
             <div class="country-header">CHILE ></div>
             <div class="channels-scroll">
-                <div class="channel-item" onclick="loadVideo('URL_TVN')">
+                <div class="channel-item" onclick="cambiarCanal('URL_EMBED_TVN')">
                     <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Logo_TVN_2020.svg/1200px-Logo_TVN_2020.svg.png"></div>
-                    <span class="channel-name">TVN</span>
+                    <span class="channel-name">TVN Chile</span>
                     <span class="channel-origin">Chile</span>
                 </div>
             </div>
         </div>
 
-    </div>
+        </div>
 
     <nav class="bottom-navbar">
-        <a href="https://tudominio.com/volver" class="nav-link">
-            <span class="dot"></span> VOLVER
-        </a>
-        <a href="#" class="nav-link">
-            <span class="dot"></span> TV VIVO
-        </a>
-        <a href="https://tudominio.com/portales" class="nav-link">
-            <span class="dot"></span> PORTALES
-        </a>
+        <a href="#" class="nav-link"><span class="dot"></span> VOLVER</a>
+        <a href="#" class="nav-link active"><span class="dot"></span> TV VIVO</a>
+        <a href="#" class="nav-link"><span class="dot"></span> PORTALES</a>
     </nav>
 
     <script>
-        // Función para cargar video y subir al reproductor
-        function loadVideo(url) {
-            const player = document.getElementById('main-player');
+        // Función para cambiar de canal y subir al reproductor
+        function cambiarCanal(url) {
+            const player = document.getElementById('main-video-player');
             player.src = url;
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        // Función para el banner de banderas
-        function filtrarRadar(pais, element) {
-            // Activar visualmente el botón
-            document.querySelectorAll('.btn-pais').forEach(b => b.classList.remove('active'));
-            element.classList.add('active');
+        // Función para navegación por banderas
+        function filtrarRadar(pais, elemento) {
+            // Cambio de color verde (contorno)
+            document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
+            elemento.classList.add('active');
 
-            // Scroll hacia la sección del país si existe
+            // Scroll al país seleccionado
             if(pais !== 'all') {
-                const target = document.getElementById('sec-' + pais);
-                if(target) {
-                    const offset = target.offsetTop - 250; // Ajuste para no quedar debajo del video fijo
-                    window.scrollTo({top: offset, behavior: 'smooth'});
+                const destino = document.getElementById('sec-' + pais);
+                if(destino) {
+                    const posicion = destino.offsetTop - 240; // Offset para que no tape la pantalla fija
+                    window.scrollTo({top: posicion, behavior: 'smooth'});
                 }
+            } else {
+                window.scrollTo({top: 0, behavior: 'smooth'});
             }
         }
     </script>
