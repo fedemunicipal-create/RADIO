@@ -2,44 +2,94 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>RADARLAT TV-VIVO</title>
     <style>
+        /* BASE Y MINIMALISMO */
         body {
             background-color: #000;
             color: #fff;
             font-family: -apple-system, system-ui, sans-serif;
             margin: 0;
             padding: 0;
-            padding-bottom: 90px; /* Espacio para no tapar contenido con el menú */
+            padding-bottom: 90px;
+            overflow-x: hidden;
         }
 
-        /* 1. ESPACIO SUPERIOR PARA BANDERAS (Blogger) */
-        .header-banners {
+        /* 1. BANNER DE BANDERAS (Integrado de tu imagen) */
+        #rl-container-fuerza {
             width: 100%;
-            min-height: 50px;
             background: #000;
             padding: 10px 0;
+            border-bottom: 1px solid #111;
         }
 
-        /* 2. PANTALLA FIJA (ANCHO COMPLETO) */
+        .rl-carrusel-centrado {
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            gap: 18px;
+            padding: 0 15px;
+            scrollbar-width: none;
+        }
+
+        .rl-carrusel-centrado::-webkit-scrollbar {
+            display: none;
+        }
+
+        .btn-pais {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            min-width: 45px;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+
+        .btn-pais.active {
+            opacity: 1;
+        }
+
+        .btn-pais img {
+            width: 28px;
+            height: auto;
+            border-radius: 2px;
+            margin-bottom: 4px;
+        }
+
+        .btn-pais span {
+            font-size: 9px;
+            font-weight: bold;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .world-icon {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        /* 2. PANTALLA FIJA SUPERIOR */
         .video-container {
             position: sticky;
             top: 0;
-            width: 100%;
+            width: 100vw;
             aspect-ratio: 16 / 9;
             background: #000;
             z-index: 1000;
             border-bottom: 1px solid #222;
+            overflow: hidden;
         }
 
         .video-container iframe {
             width: 100%;
             height: 100%;
             border: none;
+            display: block;
         }
 
-        /* 3. LISTADO DE PAÍSES (Formato Grilla/Carrusel) */
+        /* 3. LISTADO DE PAÍSES Y CANALES */
         .main-content {
             padding: 10px 0;
         }
@@ -51,7 +101,7 @@
         .country-header {
             font-size: 0.85rem;
             font-weight: bold;
-            color: #ccc;
+            color: #eee;
             margin: 15px 15px 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -62,14 +112,13 @@
             overflow-x: auto;
             gap: 15px;
             padding: 0 15px 10px;
-            scrollbar-width: none; /* Ocultar scroll en Firefox */
+            scrollbar-width: none;
         }
 
         .channels-scroll::-webkit-scrollbar {
-            display: none; /* Ocultar scroll en Chrome/Safari */
+            display: none;
         }
 
-        /* DISEÑO DE TARJETA (Inspirado en tu imagen) */
         .channel-item {
             min-width: 110px;
             text-align: center;
@@ -78,18 +127,19 @@
         .logo-box {
             width: 110px;
             height: 110px;
-            background: #fff; /* Fondo blanco como en tu captura */
-            border-radius: 20px; /* Bordes redondeados suaves */
+            background: #fff;
+            border-radius: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 8px;
             overflow: hidden;
             cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         }
 
         .logo-box img {
-            width: 80%;
+            width: 75%;
             height: auto;
             object-fit: contain;
         }
@@ -98,14 +148,17 @@
             font-size: 0.75rem;
             font-weight: bold;
             display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .channel-origin {
             font-size: 0.65rem;
-            color: #777;
+            color: #666;
         }
 
-        /* 4. MENÚ INFERIOR (Idéntico a tu captura) */
+        /* 4. MENÚ INFERIOR CON PUNTO PARPADEANTE */
         .bottom-navbar {
             position: fixed;
             bottom: 0;
@@ -115,14 +168,14 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
-            border-top: 1px solid #222;
+            border-top: 1px solid #111;
             z-index: 2000;
         }
 
         .nav-link {
             text-decoration: none;
             color: #fff;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: bold;
             display: flex;
             align-items: center;
@@ -130,98 +183,109 @@
         }
 
         .dot {
-            height: 6px;
-            width: 6px;
-            background-color: #ff0000; /* Punto rojo */
+            height: 7px;
+            width: 7px;
+            background-color: #ff0000;
             border-radius: 50%;
             display: inline-block;
             margin-right: 8px;
-            box-shadow: 0 0 5px #ff0000;
+            box-shadow: 0 0 8px #ff0000;
+            animation: parpadeo 1.5s infinite;
         }
 
-        /* Efecto de selección en el menú */
-        .nav-link.active {
-            color: #fff;
+        @keyframes parpadeo {
+            0% { opacity: 1; box-shadow: 0 0 8px #ff0000; }
+            50% { opacity: 0.2; box-shadow: 0 0 0px #ff0000; }
+            100% { opacity: 1; box-shadow: 0 0 8px #ff0000; }
         }
     </style>
 </head>
 <body>
 
-    <div class="header-banners">
-        </div>
+    <div id="rl-container-fuerza">
+        <div class="rl-carrusel-centrado">
+            <div class="btn-pais active" onclick="filtrarRadar('all', this)">
+                <div class="world-icon">🌐</div>
+                <span>Todos</span>
+            </div>
+            <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://flagcdn.com/w80/ar.png" /><span>ARG</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://flagcdn.com/w80/cl.png" /><span>CHI</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="https://flagcdn.com/w80/uy.png" /><span>URU</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="https://flagcdn.com/w80/py.png" /><span>PAR</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('br', this)"><img src="https://flagcdn.com/w80/br.png" /><span>BRA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pe', this)"><img src="https://flagcdn.com/w80/pe.png" /><span>PER</span></div>
+            </div>
+    </div>
 
     <div class="video-container">
-        <iframe id="player" src="" allowfullscreen></iframe>
+        <iframe id="main-player" src="about:blank" allowfullscreen></iframe>
     </div>
 
     <div class="main-content">
-
-        <div class="country-group">
+        
+        <div class="country-group" id="sec-ar">
             <div class="country-header">ARGENTINA ></div>
             <div class="channels-scroll">
-                
-                <div class="channel-item" onclick="loadChannel('URL_CANAL_1')">
-                    <div class="logo-box">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Todo_Noticias_2023.png" alt="TN">
-                    </div>
-                    <span class="channel-name">TN Todo Noticias</span>
+                <div class="channel-item" onclick="loadVideo('URL_TN')">
+                    <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Todo_Noticias_2023.png"></div>
+                    <span class="channel-name">TN</span>
                     <span class="channel-origin">Argentina</span>
                 </div>
-
-                <div class="channel-item" onclick="loadChannel('URL_CANAL_2')">
-                    <div class="logo-box">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/C5N_Logo_2015.svg/1200px-C5N_Logo_2015.svg.png" alt="C5N">
-                    </div>
+                <div class="channel-item" onclick="loadVideo('URL_C5N')">
+                    <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/C5N_Logo_2015.svg/1200px-C5N_Logo_2015.svg.png"></div>
                     <span class="channel-name">C5N</span>
                     <span class="channel-origin">Argentina</span>
                 </div>
-
             </div>
         </div>
 
-        <div class="country-group">
+        <div class="country-group" id="sec-cl">
             <div class="country-header">CHILE ></div>
             <div class="channels-scroll">
-                
-                <div class="channel-item" onclick="loadChannel('URL_CHILE_1')">
-                    <div class="logo-box">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Logo_TVN_2020.svg/1200px-Logo_TVN_2020.svg.png" alt="TVN">
-                    </div>
-                    <span class="channel-name">TVN Chile</span>
+                <div class="channel-item" onclick="loadVideo('URL_TVN')">
+                    <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Logo_TVN_2020.svg/1200px-Logo_TVN_2020.svg.png"></div>
+                    <span class="channel-name">TVN</span>
                     <span class="channel-origin">Chile</span>
                 </div>
-
-                <div class="channel-item" onclick="loadChannel('URL_CHILE_2')">
-                    <div class="logo-box">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Mega_logo_2020.svg/1200px-Mega_logo_2020.svg.png" alt="Mega">
-                    </div>
-                    <span class="channel-name">Mega</span>
-                    <span class="channel-origin">Chile</span>
-                </div>
-
             </div>
         </div>
 
     </div>
 
     <nav class="bottom-navbar">
-        <a href="URL_VOLVER" class="nav-link">
+        <a href="https://tudominio.com/volver" class="nav-link">
             <span class="dot"></span> VOLVER
         </a>
         <a href="#" class="nav-link">
             <span class="dot"></span> TV VIVO
         </a>
-        <a href="URL_PORTALES" class="nav-link">
+        <a href="https://tudominio.com/portales" class="nav-link">
             <span class="dot"></span> PORTALES
         </a>
     </nav>
 
     <script>
-        function loadChannel(url) {
-            const player = document.getElementById('player');
+        // Función para cargar video y subir al reproductor
+        function loadVideo(url) {
+            const player = document.getElementById('main-player');
             player.src = url;
-            // Scroll suave hacia arriba para ver el video al clickear
             window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // Función para el banner de banderas
+        function filtrarRadar(pais, element) {
+            // Activar visualmente el botón
+            document.querySelectorAll('.btn-pais').forEach(b => b.classList.remove('active'));
+            element.classList.add('active');
+
+            // Scroll hacia la sección del país si existe
+            if(pais !== 'all') {
+                const target = document.getElementById('sec-' + pais);
+                if(target) {
+                    const offset = target.offsetTop - 250; // Ajuste para no quedar debajo del video fijo
+                    window.scrollTo({top: offset, behavior: 'smooth'});
+                }
+            }
         }
     </script>
 
