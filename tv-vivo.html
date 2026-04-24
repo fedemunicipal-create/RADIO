@@ -5,6 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>RADARLAT TV-VIVO</title>
     <style>
+        /* Contenedor principal para que quede fijo arriba (opcional) o centrado */
+#r1-container-fuerza {
+  width: 100%;
+  background-color: #000;
+  padding: 10px 0;
+  border-bottom: 1px solid #333;
+}
+
+/* El carrusel deslizable */
+.r1-carrusel-centrado {
+  display: flex;            /* Pone las banderas en línea */
+  overflow-x: auto;         /* Habilita el deslizamiento horizontal */
+  overflow-y: hidden;
+  white-space: nowrap;      /* Evita que salten de línea */
+  gap: 20px;                /* Espacio entre banderas */
+  padding: 0 15px;
+  scrollbar-width: none;    /* Oculta scroll en Firefox */
+  -webkit-overflow-scrolling: touch; /* Suavidad en iPhone */
+}
+
+/* Ocultar barra de scroll en Chrome/Safari */
+.r1-carrusel-centrado::-webkit-scrollbar {
+  display: none;
+}
+
+/* Estilo de cada botón de país */
+.btn-pais {
+  display: flex;
+  flex-direction: column;   /* Bandera arriba, texto abajo */
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;           /* Evita que se aplasten las banderas */
+  cursor: pointer;
+  min-width: 50px;
+}
+
+.btn-pais img {
+  width: 35px;              /* Tamaño de la bandera */
+  height: auto;
+  border-radius: 2px;
+  margin-bottom: 5px;
+}
+
+.btn-pais span {
+  color: #fff;
+  font-size: 11px;
+  font-family: sans-serif;
+  text-transform: uppercase;
+}
+
+/* Icono de "Todos" */
+.world-icon {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
         /* CONFIGURACIÓN BASE - ESTILO MINIMALISTA */
         body {
             background-color: #000;
@@ -15,14 +71,15 @@
             padding-bottom: 90px; /* Espacio para el menú inferior */
             overflow-x: hidden;
         }
+  
+        <div id="r1-container-fuerza">
+           <div class="r1-carrusel-centrado">
+             <div class="btn-pais active" onclick="filtrarRadar('all', this)">
+              <div class="world-icon">🌎</div>
+              <span>Todos</span>
+            </div>
 
-       <div id="rl-container-fuerza">
-    <div class="rl-carrusel-centrado">
-        <div class="btn-pais active" onclick="filtrarRadar('all', this)">
-            <div class="world-icon">🌎</div>
-            <span>Todos</span>
-        </div>
-
+    
         <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://flagcdn.com/w80/ar.png" /><span>ARG</span></div>
         <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://flagcdn.com/w80/cl.png" /><span>CHI</span></div>
         <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="https://flagcdn.com/w80/uy.png" /><span>URU</span></div>
