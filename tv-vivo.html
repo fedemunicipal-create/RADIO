@@ -5,11 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>RADARLAT TV-VIVO</title>
     <script src="https://jsdelivr.net"></script>
-    
     <style>
         body { background-color: #000; color: #fff; font-family: sans-serif; margin: 0; padding-bottom: 100px; overflow-x: hidden; }
-
-        /* 1. BANDERAS (CORREGIDAS) */
         #rl-container-fuerza { position: sticky; top: 0; width: 100%; background: #0b0e11; border-bottom: 2px solid #4CAF50; z-index: 2000; }
         .r1-carrusel-centrado { display: flex; overflow-x: auto; gap: 20px; padding: 10px 15px; align-items: center; -webkit-overflow-scrolling: touch; }
         .r1-carrusel-centrado::-webkit-scrollbar { display: none; }
@@ -18,120 +15,96 @@
         .btn-pais.active img, .btn-pais.active .world-icon { border-color: #4CAF50; box-shadow: 0 0 10px #4CAF50; }
         .btn-pais span { font-size: 10px; color: #777; margin-top: 5px; font-weight: bold; text-transform: uppercase; }
         .btn-pais.active span { color: #4CAF50; }
-
-        /* 2. REPRODUCTOR */
         .video-container { width: 100%; aspect-ratio: 16/9; background: #000; position: relative; }
         #main-video-player, #hls-video-player { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: none; }
         #main-video-player.active, #hls-video-player.active { display: block; }
-
-        /* 3. CANALES */
         .main-content { padding: 10px 0; }
         .rl-card { margin-bottom: 30px; }
-        .country-header { font-size: 0.85rem; font-weight: bold; color: #ccc; margin: 15px; text-transform: uppercase; border-left: 3px solid #4CAF50; padding-left: 10px; }
+        .country-header { font-size: 0.9rem; font-weight: bold; color: #fff; margin: 15px; text-transform: uppercase; border-left: 4px solid #4CAF50; padding-left: 12px; }
         .channels-scroll { display: flex; overflow-x: auto; gap: 15px; padding: 0 15px 10px; }
-        .logo-box { width: 115px; height: 115px; background: #fff; border-radius: 22px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
-        .logo-box img { width: 80%; height: auto; }
+        .logo-box { width: 110px; height: 110px; background: #fff; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
+        .logo-box img { width: 85%; height: auto; object-fit: contain; }
         .channel-name { font-size: 0.8rem; font-weight: bold; text-align: center; display: block; color: #fff; }
-
-        /* 4. MENÚ INFERIOR (CON LUZ ROJA EN LOS TRES) */
-        .bottom-navbar { position: fixed; bottom: 0; width: 100%; height: 70px; background: #000; display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #1a1a1a; z-index: 3000; }
-        .nav-link { text-decoration: none; color: #fff; font-size: 0.8rem; font-weight: bold; display: flex; align-items: center; }
-        .dot { height: 7px; width: 7px; background-color: #ff0000; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 8px #ff0000; animation: parpadeo 1.5s infinite; }
+        .bottom-navbar { position: fixed; bottom: 0; width: 100%; height: 75px; background: #000; display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #1a1a1a; z-index: 3000; }
+        .nav-link { text-decoration: none; color: #fff; font-size: 0.85rem; font-weight: bold; display: flex; align-items: center; text-transform: uppercase; }
+        .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 10px #ff0000; animation: parpadeo 1.5s infinite; }
         @keyframes parpadeo { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     </style>
 </head>
 <body>
-
-    <!-- MENÚ DE BANDERAS -->
     <div id="rl-container-fuerza">
-        <div class="r1-carrusel-centrado" id="banderas-carrusel">
-            <!-- Se llena con JS para asegurar que todos estén presentes -->
-        </div>
+        <div class="r1-carrusel-centrado" id="banderas-carrusel"></div>
     </div>
-
-    <!-- REPRODUCTOR -->
     <div class="video-container">
         <iframe id="main-video-player" class="active" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         <video id="hls-video-player" controls autoplay playsinline></video>
     </div>
-
-    <!-- BANNER ADSTERRA -->
-    <div style="width:100%; text-align:center; padding:10px 0; background:#0b0e11;">
+    <div id="ad-container" style="width:100%; text-align:center; padding:10px 0; background:#0b0e11;">
         <script type="text/javascript">
             atOptions = { 'key' : '2518913e078a8274472eea34aba82089', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
         </script>
         <script type="text/javascript" src="https://highperformanceformat.com"></script>
     </div>
-
-    <!-- CONTENEDOR DE CANALES -->
     <div class="main-content" id="contenedor-canales"></div>
-
-    <!-- MENÚ INFERIOR -->
     <nav class="bottom-navbar">
         <a href="LINK_PAGINA_AQUI" class="nav-link"><span class="dot"></span>RADIO</a>
         <a href="LINK_PAGINA_AQUI" class="nav-link"><span class="dot"></span>VOLVER</a>
         <a href="LINK_PAGINA_AQUI" class="nav-link"><span class="dot"></span>PORTALES</a>
     </nav>
-
     <script>
         const paises = [
-            {id:'all', n:'TODOS', icon:'🌐'}, {id:'ar', n:'ARG', f:'ar'}, {id:'cl', n:'CHI', f:'cl'}, 
-            {id:'uy', n:'URU', f:'uy'}, {id:'it', n:'ITA', f:'it'}, {id:'py', n:'PAR', f:'py'},
-            {id:'br', n:'BRA', f:'br'}, {id:'pe', n:'PER', f:'pe'}, {id:'bo', n:'BOL', f:'bo'},
-            {id:'ec', n:'ECU', f:'ec'}, {id:'ve', n:'VEN', f:'ve'}, {id:'co', n:'COL', f:'co'},
-            {id:'mx', n:'MEX', f:'mx'}, {id:'pa', n:'PAN', f:'pa'}, {id:'gt', n:'GUA', f:'gt'},
-            {id:'sv', n:'SAL', f:'sv'}, {id:'ni', n:'NIC', f:'ni'}, {id:'hn', n:'HON', f:'hn'},
-            {id:'cr', n:'COS', f:'cr'}, {id:'cu', n:'CUB', f:'cu'}, {id:'do', n:'DOM', f:'do'},
-            {id:'pr', n:'PUE', f:'pr'}, {id:'us', n:'USA', f:'us'}, {id:'es', n:'ESP', f:'es'},
-            {id:'fr', n:'FRA', f:'fr'}, {id:'de', n:'ALE', f:'de'}
+            {id:'all', n:'TODOS', icon:'🌐'}, {id:'ar', n:'ARG', full:'ARGENTINA', f:'ar'}, {id:'cl', n:'CHI', full:'CHILE', f:'cl'}, 
+            {id:'uy', n:'URU', full:'URUGUAY', f:'uy'}, {id:'it', n:'ITA', full:'ITALIA', f:'it'}, {id:'py', n:'PAR', full:'PARAGUAY', f:'py'},
+            {id:'br', n:'BRA', full:'BRASIL', f:'br'}, {id:'pe', n:'PER', full:'PERÚ', f:'pe'}, {id:'bo', n:'BOL', full:'BOLIVIA', f:'bo'},
+            {id:'ec', n:'ECU', full:'ECUADOR', f:'ec'}, {id:'ve', n:'VEN', full:'VENEZUELA', f:'ve'}, {id:'co', n:'COL', full:'COLOMBIA', f:'co'},
+            {id:'mx', n:'MEX', full:'MÉXICO', f:'mx'}, {id:'pa', n:'PAN', full:'PANAMÁ', f:'pa'}, {id:'gt', n:'GUA', full:'GUATEMALA', f:'gt'},
+            {id:'sv', n:'SAL', full:'EL SALVADOR', f:'sv'}, {id:'ni', n:'NIC', full:'NICARAGUA', f:'ni'}, {id:'hn', n:'HON', full:'HONDURAS', f:'hn'},
+            {id:'cr', n:'COS', full:'COSTA RICA', f:'cr'}, {id:'cu', n:'CUB', full:'CUBA', f:'cu'}, {id:'do', n:'DOM', full:'REP. DOMINICANA', f:'do'},
+            {id:'pr', n:'PUE', full:'PUERTO RICO', f:'pr'}, {id:'us', n:'USA', full:'EE.UU.', f:'us'}, {id:'es', n:'ESP', full:'ESPAÑA', f:'es'},
+            {id:'fr', n:'FRA', full:'FRANCIA', f:'fr'}, {id:'de', n:'ALE', full:'ALEMANIA', f:'de'}
         ];
 
         const canalesData = [
-            { id: 'ar', n: 'Argentina', items: [{ n: 'TN', l: 'https://youtube.com', img: 'https://wikimedia.org' }] },
-            { id: 'cl', n: 'Chile', items: [{ n: 'TVN Chile', l: 'https://youtube.com', img: 'https://wikimedia.org' }] },
-            { id: 'uy', n: 'Uruguay', items: [{ n: 'Canal 5 Uy', l: 'https://vood.io', img: 'https://wikimedia.org' }] },
-            { id: 'it', n: 'Italia', items: [{ n: 'Rai News 24', l: 'https://akamaized.net', img: 'https://wikimedia.org' }] }
+            { id: 'ar', items: [{ n: 'TN', l: 'https://youtube.com', img: 'https://wikimedia.org' }] },
+            { id: 'cl', items: [{ n: 'TVN Chile', l: 'https://youtube.com', img: 'https://wikimedia.org' }] },
+            { id: 'uy', items: [{ n: 'Canal 5 Uy', l: 'https://vood.io', img: 'https://wikimedia.org' }] },
+            { id: 'it', items: [{ n: 'Rai News 24', l: 'https://akamaized.net', img: 'https://wikimedia.org' }] }
         ];
 
         function init() {
             const carrusel = document.getElementById('banderas-carrusel');
-            paises.forEach(p => {
-                const div = document.createElement('div');
-                div.className = `btn-pais ${p.id === 'all' ? 'active' : ''}`;
-                div.onclick = function() { filtrarRadar(p.id, this); };
-                const img = p.f ? `<img src="https://flagcdn.com{p.f}.png">` : `<div class="world-icon" style="background:#222; width:44px; height:32px; display:flex; align-items:center; justify-content:center; border-radius:6px;">${p.icon}</div>`;
-                div.innerHTML = `${img}<span>${p.n}</span>`;
-                carrusel.appendChild(div);
-            });
-
             const container = document.getElementById('contenedor-canales');
-            paises.filter(p => p.id !== 'all').forEach(p => {
-                const sec = document.createElement('div');
-                sec.className = `rl-card ${p.id}`;
-                const data = canalesData.find(d => d.id === p.id);
-                let html = `<div class="country-header">${p.n}</div>`;
-                if (data) {
-                    html += `<div class="channels-scroll">` + data.items.map(c => `
-                        <div class="channel-item" onclick="cargarContenido('${c.l}')">
-                            <div class="logo-box"><img src="${c.img}"></div>
-                            <span class="channel-name">${c.n}</span>
-                        </div>`).join('') + `</div>`;
-                } else {
-                    html += `<div style="padding:0 20px; font-size:0.7rem; color: #444;">Próximamente...</div>`;
+            paises.forEach(p => {
+                const btn = document.createElement('div');
+                btn.className = `btn-pais ${p.id === 'all' ? 'active' : ''}`;
+                btn.onclick = () => filtrarRadar(p.id, btn);
+                const visual = p.f ? `<img src="https://flagcdn.com{p.f}.png" loading="lazy">` : `<div class="world-icon">${p.icon}</div>`;
+                btn.innerHTML = `${visual}<span>${p.n}</span>`;
+                carrusel.appendChild(btn);
+
+                if (p.id !== 'all') {
+                    const sec = document.createElement('div');
+                    sec.className = `rl-card ${p.id}`;
+                    const data = canalesData.find(d => d.id === p.id);
+                    let html = `<div class="country-header">${p.full}</div>`;
+                    if (data) {
+                        html += `<div class="channels-scroll">` + data.items.map(c => `
+                            <div class="channel-item" onclick="cargarContenido('${c.l}')">
+                                <div class="logo-box"><img src="${c.img}" loading="lazy"></div>
+                                <span class="channel-name">${c.n}</span>
+                            </div>`).join('') + `</div>`;
+                    } else { html += `<div style="padding:0 20px; font-size:0.75rem; color:#666;">Señales próximamente...</div>`; }
+                    sec.innerHTML = html;
+                    container.appendChild(sec);
                 }
-                sec.innerHTML = html;
-                container.appendChild(sec);
             });
         }
 
         function cargarContenido(url) {
-            const yt = document.getElementById('main-video-player');
-            const hls = document.getElementById('hls-video-player');
-            yt.src = ""; hls.pause();
-            yt.classList.remove('active'); hls.classList.remove('active');
-            if (url.includes('youtube.com')) {
-                yt.src = url; yt.classList.add('active');
-            } else {
+            const yt = document.getElementById('main-video-player'), hls = document.getElementById('hls-video-player');
+            yt.src = ""; hls.pause(); yt.classList.remove('active'); hls.classList.remove('active');
+            if (url.includes('youtube.com')) { yt.src = url; yt.classList.add('active'); }
+            else {
                 hls.classList.add('active');
                 if (Hls.isSupported()) { const h = new Hls(); h.loadSource(url); h.attachMedia(hls); }
                 else if (hls.canPlayType('application/vnd.apple.mpegurl')) { hls.src = url; }
@@ -142,9 +115,7 @@
         function filtrarRadar(id, el) {
             document.querySelectorAll('.btn-pais').forEach(b => b.classList.remove('active'));
             el.classList.add('active');
-            document.querySelectorAll('.rl-card').forEach(c => {
-                c.style.display = (id === 'all' || c.classList.contains(id)) ? 'block' : 'none';
-            });
+            document.querySelectorAll('.rl-card').forEach(c => c.style.display = (id === 'all' || c.classList.contains(id)) ? 'block' : 'none');
         }
 
         window.onload = () => { init(); cargarContenido('https://youtube.com'); };
