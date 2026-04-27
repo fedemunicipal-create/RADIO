@@ -13,8 +13,10 @@
         .r1-carrusel-centrado { display: flex; overflow-x: auto; gap: 20px; padding: 10px 15px; align-items: center; }
         .r1-carrusel-centrado::-webkit-scrollbar { display: none; }
         .btn-pais { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; min-width: 50px; cursor: pointer; }
-        .btn-pais img, .world-icon { width: 44px; height: 32px; border-radius: 6px; border: 2px solid transparent; object-fit: cover; }
-        .btn-pais.active img, .btn-pais.active .world-icon { border-color: #4CAF50; box-shadow: 0 0 10px #4CAF50; }
+        
+        /* Ajuste de banderas para que SIEMPRE se vean */
+        .btn-pais img { width: 44px; height: 32px; border-radius: 6px; border: 2px solid transparent; object-fit: cover; background: #222; display: block; }
+        .btn-pais.active img { border-color: #4CAF50; box-shadow: 0 0 10px #4CAF50; }
         .btn-pais span { font-size: 10px; color: #777; margin-top: 5px; font-weight: bold; text-transform: uppercase; }
         .btn-pais.active span { color: #4CAF50; }
 
@@ -28,7 +30,6 @@
         .rl-card { margin-bottom: 30px; }
         .country-header { font-size: 0.9rem; font-weight: bold; color: #fff; margin: 15px; text-transform: uppercase; border-left: 4px solid #4CAF50; padding-left: 12px; }
         .channels-scroll { display: flex; overflow-x: auto; gap: 15px; padding: 0 15px 10px; }
-        .channels-scroll::-webkit-scrollbar { display: none; }
         .logo-box { width: 110px; height: 110px; background: #fff; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
         .logo-box img { width: 80%; height: auto; object-fit: contain; }
         .channel-name { font-size: 0.8rem; font-weight: bold; text-align: center; display: block; color: #fff; }
@@ -44,32 +45,33 @@
 
     <div id="rl-container-fuerza">
         <div class="r1-carrusel-centrado">
-            <div class="btn-pais active" onclick="filtrarRadar('all', this)"><div class="world-icon" style="background:#222; display:flex; align-items:center; justify-content:center;">🌐</div><span>TODOS</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://flagcdn.com"><span>ARG</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://flagcdn.com"><span>CHI</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="https://flagcdn.com"><span>URU</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="https://flagcdn.com"><span>PAR</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('br', this)"><img src="https://flagcdn.com"><span>BRA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pe', this)"><img src="https://flagcdn.com"><span>PER</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('bo', this)"><img src="https://flagcdn.com"><span>BOL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ec', this)"><img src="https://flagcdn.com"><span>ECU</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ve', this)"><img src="https://flagcdn.com"><span>VEN</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('co', this)"><img src="https://flagcdn.com"><span>COL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('mx', this)"><img src="https://flagcdn.com"><span>MEX</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pa', this)"><img src="https://flagcdn.com"><span>PAN</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('gt', this)"><img src="https://flagcdn.com"><span>GUA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('sv', this)"><img src="https://flagcdn.com"><span>SAL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ni', this)"><img src="https://flagcdn.com"><span>NIC</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="https://flagcdn.com"><span>HON</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cr', this)"><img src="https://flagcdn.com"><span>COS</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cu', this)"><img src="https://flagcdn.com"><span>CUB</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="https://flagcdn.com"><span>DOM</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pr', this)"><img src="https://flagcdn.com"><span>PUE</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('us', this)"><img src="https://flagcdn.com"><span>USA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="https://flagcdn.com"><span>ESP</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('it', this)"><img src="https://flagcdn.com"><span>ITA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="https://flagcdn.com"><span>FRA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://flagcdn.com"><span>ALE</span></div>
+            <div class="btn-pais active" onclick="filtrarRadar('all', this)"><div style="width:44px; height:32px; background:#222; border-radius:6px; display:flex; align-items:center; justify-content:center;">🌐</div><span>TODOS</span></div>
+            <!-- Lista completa de banderas con servidor alternativo -->
+            <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://github.io"><span>ARG</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://github.io"><span>CHI</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="https://github.io"><span>URU</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="https://github.io"><span>PAR</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('br', this)"><img src="https://github.io"><span>BRA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pe', this)"><img src="https://github.io"><span>PER</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('bo', this)"><img src="https://github.io"><span>BOL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ec', this)"><img src="https://github.io"><span>ECU</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ve', this)"><img src="https://github.io"><span>VEN</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('co', this)"><img src="https://github.io"><span>COL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('mx', this)"><img src="https://github.io"><span>MEX</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pa', this)"><img src="https://github.io"><span>PAN</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('gt', this)"><img src="https://github.io"><span>GUA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('sv', this)"><img src="https://github.io"><span>SAL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ni', this)"><img src="https://github.io"><span>NIC</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="https://github.io"><span>HON</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cr', this)"><img src="https://github.io"><span>COS</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cu', this)"><img src="https://github.io"><span>CUB</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="https://github.io"><span>DOM</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pr', this)"><img src="https://github.io"><span>PUE</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('us', this)"><img src="https://github.io"><span>USA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="https://github.io"><span>ESP</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('it', this)"><img src="https://github.io"><span>ITA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="https://github.io"><span>FRA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://github.io"><span>ALE</span></div>
         </div>
     </div>
 
@@ -79,10 +81,7 @@
     </div>
 
     <div id="ad-box" style="width:100%; text-align:center; padding:10px 0; background:#0b0e11;">
-        <script type="text/javascript">
-            atOptions = { 'key' : '2518913e078a8274472eea34aba82089', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
-        </script>
-        <script type="text/javascript" src="https://highperformanceformat.com"></script>
+        <!-- Espacio para el script de Adsterra -->
     </div>
 
     <div class="main-content" id="contenedor-canales"></div>
@@ -98,9 +97,8 @@
         {id:'ar', full:'ARGENTINA', c:[{n:'TN', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'C5N', l:'https://youtube.com', img:'https://wikimedia.org'}]},
         {id:'cl', full:'CHILE', c:[{n:'TVN', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'T13', l:'https://youtube.com', img:'https://wikimedia.org'}]},
         {id:'uy', full:'URUGUAY', c:[{n:'CANAL 5', l:'https://vood.io', img:'https://wikimedia.org'},{n:'TELEMUNDO', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'py', full:'PARAGUAY', c:[]}, {id:'br', full:'BRASIL', c:[]}, {id:'pe', full:'PERÚ', c:[]}, {id:'bo', full:'BOLIVIA', c:[]}, {id:'ec', full:'ECUADOR', c:[]}, {id:'ve', full:'VENEZUELA', c:[]}, {id:'co', full:'COLOMBIA', c:[]}, {id:'mx', full:'MÉXICO', c:[]}, {id:'pa', full:'PANAMÁ', c:[]}, {id:'gt', full:'GUATEMALA', c:[]}, {id:'sv', full:'EL SALVADOR', c:[]}, {id:'ni', full:'NICARAGUA', c:[]}, {id:'hn', full:'HONDURAS', c:[]}, {id:'cr', full:'COSTA RICA', c:[]}, {id:'cu', full:'CUBA', c:[]}, {id:'do', full:'REP. DOMINICANA', c:[]}, {id:'pr', full:'PUERTO RICO', c:[]}, {id:'us', full:'USA', c:[]}, {id:'es', full:'ESPAÑA', c:[]},
         {id:'it', full:'ITALIA', c:[{n:'RAI NEWS', l:'https://akamaized.net', img:'https://wikimedia.org'}]},
-        {id:'fr', full:'FRANCIA', c:[]}, {id:'de', full:'ALEMANIA', c:[]}
+        {id:'py', full:'PARAGUAY', c:[]}, {id:'br', full:'BRASIL', c:[]}, {id:'pe', full:'PERÚ', c:[]}, {id:'bo', full:'BOLIVIA', c:[]}, {id:'ec', full:'ECUADOR', c:[]}, {id:'ve', full:'VENEZUELA', c:[]}, {id:'co', full:'COLOMBIA', c:[]}, {id:'mx', full:'MÉXICO', c:[]}, {id:'pa', full:'PANAMÁ', c:[]}, {id:'gt', full:'GUATEMALA', c:[]}, {id:'sv', full:'EL SALVADOR', c:[]}, {id:'ni', full:'NICARAGUA', c:[]}, {id:'hn', full:'HONDURAS', c:[]}, {id:'cr', full:'COSTA RICA', c:[]}, {id:'cu', full:'CUBA', c:[]}, {id:'do', full:'REP. DOMINICANA', c:[]}, {id:'pr', full:'PUERTO RICO', c:[]}, {id:'us', full:'USA', c:[]}, {id:'es', full:'ESPAÑA', c:[]}, {id:'fr', full:'FRANCIA', c:[]}, {id:'de', full:'ALEMANIA', c:[]}
     ];
 
     function render(filtro = 'all') {
