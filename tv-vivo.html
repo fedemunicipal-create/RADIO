@@ -217,110 +217,75 @@
         </div>
     </div>
 
-    <div class="video-container">
-        <iframe id="main-video-player" src="about:blank" allowfullscreen></iframe>
-    </div>
+   <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;">
+    <iframe id="main-video-player" 
+            src="https://www.youtube.com/embed/5Z06_OH0M6M?autoplay=1" 
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
+            frameborder="0" 
+            allow="autoplay; encrypted-media" 
+            allowfullscreen>
+    </iframe>
+</div>
 
-    <div style="width:100%; text-align:center; padding:10px 0; background:#0b0e11;">
-        <span style="color:#444; font-size:10px;"><script>
-  atOptions = {
-    'key' : '2518913e078a8274472eea34aba82089',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
+<div style="width:100%; text-align:center; padding:10px 0; background:#0b0e11;">
+    <span style="color:#444; font-size:10px;">PUBLICIDAD</span>
+</div>
+
+<div class="main-content">
+    <div class="country-group r1-card ar" id="sec-ar">
+        <div class="country-header" style="color: white; padding: 10px; font-weight: bold;">ARGENTINA</div>
+        <div class="channels-scroll" style="display: flex; gap: 10px; overflow-x: auto; padding: 10px;">
+            
+            <div class="channel-item" onclick="cambiarCanal('https://www.youtube.com/embed/5Z06_OH0M6M?autoplay=1')" style="cursor: pointer; min-width: 120px;">
+                <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Todo_Noticias_2023.png" width="100%"></div>
+                <span class="channel-name" style="color: white; display: block; font-size: 12px;">TN Noticias</span>
+            </div>
+
+            <div class="channel-item" onclick="cambiarCanal('https://www.youtube.com/embed/VVhQ6xspnSc?autoplay=1')" style="cursor: pointer; min-width: 120px;">
+                <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/C5N_2017_Alternate.svg/1920px-C5N_2017_Alternate.svg.png" width="100%"></div>
+                <span class="channel-name" style="color: white; display: block; font-size: 12px;">C5N</span>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<nav class="bottom-navbar">
+    <a href="#" class="nav-link">VOLVER</a>
+    <a href="#" class="nav-link active">TV VIVO</a>
+    <a href="#" class="nav-link">PORTALES</a>
+</nav>
+
+<script>
+// Lista de canales para el inicio aleatorio
+const canalesRandom = [
+    'https://www.youtube.com/embed/5Z06_OH0M6M?autoplay=1',
+    'https://www.youtube.com/embed/VVhQ6xspnSc?autoplay=1'
+];
+
+function cambiarCanal(url) {
+    const player = document.getElementById('main-video-player');
+    if (player) {
+        player.src = url;
+        // Scroll hacia arriba para ver el video
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+}
+
+// Filtrado de países
+function filtrarRadar(code, el) {
+    document.querySelectorAll('.btn-pais').forEach(b => b.classList.remove('active'));
+    if(el) el.classList.add('active');
+
+    const items = document.querySelectorAll('.rl-card');
+    items.forEach(item => {
+        item.style.display = (code === 'all' || item.classList.contains(code)) ? 'block' : 'none';
+    });
+}
+
+// Carga inicial
+window.onload = () => {
+    const randomUrl = canalesRandom[Math.floor(Math.random() * canalesRandom.length)];
+    cambiarCanal(randomUrl);
+};
 </script>
-<script src="https://www.highperformanceformat.com/2518913e078a8274472eea34aba82089/invoke.js"></script>
-</span>
-    </div>
-
-    <div class="main-content">
-        <div class="country-group rl-card ar" id="sec-ar">
-            <div class="country-header">ARGENTINA ></div>
-            <div class="channels-scroll">
-                <div class="channel-item" onclick="cambiarCanal('https://www.youtube.com/embed/S2O6_0H0M6M?autoplay=1')">
-                    <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Todo_Noticias_2023.png"></div>
-                    <span class="channel-name">TN Todo Noticias</span>
-                    <span class="channel-origin">Argentina</span>
-                </div>
-                <div class="channel-item" onclick="cambiarCanal('https://www.youtube.com/live/VWhQ6xspnSc?si=Hnega0VI3zzykKL8')">
-                    <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/C5N_2017_Alternate.svg/1920px-C5N_2017_Alternate.svg.png"></div>
-                    <span class="channel-name">C5N</span>
-                    <span class="channel-origin">Argentina</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="country-group rl-card cl" id="sec-cl">
-            <div class="country-header">CHILE ></div>
-            <div class="channels-scroll">
-                <div class="channel-item" onclick="cambiarCanal('https://www.youtube.com/embed/id_tvn_chile?autoplay=1')">
-                    <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Logo_TVN_2020.svg/1200px-Logo_TVN_2020.svg.png"></div>
-                    <span class="channel-name">TVN Chile</span>
-                    <span class="channel-origin">Chile</span>
-                </div>
-                <div class="channel-item" onclick="cambiarCanal('aquí link YouTube')">
-                    <div class="logo-box">aquí logo de canal</div>
-                    <span class="channel-name">Nuevo Canal</span>
-                    <span class="channel-origin">Chile</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="country-group rl-card uy" id="sec-uy">
-            <div class="country-header">URUGUAY ></div>
-            <div class="channels-scroll">
-                <div class="channel-item" onclick="cambiarCanal('aquí link YouTube')">
-                    <div class="logo-box">aquí logo de canal</div>
-                    <span class="channel-name">Canal Ejemplo</span>
-                    <span class="channel-origin">Uruguay</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <nav class="bottom-navbar">
-        <a href="#" class="nav-link">VOLVER</a>
-        <a href="#" class="nav-link active"><span class="dot"></span>TV VIVO</a>
-        <a href="#" class="nav-link">PORTALES</a>
-    </nav>
-
-    <script>
-        // Lista para reproductor aleatorio al cargar
-        const canalesRandom = [
-            'https://www.youtube.com/embed/S2O6_0H0M6M?autoplay=1', // TN
-            'https://www.youtube.com/embed/5m0p1_8P_N0?autoplay=1'  // C5N
-        ];
-
-        function cambiarCanal(url) {
-            const player = document.getElementById('main-video-player');
-            player.src = url;
-            // Scroll suave hacia arriba para ver el video al clickear
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function filtrarRadar(code, el) {
-            // Estética de los botones
-            document.querySelectorAll('.btn-pais').forEach(b => b.classList.remove('active'));
-            el.classList.add('active');
-
-            // Lógica de filtrado
-            const items = document.querySelectorAll('.rl-card');
-            items.forEach(item => {
-                if (code === 'all') {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = item.classList.contains(code) ? 'block' : 'none';
-                }
-            });
-        }
-
-        // Elegir canal al azar al iniciar
-        window.onload = () => {
-            const randomUrl = canalesRandom[Math.floor(Math.random() * canalesRandom.length)];
-            cambiarCanal(randomUrl);
-        };
-    </script>
-</body>
-</html>
