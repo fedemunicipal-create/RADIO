@@ -3,37 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>RADARLAT TV-VIVO</title>
+    <title>RADARLAT TV-RADIO</title>
     <script src="https://jsdelivr.net"></script>
     <style>
         body { background-color: #000; color: #fff; font-family: sans-serif; margin: 0; padding-bottom: 100px; overflow-x: hidden; }
         
-        /* BANDERAS - CARGA INMEDIATA */
+        /* MENU BANDERAS */
         #rl-container-fuerza { position: sticky; top: 0; width: 100%; background: #0b0e11; border-bottom: 2px solid #4CAF50; z-index: 2000; }
-        .r1-carrusel-centrado { display: flex; overflow-x: auto; gap: 20px; padding: 10px 15px; align-items: center; }
+        .r1-carrusel-centrado { display: flex; overflow-x: auto; gap: 15px; padding: 10px; align-items: center; }
         .r1-carrusel-centrado::-webkit-scrollbar { display: none; }
-        .btn-pais { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; min-width: 50px; cursor: pointer; text-decoration: none; }
-        .btn-pais img { width: 44px; height: 30px; border-radius: 4px; border: 2px solid transparent; object-fit: cover; background: #222; }
-        .btn-pais.active img { border-color: #4CAF50; box-shadow: 0 0 10px #4CAF50; }
-        .btn-pais span { font-size: 10px; color: #777; margin-top: 5px; font-weight: bold; }
-        .btn-pais.active span { color: #4CAF50; }
+        .btn-pais { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; min-width: 55px; cursor: pointer; }
+        .flag-icon { font-size: 24px; width: 44px; height: 32px; display: flex; align-items: center; justify-content: center; background: #222; border-radius: 6px; border: 2px solid transparent; }
+        .btn-pais.active .flag-icon { border-color: #4CAF50; box-shadow: 0 0 10px #4CAF50; }
+        .btn-pais span { font-size: 10px; color: #777; margin-top: 4px; font-weight: bold; }
 
-        /* REPRODUCTOR */
-        .video-container { width: 100%; aspect-ratio: 16/9; background: #000; position: relative; }
+        /* PANTALLA FIJA RESPONSIVA */
+        .video-container { width: 100%; max-width: 100vw; aspect-ratio: 16/9; background: #111; position: relative; overflow: hidden; }
         #main-video-player, #hls-video-player { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: none; }
         #main-video-player.active, #hls-video-player.active { display: block; }
 
-        /* LISTA DE CANALES */
+        /* LISTA DE PAISES Y CANALES */
         .main-content { padding: 10px 0; }
-        .rl-card { margin-bottom: 30px; display: block; }
-        .country-header { font-size: 1rem; font-weight: bold; color: #fff; margin: 15px; text-transform: uppercase; border-left: 4px solid #4CAF50; padding-left: 12px; }
-        .channels-scroll { display: flex; overflow-x: auto; gap: 15px; padding: 0 15px 10px; }
-        .logo-box { width: 100px; height: 100px; background: #fff; border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 5px; }
-        .logo-box img { width: 80%; height: auto; }
-        .channel-name { font-size: 0.75rem; text-align: center; display: block; color: #fff; font-weight: bold; }
+        .rl-card { margin-bottom: 25px; }
+        .country-header { font-size: 1rem; font-weight: bold; color: #fff; margin: 10px 15px; text-transform: uppercase; border-left: 4px solid #4CAF50; padding-left: 10px; }
+        .channels-scroll { display: flex; overflow-x: auto; gap: 12px; padding: 0 15px 10px; }
+        .logo-box { width: 90px; height: 90px; background: #fff; border-radius: 18px; display: flex; align-items: center; justify-content: center; margin-bottom: 5px; }
+        .logo-box img { width: 75%; height: auto; object-fit: contain; }
+        .channel-name { font-size: 0.7rem; text-align: center; font-weight: bold; width: 90px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* MENÚ INFERIOR - 3 LUCES ROJAS */
-        .bottom-navbar { position: fixed; bottom: 0; width: 100%; height: 75px; background: #000; display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #1a1a1a; z-index: 3000; }
+        /* MENU INFERIOR */
+        .bottom-navbar { position: fixed; bottom: 0; width: 100%; height: 70px; background: #000; display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #222; z-index: 3000; }
         .nav-link { text-decoration: none; color: #fff; font-size: 0.8rem; font-weight: bold; display: flex; align-items: center; }
         .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 8px #f00; animation: parpadeo 1.5s infinite; }
         @keyframes parpadeo { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
@@ -42,34 +41,7 @@
 <body>
 
 <div id="rl-container-fuerza">
-    <div class="r1-carrusel-centrado">
-        <div class="btn-pais active" onclick="filtrarRadar('all', this)"><div style="width:44px; height:30px; display:flex; align-items:center; justify-content:center; background:#222; border-radius:4px; font-size:18px;">🌐</div><span>TODOS</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://github.io"><span>ARG</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://github.io"><span>CHI</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="https://github.io"><span>URU</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('it', this)"><img src="https://github.io"><span>ITA</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="https://github.io"><span>PAR</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('br', this)"><img src="https://github.io"><span>BRA</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('pe', this)"><img src="https://github.io"><span>PER</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('bo', this)"><img src="https://github.io"><span>BOL</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('ec', this)"><img src="https://github.io"><span>ECU</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('ve', this)"><img src="https://github.io"><span>VEN</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('co', this)"><img src="https://github.io"><span>COL</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('mx', this)"><img src="https://github.io"><span>MEX</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('pa', this)"><img src="https://github.io"><span>PAN</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('gt', this)"><img src="https://github.io"><span>GUA</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('sv', this)"><img src="https://github.io"><span>SAL</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('ni', this)"><img src="https://github.io"><span>NIC</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="https://github.io"><span>HON</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('cr', this)"><img src="https://github.io"><span>COS</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('cu', this)"><img src="https://github.io"><span>CUB</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="https://github.io"><span>DOM</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('pr', this)"><img src="https://github.io"><span>PUE</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('us', this)"><img src="https://github.io"><span>USA</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="https://github.io"><span>ESP</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="https://github.io"><span>FRA</span></div>
-        <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://github.io"><span>ALE</span></div>
-    </div>
+    <div class="r1-carrusel-centrado" id="menu-flags"></div>
 </div>
 
 <div class="video-container">
@@ -77,59 +49,15 @@
     <video id="hls-video-player" controls autoplay playsinline></video>
 </div>
 
-<!-- ADS ADSTERRA -->
-<div style="width:100%; text-align:center; padding:10px 0; background:#0b0e11;">
+<div id="ad-area" style="width:100%; text-align:center; padding:10px 0; background:#0b0e11;">
+    <!-- Script Adsterra -->
     <script type="text/javascript">
         atOptions = { 'key' : '2518913e078a8274472eea34aba82089', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
     </script>
     <script type="text/javascript" src="https://highperformanceformat.com"></script>
 </div>
 
-<div class="main-content" id="contenedor-canales">
-    <!-- ARGENTINA -->
-    <div class="rl-card ar">
-        <div class="country-header">ARGENTINA</div>
-        <div class="channels-scroll">
-            <div class="channel-item" onclick="cargarContenido('https://youtube.com')">
-                <div class="logo-box"><img src="https://wikimedia.org"></div>
-                <span class="channel-name">TN NOTICIAS</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- CHILE -->
-    <div class="rl-card cl">
-        <div class="country-header">CHILE</div>
-        <div class="channels-scroll">
-            <div class="channel-item" onclick="cargarContenido('https://youtube.com')">
-                <div class="logo-box"><img src="https://wikimedia.org"></div>
-                <span class="channel-name">TVN CHILE</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- URUGUAY -->
-    <div class="rl-card uy">
-        <div class="country-header">URUGUAY</div>
-        <div class="channels-scroll">
-            <div class="channel-item" onclick="cargarContenido('https://vood.io')">
-                <div class="logo-box"><img src="https://wikimedia.org"></div>
-                <span class="channel-name">CANAL 5 UY</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- ITALIA -->
-    <div class="rl-card it">
-        <div class="country-header">ITALIA</div>
-        <div class="channels-scroll">
-            <div class="channel-item" onclick="cargarContenido('https://akamaized.net')">
-                <div class="logo-box"><img src="https://wikimedia.org"></div>
-                <span class="channel-name">RAI NEWS 24</span>
-            </div>
-        </div>
-    </div>
-</div>
+<div class="main-content" id="contenedor-paises"></div>
 
 <nav class="bottom-navbar">
     <a href="LINK_AQUI" class="nav-link"><span class="dot"></span>RADIO</a>
@@ -138,35 +66,60 @@
 </nav>
 
 <script>
-    function cargarContenido(url) {
-        const yt = document.getElementById('main-video-player');
-        const hlsPlayer = document.getElementById('hls-video-player');
-        yt.src = ""; hlsPlayer.pause();
-        yt.classList.remove('active'); hlsPlayer.classList.remove('active');
+    const data = [
+        {id:'ar', n:'ARG', full:'ARGENTINA', f:'🇦🇷', c:[{n:'TN', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'C5N', l:'https://youtube.com', img:'https://wikimedia.org'}]},
+        {id:'cl', n:'CHI', full:'CHILE', f:'🇨🇱', c:[{n:'TVN', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'T13', l:'https://youtube.com', img:'https://wikimedia.org'}]},
+        {id:'uy', n:'URU', full:'URUGUAY', f:'🇺🇾', c:[{n:'CANAL 5', l:'https://vood.io', img:'https://wikimedia.org'},{n:'TELEMUNDO', l:'https://youtube.com', img:'https://wikimedia.org'}]},
+        {id:'py', n:'PAR', full:'PARAGUAY', f:'🇵🇾', c:[]}, {id:'br', n:'BRA', full:'BRASIL', f:'🇧🇷', c:[]}, {id:'pe', n:'PER', full:'PERÚ', f:'🇵🇪', c:[]},
+        {id:'bo', n:'BOL', full:'BOLIVIA', f:'🇧🇴', c:[]}, {id:'ec', n:'ECU', full:'ECUADOR', f:'🇪🇨', c:[]}, {id:'ve', n:'VEN', full:'VENEZUELA', f:'🇻🇪', c:[]},
+        {id:'co', n:'COL', full:'COLOMBIA', f:'🇨🇴', c:[]}, {id:'mx', n:'MEX', full:'MÉXICO', f:'🇲🇽', c:[]}, {id:'pa', n:'PAN', full:'PANAMÁ', f:'🇵🇦', c:[]},
+        {id:'gt', n:'GUA', full:'GUATEMALA', f:'🇬🇹', c:[]}, {id:'sv', n:'SAL', full:'EL SALVADOR', f:'🇸🇻', c:[]}, {id:'ni', n:'NIC', full:'NICARAGUA', f:'🇳🇮', c:[]},
+        {id:'hn', n:'HON', full:'HONDURAS', f:'🇭🇳', c:[]}, {id:'cr', n:'COS', full:'COSTA RICA', f:'🇨🇷', c:[]}, {id:'cu', n:'CUB', full:'CUBA', f:'🇨🇺', c:[]},
+        {id:'do', n:'DOM', full:'REP. DOMINICANA', f:'🇩🇴', c:[]}, {id:'pr', n:'PUE', full:'PUERTO RICO', f:'🇵🇷', c:[]}, {id:'us', n:'USA', full:'EE.UU.', f:'🇺🇸', c:[]},
+        {id:'es', n:'ESP', full:'ESPAÑA', f:'🇪🇸', c:[]}, {id:'fr', n:'FRA', full:'FRANCIA', f:'🇫🇷', c:[]}, {id:'de', n:'ALE', full:'ALEMANIA', f:'🇩🇪', c:[]},
+        {id:'it', n:'ITA', full:'ITALIA', f:'🇮🇹', c:[{n:'RAI NEWS', l:'https://akamaized.net', img:'https://wikimedia.org'}]}
+    ];
 
-        if (url.includes('youtube.com')) {
-            yt.src = url; yt.classList.add('active');
-        } else {
-            hlsPlayer.classList.add('active');
-            if (Hls.isSupported()) {
-                const hls = new Hls(); hls.loadSource(url); hls.attachMedia(hlsPlayer);
-            } else if (hlsPlayer.canPlayType('application/vnd.apple.mpegurl')) {
-                hlsPlayer.src = url;
-            }
-        }
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    function init() {
+        const menu = document.getElementById('menu-flags');
+        const content = document.getElementById('contenedor-paises');
+        
+        // Agregar botón "TODOS"
+        menu.innerHTML = `<div class="btn-pais active" onclick="filtrar('all', this)"><div class="flag-icon">🌐</div><span>TODOS</span></div>`;
 
-    function filtrarRadar(id, el) {
-        document.querySelectorAll('.btn-pais').forEach(b => b.classList.remove('active'));
-        el.classList.add('active');
-        document.querySelectorAll('.rl-card').forEach(card => {
-            card.style.display = (id === 'all' || card.classList.contains(id)) ? 'block' : 'none';
+        data.forEach(p => {
+            // Menu Banderas
+            menu.innerHTML += `<div class="btn-pais" onclick="filtrar('${p.id}', this)"><div class="flag-icon">${p.f}</div><span>${p.n}</span></div>`;
+            
+            // Bloque Pais
+            const div = document.createElement('div');
+            div.className = `rl-card ${p.id}`;
+            let channelsHtml = p.c.length > 0 ? p.c.map(c => `
+                <div class="channel-item" onclick="cargar('${c.l}')">
+                    <div class="logo-box"><img src="${c.img}"></div>
+                    <span class="channel-name">${c.n}</span>
+                </div>`).join('') : '<span style="color:#444; padding-left:15px; font-size:12px;">Señales próximamente...</span>';
+            
+            div.innerHTML = `<div class="country-header">${p.full}</div><div class="channels-scroll">${channelsHtml}</div>`;
+            content.appendChild(div);
         });
     }
 
-    window.onload = () => { cargarContenido('https://youtube.com'); };
-</script>
+    function cargar(url) {
+        const yt = document.getElementById('main-video-player'), hls = document.getElementById('hls-video-player');
+        yt.src = ""; hls.pause(); yt.classList.remove('active'); hls.classList.remove('active');
+        if(url.includes('youtube.com')) { yt.src = url; yt.classList.add('active'); }
+        else { hls.classList.add('active'); if(Hls.isSupported()){ const h=new Hls(); h.loadSource(url); h.attachMedia(hls); } else { hls.src=url; } }
+        window.scrollTo({top:0, behavior:'smooth'});
+    }
 
+    function filtrar(id, el) {
+        document.querySelectorAll('.btn-pais').forEach(b => b.classList.remove('active'));
+        el.classList.add('active');
+        document.querySelectorAll('.rl-card').forEach(c => c.style.display = (id==='all' || c.classList.contains(id)) ? 'block' : 'none');
+    }
+
+    window.onload = () => { init(); cargar('https://youtube.com'); };
+</script>
 </body>
 </html>
