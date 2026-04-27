@@ -6,14 +6,14 @@
     <title>RADARLAT TV-VIVO</title>
     
     <style>
-        /* 1. CONFIGURACIÓN BASE - ESTILO MINIMALISTA */
+        /* 1. ESTILOS BASE */
         body {
             background-color: #000;
             color: #fff;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             margin: 0;
             padding: 0;
-            padding-bottom: 90px; /* Espacio para el menú inferior */
+            padding-bottom: 90px;
             overflow-x: hidden;
         }
 
@@ -28,22 +28,19 @@
         }
 
         .r1-carrusel-centrado {
-            display: flex !important;
-            flex-direction: row !important;
-            flex-wrap: nowrap !important;
-            overflow-x: auto !important;
+            display: flex;
+            overflow-x: auto;
             gap: 20px;
             padding: 10px 15px;
             align-items: center;
-            -webkit-overflow-scrolling: touch;
         }
         .r1-carrusel-centrado::-webkit-scrollbar { display: none; }
 
         .btn-pais {
             flex: 0 0 auto;
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             min-width: 50px;
             cursor: pointer;
         }
@@ -81,15 +78,20 @@
         /* 3. REPRODUCTOR FIJO (16:9) */
         .video-container {
             width: 100%;
-            aspect-ratio: 16 / 9;
+            position: relative;
+            padding-bottom: 56.25%; /* Relación 16:9 */
+            height: 0;
+            overflow: hidden;
             background: #000;
             border-bottom: 1px solid #222;
         }
         .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             border: none;
-            display: block;
         }
 
         /* 4. GRILLA DE CANALES */
@@ -135,13 +137,10 @@
             font-size: 0.8rem; 
             font-weight: bold; 
             display: block;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            color: #fff;
         }
-        .channel-origin { font-size: 0.65rem; color: #666; }
 
-        /* 5. MENÚ INFERIOR CON LUZ PARPADEANTE */
+        /* 5. MENÚ INFERIOR */
         .bottom-navbar {
             position: fixed;
             bottom: 0;
@@ -185,117 +184,124 @@
 </head>
 <body>
 
+    <!-- MENÚ DE BANDERAS -->
     <div id="rl-container-fuerza">
         <div class="r1-carrusel-centrado">
             <div class="btn-pais active" onclick="filtrarRadar('all', this)">
                 <div class="world-icon">🌐</div><span>TODOS</span>
             </div>
-            <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://flagcdn.com/w80/ar.png"><span>ARG</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://flagcdn.com/w80/cl.png"><span>CHI</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="https://flagcdn.com/w80/uy.png"><span>URU</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="https://flagcdn.com/w80/py.png"><span>PAR</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('br', this)"><img src="https://flagcdn.com/w80/br.png"><span>BRA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pe', this)"><img src="https://flagcdn.com/w80/pe.png"><span>PER</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('bo', this)"><img src="https://flagcdn.com/w80/bo.png"><span>BOL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ec', this)"><img src="https://flagcdn.com/w80/ec.png"><span>ECU</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ve', this)"><img src="https://flagcdn.com/w80/ve.png"><span>VEN</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('co', this)"><img src="https://flagcdn.com/w80/co.png"><span>COL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('mx', this)"><img src="https://flagcdn.com/w80/mx.png"><span>MEX</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pa', this)"><img src="https://flagcdn.com/w80/pa.png"><span>PAN</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('gt', this)"><img src="https://flagcdn.com/w80/gt.png"><span>GUA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('sv', this)"><img src="https://flagcdn.com/w80/sv.png"><span>SAL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ni', this)"><img src="https://flagcdn.com/w80/ni.png"><span>NIC</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="https://flagcdn.com/w80/hn.png"><span>HON</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cr', this)"><img src="https://flagcdn.com/w80/cr.png"><span>COS</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cu', this)"><img src="https://flagcdn.com/w80/cu.png"><span>CUB</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="https://flagcdn.com/w80/do.png"><span>DOM</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pr', this)"><img src="https://flagcdn.com/w80/pr.png"><span>PUE</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('us', this)"><img src="https://flagcdn.com/w80/us.png"><span>USA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="https://flagcdn.com/w80/es.png"><span>ESP</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="https://flagcdn.com/w80/fr.png"><span>FRA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://flagcdn.com/w80/de.png"><span>ALE</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://flagcdn.com"><span>ARG</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://flagcdn.com"><span>CHI</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="https://flagcdn.com"><span>URU</span></div>
         </div>
     </div>
 
-   <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000;">
-    <iframe id="main-video-player" 
-            src="https://www.youtube.com/embed/5Z06_OH0M6M?autoplay=1" 
-            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
-            frameborder="0" 
-            allow="autoplay; encrypted-media" 
-            allowfullscreen>
-    </iframe>
-</div>
-
-<div style="width:100%; text-align:center; padding:10px 0; background:#0b0e11;">
-    <span style="color:#444; font-size:10px;"><script>
-  atOptions = {
-    'key' : '2518913e078a8274472eea34aba82089',
-    'format' : 'iframe',
-    'height' : 50,
-    'width' : 320,
-    'params' : {}
-  };
-</script>
-<script src="https://www.highperformanceformat.com/2518913e078a8274472eea34aba82089/invoke.js"></script>
-</span>
-</div>
-
-<div class="main-content">
-    <div class="country-group r1-card ar" id="sec-ar">
-        <div class="country-header" style="color: white; padding: 10px; font-weight: bold;">ARGENTINA</div>
-        <div class="channels-scroll" style="display: flex; gap: 10px; overflow-x: auto; padding: 10px;">
-            
-            <div class="channel-item" onclick="cambiarCanal('https://www.youtube.com/embed/5Z06_OH0M6M?autoplay=1')" style="cursor: pointer; min-width: 120px;">
-                <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Todo_Noticias_2023.png" width="100%"></div>
-                <span class="channel-name" style="color: white; display: block; font-size: 12px;">TN Noticias</span>
-            </div>
-
-            <div class="channel-item" onclick="cambiarCanal('https://www.youtube.com/watch?v=VWhQ6xspnSc?autoplay=1')" style="cursor: pointer; min-width: 120px;">
-                <div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/C5N_2017_Alternate.svg/1920px-C5N_2017_Alternate.svg.png" width="100%"></div>
-                <span class="channel-name" style="color: white; display: block; font-size: 12px;">C5N</span>
-            </div>
-            
-        </div>
+    <!-- REPRODUCTOR -->
+    <div class="video-container">
+        <iframe id="main-video-player" 
+                src="" 
+                frameborder="0" 
+                allow="autoplay; encrypted-media" 
+                allowfullscreen>
+        </iframe>
     </div>
-</div>
 
-<nav class="bottom-navbar">
-    <a href="#" class="nav-link">RADIO</a>
-    <a href="#" class="nav-link">VOLVER</a>
-    <a href="#" class="nav-link">PORTALES</a>
-</nav>
+    <!-- CONTENIDO DE CANALES -->
+    <div class="main-content">
+        
+        <!-- ARGENTINA -->
+        <div class="country-group rl-card ar">
+            <div class="country-header">ARGENTINA</div>
+            <div class="channels-scroll">
+                <div class="channel-item" onclick="cambiarCanal('https://youtube.com')">
+                    <div class="logo-box"><img src="https://wikimedia.org"></div>
+                    <span class="channel-name">TN Noticias</span>
+                </div>
+                <div class="channel-item" onclick="cambiarCanal('https://youtube.com')">
+                    <div class="logo-box"><img src="https://wikimedia.org"></div>
+                    <span class="channel-name">C5N</span>
+                </div>
+            </div>
+        </div>
 
-<script>
-// Lista de canales para el inicio aleatorio
-const canalesRandom = [
-    'https://www.youtube.com/embed/5Z06_OH0M6M?autoplay=1',
-    'https://www.youtube.com/embed/VVhQ6xspnSc?autoplay=1'
-];
+        <!-- CHILE -->
+        <div class="country-group rl-card cl">
+            <div class="country-header">CHILE</div>
+            <div class="channels-scroll">
+                <div class="channel-item" onclick="cambiarCanal('https://youtube.com')">
+                    <div class="logo-box"><img src="https://wikimedia.org"></div>
+                    <span class="channel-name">TVN Chile</span>
+                </div>
+                <div class="channel-item" onclick="cambiarCanal('https://youtube.com')">
+                    <div class="logo-box"><img src="https://wikimedia.org"></div>
+                    <span class="channel-name">24 Horas</span>
+                </div>
+            </div>
+        </div>
 
-function cambiarCanal(url) {
-    const player = document.getElementById('main-video-player');
-    if (player) {
-        player.src = url;
-        // Scroll hacia arriba para ver el video
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-}
+        <!-- URUGUAY -->
+        <div class="country-group rl-card uy">
+            <div class="country-header">URUGUAY</div>
+            <div class="channels-scroll">
+                <div class="channel-item" onclick="cambiarCanal('https://youtube.com')">
+                    <div class="logo-box"><img src="https://wikimedia.org"></div>
+                    <span class="channel-name">Canal 5</span>
+                </div>
+                <div class="channel-item" onclick="cambiarCanal('https://youtube.com')">
+                    <div class="logo-box"><img src="https://wikimedia.org"></div>
+                    <span class="channel-name">Telemundo</span>
+                </div>
+            </div>
+        </div>
 
-// Filtrado de países
-function filtrarRadar(code, el) {
-    document.querySelectorAll('.btn-pais').forEach(b => b.classList.remove('active'));
-    if(el) el.classList.add('active');
+    </div>
 
-    const items = document.querySelectorAll('.rl-card');
-    items.forEach(item => {
-        item.style.display = (code === 'all' || item.classList.contains(code)) ? 'block' : 'none';
-    });
-}
+    <!-- MENÚ INFERIOR -->
+    <nav class="bottom-navbar">
+        <a href="#" class="nav-link"><span class="dot"></span>EN VIVO</a>
+        <a href="#" class="nav-link">RADIO</a>
+        <a href="#" class="nav-link">PORTALES</a>
+    </nav>
 
-// Carga inicial
-window.onload = () => {
-    const randomUrl = canalesRandom[Math.floor(Math.random() * canalesRandom.length)];
-    cambiarCanal(randomUrl);
-};
-</script>
+    <script>
+        // 1. Lista de canales para el inicio aleatorio
+        const canalesRandom = [
+            'https://youtube.com',
+            'https://youtube.com',
+            'https://youtube.com'
+        ];
+
+        // 2. Función para cambiar el video
+        function cambiarCanal(url) {
+            const player = document.getElementById('main-video-player');
+            if (player) {
+                player.src = url;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // 3. Función de filtrado por país
+        function filtrarRadar(code, el) {
+            // Actualizar botones de banderas
+            document.querySelectorAll('.btn-pais').forEach(b => b.classList.remove('active'));
+            if(el) el.classList.add('active');
+
+            // Filtrar las tarjetas de países
+            const items = document.querySelectorAll('.rl-card');
+            items.forEach(item => {
+                if (code === 'all' || item.classList.contains(code)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // 4. Ejecución al cargar la página
+        window.onload = () => {
+            const randomUrl = canalesRandom[Math.floor(Math.random() * canalesRandom.length)];
+            cambiarCanal(randomUrl);
+        };
+    </script>
+</body>
+</html>
