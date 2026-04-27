@@ -7,75 +7,45 @@
     <script src="https://jsdelivr.net"></script>
     
     <style>
-        body { background-color: #000; color: #fff; font-family: sans-serif; margin: 0; padding-bottom: 90px; overflow-x: hidden; }
+        body { background-color: #000; color: #fff; font-family: sans-serif; margin: 0; padding-bottom: 100px; overflow-x: hidden; }
 
-        /* BANNER DE BANDERAS (26 PAÍSES) */
+        /* 1. BANDERAS (CORREGIDAS) */
         #rl-container-fuerza { position: sticky; top: 0; width: 100%; background: #0b0e11; border-bottom: 2px solid #4CAF50; z-index: 2000; }
-        .r1-carrusel-centrado { display: flex; overflow-x: auto; gap: 20px; padding: 10px 15px; align-items: center; }
+        .r1-carrusel-centrado { display: flex; overflow-x: auto; gap: 20px; padding: 10px 15px; align-items: center; -webkit-overflow-scrolling: touch; }
         .r1-carrusel-centrado::-webkit-scrollbar { display: none; }
-        
-        .btn-pais { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; min-width: 50px; cursor: pointer; opacity: 0.7; }
-        .btn-pais.active { opacity: 1; }
+        .btn-pais { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; min-width: 50px; cursor: pointer; }
         .btn-pais img, .world-icon { width: 44px; height: 32px; border-radius: 6px; border: 2px solid transparent; object-fit: cover; }
         .btn-pais.active img, .btn-pais.active .world-icon { border-color: #4CAF50; box-shadow: 0 0 10px #4CAF50; }
         .btn-pais span { font-size: 10px; color: #777; margin-top: 5px; font-weight: bold; text-transform: uppercase; }
         .btn-pais.active span { color: #4CAF50; }
 
-        /* REPRODUCTOR DUAL */
-        .video-container { width: 100%; aspect-ratio: 16/9; background: #000; position: relative; border-bottom: 1px solid #222; }
+        /* 2. REPRODUCTOR */
+        .video-container { width: 100%; aspect-ratio: 16/9; background: #000; position: relative; }
         #main-video-player, #hls-video-player { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: none; }
         #main-video-player.active, #hls-video-player.active { display: block; }
 
-        /* GRILLA DE CANALES */
+        /* 3. CANALES */
         .main-content { padding: 10px 0; }
-        .rl-card { margin-bottom: 30px; display: block; }
+        .rl-card { margin-bottom: 30px; }
         .country-header { font-size: 0.85rem; font-weight: bold; color: #ccc; margin: 15px; text-transform: uppercase; border-left: 3px solid #4CAF50; padding-left: 10px; }
         .channels-scroll { display: flex; overflow-x: auto; gap: 15px; padding: 0 15px 10px; }
-        .channels-scroll::-webkit-scrollbar { display: none; }
-        
         .logo-box { width: 115px; height: 115px; background: #fff; border-radius: 22px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
         .logo-box img { width: 80%; height: auto; }
         .channel-name { font-size: 0.8rem; font-weight: bold; text-align: center; display: block; color: #fff; }
-        .no-channels { padding: 0 20px; font-size: 0.7rem; color: #555; font-style: italic; }
 
-        /* MENÚ INFERIOR */
+        /* 4. MENÚ INFERIOR (CON LUZ ROJA EN LOS TRES) */
         .bottom-navbar { position: fixed; bottom: 0; width: 100%; height: 70px; background: #000; display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #1a1a1a; z-index: 3000; }
-        .nav-link { text-decoration: none; color: #fff; font-size: 0.8rem; font-weight: bold; text-align: center; }
-        .dot { height: 7px; width: 7px; background-color: #ff0000; border-radius: 50%; display: inline-block; margin-right: 5px; animation: parpadeo 1.5s infinite; }
+        .nav-link { text-decoration: none; color: #fff; font-size: 0.8rem; font-weight: bold; display: flex; align-items: center; }
+        .dot { height: 7px; width: 7px; background-color: #ff0000; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 8px #ff0000; animation: parpadeo 1.5s infinite; }
         @keyframes parpadeo { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     </style>
 </head>
 <body>
 
-    <!-- MENÚ COMPLETO (26 PAÍSES) -->
+    <!-- MENÚ DE BANDERAS -->
     <div id="rl-container-fuerza">
-        <div class="r1-carrusel-centrado">
-            <div class="btn-pais active" onclick="filtrarRadar('all', this)"><div style="background:#222; width:44px; height:32px; display:flex; align-items:center; justify-content:center; border-radius:6px;">🌐</div><span>TODOS</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://flagcdn.com"><span>ARG</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://flagcdn.com"><span>CHI</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="https://flagcdn.com"><span>URU</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('it', this)"><img src="https://flagcdn.com"><span>ITA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="https://flagcdn.com"><span>PAR</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('br', this)"><img src="https://flagcdn.com"><span>BRA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pe', this)"><img src="https://flagcdn.com"><span>PER</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('bo', this)"><img src="https://flagcdn.com"><span>BOL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ec', this)"><img src="https://flagcdn.com"><span>ECU</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ve', this)"><img src="https://flagcdn.com"><span>VEN</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('co', this)"><img src="https://flagcdn.com"><span>COL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('mx', this)"><img src="https://flagcdn.com"><span>MEX</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pa', this)"><img src="https://flagcdn.com"><span>PAN</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('gt', this)"><img src="https://flagcdn.com"><span>GUA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('sv', this)"><img src="https://flagcdn.com"><span>SAL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ni', this)"><img src="https://flagcdn.com"><span>NIC</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="https://flagcdn.com"><span>HON</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cr', this)"><img src="https://flagcdn.com"><span>COS</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cu', this)"><img src="https://flagcdn.com"><span>CUB</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="https://flagcdn.com"><span>DOM</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pr', this)"><img src="https://flagcdn.com"><span>PUE</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('us', this)"><img src="https://flagcdn.com"><span>USA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="https://flagcdn.com"><span>ESP</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="https://flagcdn.com"><span>FRA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://flagcdn.com"><span>ALE</span></div>
+        <div class="r1-carrusel-centrado" id="banderas-carrusel">
+            <!-- Se llena con JS para asegurar que todos estén presentes -->
         </div>
     </div>
 
@@ -85,98 +55,99 @@
         <video id="hls-video-player" controls autoplay playsinline></video>
     </div>
 
-    <div class="main-content" id="contenedor-canales">
-        <!-- SECCIÓN DINÁMICA DE CANALES -->
+    <!-- BANNER ADSTERRA -->
+    <div style="width:100%; text-align:center; padding:10px 0; background:#0b0e11;">
+        <script type="text/javascript">
+            atOptions = { 'key' : '2518913e078a8274472eea34aba82089', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
+        </script>
+        <script type="text/javascript" src="https://highperformanceformat.com"></script>
     </div>
 
+    <!-- CONTENEDOR DE CANALES -->
+    <div class="main-content" id="contenedor-canales"></div>
+
+    <!-- MENÚ INFERIOR -->
     <nav class="bottom-navbar">
-        <a href="#" class="nav-link"><span class="dot"></span>EN VIVO</a>
-        <a href="#" class="nav-link">RADIO</a>
-        <a href="#" class="nav-link">PORTALES</a>
+        <a href="LINK_PAGINA_AQUI" class="nav-link"><span class="dot"></span>RADIO</a>
+        <a href="LINK_PAGINA_AQUI" class="nav-link"><span class="dot"></span>VOLVER</a>
+        <a href="LINK_PAGINA_AQUI" class="nav-link"><span class="dot"></span>PORTALES</a>
     </nav>
 
     <script>
-        const paisesConfig = [
-            { id: 'ar', nombre: 'Argentina', canales: [{ n: 'TN', l: 'https://youtube.com', img: 'https://wikimedia.org' }] },
-            { id: 'cl', nombre: 'Chile', canales: [{ n: 'TVN Chile', l: 'https://youtube.com', img: 'https://wikimedia.org' }] },
-            { id: 'uy', nombre: 'Uruguay', canales: [{ n: 'Canal 5 Uy', l: 'https://vood.io', img: 'https://wikimedia.org' }] },
-            { id: 'it', nombre: 'Italia', canales: [{ n: 'Rai News 24', l: 'https://akamaized.net', img: 'https://wikimedia.org' }] },
-            { id: 'es', nombre: 'España', canales: [{ n: 'RTVE 24h', l: 'https://akamaized.net', img: 'https://wikimedia.org' }] },
-            { id: 'fr', nombre: 'Francia', canales: [{ n: 'France 24', l: 'https://france24.com', img: 'https://wikimedia.org' }] },
-            { id: 'de', nombre: 'Alemania', canales: [{ n: 'DW Español', l: 'https://akamaized.net', img: 'https://wikimedia.org' }] },
-            // Agrega aquí los objetos para el resto de países (py, br, pe, etc.)
-            { id: 'py', nombre: 'Paraguay', canales: [] },
-            { id: 'br', nombre: 'Brasil', canales: [] },
-            { id: 'pe', nombre: 'Perú', canales: [] },
-            { id: 'bo', nombre: 'Bolivia', canales: [] },
-            { id: 'ec', nombre: 'Ecuador', canales: [] },
-            { id: 've', nombre: 'Venezuela', canales: [] },
-            { id: 'co', nombre: 'Colombia', canales: [] },
-            { id: 'mx', nombre: 'México', canales: [] },
-            { id: 'pa', nombre: 'Panamá', canales: [] },
-            { id: 'gt', nombre: 'Guatemala', canales: [] },
-            { id: 'sv', nombre: 'El Salvador', canales: [] },
-            { id: 'ni', nombre: 'Nicaragua', canales: [] },
-            { id: 'hn', nombre: 'Honduras', canales: [] },
-            { id: 'cr', nombre: 'Costa Rica', canales: [] },
-            { id: 'cu', nombre: 'Cuba', canales: [] },
-            { id: 'do', nombre: 'Rep. Dominicana', canales: [] },
-            { id: 'pr', nombre: 'Puerto Rico', canales: [] },
-            { id: 'us', nombre: 'USA', canales: [] }
+        const paises = [
+            {id:'all', n:'TODOS', icon:'🌐'}, {id:'ar', n:'ARG', f:'ar'}, {id:'cl', n:'CHI', f:'cl'}, 
+            {id:'uy', n:'URU', f:'uy'}, {id:'it', n:'ITA', f:'it'}, {id:'py', n:'PAR', f:'py'},
+            {id:'br', n:'BRA', f:'br'}, {id:'pe', n:'PER', f:'pe'}, {id:'bo', n:'BOL', f:'bo'},
+            {id:'ec', n:'ECU', f:'ec'}, {id:'ve', n:'VEN', f:'ve'}, {id:'co', n:'COL', f:'co'},
+            {id:'mx', n:'MEX', f:'mx'}, {id:'pa', n:'PAN', f:'pa'}, {id:'gt', n:'GUA', f:'gt'},
+            {id:'sv', n:'SAL', f:'sv'}, {id:'ni', n:'NIC', f:'ni'}, {id:'hn', n:'HON', f:'hn'},
+            {id:'cr', n:'COS', f:'cr'}, {id:'cu', n:'CUB', f:'cu'}, {id:'do', n:'DOM', f:'do'},
+            {id:'pr', n:'PUE', f:'pr'}, {id:'us', n:'USA', f:'us'}, {id:'es', n:'ESP', f:'es'},
+            {id:'fr', n:'FRA', f:'fr'}, {id:'de', n:'ALE', f:'de'}
         ];
 
-        function renderizarCanales() {
+        const canalesData = [
+            { id: 'ar', n: 'Argentina', items: [{ n: 'TN', l: 'https://youtube.com', img: 'https://wikimedia.org' }] },
+            { id: 'cl', n: 'Chile', items: [{ n: 'TVN Chile', l: 'https://youtube.com', img: 'https://wikimedia.org' }] },
+            { id: 'uy', n: 'Uruguay', items: [{ n: 'Canal 5 Uy', l: 'https://vood.io', img: 'https://wikimedia.org' }] },
+            { id: 'it', n: 'Italia', items: [{ n: 'Rai News 24', l: 'https://akamaized.net', img: 'https://wikimedia.org' }] }
+        ];
+
+        function init() {
+            const carrusel = document.getElementById('banderas-carrusel');
+            paises.forEach(p => {
+                const div = document.createElement('div');
+                div.className = `btn-pais ${p.id === 'all' ? 'active' : ''}`;
+                div.onclick = function() { filtrarRadar(p.id, this); };
+                const img = p.f ? `<img src="https://flagcdn.com{p.f}.png">` : `<div class="world-icon" style="background:#222; width:44px; height:32px; display:flex; align-items:center; justify-content:center; border-radius:6px;">${p.icon}</div>`;
+                div.innerHTML = `${img}<span>${p.n}</span>`;
+                carrusel.appendChild(div);
+            });
+
             const container = document.getElementById('contenedor-canales');
-            paisesConfig.forEach(p => {
-                const card = document.createElement('div');
-                card.className = `rl-card ${p.id}`;
-                card.innerHTML = `<div class="country-header">${p.nombre}</div>`;
-                
-                if (p.canales.length > 0) {
-                    let scroll = `<div class="channels-scroll">`;
-                    p.canales.forEach(c => {
-                        scroll += `<div class="channel-item" onclick="cargarContenido('${c.l}')">
-                                    <div class="logo-box"><img src="${c.img}"></div>
-                                    <span class="channel-name">${c.n}</span>
-                                   </div>`;
-                    });
-                    scroll += `</div>`;
-                    card.innerHTML += scroll;
+            paises.filter(p => p.id !== 'all').forEach(p => {
+                const sec = document.createElement('div');
+                sec.className = `rl-card ${p.id}`;
+                const data = canalesData.find(d => d.id === p.id);
+                let html = `<div class="country-header">${p.n}</div>`;
+                if (data) {
+                    html += `<div class="channels-scroll">` + data.items.map(c => `
+                        <div class="channel-item" onclick="cargarContenido('${c.l}')">
+                            <div class="logo-box"><img src="${c.img}"></div>
+                            <span class="channel-name">${c.n}</span>
+                        </div>`).join('') + `</div>`;
                 } else {
-                    card.innerHTML += `<div class="no-channels">Próximamente señales de ${p.nombre}...</div>`;
+                    html += `<div style="padding:0 20px; font-size:0.7rem; color: #444;">Próximamente...</div>`;
                 }
-                container.appendChild(card);
+                sec.innerHTML = html;
+                container.appendChild(sec);
             });
         }
 
-        const ytPlayer = document.getElementById('main-video-player');
-        const hlsPlayer = document.getElementById('hls-video-player');
-
         function cargarContenido(url) {
-            ytPlayer.src = ""; hlsPlayer.pause();
-            ytPlayer.classList.remove('active'); hlsPlayer.classList.remove('active');
+            const yt = document.getElementById('main-video-player');
+            const hls = document.getElementById('hls-video-player');
+            yt.src = ""; hls.pause();
+            yt.classList.remove('active'); hls.classList.remove('active');
             if (url.includes('youtube.com')) {
-                ytPlayer.src = url; ytPlayer.classList.add('active');
+                yt.src = url; yt.classList.add('active');
             } else {
-                hlsPlayer.classList.add('active');
-                if (Hls.isSupported()) {
-                    const hls = new Hls(); hls.loadSource(url); hls.attachMedia(hlsPlayer);
-                } else if (hlsPlayer.canPlayType('application/vnd.apple.mpegurl')) {
-                    hlsPlayer.src = url;
-                }
+                hls.classList.add('active');
+                if (Hls.isSupported()) { const h = new Hls(); h.loadSource(url); h.attachMedia(hls); }
+                else if (hls.canPlayType('application/vnd.apple.mpegurl')) { hls.src = url; }
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function filtrarRadar(code, el) {
+        function filtrarRadar(id, el) {
             document.querySelectorAll('.btn-pais').forEach(b => b.classList.remove('active'));
             el.classList.add('active');
-            document.querySelectorAll('.rl-card').forEach(item => {
-                item.style.display = (code === 'all' || item.classList.contains(code)) ? 'block' : 'none';
+            document.querySelectorAll('.rl-card').forEach(c => {
+                c.style.display = (id === 'all' || c.classList.contains(id)) ? 'block' : 'none';
             });
         }
 
-        window.onload = () => { renderizarCanales(); cargarContenido('https://youtube.com'); };
+        window.onload = () => { init(); cargarContenido('https://youtube.com'); };
     </script>
 </body>
 </html>
