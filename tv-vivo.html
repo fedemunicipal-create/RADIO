@@ -164,32 +164,12 @@
         render(id);
     }
 
-   window.onload = () => {
-    // 1. Primero dibujamos los canales en pantalla
-    render('all');
-
-    // 2. Buscamos todos los links válidos que hayas cargado en el "config"
-    let poolDeCanales = [];
+  window.onload = () => {
+    // En lugar de render('all'), carga solo el primer país (ej: Argentina)
+    render('ar'); 
     
-    config.forEach(pais => {
-        if (pais.c && pais.c.length > 0) {
-            pais.c.forEach(canal => {
-                // Solo sumamos links que empiecen con http y no sean el texto "LINK_AQUI"
-                if (canal.l && canal.l.startsWith('http') && !canal.l.includes('LINK_AQUI')) {
-                    poolDeCanales.push(canal.l);
-                }
-            });
-        }
-    });
-
-    // 3. Elegimos el canal aleatorio
-    if (poolDeCanales.length > 0) {
-        const indiceAleatorio = Math.floor(Math.random() * poolDeCanales.length);
-        cargarContenido(poolDeCanales[indiceAleatorio]);
-    } else {
-        // Canal de respaldo (TN) por si todavía no has cargado links nuevos
-        cargarContenido('https://youtube.com');
-    }
+    // Activa el reproductor
+    cargarContenido('https://youtube.com');
 };
 </script>
 </body>
