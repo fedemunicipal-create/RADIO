@@ -150,7 +150,30 @@
         render(id);
     }
 
-    window.onload = () => { render('all'); cargarContenido('https://youtube.com'); };
+    window.onload = () => {
+    // 1. Creamos una lista con todos los links disponibles en tu config
+    const todosLosLinks = [];
+    config.forEach(pais => {
+        pais.c.forEach(canal => {
+            if(canal.l && canal.l !== 'LINK_AQUI') {
+                todosLosLinks.push(canal.l);
+            }
+        });
+    });
+
+    // 2. Si hay canales cargados, elige uno al azar
+    if (todosLosLinks.length > 0) {
+        const linkAleatorio = todosLosLinks[Math.floor(Math.random() * todosLosLinks.length)];
+        cargarContenido(linkAleatorio);
+    } else {
+        // 3. Si no hay nada cargado aún, podrías poner una imagen de fondo o tu logo
+        // Por ahora, cargamos el que tenías por defecto
+        cargarContenido('https://youtube.com');
+    }
+    
+    // 4. Renderizamos la lista completa (esto ya lo tenías)
+    render('all');
+};
 </script>
 </body>
 </html>
