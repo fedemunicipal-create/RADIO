@@ -150,29 +150,32 @@
         render(id);
     }
 
-    window.onload = () => {
-    // 1. Creamos una lista con todos los links disponibles en tu config
-    const todosLosLinks = [];
+   window.onload = () => {
+    // 1. Primero dibujamos los canales en pantalla
+    render('all');
+
+    // 2. Buscamos todos los links válidos que hayas cargado en el "config"
+    let poolDeCanales = [];
+    
     config.forEach(pais => {
-        pais.c.forEach(canal => {
-            if(canal.l && canal.l !== 'LINK_AQUI') {
-                todosLosLinks.push(canal.l);
-            }
-        });
+        if (pais.c && pais.c.length > 0) {
+            pais.c.forEach(canal => {
+                // Solo sumamos links que empiecen con http y no sean el texto "LINK_AQUI"
+                if (canal.l && canal.l.startsWith('http') && !canal.l.includes('LINK_AQUI')) {
+                    poolDeCanales.push(canal.l);
+                }
+            });
+        }
     });
 
-    // 2. Si hay canales cargados, elige uno al azar
-    if (todosLosLinks.length > 0) {
-        const linkAleatorio = todosLosLinks[Math.floor(Math.random() * todosLosLinks.length)];
-        cargarContenido(linkAleatorio);
+    // 3. Elegimos el canal aleatorio
+    if (poolDeCanales.length > 0) {
+        const indiceAleatorio = Math.floor(Math.random() * poolDeCanales.length);
+        cargarContenido(poolDeCanales[indiceAleatorio]);
     } else {
-        // 3. Si no hay nada cargado aún, podrías poner una imagen de fondo o tu logo
-        // Por ahora, cargamos el que tenías por defecto
+        // Canal de respaldo (TN) por si todavía no has cargado links nuevos
         cargarContenido('https://youtube.com');
     }
-    
-    // 4. Renderizamos la lista completa (esto ya lo tenías)
-    render('all');
 };
 </script>
 </body>
