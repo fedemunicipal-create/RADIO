@@ -9,9 +9,9 @@
     <style>
         body { background-color: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 0; padding-bottom: 100px; overflow-x: hidden; }
         #rl-container-fuerza { position: sticky; top: 0; width: 100%; background: #0b0e11; border-bottom: 2px solid #4CAF50; z-index: 2000; }
-        .r1-carrusel-centrado { display: flex; overflow-x: auto; gap: 20px; padding: 10px 15px; align-items: center; -webkit-overflow-scrolling: touch; }
+        .r1-carrusel-centrado { display: flex !important; flex-direction: row !important; overflow-x: auto !important; gap: 20px; padding: 10px 15px; align-items: center; -webkit-overflow-scrolling: touch; }
         .r1-carrusel-centrado::-webkit-scrollbar { display: none; }
-        .btn-pais { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; min-width: 50px; cursor: pointer; }
+        .btn-pais { flex: 0 0 auto; display: flex !important; flex-direction: column !important; align-items: center !important; min-width: 50px; cursor: pointer; }
         .btn-pais img, .world-icon { width: 44px; height: 32px; border-radius: 6px; border: 2px solid transparent; object-fit: cover; }
         .btn-pais.active img, .btn-pais.active .world-icon { border-color: #4CAF50; box-shadow: 0 0 10px #4CAF50; }
         .btn-pais span { font-size: 10px; color: #777; margin-top: 5px; font-weight: bold; text-transform: uppercase; }
@@ -23,10 +23,8 @@
         .rl-card { margin-bottom: 30px; display: block; }
         .country-header { font-size: 0.9rem; font-weight: bold; color: #fff; margin: 15px; text-transform: uppercase; border-left: 4px solid #4CAF50; padding-left: 12px; }
         .channels-scroll { display: flex; overflow-x: auto; gap: 15px; padding: 0 15px 10px; }
-        .channels-scroll::-webkit-scrollbar { display: none; }
         .logo-box { width: 110px; height: 110px; background: #fff; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
         .logo-box img { width: 80%; height: auto; object-fit: contain; }
-        .channel-name { font-size: 0.8rem; font-weight: bold; text-align: center; display: block; color: #fff; }
         .bottom-navbar { position: fixed; bottom: 0; width: 100%; height: 75px; background: #000; display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #1a1a1a; z-index: 3000; }
         .nav-link { text-decoration: none; color: #fff; font-size: 0.85rem; font-weight: bold; display: flex; align-items: center; text-transform: uppercase; }
         .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 8px #f00; animation: parpadeo 1.5s infinite; }
@@ -38,30 +36,30 @@
     <div id="rl-container-fuerza">
         <div class="r1-carrusel-centrado">
             <div class="btn-pais active" onclick="filtrarRadar('all', this)"><div class="world-icon" style="background:#222; display:flex; align-items:center; justify-content:center;">🌐</div><span>TODOS</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://flagcdn.com"><span>ARG</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://flagcdn.com"><span>CHI</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="https://flagcdn.com"><span>URU</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="https://flagcdn.com"><span>PAR</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('br', this)"><img src="https://flagcdn.com"><span>BRA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pe', this)"><img src="https://flagcdn.com"><span>PER</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('bo', this)"><img src="https://flagcdn.com"><span>BOL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ec', this)"><img src="https://flagcdn.com"><span>ECU</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ve', this)"><img src="https://flagcdn.com"><span>VEN</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('co', this)"><img src="https://flagcdn.com"><span>COL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('mx', this)"><img src="https://flagcdn.com"><span>MEX</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pa', this)"><img src="https://flagcdn.com"><span>PAN</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('gt', this)"><img src="https://flagcdn.com"><span>GUA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('sv', this)"><img src="https://flagcdn.com"><span>SAL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ni', this)"><img src="https://flagcdn.com"><span>NIC</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="https://flagcdn.com"><span>HON</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cr', this)"><img src="https://flagcdn.com"><span>COS</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cu', this)"><img src="https://flagcdn.com"><span>CUB</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="https://flagcdn.com"><span>DOM</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pr', this)"><img src="https://flagcdn.com"><span>PUE</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('us', this)"><img src="https://flagcdn.com"><span>USA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="https://flagcdn.com"><span>ESP</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="https://flagcdn.com"><span>FRA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://flagcdn.com"><span>ALE</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://flagcdn.com/w80/ar.png"><span>ARG</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://flagcdn.com/w80/cl.png"><span>CHI</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="https://flagcdn.com/w80/uy.png"><span>URU</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="https://flagcdn.com/w80/py.png"><span>PAR</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('br', this)"><img src="https://flagcdn.com/w80/br.png"><span>BRA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pe', this)"><img src="https://flagcdn.com/w80/pe.png"><span>PER</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('bo', this)"><img src="https://flagcdn.com/w80/bo.png"><span>BOL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ec', this)"><img src="https://flagcdn.com/w80/ec.png"><span>ECU</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ve', this)"><img src="https://flagcdn.com/w80/ve.png"><span>VEN</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('co', this)"><img src="https://flagcdn.com/w80/co.png"><span>COL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('mx', this)"><img src="https://flagcdn.com/w80/mx.png"><span>MEX</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pa', this)"><img src="https://flagcdn.com/w80/pa.png"><span>PAN</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('gt', this)"><img src="https://flagcdn.com/w80/gt.png"><span>GUA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('sv', this)"><img src="https://flagcdn.com/w80/sv.png"><span>SAL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ni', this)"><img src="https://flagcdn.com/w80/ni.png"><span>NIC</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="https://flagcdn.com/w80/hn.png"><span>HON</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cr', this)"><img src="https://flagcdn.com/w80/cr.png"><span>COS</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cu', this)"><img src="https://flagcdn.com/w80/cu.png"><span>CUB</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="https://flagcdn.com/w80/do.png"><span>DOM</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pr', this)"><img src="https://flagcdn.com/w80/pr.png"><span>PUE</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('us', this)"><img src="https://flagcdn.com/w80/us.png"><span>USA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="https://flagcdn.com/w80/es.png"><span>ESP</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="https://flagcdn.com/w80/fr.png"><span>FRA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://flagcdn.com/w80/de.png"><span>ALE</span></div>
         </div>
     </div>
 
@@ -90,27 +88,27 @@
         {id:'ar', full:'ARGENTINA', c:[{n:'TN', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'C5N', l:'https://youtube.com', img:'https://wikimedia.org'}]},
         {id:'cl', full:'CHILE', c:[{n:'TVN', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'24H', l:'https://youtube.com', img:'https://wikimedia.org'}]},
         {id:'uy', full:'URUGUAY', c:[{n:'CANAL 5', l:'https://vood.io', img:'https://wikimedia.org'},{n:'TELEMUNDO', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'py', full:'PARAGUAY', c:[{n:'NPY', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'ABC TV', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'br', full:'BRASIL', c:[{n:'SBT', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'RECORD', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'pe', full:'PERÚ', c:[{n:'TV PERU', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'ATV', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'bo', full:'BOLIVIA', c:[{n:'UNITEL', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'RED UNO', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'ec', full:'ECUADOR', c:[{n:'TC TV', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'TELEAMAZONAS', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'ve', full:'VENEZUELA', c:[{n:'VPI TV', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'TELESUR', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'co', full:'COLOMBIA', c:[{n:'CARACOL', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'RCN', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'mx', full:'MÉXICO', c:[{n:'FORO TV', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'MILENIO', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'pa', full:'PANAMÁ', c:[{n:'TVN PA', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'TELEMETRO', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'gt', full:'GUATEMALA', c:[{n:'TN23', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'GUATEVISION', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'sv', full:'EL SALVADOR', c:[{n:'TCS+', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'CANAL 10', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'ni', full:'NICARAGUA', c:[{n:'CANAL 10', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'VOS TV', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'hn', full:'HONDURAS', c:[{n:'HCH', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'TSI', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'cr', full:'COSTA RICA', c:[{n:'TELETICA', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'RERETEL', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'cu', full:'CUBA', c:[{n:'CUBAVISION', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'CANAL CARIBE', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'do', full:'REP. DOMINICANA', c:[{n:'TELEMANTILLAS', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'COLOR VISION', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'pr', full:'PUERTO RICO', c:[{n:'WAPA', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'TELEMUNDO PR', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'us', full:'EE.UU.', c:[{n:'ABC NEWS', l:'https://youtube.com', img:'https://wikimedia.org'},{n:'CBS NEWS', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'es', full:'ESPAÑA', c:[{n:'RTVE 24H', l:'https://akamaized.net', img:'https://wikimedia.org'},{n:'LA SEXTA', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'fr', full:'FRANCIA', c:[{n:'FRANCE 24', l:'https://france24.com', img:'https://wikimedia.org'},{n:'EURONEWS', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'de', full:'ALEMANIA', c:[{n:'DW ESPAÑOL', l:'https://akamaized.net', img:'https://wikimedia.org'},{n:'WELT', l:'https://youtube.com', img:'https://wikimedia.org'}]}
+        {id:'py', full:'PARAGUAY', c:[{n:'NPY', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'ABC TV', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
+        {id:'br', full:'BRASIL', c:[{n:'SBT', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'RECORD', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
+        {id:'pe', full:'PERÚ', c:[{n:'TV PERU', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'ATV', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
+        {id:'bo', full:'BOLIVIA', c:[{n:'UNITEL', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'RED UNO', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
+        {id:'ec', full:'ECUADOR', c:[{n:'TC TV', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'TELEAMAZONAS', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
+        {id:'ve', full:'VENEZUELA', c:[{n:'VPI TV', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'TELESUR', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
+        {id:'co', full:'COLOMBIA', c:[{n:'CARACOL', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'RCN', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
+        {id:'mx', full:'MÉXICO', c:[{n:'FORO TV', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'MILENIO', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
+        {id:'pa', full:'PANAMÁ', c:[{n:'TVN PA', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'TELEMETRO', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
+        {id:'gt', full:'GUATEMALA', c:[{n:'TN23', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'GUATEVISION', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
+        {id:'sv', full:'EL SALVADOR', c:[{n:'CANAL 10', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'TCS+', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
+        {id:'ni', full:'NICARAGUA', c:[{n:'CANAL 10', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'VOS TV', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
+        {id:'hn', full:'HONDURAS', c:[{n:'HCH', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'TSI', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
+        {id:'cr', full:'COSTA RICA', c:[{n:'TELETICA', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'REPRETEL', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
+        {id:'cu', full:'CUBA', c:[{n:'CUBAVISION', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'CANAL CARIBE', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
+        {id:'do', full:'REP. DOMINICANA', c:[{n:'TELEMANTILLAS', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'COLOR VISION', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
+        {id:'pr', full:'PUERTO RICO', c:[{n:'WAPA', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'TELEMUNDO PR', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
+        {id:'us', full:'EE.UU.', c:[{n:'ABC NEWS', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'CBS NEWS', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
+        {id:'es', full:'ESPAÑA', c:[{n:'RTVE 24H', l:'https://akamaized.net', img:'https://wikimedia.org'},{n:'LA SEXTA', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
+        {id:'fr', full:'FRANCIA', c:[{n:'FRANCE 24', l:'https://france24.com', img:'https://wikimedia.org'},{n:'EURONEWS', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
+        {id:'de', full:'ALEMANIA', c:[{n:'DW ESPAÑOL', l:'https://akamaized.net', img:'https://wikimedia.org'},{n:'WELT', l:'LINK_AQUI', img:'https://wikimedia.org'}]}
     ];
 
     function render(filtro = 'all') {
@@ -124,7 +122,7 @@
                 p.c.forEach(c => {
                     html += `<div class="channel-item" onclick="cargarContenido('${c.l}')">
                                 <div class="logo-box"><img src="${c.img}" loading="lazy"></div>
-                                <span class="channel-name">${p.id === 'all' ? p.id.toUpperCase() : ''} ${c.n}</span>
+                                <span class="channel-name">${c.n}</span>
                              </div>`;
                 });
                 html += `</div>`;
