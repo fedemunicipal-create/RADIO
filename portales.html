@@ -35,22 +35,23 @@
 #rl-container-fuerza {
   width: 100%;
   overflow-x: auto;
-  padding: 12px 0;
-  background-color: #f8f9fa;
-  /* Optimiza el rendimiento del renderizado en el navegador */
+  padding: 16px 0;
+  background-color: #0b0c10; /* Fondo negro profundo */
   content-visibility: auto;
-  contain-intrinsic-size: 0 60px;
+  contain-intrinsic-size: 0 80px;
+  /* Desplazamiento táctil ultra suave en iOS y Android */
+  -webkit-overflow-scrolling: touch; 
 }
 
-/* Oculta la barra de scroll en navegadores modernos pero mantiene la funcionalidad */
+/* Oculta barra de scroll manteniendo el deslizamiento */
 #rl-container-fuerza::-webkit-scrollbar {
   display: none;
 }
 
 .rl-carrusel-centrado {
   display: flex;
-  gap: 10px;
-  padding: 0 16px;
+  gap: 12px;
+  padding: 0 20px;
   width: max-content;
   margin: 0 auto;
 }
@@ -58,39 +59,46 @@
 .btn-pais {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  border: 1px solid #e0e0e0;
-  border-radius: 20px;
-  background-color: #ffffff;
+  gap: 10px;
+  /* Altura ideal recomendada por Google (min 48px) para clics con el pulgar */
+  padding: 10px 18px; 
+  border: 1px solid #2f3136;
+  border-radius: 25px;
+  background-color: #1f2023; /* Botón gris oscuro */
   cursor: pointer;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  color: #333333;
-  /* Evita parpadeos o retrasos visuales */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px; /* Texto más grande */
+  font-weight: 700;
+  color: #eeeeee;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent; /* Elimina el cuadro azul al tocar en celular */
   will-change: transform, background-color;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
+  transition: all 0.15s ease;
 }
 
+/* Estado al mantener presionado en celular o pasar el cursor */
+.btn-pais:active,
 .btn-pais:hover {
-  background-color: #f1f3f5;
-  border-color: #ced4da;
+  background-color: #2b2c30;
+  border-color: #4f5157;
 }
 
+/* Botón Activo (Destacado en Blanco brillante) */
 .btn-pais.active {
-  background-color: #212529;
-  color: #ffffff;
-  border-color: #212529;
+  background-color: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
 }
 
+/* Emojis un 30% más grandes */
 .flag-icon {
-  font-size: 18px;
+  font-size: 24px; 
   line-height: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
 }
 </style>
+Usa el código con precaución.Mejoras
 
 
