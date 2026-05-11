@@ -1,54 +1,73 @@
 <div id="rl-container-fuerza">
   <div class="rl-carrusel-centrado">
-    <button class="btn-pais active" onclick="filtrarRadar('all', this)" aria-label="Todos los países">
-      <span class="world-icon" aria-hidden="true">🌐</span>
+    <button class="btn-pais active" onclick="navegarYFiltrar('all', this)" aria-label="Todos los países">
+      <div class="world-icon" aria-hidden="true">🌐</div>
       <span>TODOS</span>
     </button>
-    <button class="btn-pais" onclick="filtrarRadar('ar', this)"><span class="flag-sprite ar"></span><span>ARG</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('cl', this)"><span class="flag-sprite cl"></span><span>CHI</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('uy', this)"><span class="flag-sprite uy"></span><span>URU</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('py', this)"><span class="flag-sprite py"></span><span>PAR</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('br', this)"><span class="flag-sprite br"></span><span>BRA</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('pe', this)"><span class="flag-sprite pe"></span><span>PER</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('bo', this)"><span class="flag-sprite bo"></span><span>BOL</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('ec', this)"><span class="flag-sprite ec"></span><span>ECU</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('ve', this)"><span class="flag-sprite ve"></span><span>VEN</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('co', this)"><span class="flag-sprite co"></span><span>COL</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('mx', this)"><span class="flag-sprite mx"></span><span>MEX</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('pa', this)"><span class="flag-sprite pa"></span><span>PAN</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('gt', this)"><span class="flag-sprite gt"></span><span>GUA</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('sv', this)"><span class="flag-sprite sv"></span><span>SAL</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('ni', this)"><span class="flag-sprite ni"></span><span>NIC</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('hn', this)"><span class="flag-sprite hn"></span><span>HON</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('cr', this)"><span class="flag-sprite cr"></span><span>COS</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('cu', this)"><span class="flag-sprite cu"></span><span>CUB</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('do', this)"><span class="flag-sprite _do"></span><span>DOM</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('pr', this)"><span class="flag-sprite pr"></span><span>PUE</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('us', this)"><span class="flag-sprite us"></span><span>USA</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('es', this)"><span class="flag-sprite es"></span><span>ESP</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('fr', this)"><span class="flag-sprite fr"></span><span>FRA</span></button>
-    <button class="btn-pais" onclick="filtrarRadar('de', this)"><span class="flag-sprite de"></span><span>ALE</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('ar', this)"><img src="flagcdn.com" alt="ARG"><span>ARG</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('cl', this)"><img src="flagcdn.com" alt="CHI"><span>CHI</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('uy', this)"><img src="flagcdn.com" alt="URU"><span>URU</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('py', this)"><img src="flagcdn.com" alt="PAR"><span>PAR</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('br', this)"><img src="flagcdn.com" alt="BRA"><span>BRA</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('pe', this)"><img src="flagcdn.com" alt="PER"><span>PER</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('bo', this)"><img src="flagcdn.com" alt="BOL"><span>BOL</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('ec', this)"><img src="flagcdn.com" alt="ECU"><span>ECU</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('ve', this)"><img src="flagcdn.com" alt="VEN"><span>VEN</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('co', this)"><img src="flagcdn.com" alt="COL"><span>COL</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('mx', this)"><img src="flagcdn.com" alt="MEX"><span>MEX</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('pa', this)"><img src="flagcdn.com" alt="PAN"><span>PAN</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('gt', this)"><img src="flagcdn.com" alt="GUA"><span>GUA</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('sv', this)"><img src="flagcdn.com" alt="SAL"><span>SAL</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('ni', this)"><img src="flagcdn.com" alt="NIC"><span>NIC</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('hn', this)"><img src="flagcdn.com" alt="HON"><span>HON</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('cr', this)"><img src="flagcdn.com" alt="COS"><span>COS</span></button>
+    <button class="btn-pais" onclick="whitespaces('cu', this)"><img src="flagcdn.com" alt="CUB"><span>CUB</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('do', this)"><img src="flagcdn.com" alt="DOM"><span>DOM</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('pr', this)"><img src="flagcdn.com" alt="PUE"><span>PUE</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('us', this)"><img src="flagcdn.com" alt="USA"><span>USA</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('es', this)"><img src="flagcdn.com" alt="ESP"><span>ESP</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('fr', this)"><img src="flagcdn.com" alt="FRA"><span>FRA</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('de', this)"><img src="flagcdn.com" alt="ALE"><span>ALE</span></button>
   </div>
 </div>
 
+<!-- Bloque de Destino: Lista de Archivos (Muestra/Oculta dinámicamente) -->
+<div id="contenedor-archivos-radar">
+  <div class="bloque-pais" data-pais="ar">
+    <h3>📂 Archivos Argentina</h3>
+    <ul>
+      <li><a href="#">Reporte_Noticias_ARG_01.pdf</a></li>
+      <li><a href="#">Transmision_Radar_BuenosAires.mp4</a></li>
+    </ul>
+  </div>
+  
+  <div class="bloque-pais" data-pais="cl">
+    <h3>📂 Archivos Chile</h3>
+    <ul>
+      <li><a href="#">Reporte_Noticias_CHI_01.pdf</a></li>
+      <li><a href="#">Datos_Radar_Santiago.json</a></li>
+    </ul>
+  </div>
+
+  <div class="bloque-pais" data-pais="uy">
+    <h3>📂 Archivos Uruguay</h3>
+    <ul>
+      <li><a href="#">Reporte_Noticias_URU_01.pdf</a></li>
+    </ul>
+  </div>
+  <!-- Puedes clonar este bloque para añadir el resto de países -->
+</div>
+
 <style>
+/* Contenedor Principal */
 #rl-container-fuerza {
   width: 100%;
   overflow-x: auto;
-  padding: 14px 0 10px 0;
-  background-color: #030704; /* Fondo oscuro integrado al radar */
+  padding: 18px 0 0 0;
+  background-color: #030704;
   -webkit-overflow-scrolling: touch;
-}
-
-/* Línea verde inferior característica de tu diseño */
-#rl-container-fuerza::after {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 2px;
-  background-color: #00ff66;
-  margin-top: 10px;
-  opacity: 0.7;
+  border-bottom: 3px solid #00ff66; /* Solución: Línea verde 100% de extremo a extremo */
+  box-sizing: border-box;
 }
 
 #rl-container-fuerza::-webkit-scrollbar {
@@ -57,94 +76,148 @@
 
 .rl-carrusel-centrado {
   display: flex;
-  gap: 16px;
-  padding: 0 16px;
+  gap: 20px; /* Más espacio entre elementos */
+  padding: 0 24px 16px 24px;
   width: max-content;
 }
 
 .btn-pais {
   display: flex;
-  flex-direction: column; /* Estructura vertical de tu imagen */
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 6px;
   -webkit-tap-highlight-color: transparent;
+  transition: transform 0.1s ease;
 }
 
-/* Tipografía de los países (Pequeña, grisácea y centrada) */
-.btn-pais span:last-child {
-  font-family: 'Roboto Condensed', system-ui, sans-serif;
-  font-size: 11px;
-  font-weight: bold;
-  color: #8fa095;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+.btn-pais:active {
+  transform: scale(0.95);
 }
 
-/* Efecto activo: recuadro verde brillante idéntico a tu captura */
-.btn-pais.active {
-  outline: 2px solid #00ff66;
-  outline-offset: 4px;
-  border-radius: 4px;
-}
-
-.btn-pais.active span:last-child {
-  color: #00ff66; /* El texto se ilumina en verde */
-}
-
-/* Icono del mundo inicial */
+/* Escala y Tamaño Grande de Banderas */
+.btn-pais img, 
 .world-icon {
-  width: 52px;
-  height: 34px;
-  background: linear-gradient(135deg, #153a21, #081c10);
-  border: 1px solid #1f5231;
+  width: 72px;   /* Tamaño expandido e idéntico a resoluciones altas de móvil */
+  height: 46px;
+  object-fit: cover;
   border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+  border: 1px solid #1c2e22;
+  box-sizing: border-box;
+}
+
+.world-icon {
+  background: linear-gradient(135deg, #153a21, #081c10);
+  border: 1px solid #00ff66;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 24px;
 }
 
-/* --- MOTOR DEL SPRITE (Carga instantánea de banderas) --- */
-.flag-sprite {
-  width: 52px;  /* Proporción exacta de tu captura */
-  height: 34px;
-  border-radius: 3px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.4); /* Sombra suave para realzar la bandera */
-  display: inline-block;
-  background-image: url('flagcdn.com'); /* Fallback */
-  background-size: cover;
-  background-position: center;
+/* Etiquetas de Texto Inferiores */
+.btn-pais span {
+  font-family: 'Roboto Condensed', system-ui, -apple-system, sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  color: #7a8c80;
+  letter-spacing: 0.8px;
 }
 
-/* Mapeo individual rápido usando la CDN optimizada de banderas */
-.ar { background-image: url('flagcdn.com'); }
-.cl { background-image: url('flagcdn.com'); }
-.uy { background-image: url('flagcdn.com'); }
-.py { background-image: url('flagcdn.com'); }
-.br { background-image: url('flagcdn.com'); }
-.pe { background-image: url('flagcdn.com'); }
-.bo { background-image: url('flagcdn.com'); }
-.ec { background-image: url('flagcdn.com'); }
-.ve { background-image: url('flagcdn.com'); }
-.co { background-image: url('flagcdn.com'); }
-.mx { background-image: url('flagcdn.com'); }
-.pa { background-image: url('flagcdn.com'); }
-.gt { background-image: url('flagcdn.com'); }
-.sv { background-image: url('flagcdn.com'); }
-.ni { background-image: url('flagcdn.com'); }
-.hn { background-image: url('flagcdn.com'); }
-.cr { background-image: url('flagcdn.com'); }
-.cu { background-image: url('flagcdn.com'); }
-._do { background-image: url('flagcdn.com'); }
-.pr { background-image: url('flagcdn.com'); }
-.us { background-image: url('flagcdn.com'); }
-.es { background-image: url('flagcdn.com'); }
-.fr { background-image: url('flagcdn.com'); }
-.de { background-image: url('flagcdn.com'); }
+/* Estado de Selección (Recuadro Verde Fluorescente) */
+.btn-pais.active img,
+.btn-pais.active .world-icon {
+  outline: 3px solid #00ff66;
+  outline-offset: 4px;
+}
+
+.btn-pais.active span {
+  color: #00ff66;
+  text-shadow: 0 0 5px rgba(0, 255, 102, 0.5);
+}
+
+/* --- ESTILOS DE LA LISTA DE ARCHIVOS --- */
+#contenedor-archivos-radar {
+  background-color: #050a06;
+  padding: 24px;
+  font-family: system-ui, sans-serif;
+  color: #ffffff;
+}
+
+.bloque-pais {
+  display: block; /* Por defecto se muestran todos */
+  background: #0e1711;
+  border-left: 4px solid #00ff66;
+  padding: 16px;
+  margin-bottom: 15px;
+  border-radius: 0 8px 8px 0;
+}
+
+.bloque-pais h3 {
+  margin: 0 0 12px 0;
+  color: #00ff66;
+  font-size: 18px;
+}
+
+.bloque-pais ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bloque-pais li {
+  margin-bottom: 8px;
+}
+
+.bloque-pais a {
+  color: #adbeaf;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.bloque-pais a:hover {
+  text-decoration: underline;
+  color: #ffffff;
+}
 </style>
+
+<script>
+function navegarYFiltrar(codigoPais, elemento) {
+  // 1. Ejecutar tu función existente del radar (para no romper tu lógica previa)
+  if (typeof filtrarRadar === "function") {
+    filtrarRadar(codigoPais, elemento);
+  }
+
+  // 2. Gestionar clases visuales del botón seleccionado
+  document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
+  elemento.classList.add('active');
+
+  // 3. Filtrar la lista de archivos integrada
+  const bloques = document.querySelectorAll('.bloque-pais');
+  
+  if (codigoPais === 'all') {
+    bloques.forEach(bloque => bloque.style.display = 'block');
+  } else {
+    bloques.forEach(bloque => {
+      if (bloque.getAttribute('data-pais') === codigoPais) {
+        bloque.style.display = 'block';
+      } else {
+        bloque.style.display = 'none';
+      }
+    });
+  }
+
+  // 4. Desplazamiento automático suave hacia la sección de archivos
+  document.getElementById('contenedor-archivos-radar').scrollIntoView({ 
+    behavior: 'smooth', 
+    block: 'start' 
+  });
+}
+</script>
+
 
