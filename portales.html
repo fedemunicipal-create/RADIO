@@ -16,12 +16,12 @@
         .btn-pais span { font-size: 10px; color: #777; margin-top: 5px; font-weight: bold; text-transform: uppercase; }
         .btn-pais.active span { color: #4CAF50; }
         
-        /* Contenedor del Reproductor de Video */
+        /* Contenedor del Reproductor con Fondo Informativo Inteligente */
         .video-container { width: 100%; aspect-ratio: 16/9; background: #000; position: relative; overflow: hidden; border-bottom: 1px solid #222; }
         #main-video-player, #hls-video-player { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: none; z-index: 2; }
         #main-video-player.active, #hls-video-player.active { display: block; }
         
-        /* Capa de Instrucciones Base64 de RadarLat */
+        /* Capa de la imagen de instrucciones de RadarLat */
         #poster-inicio-radar { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; display: flex; align-items: center; justify-content: center; background-color: #000; }
         #poster-inicio-radar img { width: 100%; height: 100%; object-fit: contain; }
         
@@ -37,38 +37,129 @@
 </head>
 <body>
 
-    <!-- Menú Superior de Países de RadarLat con URLs Originales Fijas -->
+    <!-- Menú Superior con tus Direcciones de Banderas Intactas -->
     <div id="rl-container-fuerza">
         <div class="r1-carrusel-centrado">
             <div class="btn-pais active" onclick="filtrarRadar('all', this)"><div class="world-icon" style="background:#222; display:flex; align-items:center; justify-content:center;">🌐</div><span>TODOS</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="flagcdn.com"><span>ARG</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="flagcdn.com"><span>CHI</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="flagcdn.com"><span>URU</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="flagcdn.com"><span>PAR</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('br', this)"><img src="flagcdn.com"><span>BRA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pe', this)"><img src="flagcdn.com"><span>PER</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('bo', this)"><img src="flagcdn.com"><span>BOL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ec', this)"><img src="flagcdn.com"><span>ECU</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ve', this)"><img src="flagcdn.com"><span>VEN</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('co', this)"><img src="flagcdn.com"><span>COL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('mx', this)"><img src="flagcdn.com"><span>MEX</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pa', this)"><img src="flagcdn.com"><span>PAN</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('gt', this)"><img src="flagcdn.com"><span>GUA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('sv', this)"><img src="flagcdn.com"><span>SAL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ni', this)"><img src="flagcdn.com"><span>NIC</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="flagcdn.com"><span>HON</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cr', this)"><img src="flagcdn.com"><span>COS</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cu', this)"><img src="flagcdn.com"><span>CUB</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="flagcdn.com"><span>DOM</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pr', this)"><img src="flagcdn.com"><span>PUE</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('us', this)"><img src="flagcdn.com"><span>USA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="flagcdn.com"><span>ESP</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="flagcdn.com"><span>FRA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="flagcdn.com"><span>ALE</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://flagcdn.com/w80/ar.png"><span>ARG</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://flagcdn.com/w80/cl.png"><span>CHI</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="https://flagcdn.com/w80/uy.png"><span>URU</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="https://flagcdn.com/w80/py.png"><span>PAR</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('br', this)"><img src="https://flagcdn.com/w80/br.png"><span>BRA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pe', this)"><img src="https://flagcdn.com/w80/pe.png"><span>PER</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('bo', this)"><img src="https://flagcdn.com/w80/bo.png"><span>BOL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ec', this)"><img src="https://flagcdn.com/w80/ec.png"><span>ECU</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ve', this)"><img src="https://flagcdn.com/w80/ve.png"><span>VEN</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('co', this)"><img src="https://flagcdn.com/w80/co.png"><span>COL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('mx', this)"><img src="https://flagcdn.com/w80/mx.png"><span>MEX</span></div >
+            <div class="btn-pais" onclick="filtrarRadar('pa', this)"><img src="https://flagcdn.com/w80/pa.png"><span>PAN</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('gt', this)"><img src="https://flagcdn.com/w80/gt.png"><span>GUA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('sv', this)"><img src="https://flagcdn.com/w80/sv.png"><span>SAL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ni', this)"><img src="https://flagcdn.com/w80/ni.png"><span>NIC</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="https://flagcdn.com/w80/hn.png"><span>HON</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cr', this)"><img src="https://flagcdn.com/w80/cr.png"><span>COS</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cu', this)"><img src="https://flagcdn.com/w80/cu.png"><span>CUB</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="https://flagcdn.com/w80/do.png"><span>DOM</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pr', this)"><img src="https://flagcdn.com/w80/pr.png"><span>PUE</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('us', this)"><img src="https://flagcdn.com/w80/us.png"><span>USA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="https://flagcdn.com/w80/es.png"><span>ESP</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="https://flagcdn.com/w80/fr.png"><span>FRA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://flagcdn.com/w80/de.png"><span>ALE</span></div>
         </div>
     </div>
 
-    <!-- Zona del Reproductor de Video con Fondo Base64 de Instrucciones -->
+    <!-- Zona del Reproductor con la Imagen de Inicio Incorporada -->
     <div class="video-container">
+        <!-- Reemplaza "tu-imagen.jpg" por la ruta real de tu archivo subido al servidor -->
         <div id="poster-inicio-radar">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABLAAAAGKCAYAAAD82UvBAAAAAXNSR0IArs4c6QAAIABREFUeF7t3XmYJVV9B/Dv6ZnhLgMKwzAoqIDggorLgOBywS0uYGI0Gg0ajVvUuEQTjTvGaNxwSdwXFAUVEUVAFFwYEUFlGGBgYGBgmIEZ7unpOfX73Oqu6q6uqq6uW911696v/gP3vXvP+Z2b/vS9p86pInwIECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIEFgsAhUslo3wOQgQIECAAAECBAgQIECAAAECBAgQIECAAAECBAgQIDAIYGEgECBAgAABAgQIECBAgAABAgQIECBAgAABAgQIEFgsAhAsi23LfB4CBAgQIECAAAECBAgQIECAAAECBAgQIECAAAECBBDYwgwgQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECAAAECBAgQIECAAAECBAgQsAUYQIAAAQIECBAgQIAAAECBAgQIECAAAECBAgQIEBgsQlAsCymLfP5CBAgQIAAAECBAgQIECA
+            <img src="tu-imagen.jpg" alt="Elegir país / Elegir canal">
+        </div>
+        <iframe id="main-video-player" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <video id="hls-video-player" controls autoplay playsinline></video>
+    </div>
+
+    <!-- Bloque de Publicidad Reutilizable -->
+    <div style="display: flex; justify-content: center; width: 100%; margin: 10px 0;">
+        <script type="text/javascript">
+            atOptions = { 'key' : '2518913e078a8274472eea34aba82d89', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
+        </script>
+        <script type="text/javascript" src="//highperformanceformat.com" async></script>
+    </div>
+
+    <!-- Contenido Principal: Listas de Canales distribuidos por país -->
+    <div class="main-content">
+        
+        <!-- Bloque Argentina -->
+        <div class="rl-card" data-pais="ar">
+            <div class="country-header">Argentina</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- Bloque Chile -->
+        <div class="rl-card" data-pais="cl">
+            <div class="country-header">Chile</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal Chile</span></div>
+            </div>
+        </div>
+
+        <!-- Bloque Uruguay -->
+        <div class="rl-card" data-pais="uy">
+            <div class="country-header">Uruguay</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal Uruguay</span></div>
+            </div>
+        </div>
+
+        <!-- El resto de contenedores "rl-card" siguen la misma estructura -->
+    </div>
+
+    <!-- Script de Control de Filtrado Dinámico y Ocultación Automática -->
+    <script>
+    function filtrarRadar(codigoPais, elemento) {
+        document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
+        elemento.classList.add('active');
+        
+        const tarjetas = document.querySelectorAll('.rl-card');
+        tarjetas.forEach(tarjeta => {
+            if (codigoPais === 'all') {
+                tarjeta.style.display = 'block';
+            } else {
+                if (tarjeta.getAttribute('data-pais') === codigoPais) {
+                    tarjeta.style.display = 'block';
+                } else {
+                    tarjeta.style.display = 'none';
+                }
+            }
+        });
+    }
+
+    function reproducirCanal(url, tipo) {
+        // Remueve la capa informativa de instrucciones cuando inicia el streaming
+        const posterInicio = document.getElementById('poster-inicio-radar');
+        if (posterInicio) {
+            posterInicio.style.display = 'none';
+        }
+
+        const iframePlayer = document.getElementById('main-video-player');
+        const hlsPlayer = document.getElementById('hls-video-player');
+
+        if (tipo === 'iframe') {
+            hlsPlayer.classList.remove('active');
+            hlsPlayer.pause();
+            iframePlayer.src = url;
+            iframePlayer.classList.add('active');
+        } else if (tipo === 'hls') {
+            iframePlayer.classList.remove('active');
+            iframePlayer.src = '';
+            hlsPlayer.src = url;
+            hlsPlayer.classList.add('active');
+            hlsPlayer.play().catch(e => console.log("Autoplay bloqueado"));
+        }
+    }
+    </script>
+</body>
+</html>
