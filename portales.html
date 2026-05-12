@@ -12,20 +12,21 @@
         .r1-carrusel-centrado::-webkit-scrollbar { display: none; }
         .btn-pais { flex: 0 0 auto; display: flex !important; flex-direction: column !important; align-items: center !important; min-width: 50px; cursor: pointer; background: transparent; border: none; padding: 0; -webkit-tap-highlight-color: transparent; }
         
-        /* Regla aislada de forma estricta mediante el selector directo (>) para no alterar las banderas */
+        /* Selectores específicos por jerarquía (>) para blindar el tamaño de las banderas */
         .btn-pais > img, .world-icon { width: 44px; height: 32px; border-radius: 6px; border: 2px solid transparent; object-fit: cover; }
         .btn-pais.active > img, .btn-pais.active .world-icon { border-color: #4CAF50; box-shadow: 0 0 10px #4CAF50; }
         .btn-pais span { font-size: 10px; color: #777; margin-top: 5px; font-weight: bold; text-transform: uppercase; }
         .btn-pais.active span { color: #4CAF50; }
         
-        /* Contenedor del Reproductor */
+        /* Contenedor del Reproductor Estilo RadarLat */
         .video-container { width: 100%; aspect-ratio: 16/9; background: #000; position: relative; overflow: hidden; border-bottom: 1px solid #222; }
         #main-video-player, #hls-video-player { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: none; z-index: 2; }
         #main-video-player.active, #hls-video-player.active { display: block; }
         
-        /* Capa aislada e independiente para la imagen de instrucciones */
-        #poster-inicio-radar { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; display: flex; align-items: center; justify-content: center; background-color: #000; pointer-events: none; }
-        #poster-inicio-radar .img-instrucciones { width: 100%; height: 100%; object-fit: contain; }
+        /* Capa contenedora aislada para tu banner de instrucciones de Postimg */
+        #poster-inicio-radar { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; display: flex; align-items: center; justify-content: center; background-color: #000; }
+        #poster-inicio-radar a, #poster-inicio-radar img { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+        #poster-inicio-radar img { object-fit: contain; }
         
         .main-content { padding: 10px 0; }
         .rl-card { margin-bottom: 30px; display: block; content-visibility: auto; contain-intrinsic-size: 0 180px; }
@@ -39,11 +40,11 @@
 </head>
 <body>
 
-    <!-- Menú Superior con tus Direcciones de Banderas Intactas y Comprobadas -->
+    <!-- Menú Superior con los 24 Enlaces de Banderas Completos y Protegidos -->
     <div id="rl-container-fuerza">
         <div class="r1-carrusel-centrado">
             <div class="btn-pais active" onclick="filtrarRadar('all', this)"><div class="world-icon" style="background:#222; display:flex; align-items:center; justify-content:center;">🌐</div><span>TODOS</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://flagcdn.com/w80/ar.png"><span>ARG</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="flagcdn.com"><span>ARG</span></div>
             <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="flagcdn.com"><span>CHI</span></div>
             <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="flagcdn.com"><span>URU</span></div>
             <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="flagcdn.com"><span>PAR</span></div>
@@ -70,10 +71,10 @@
         </div>
     </div>
 
-    <!-- Zona del Reproductor con Imagen de Instrucciones de Postimg Incorporada -->
+    <!-- Zona del Reproductor con tu Enlace e Imagen de Postimages Integrados -->
     <div class="video-container">
         <div id="poster-inicio-radar">
-            <img class="img-instrucciones" src="postimg.cc" alt="Elegir país / Elegir canal">
+            <a href='https://postimg.cc/kRBNNm32' target='_blank'><img src='https://i.postimg.cc/wMkWpqwQ/1000474141.png' border='0' alt='1000474141'></a>
         </div>
         <iframe id="main-video-player" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         <video id="hls-video-player" controls autoplay playsinline></video>
@@ -85,8 +86,8 @@
         <div class="rl-card" data-pais="ar">
             <div class="country-header">Argentina</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_STREAM_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_STREAM_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -94,7 +95,7 @@
         <div class="rl-card" data-pais="cl">
             <div class="country-header">Chile</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal Chile</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_STREAM_AQUÍ', 'hls')"><span>Canal Chile</span></div>
             </div>
         </div>
 
@@ -102,7 +103,7 @@
         <div class="rl-card" data-pais="uy">
             <div class="country-header">Uruguay</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal Uruguay</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_STREAM_AQUÍ', 'hls')"><span>Canal Uruguay</span></div>
             </div>
         </div>
     </div>
@@ -152,4 +153,3 @@
     </script>
 </body>
 </html>
-
