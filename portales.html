@@ -32,7 +32,7 @@
 </head>
 <body>
 
-    <!-- Menú Superior con URLs Oficiales de FlagCDN -->
+    <!-- Menú Superior de Países -->
     <div id="rl-container-fuerza">
         <div class="r1-carrusel-centrado">
             <button class="btn-pais active" onclick="filtrarRadar('all', this)"><div class="world-icon" style="background:#222; display:flex; align-items:center; justify-content:center;">🌐</div><span>TODOS</span></button>
@@ -69,44 +69,80 @@
         <video id="hls-video-player" controls autoplay playsinline></video>
     </div>
 
-    <!-- Bloque de Publicidad Reutilizable -->
-    <div style="display: flex; justify-content: center; width: 100%; margin: 10px 0;">
-        <script type="text/javascript">
-            atOptions = { 'key' : '2518913e078a8274472eea34aba82d89', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
-        </script>
-        <script type="text/javascript" src="//highperformanceformat.com" async></script>
-    </div>
-
-    <!-- Contenido Principal: Listas de Canales distribuidos por país -->
+    <!-- Contenido Principal: Listas de Canales -->
     <div class="main-content">
         
+        <!-- ARGENTINA -->
         <div class="rl-card" data-pais="ar">
             <div class="country-header">Argentina</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_M3U8_AQUÍ', 'hls')"><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_M3U8_AQUÍ', 'hls')"><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
+        <!-- CHILE -->
         <div class="rl-card" data-pais="cl">
             <div class="country-header">Chile</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_M3U8_AQUÍ', 'hls')"><span>Canal Chile</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal Chile</span></div>
             </div>
         </div>
 
+        <!-- URUGUAY -->
         <div class="rl-card" data-pais="uy">
             <div class="country-header">Uruguay</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_M3U8_AQUÍ', 'hls')"><span>Canal Uruguay</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal Uruguay</span></div>
             </div>
         </div>
 
-        <!-- Agrega las cajas ".rl-card" adicionales para el resto de los países con su data-pais correspondiente -->
+        <!-- PARAGUAY -->
+        <div class="rl-card" data-pais="py"><div class="country-header">Paraguay</div><div class="channels-scroll"><div class="logo-box"><span>Canal 1</span></div></div></div>
+        <!-- BRASIL -->
+        <div class="rl-card" data-pais="br"><div class="country-header">Brasil</div><div class="channels-scroll"><div class="logo-box"><span>Canal 1</span></div></div></div>
+        <!-- PERÚ -->
+        <div class="rl-card" data-pais="pe"><div class="country-header">Perú</div><div class="channels-scroll"><div class="logo-box"><span>Canal 1</span></div></div></div>
+        <!-- BOLIVIA -->
+        <div class="rl-card" data-pais="bo"><div class="country-header">Bolivia</div><div class="channels-scroll"><div class="logo-box"><span>Canal 1</span></div></div></div>
+        <!-- ECUADOR -->
+        <div class="rl-card" data-pais="ec"><div class="country-header">Ecuador</div><div class="channels-scroll"><div class="logo-box"><span>Canal 1</span></div></div></div>
+        <!-- VENEZUELA -->
+        <div class="rl-card" data-pais="ve"><div class="country-header">Venezuela</div><div class="channels-scroll"><div class="logo-box"><span>Canal 1</span></div></div></div>
+        <!-- COLOMBIA -->
+        <div class="rl-card" data-pais="co"><div class="country-header">Colombia</div><div class="channels-scroll"><div class="logo-box"><span>Canal 1</span></div></div></div>
+        <!-- MÉXICO -->
+        <div class="rl-card" data-pais="mx"><div class="country-header">México</div><div class="channels-scroll"><div class="logo-box"><span>Canal 1</span></div></div></div>
+        <!-- PANAMÁ -->
+        <div class="rl-card" data-pais="pa"><div class="country-header">Panamá</div><div class="channels-scroll"><div class="logo-box"><span>Canal 1</span></div></div></div>
+        <!-- GUATEMALA -->
+        <div class="rl-card" data-pais="gt"><div class="country-header">Guatemala</div><div class="channels-scroll"><div class="logo-box"><span>Canal 1</span></div></div></div>
+        <!-- EL SALVADOR -->
+        <div class="rl-card" data-pais="sv"><div class="country-header">El Salvador</div><div class="channels-scroll"><div class="logo-box"><span>Canal 1</span></div></div></div>
+        <!-- NICARAGUA -->
+        <div class="rl-card" data-pais="ni"><div class="country-header">Nicaragua</div><div class="channels-scroll"><div class="logo-box"><span>Canal 1</span></div></div></div>
+        <!-- HONDURAS -->
+        <div class="rl-card" data-pais="hn"><div class="country-header">Honduras</div><div class="channels-scroll"><div class="logo-box"><span>Canal 1</span></div></div></div>
+        <!-- COSTA RICA -->
+        <div class="rl-card" data-pais="cr"><div class="country-header">Costa Rica</div><div class="channels-scroll"><div class="logo-box"><span>Canal 1</span></div></div></div>
+        <!-- CUBA -->
+        <div class="rl-card" data-pais="cu"><div class="country-header">Cuba</div><div class="channels-scroll"><div class="logo-box"><span>Canal 1</span></div></div></div>
+        <!-- REPÚBLICA DOMINICANA -->
+        <div class="rl-card" data-pais="do"><div class="country-header">República Dominicana</div><div class="channels-scroll"><div class="logo-box"><span>Canal 1</span></div></div></div>
+        <!-- PUERTO RICO -->
+        <div class="rl-card" data-pais="pr"><div class="country-header">Puerto Rico</div><div class="channels-scroll"><div class="logo-box"><span>Canal 1</span></div></div></div>
+        <!-- ESTADOS UNIDOS -->
+        <div class="rl-card" data-pais="us"><div class="country-header">Estados Unidos</div><div class="channels-scroll"><div class="logo-box"><span>Canal 1</span></div></div></div>
+        <!-- ESPAÑA -->
+        <div class="rl-card" data-pais="es"><div class="country-header">España</div><div class="channels-scroll"><div class="logo-box"><span>Canal 1</span></div></div></div>
+        <!-- FRANCIA -->
+        <div class="rl-card" data-pais="fr"><div class="country-header">Francia</div><div class="channels-scroll"><div class="logo-box"><span>Canal 1</span></div></div></div>
+        <!-- ALEMANIA -->
+        <div class="rl-card" data-pais="de"><div class="country-header">Alemania</div><div class="channels-scroll"><div class="logo-box"><span>Canal 1</span></div></div></div>
 
     </div>
 
-    <!-- Script de Control de Filtrado Dinámico -->
+    <!-- Script de Control Lógico -->
     <script>
     function filtrarRadar(codigoPais, elemento) {
         document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
