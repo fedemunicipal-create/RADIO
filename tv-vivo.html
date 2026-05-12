@@ -4,35 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>RADARLAT TV-VIVO</title>
-    <script src="https://jsdelivr.net"></script>
     
     <style>
         body { background-color: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 0; padding-bottom: 100px; overflow-x: hidden; }
-        #rl-container-fuerza { position: sticky; top: 0; width: 100%; background: #0b0e11; border-bottom: 2px solid #4CAF50; z-index: 2000; }
+        #rl-container-fuerza { position: sticky; top: 0; width: 100%; background: #0b0e11; border-bottom: 2px solid #4CAF50; z-index: 2000; content-visibility: auto; contain-intrinsic-size: 0 62px; }
         .r1-carrusel-centrado { display: flex !important; flex-direction: row !important; overflow-x: auto !important; gap: 20px; padding: 10px 15px; align-items: center; -webkit-overflow-scrolling: touch; }
         .r1-carrusel-centrado::-webkit-scrollbar { display: none; }
-        .btn-pais { flex: 0 0 auto; display: flex !important; flex-direction: column !important; align-items: center !important; min-width: 50px; cursor: pointer; }
+        .btn-pais { flex: 0 0 auto; display: flex !important; flex-direction: column !important; align-items: center !important; min-width: 50px; cursor: pointer; background: transparent; border: none; padding: 0; -webkit-tap-highlight-color: transparent; }
         .btn-pais img, .world-icon { width: 44px; height: 32px; border-radius: 6px; border: 2px solid transparent; object-fit: cover; }
         .btn-pais.active img, .btn-pais.active .world-icon { border-color: #4CAF50; box-shadow: 0 0 10px #4CAF50; }
         .btn-pais span { font-size: 10px; color: #777; margin-top: 5px; font-weight: bold; text-transform: uppercase; }
         .btn-pais.active span { color: #4CAF50; }
+        
+        /* Contenedor del Reproductor */
         .video-container { width: 100%; aspect-ratio: 16/9; background: #000; position: relative; overflow: hidden; border-bottom: 1px solid #222; }
-        #main-video-player, #hls-video-player { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: none; }
+        #main-video-player, #hls-video-player { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: none; z-index: 2; }
         #main-video-player.active, #hls-video-player.active { display: block; }
+        
         .main-content { padding: 10px 0; }
-        .rl-card { margin-bottom: 30px; display: block; }
+        .rl-card { margin-bottom: 30px; display: block; content-visibility: auto; contain-intrinsic-size: 0 180px; }
         .country-header { font-size: 0.9rem; font-weight: bold; color: #fff; margin: 15px; text-transform: uppercase; border-left: 4px solid #4CAF50; padding-left: 12px; }
-        .channels-scroll { display: flex; overflow-x: auto; gap: 15px; padding: 0 15px 10px; }
-        .logo-box { width: 110px; height: 110px; background: #fff; border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
-        .logo-box img { width: 80%; height: auto; object-fit: contain; }
-        .bottom-navbar { position: fixed; bottom: 0; width: 100%; height: 75px; background: #000; display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #1a1a1a; z-index: 3000; }
-        .nav-link { text-decoration: none; color: #fff; font-size: 0.85rem; font-weight: bold; display: flex; align-items: center; text-transform: uppercase; }
-        .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 8px #f00; animation: parpadeo 1.5s infinite; }
-        @keyframes parpadeo { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .channels-scroll { display: flex; overflow-x: auto; gap: 15px; padding: 0 15px 10px; -webkit-overflow-scrolling: touch; }
+        .channels-scroll::-webkit-scrollbar { display: none; }
+        
+        .logo-box { width: 110px; height: 110px; background: #fff; border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 0 0 auto; cursor: pointer; padding: 5px; box-sizing: border-box; }
+        .logo-box img { width: 85%; height: 85%; object-fit: contain; display: block; }
+        .logo-box span { font-size: 11px; color: #333; font-weight: bold; text-align: center; margin-top: 2px; }
     </style>
 </head>
 <body>
 
+    <!-- Menú Superior con tus Direcciones de Banderas Solicitadas Exactas -->
     <div id="rl-container-fuerza">
         <div class="r1-carrusel-centrado">
             <div class="btn-pais active" onclick="filtrarRadar('all', this)"><div class="world-icon" style="background:#222; display:flex; align-items:center; justify-content:center;">🌐</div><span>TODOS</span></div>
@@ -63,129 +65,269 @@
         </div>
     </div>
 
+    <!-- Zona del Reproductor -->
     <div class="video-container">
-        <iframe id="main-video-player" class="active" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe id="main-video-player" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         <video id="hls-video-player" controls autoplay playsinline></video>
     </div>
-     </div>
 
-<div style="display: flex; justify-content: center; width: 100%; margin: 10px 0;">
-    <script type="text/javascript">
-        atOptions = {
-            'key' : '2518913e078a8274472eea34aba82d89',
-            'format' : 'iframe',
-            'height' : 50,
-            'width' : 320,
-            'params' : {}
-        };
-    </script>
-    <script type="text/javascript" src="//www.highperformanceformat.com/2518913e078a8274472eea34aba82d89/invoke.js"></script>
-</div>
+    <!-- Contenido Principal: Listas de Canales distribuidos por país -->
+    <div class="main-content">
+        
+        <!-- ARGENTINA -->
+        <div class="rl-card" data-pais="ar">
+            <div class="country-header">Argentina</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
 
-<div id="ad-box" style="width:100%; text-align:center; ...">
-    <div id="ad-box" style="width:100%; text-align:center; padding:10px 0; background:#0b0e11;">
-        <script type="text/javascript">
-            atOptions = {
-                'key' : '2518913e078a8274472eea34aba82089',
-                'format' : 'iframe',
-                'height' : 50,
-                'width' : 320,
-                'params' : {}
-            };
-        </script>
-        <script type="text/javascript" src="https://highperformanceformat.com"></script>
+        <!-- CHILE -->
+        <div class="rl-card" data-pais="cl">
+            <div class="country-header">Chile</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- URUGUAY -->
+        <div class="rl-card" data-pais="uy">
+            <div class="country-header">Uruguay</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- PARAGUAY -->
+        <div class="rl-card" data-pais="py">
+            <div class="country-header">Paraguay</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- BRASIL -->
+        <div class="rl-card" data-pais="br">
+            <div class="country-header">Brasil</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- PERÚ -->
+        <div class="rl-card" data-pais="pe">
+            <div class="country-header">Perú</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- BOLIVIA -->
+        <div class="rl-card" data-pais="bo">
+            <div class="country-header">Bolivia</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- ECUADOR -->
+        <div class="rl-card" data-pais="ec">
+            <div class="country-header">Ecuador</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- VENEZUELA -->
+        <div class="rl-card" data-pais="ve">
+            <div class="country-header">Venezuela</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- COLOMBIA -->
+        <div class="rl-card" data-pais="co">
+            <div class="country-header">Colombia</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- MÉXICO -->
+        <div class="rl-card" data-pais="mx">
+            <div class="country-header">México</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- PANAMÁ -->
+        <div class="rl-card" data-pais="pa">
+            <div class="country-header">Panamá</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- GUATEMALA -->
+        <div class="rl-card" data-pais="gt">
+            <div class="country-header">Guatemala</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- EL SALVADOR -->
+        <div class="rl-card" data-pais="sv">
+            <div class="country-header">El Salvador</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- NICARAGUA -->
+        <div class="rl-card" data-pais="ni">
+            <div class="country-header">Nicaragua</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- HONDURAS -->
+        <div class="rl-card" data-pais="hn">
+            <div class="country-header">Honduras</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- COSTA RICA -->
+        <div class="rl-card" data-pais="cr">
+            <div class="country-header">Costa Rica</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- CUBA -->
+        <div class="rl-card" data-pais="cu">
+            <div class="country-header">Cuba</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- REPÚBLICA DOMINICANA -->
+        <div class="rl-card" data-pais="do">
+            <div class="country-header">República Dominicana</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- PUERTO RICO -->
+        <div class="rl-card" data-pais="pr">
+            <div class="country-header">Puerto Rico</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- ESTADOS UNIDOS -->
+        <div class="rl-card" data-pais="us">
+            <div class="country-header">Estados Unidos</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- ESPAÑA -->
+        <div class="rl-card" data-pais="es">
+            <div class="country-header">España</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- FRANCIA -->
+        <div class="rl-card" data-pais="fr">
+            <div class="country-header">Francia</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
+
+        <!-- ALEMANIA -->
+        <div class="rl-card" data-pais="de">
+            <div class="country-header">Alemania</div>
+            <div class="channels-scroll">
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
+            </div>
+        </div>
     </div>
 
-
-    <div id="ad-box" style="width:100%; text-align:center; padding:10px 0; background:#0b0e11;">
-        <script type="text/javascript">
-            atOptions = { 'key' : '2518913e078a8274472eea34aba82089', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
-        </script>
-        <script type="text/javascript" src="https://highperformanceformat.com"></script>
-    </div>
-
-    <div class="main-content" id="contenedor-canales"></div>
-
-    <nav class="bottom-navbar">
-        <a href="https://fedemunicipal-create.github.io/RADIO/" class="nav-link"><span class="dot"></span>RADIO</a>
-        <a href="https://radarlat.blogspot.com/" class="nav-link"><span class="dot"></span>VOLVER</a>
-        <a href="https://fedemunicipal-create.github.io/RADIO/portales.html" class="nav-link"><span class="dot"></span>PORTALES</a>
-    </nav>
-
-<script>
-    const config = [
-        {id:'ar', full:'ARGENTINA', c:[{n:'TN', l:'https://www.youtube.com/embed/cb12KmMMDJA?si=lY3BrhN5v-5eFu2v', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/TN_todo_noticias_logo.svg/1280px-TN_todo_noticias_logo.svg.png'},{n:'C5N', l:'https://www.youtube.com/embed/VWhQ6xspnSc?si=e5XeytTGlTow_TDa', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/C5N_2017_Alternate.svg/1920px-C5N_2017_Alternate.svg.png'}]},
-        {id:'cl', full:'CHILE', c:[{n:'TL13', l:'https://www.youtube.com/embed/aps1pJ51Lbk?si=DiRAaIAvUpFBGKtQ', img:'https://upload.wikimedia.org/wikipedia/commons/6/64/T13envivo2025.png'},{n:'24H', l:'https://www.youtube.com/embed/kKLrmUUALgA?si=xH2w0j3bCyI54akn', img:'https://upload.wikimedia.org/wikipedia/commons/9/92/24_horas_2023_logo.png'}]},
-        {id:'uy', full:'URUGUAY', c:[{n:'CANAL 5', l:'https://vood.io', img:'https://wikimedia.org'},{n:'TELEMUNDO', l:'https://youtube.com', img:'https://wikimedia.org'}]},
-        {id:'py', full:'PARAGUAY', c:[{n:'NPY', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'ABC TV', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
-        {id:'br', full:'BRASIL', c:[{n:'Folha Politica', l:'https://www.youtube.com/embed/EK9qkJAGKrA?si=qZU0T-2Q9lzxXjXQ', img:'https://yt3.googleusercontent.com/ytc/AIdro_lsGOic20sDP0-rRTAk7vfPYvk0_obP4LwwOt7RX1RXE6k=s900-c-k-c0x00ffffff-no-rj'},{n:'SBT', l:'https://www.youtube.com/embed/wIJNgR5-ijI?si=HCKuaG-TBHISzEE3', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/SBT_logo.svg/960px-SBT_logo.svg.png'}]},
-        {id:'ec', full:'ECUADOR', c:[{n:'TELEAMAZONAS', l:'https://www.youtube.com/embed/QO-xLtjdSjM?si=e3Lmyb3vExIGwjFE', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Teleamazonas_Logo.png/960px-Teleamazonas_Logo.png'}]},
-        {id:'pe', full:'PERÚ', c:[{n:'Panamericana', l:'https://www.youtube.com/embed/X-yXkQblDLY?si=MWG63JtGZtNi4tzw', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Logo_Panamericana_2020.png/960px-Logo_Panamericana_2020.png'}, {n:'LatinaTV', l:'https://www.youtube.com/embed/AhBefTxKY-o?si=lbAgMZ34ry81al2P', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Latina_Television_-_Logotipo.png/960px-Latina_Television_-_Logotipo.png'}]},
-        {id:'bo', full:'BOLIVIA', c:[{n:'QNMP', l:'https://www.youtube.com/embed/JH6vjMm0-Po?si=EXPfQ3nQT3af-Uik', img:'https://yt3.googleusercontent.com/p1Os8vXcDIszBm1pt0aJ94m8j24lq_A7OOXCzpVi3M66M05_n1HdDWM8IQbkjc1lXBhXducxwA=s900-c-k-c0x00ffffff-no-rj'},{n:'RTP', l:'https://www.youtube.com/embed/LZD4Y_at_ag?si=NX3MLumr4o4Htq9n', img:'https://upload.wikimedia.org/wikipedia/commons/1/14/Rtpbolivia2021.png'}]},
-        {id:'ve', full:'VENEZUELA', c:[{n:'NTN', l:'https://www.youtube.com/embed/rTwqadYHMBk?si=GhTvZLssOC70FPJa', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/NTN24_Logo.png/960px-NTN24_Logo.png'},{n:'TELESUR', l:'https://www.youtube.com/embed/uGK8rHot0Pc?si=T_ffL6Mezl1WExkT', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/TeleSUR_logo_%28textless%29.svg/500px-TeleSUR_logo_%28textless%29.svg.png'}]},
-        {id:'co', full:'COLOMBIA', c:[{n:'CARACOL', l:'https://www.youtube.com/embed/kMNm9L0TM1w?si=Z5HLzVcPjzJ6PsBl', img:'https://upload.wikimedia.org/wikipedia/commons/e/ec/CaracolTV2025.png'},{n:'RCN', l:'https://www.youtube.com/embed/Vi7m3E_rfoI?si=Wq27fGxN2TPk-fVE', img:'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/CanalRCN2023.png/500px-CanalRCN2023.png'}]},
-        {id:'mx', full:'MÉXICO', c:[{n:'FORO TV', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'MILENIO', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
-        {id:'pa', full:'PANAMÁ', c:[{n:'TVN PA', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'TELEMETRO', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
-        {id:'gt', full:'GUATEMALA', c:[{n:'TN23', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'GUATEVISION', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
-        {id:'sv', full:'EL SALVADOR', c:[{n:'CANAL 10', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'TCS+', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
-        {id:'ni', full:'NICARAGUA', c:[{n:'CANAL 10', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'VOS TV', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
-        {id:'hn', full:'HONDURAS', c:[{n:'HCH', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'TSI', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
-        {id:'cr', full:'COSTA RICA', c:[{n:'TELETICA', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'REPRETEL', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
-        {id:'cu', full:'CUBA', c:[{n:'CUBAVISION', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'CANAL CARIBE', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
-        {id:'do', full:'REP. DOMINICANA', c:[{n:'TELEMANTILLAS', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'COLOR VISION', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
-        {id:'pr', full:'PUERTO RICO', c:[{n:'WAPA', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'TELEMUNDO PR', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
-        {id:'us', full:'EE.UU.', c:[{n:'ABC NEWS', l:'LINK_AQUI', img:'https://wikimedia.org'},{n:'CBS NEWS', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
-        {id:'es', full:'ESPAÑA', c:[{n:'RTVE 24H', l:'https://akamaized.net', img:'https://wikimedia.org'},{n:'LA SEXTA', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
-        {id:'fr', full:'FRANCIA', c:[{n:'FRANCE 24', l:'https://france24.com', img:'https://wikimedia.org'},{n:'EURONEWS', l:'LINK_AQUI', img:'https://wikimedia.org'}]},
-        {id:'de', full:'ALEMANIA', c:[{n:'DW ESPAÑOL', l:'https://akamaized.net', img:'https://wikimedia.org'},{n:'WELT', l:'LINK_AQUI', img:'https://wikimedia.org'}]}
-    ];
-
-    function render(filtro = 'all') {
-        const container = document.getElementById('contenedor-canales');
-        container.innerHTML = "";
-        config.forEach(p => {
-            if (filtro === 'all' || p.id === filtro) {
-                const card = document.createElement('div');
-                card.className = `rl-card ${p.id}`;
-                let html = `<div class="country-header">${p.full}</div><div class="channels-scroll">`;
-                p.c.forEach(c => {
-                    html += `<div class="channel-item" onclick="cargarContenido('${c.l}')">
-                                <div class="logo-box"><img src="${c.img}" loading="lazy"></div>
-                                <span class="channel-name">${c.n}</span>
-                             </div>`;
-                });
-                html += `</div>`;
-                card.innerHTML = html;
-                container.appendChild(card);
+    <!-- Script de Control -->
+    <script>
+    function filtrarRadar(codigoPais, elemento) {
+        document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
+        elemento.classList.add('active');
+        
+        const tarjetas = document.querySelectorAll('.rl-card');
+        tarjetas.forEach(tarjeta => {
+            if (codigoPais === 'all') {
+                tarjeta.style.display = 'block';
+            } else {
+                if (tarjeta.getAttribute('data-pais') === codigoPais) {
+                    tarjeta.style.display = 'block';
+                } else {
+                    tarjeta.style.display = 'none';
+                }
             }
         });
     }
 
-    function cargarContenido(url) {
-        const yt = document.getElementById('main-video-player'), hls = document.getElementById('hls-video-player');
-        yt.src = ""; hls.pause(); yt.classList.remove('active'); hls.classList.remove('active');
-        if (url.includes('youtube.com')) { yt.src = url; yt.classList.add('active'); }
-        else {
-            hls.classList.add('active');
-            if (Hls.isSupported()) { const h = new Hls(); h.loadSource(url); h.attachMedia(hls); }
-            else if (hls.canPlayType('application/vnd.apple.mpegurl')) { hls.src = url; }
+    function reproducirCanal(url, tipo) {
+        const iframePlayer = document.getElementById('main-video-player');
+        const hlsPlayer = document.getElementById('hls-video-player');
+
+        if (tipo === 'iframe') {
+            hlsPlayer.classList.remove('active');
+            hlsPlayer.pause();
+            iframePlayer.src = url;
+            iframePlayer.classList.add('active');
+        } else if (tipo === 'hls') {
+            iframePlayer.classList.remove('active');
+            iframePlayer.src = '';
+            hlsPlayer.src = url;
+            hlsPlayer.classList.add('active');
+            hlsPlayer.play().catch(e => console.log("Autoplay bloqueado"));
         }
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
-    function filtrarRadar(id, el) {
-        document.querySelectorAll('.btn-pais').forEach(b => b.classList.remove('active'));
-        el.classList.add('active');
-        render(id);
-    }
-
-  window.onload = () => {
-    // En lugar de render('all'), carga solo el primer país (ej: Argentina)
-    render('ar'); 
-    
-    // Activa el reproductor
-    cargarContenido('https://youtube.com');
-};
-</script>
+    </script>
 </body>
 </html>
