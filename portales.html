@@ -30,42 +30,45 @@
         .channels-scroll { display: flex; overflow-x: auto; gap: 15px; padding: 0 15px 10px; -webkit-overflow-scrolling: touch; }
         .channels-scroll::-webkit-scrollbar { display: none; }
         
-        .logo-box { width: 150px; height: 110px; background: #111417; border: 1px solid #222; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; flex: 0 0 auto; cursor: pointer; padding: 10px; box-sizing: border-box; text-decoration: none; color: #fff; }
-        .logo-box:hover { border-color: #4CAF50; box-shadow: 0 0 5px rgba(76, 175, 80, 0.3); }
-        .logo-box img { width: 100%; height: 55px; object-fit: contain; margin-bottom: 5px; background: #fff; border-radius: 4px; padding: 2px; }
-        .logo-box span { font-size: 11px; font-weight: bold; text-align: center; color: #adbeaf; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; }
+        /* SOLUCIÓN EN CSS: Forzar la caja del logo a ser un cuadrado y quitar color azul de link */
+        .logo-box { width: 130px; height: 130px; background: #111417; border: 1px solid #222; border-radius: 16px; display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; flex: 0 0 auto; cursor: pointer; padding: 12px; box-sizing: border-box; text-decoration: none !important; color: #fff !important; }
+        .logo-box:hover { border-color: #4CAF50; box-shadow: 0 0 5px rgba(76, 175, 80, 0.4); }
+        
+        /* Formato e integración para el logotipo del diario */
+        .logo-box img { width: 100%; height: 60px; object-fit: contain; margin-bottom: 8px; background: #fff; border-radius: 6px; padding: 4px; box-sizing: border-box; display: block; }
+        .logo-box span { font-size: 11px; font-weight: bold; text-align: center; color: #adbeaf !important; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; margin: 0; text-decoration: none !important; }
     </style>
 </head>
 <body>
 
-    <!-- Menú Superior con tus Códigos de Banderas Exactos e Intactas -->
+    <!-- Menú Superior con tus Direcciones de Banderas Originales Exactas -->
     <div id="rl-container-fuerza">
         <div class="r1-carrusel-centrado">
             <div class="btn-pais active" onclick="filtrarRadar('all', this)"><div class="world-icon" style="background:#222; display:flex; align-items:center; justify-content:center;">🌐</div><span>TODOS</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://flagcdn.com/w80/ar.png"><span>ARG</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://flagcdn.com/w80/cl.png"><span>CHI</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="https://flagcdn.com/w80/uy.png"><span>URU</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="https://flagcdn.com/w80/py.png"><span>PAR</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('br', this)"><img src="https://flagcdn.com/w80/br.png"><span>BRA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pe', this)"><img src="https://flagcdn.com/w80/pe.png"><span>PER</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('bo', this)"><img src="https://flagcdn.com/w80/bo.png"><span>BOL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ec', this)"><img src="https://flagcdn.com/w80/ec.png"><span>ECU</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ve', this)"><img src="https://flagcdn.com/w80/ve.png"><span>VEN</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('co', this)"><img src="https://flagcdn.com/w80/co.png"><span>COL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('mx', this)"><img src="https://flagcdn.com/w80/mx.png"><span>MEX</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pa', this)"><img src="https://flagcdn.com/w80/pa.png"><span>PAN</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('gt', this)"><img src="https://flagcdn.com/w80/gt.png"><span>GUA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('sv', this)"><img src="https://flagcdn.com/w80/sv.png"><span>SAL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ni', this)"><img src="https://flagcdn.com/w80/ni.png"><span>NIC</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="https://flagcdn.com/w80/hn.png"><span>HON</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cr', this)"><img src="https://flagcdn.com/w80/cr.png"><span>COS</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cu', this)"><img src="https://flagcdn.com/w80/cu.png"><span>CUB</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="https://flagcdn.com/w80/do.png"><span>DOM</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pr', this)"><img src="https://flagcdn.com/w80/pr.png"><span>PUE</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('us', this)"><img src="https://flagcdn.com/w80/us.png"><span>USA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="https://flagcdn.com/w80/es.png"><span>ESP</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="https://flagcdn.com/w80/fr.png"><span>FRA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://flagcdn.com/w80/de.png"><span>ALE</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="flagcdn.com"><span>ARG</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="flagcdn.com"><span>CHI</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="flagcdn.com"><span>URU</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="flagcdn.com"><span>PAR</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('br', this)"><img src="flagcdn.com"><span>BRA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pe', this)"><img src="flagcdn.com"><span>PER</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('bo', this)"><img src="flagcdn.com"><span>BOL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ec', this)"><img src="flagcdn.com"><span>ECU</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ve', this)"><img src="flagcdn.com"><span>VEN</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('co', this)"><img src="flagcdn.com"><span>COL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('mx', this)"><img src="flagcdn.com"><span>MEX</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pa', this)"><img src="flagcdn.com"><span>PAN</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('gt', this)"><img src="flagcdn.com"><span>GUA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('sv', this)"><img src="flagcdn.com"><span>SAL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ni', this)"><img src="flagcdn.com"><span>NIC</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="flagcdn.com"><span>HON</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cr', this)"><img src="flagcdn.com"><span>COS</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cu', this)"><img src="flagcdn.com"><span>CUB</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="flagcdn.com"><span>DOM</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pr', this)"><img src="flagcdn.com"><span>PUE</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('us', this)"><img src="flagcdn.com"><span>USA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="flagcdn.com"><span>ESP</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="flagcdn.com"><span>FRA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="flagcdn.com"><span>ALE</span></div>
         </div>
     </div>
 
@@ -77,12 +80,19 @@
 
     <!-- Contenido Principal: los 24 carruseles de diarios y portales -->
     <div class="main-content">
-        <!-- ARGENTINA -->
+        <!-- EJEMPLO RESUELTO EN ARGENTINA -->
         <div class="rl-card" data-pais="ar">
             <div class="country-header">Argentina</div>
             <div class="channels-scroll">
-                <a href="https://www.infobae.com/?noredirect" target="_blank" class="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Infobae_logo.svg/1920px-Infobae_logo.svg.png"><span>Infobae</span></a>
-                <a href="https://www.clarin.com/" target="_blank" class="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Clar%C3%ADn_logo.svg/1920px-Clar%C3%ADn_logo.svg.png"><span>Clarín</span></a>
+                <!-- Reemplaza los enlaces src por las fotos de tus logotipos -->
+                <a href="infobae.com" target="_blank" class="logo-box">
+                    <img src="postimg.cc" alt="Infobae">
+                    <span>Infobae</span>
+                </a>
+                <a href="clarin.com" target="_blank" class="logo-box">
+                    <img src="postimg.cc" alt="Clarín">
+                    <span>Clarín</span>
+                </a>
             </div>
         </div>
 
@@ -90,8 +100,8 @@
         <div class="rl-card" data-pais="cl">
             <div class="country-header">Chile</div>
             <div class="channels-scroll">
-                <a href="latercera.com" target="_blank" class="logo-box"><span>La Tercera</span></a>
-                <a href="biobiochile.cl" target="_blank" class="logo-box"><span>BioBioChile</span></a>
+                <a href="#" target="_blank" class="logo-box"><img src="postimg.cc" alt=""><span>La Tercera</span></a>
+                <a href="#" target="_blank" class="logo-box"><img src="postimg.cc" alt=""><span>BioBioChile</span></a>
             </div>
         </div>
 
@@ -99,40 +109,39 @@
         <div class="rl-card" data-pais="uy">
             <div class="country-header">Uruguay</div>
             <div class="channels-scroll">
-                <a href="elpais.com.uy" target="_blank" class="logo-box"><span>El País</span></a>
-                <a href="elobservador.com.uy" target="_blank" class="logo-box"><span>El Observador</span></a>
+                <a href="#" target="_blank" class="logo-box"><img src="postimg.cc" alt=""><span>El País</span></a>
+                <a href="#" target="_blank" class="logo-box"><img src="postimg.cc" alt=""><span>El Observador</span></a>
             </div>
         </div>
 
-        <!-- Los siguientes 21 países heredan exactamente la misma estructura para desplegarse juntos en TODOS -->
-        <div class="rl-card" data-pais="py"><div class="country-header">Paraguay</div><div class="channels-scroll"><a href="#" class="logo-box"><span>ABC Color</span></a><a href="#" class="logo-box"><span>Última Hora</span></a></div></div>
-        <div class="rl-card" data-pais="br"><div class="country-header">Brasil</div><div class="channels-scroll"><a href="#" class="logo-box"><span>O Globo</span></a><a href="#" class="logo-box"><span>Folha</span></a></div></div>
-        <div class="rl-card" data-pais="pe"><div class="country-header">Perú</div><div class="channels-scroll"><a href="#" class="logo-box"><span>El Comercio</span></a><a href="#" class="logo-box"><span>La República</span></a></div></div>
-        <div class="rl-card" data-pais="bo"><div class="country-header">Bolivia</div><div class="channels-scroll"><a href="#" class="logo-box"><span>El Deber</span></a><a href="#" class="logo-box"><span>Los Tiempos</span></a></div></div>
-        <div class="rl-card" data-pais="ec"><div class="country-header">Ecuador</div><div class="channels-scroll"><a href="#" class="logo-box"><span>El Universo</span></a><a href="#" class="logo-box"><span>El Comercio</span></a></div></div>
-        <div class="rl-card" data-pais="ve"><div class="country-header">Venezuela</div><div class="channels-scroll"><a href="#" class="logo-box"><span>El Nacional</span></a><a href="#" class="logo-box"><span>Últimas Noticias</span></a></div></div>
-        <div class="rl-card" data-pais="co"><div class="country-header">Colombia</div><div class="channels-scroll"><a href="#" class="logo-box"><span>El Tiempo</span></a><a href="#" class="logo-box"><span>El Espectador</span></a></div></div>
-        <div class="rl-card" data-pais="mx"><div class="country-header">México</div><div class="channels-scroll"><a href="#" class="logo-box"><span>El Universal</span></a><a href="#" class="logo-box"><span>Milenio</span></a></div></div>
-        <div class="rl-card" data-pais="pa"><div class="country-header">Panamá</div><div class="channels-scroll"><a href="#" class="logo-box"><span>La Prensa</span></a><a href="#" class="logo-box"><span>Mi Diario</span></a></div></div>
-        <div class="rl-card" data-pais="gt"><div class="country-header">Guatemala</div><div class="channels-scroll"><a href="#" class="logo-box"><span>Prensa Libre</span></a><a href="#" class="logo-box"><span>Soy502</span></a></div></div>
-        <div class="rl-card" data-pais="sv"><div class="country-header">El Salvador</div><div class="channels-scroll"><a href="#" class="logo-box"><span>El Diario de Hoy</span></a><a href="#" class="logo-box"><span>La Prensa Gráfica</span></a></div></div>
-        <div class="rl-card" data-pais="ni"><div class="country-header">Nicaragua</div><div class="channels-scroll"><a href="#" class="logo-box"><span>La Prensa</span></a><a href="#" class="logo-box"><span>Confidencial</span></a></div></div>
-        <div class="rl-card" data-pais="hn"><div class="country-header">Honduras</div><div class="channels-scroll"><a href="#" class="logo-box"><span>El Heraldo</span></a><a href="#" class="logo-box"><span>La Prensa</span></a></div></div>
-        <div class="rl-card" data-pais="cr"><div class="country-header">Costa Rica</div><div class="channels-scroll"><a href="#" class="logo-box"><span>La Nación</span></a><a href="#" class="logo-box"><span>CRHoy</span></a></div></div>
-        <div class="rl-card" data-pais="cu"><div class="country-header">Cuba</div><div class="channels-scroll"><a href="#" class="logo-box"><span>Granma</span></a><a href="#" class="logo-box"><span>Cubadebate</span></a></div></div>
-        <div class="rl-card" data-pais="do"><div class="country-header">República Dominicana</div><div class="channels-scroll"><a href="#" class="logo-box"><span>Listín Diario</span></a><a href="#" class="logo-box"><span>Diario Libre</span></a></div></div>
-        <div class="rl-card" data-pais="pr"><div class="country-header">Puerto Rico</div><div class="channels-scroll"><a href="#" class="logo-box"><span>El Nuevo Día</span></a><a href="#" class="logo-box"><span>Primera Hora</span></a></div></div>
-        <div class="rl-card" data-pais="us"><div class="country-header">Estados Unidos</div><div class="channels-scroll"><a href="#" class="logo-box"><span>CNN en Español</span></a><a href="#" class="logo-box"><span>The NY Times</span></a></div></div>
-        <div class="rl-card" data-pais="es"><div class="country-header">España</div><div class="channels-scroll"><a href="#" class="logo-box"><span>El País</span></a><a href="#" class="logo-box"><span>El Mundo</span></a></div></div>
-        <div class="rl-card" data-pais="fr"><div class="country-header">Francia</div><div class="channels-scroll"><a href="#" class="logo-box"><span>Le Monde</span></a><a href="#" class="logo-box"><span>Le Figaro</span></a></div></div>
-        <div class="rl-card" data-pais="de"><div class="country-header">Alemania</div><div class="channels-scroll"><a href="#" class="logo-box"><span>Deutsche Welle</span></a><a href="#" class="logo-box"><span>Bild</span></a></div></div>
+        <!-- Los restantes países mantienen su respectivo data-pais -->
+        <div class="rl-card" data-pais="py"><div class="country-header">Paraguay</div><div class="channels-scroll"><a href="#" class="logo-box"><img src="postimg.cc"><span>ABC Color</span></a><a href="#" class="logo-box"><img src="postimg.cc"><span>Última Hora</span></a></div></div>
+        <div class="rl-card" data-pais="br"><div class="country-header">Brasil</div><div class="channels-scroll"><a href="#" class="logo-box"><img src="postimg.cc"><span>O Globo</span></a><a href="#" class="logo-box"><img src="postimg.cc"><span>Folha</span></a></div></div>
+        <div class="rl-card" data-pais="pe"><div class="country-header">Perú</div><div class="channels-scroll"><a href="#" class="logo-box"><img src="postimg.cc"><span>El Comercio</span></a><a href="#" class="logo-box"><img src="postimg.cc"><span>La República</span></a></div></div>
+        <div class="rl-card" data-pais="bo"><div class="country-header">Bolivia</div><div class="channels-scroll"><a href="#" class="logo-box"><img src="postimg.cc"><span>El Deber</span></a><a href="#" class="logo-box"><img src="postimg.cc"><span>Los Tiempos</span></a></div></div>
+        <div class="rl-card" data-pais="ec"><div class="country-header">Ecuador</div><div class="channels-scroll"><a href="#" class="logo-box"><img src="postimg.cc"><span>El Universo</span></a><a href="#" class="logo-box"><img src="postimg.cc"><span>El Comercio</span></a></div></div>
+        <div class="rl-card" data-pais="ve"><div class="country-header">Venezuela</div><div class="channels-scroll"><a href="#" class="logo-box"><img src="postimg.cc"><span>El Nacional</span></a><a href="#" class="logo-box"><img src="postimg.cc"><span>Últimas Noticias</span></a></div></div>
+        <div class="rl-card" data-pais="co"><div class="country-header">Colombia</div><div class="channels-scroll"><a href="#" class="logo-box"><img src="postimg.cc"><span>El Tiempo</span></a><a href="#" class="logo-box"><img src="postimg.cc"><span>El Espectador</span></a></div></div>
+        <div class="rl-card" data-pais="mx"><div class="country-header">México</div><div class="channels-scroll"><a href="#" class="logo-box"><img src="postimg.cc"><span>El Universal</span></a><a href="#" class="logo-box"><img src="postimg.cc"><span>Milenio</span></a></div></div>
+        <div class="rl-card" data-pais="pa"><div class="country-header">Panamá</div><div class="channels-scroll"><a href="#" class="logo-box"><img src="postimg.cc"><span>La Prensa</span></a><a href="#" class="logo-box"><img src="postimg.cc"><span>Mi Diario</span></a></div></div>
+        <div class="rl-card" data-pais="gt"><div class="country-header">Guatemala</div><div class="channels-scroll"><a href="#" class="logo-box"><img src="postimg.cc"><span>Prensa Libre</span></a><a href="#" class="logo-box"><img src="postimg.cc"><span>Soy502</span></a></div></div>
+        <div class="rl-card" data-pais="sv"><div class="country-header">El Salvador</div><div class="channels-scroll"><a href="#" class="logo-box"><img src="postimg.cc"><span>El Diario de Hoy</span></a><a href="#" class="logo-box"><img src="postimg.cc"><span>La Prensa Gráfica</span></a></div></div>
+        <div class="rl-card" data-pais="ni"><div class="country-header">Nicaragua</div><div class="channels-scroll"><a href="#" class="logo-box"><img src="postimg.cc"><span>La Prensa</span></a><a href="#" class="logo-box"><img src="postimg.cc"><span>Confidencial</span></a></div></div>
+        <div class="rl-card" data-pais="hn"><div class="country-header">Honduras</div><div class="channels-scroll"><a href="#" class="logo-box"><img src="postimg.cc"><span>El Heraldo</span></a><a href="#" class="logo-box"><img src="postimg.cc"><span>La Prensa</span></a></div></div>
+        <div class="rl-card" data-pais="cr"><div class="country-header">Costa Rica</div><div class="channels-scroll"><a href="#" class="logo-box"><img src="postimg.cc"><span>La Nación</span></a><a href="#" class="logo-box"><img src="postimg.cc"><span>CRHoy</span></a></div></div>
+        <div class="rl-card" data-pais="cu"><div class="country-header">Cuba</div><div class="channels-scroll"><a href="#" class="logo-box"><img src="postimg.cc"><span>Granma</span></a><a href="#" class="logo-box"><img src="postimg.cc"><span>Cubadebate</span></a></div></div>
+        <div class="rl-card" data-pais="do"><div class="country-header">República Dominicana</div><div class="channels-scroll"><a href="#" class="logo-box"><img src="postimg.cc"><span>Listín Diario</span></a><a href="#" class="logo-box"><img src="postimg.cc"><span>Diario Libre</span></a></div></div>
+        <div class="rl-card" data-pais="pr"><div class="country-header">Puerto Rico</div><div class="channels-scroll"><a href="#" class="logo-box"><img src="postimg.cc"><span>El Nuevo Día</span></a><a href="#" class="logo-box"><img src="postimg.cc"><span>Primera Hora</span></a></div></div>
+        <div class="rl-card" data-pais="us"><div class="country-header">Estados Unidos</div><div class="channels-scroll"><a href="#" class="logo-box"><img src="postimg.cc"><span>CNN en Español</span></a><a href="#" class="logo-box"><img src="postimg.cc"><span>The NY Times</span></a></div></div>
+        <div class="rl-card" data-pais="es"><div class="country-header">España</div><div class="channels-scroll"><a href="#" class="logo-box"><img src="postimg.cc"><span>El País</span></a><a href="#" class="logo-box"><img src="postimg.cc"><span>El Mundo</span></a></div></div>
+        <div class="rl-card" data-pais="fr"><div class="country-header">Francia</div><div class="channels-scroll"><a href="#" class="logo-box"><img src="postimg.cc"><span>Le Monde</span></a><a href="#" class="logo-box"><img src="postimg.cc"><span>Le Figaro</span></a></div></div>
+        <div class="rl-card" data-pais="de"><div class="country-header">Alemania</div><div class="channels-scroll"><a href="#" class="logo-box"><img src="postimg.cc"><span>Deutsche Welle</span></a><a href="#" class="logo-box"><img src="postimg.cc"><span>Bild</span></a></div></div>
     </div>
 
-    <!-- Script de Automatización de Feeds RSS Reales -->
+    <!-- Script de Automatización de Feeds RSS -->
     <script>
-    // RSS reales para los ejemplos iniciales
     const urlsFeedsReales = {
-        "ar": "https://www.clarin.com/rss/lo-ultimo/",
+        "ar": "infobae.com",
         "cl": "latercera.com",
         "uy": "elpais.com.uy"
     };
@@ -141,7 +150,6 @@
         document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
         elemento.classList.add('active');
         
-        // 1. FILTRADO DINÁMICO DE LOS 24 CARRUSELES
         const tarjetas = document.querySelectorAll('.rl-card');
         tarjetas.forEach(tarjeta => {
             if (codigoPais === 'all') {
@@ -151,10 +159,8 @@
             }
         });
 
-        // 2. CONEXIÓN Y CARGA REAL EN VIVO DEL RSS AUTOMÁTICO
         const headerRSS = document.getElementById('rss-header-pais');
         const contenidoRSS = document.getElementById('rss-contenido-dinamico');
-        
         let paisAProcesar = codigoPais;
 
         if (codigoPais === 'all') {
@@ -168,13 +174,12 @@
         if (urlsFeedsReales[paisAProcesar]) {
             contenidoRSS.innerHTML = "Sincronizando feed táctico con el servidor del diario...";
             try {
-                // Conversión automática mediante la API gratuita de rss2json
                 const proxyUrl = `rss2json.com{encodeURIComponent(urlsFeedsReales[paisAProcesar])}`;
                 const respuesta = await fetch(proxyUrl);
                 const datos = await respuesta.json();
 
                 if (datos.status === 'ok' && datos.items.length > 0) {
-                    const noticia = datos.items[0]; // Extrae la noticia de último momento de forma automática
+                    const noticia = datos.items[0];
                     contenidoRSS.innerHTML = `<strong>NUEVO_TITULAR:</strong> ${noticia.title} — <a href="${noticia.link}" target="_blank">LEER EN EL DIARIO ></a>`;
                 } else {
                     contenidoRSS.innerHTML = "ERROR: No se pudieron procesar los flujos de texto del feed.";
@@ -187,7 +192,6 @@
         }
     }
 
-    // Carga inicial automatizada
     window.addEventListener('DOMContentLoaded', () => {
         filtrarRadar('all', document.querySelector('.btn-pais.active'));
     });
