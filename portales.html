@@ -11,22 +11,15 @@
         .r1-carrusel-centrado { display: flex !important; flex-direction: row !important; overflow-x: auto !important; gap: 20px; padding: 10px 15px; align-items: center; -webkit-overflow-scrolling: touch; }
         .r1-carrusel-centrado::-webkit-scrollbar { display: none; }
         .btn-pais { flex: 0 0 auto; display: flex !important; flex-direction: column !important; align-items: center !important; min-width: 50px; cursor: pointer; background: transparent; border: none; padding: 0; -webkit-tap-highlight-color: transparent; }
-        
-        /* Aislamiento estricto (>) para proteger las propiedades de tus banderas */
-        .btn-pais > img, .world-icon { width: 44px; height: 32px; border-radius: 6px; border: 2px solid transparent; object-fit: cover; }
-        .btn-pais.active > img, .btn-pais.active .world-icon { border-color: #4CAF50; box-shadow: 0 0 10px #4CAF50; }
+        .btn-pais img, .world-icon { width: 44px; height: 32px; border-radius: 6px; border: 2px solid transparent; object-fit: cover; }
+        .btn-pais.active img, .btn-pais.active .world-icon { border-color: #4CAF50; box-shadow: 0 0 10px #4CAF50; }
         .btn-pais span { font-size: 10px; color: #777; margin-top: 5px; font-weight: bold; text-transform: uppercase; }
         .btn-pais.active span { color: #4CAF50; }
         
-        /* Contenedor del Reproductor */
+        /* Contenedor del Reproductor Limpio */
         .video-container { width: 100%; aspect-ratio: 16/9; background: #000; position: relative; overflow: hidden; border-bottom: 1px solid #222; }
         #main-video-player, #hls-video-player { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: none; z-index: 2; }
         #main-video-player.active, #hls-video-player.active { display: block; }
-        
-        /* Capa para la imagen de instrucciones de RadarLat */
-        #poster-inicio-radar { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; display: flex; align-items: center; justify-content: center; background-color: #000; }
-        #poster-inicio-radar a, #poster-inicio-radar img { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
-        #poster-inicio-radar img { object-fit: contain; }
         
         .main-content { padding: 10px 0; }
         .rl-card { margin-bottom: 30px; display: block; content-visibility: auto; contain-intrinsic-size: 0 180px; }
@@ -41,7 +34,7 @@
 </head>
 <body>
 
-    <!-- Menú Superior con tus Direcciones de Banderas Intactas -->
+    <!-- Menú Superior con tus Direcciones de Banderas Originales e Intactas -->
     <div id="rl-container-fuerza">
         <div class="r1-carrusel-centrado">
             <div class="btn-pais active" onclick="filtrarRadar('all', this)"><div class="world-icon" style="background:#222; display:flex; align-items:center; justify-content:center;">🌐</div><span>TODOS</span></div>
@@ -72,31 +65,20 @@
         </div>
     </div>
 
-    <!-- Zona del Reproductor con Imagen de Instrucciones Integrada -->
+    <!-- Zona del Reproductor Limpio -->
     <div class="video-container">
-        <div id="poster-inicio-radar">
-            <a href="postimg.cc" target="_blank">
-                <img src="postimg.cc" border="0" alt="Instrucciones RadarLat">
-            </a>
-        </div>
         <iframe id="main-video-player" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         <video id="hls-video-player" controls autoplay playsinline></video>
     </div>
 
     <!-- Contenido Principal: Listas de Canales distribuidos por país -->
     <div class="main-content">
-        
-        <!-- INSTRUCCIONES DE LLENADO PARA CADA CANAL:
-             - Cambia 'RUT_DE_TU_LOGO.png' por la dirección web del logo del canal.
-             - Cambia 'URL_DE_TU_EMISOR' por el enlace de transmisión del video.
-             - Si el canal abre por iframe, usa: 'iframe' al final. Si es m3u8, usa: 'hls' -->
-
         <!-- ARGENTINA -->
         <div class="rl-card" data-pais="ar">
             <div class="country-header">Argentina</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -104,8 +86,8 @@
         <div class="rl-card" data-pais="cl">
             <div class="country-header">Chile</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -113,8 +95,8 @@
         <div class="rl-card" data-pais="uy">
             <div class="country-header">Uruguay</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -122,8 +104,8 @@
         <div class="rl-card" data-pais="py">
             <div class="country-header">Paraguay</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -131,8 +113,8 @@
         <div class="rl-card" data-pais="br">
             <div class="country-header">Brasil</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -140,8 +122,8 @@
         <div class="rl-card" data-pais="pe">
             <div class="country-header">Perú</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -149,8 +131,8 @@
         <div class="rl-card" data-pais="bo">
             <div class="country-header">Bolivia</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -158,8 +140,8 @@
         <div class="rl-card" data-pais="ec">
             <div class="country-header">Ecuador</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -167,8 +149,8 @@
         <div class="rl-card" data-pais="ve">
             <div class="country-header">Venezuela</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -176,8 +158,8 @@
         <div class="rl-card" data-pais="co">
             <div class="country-header">Colombia</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -185,8 +167,8 @@
         <div class="rl-card" data-pais="mx">
             <div class="country-header">México</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -194,8 +176,8 @@
         <div class="rl-card" data-pais="pa">
             <div class="country-header">Panamá</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -203,8 +185,8 @@
         <div class="rl-card" data-pais="gt">
             <div class="country-header">Guatemala</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -212,8 +194,8 @@
         <div class="rl-card" data-pais="sv">
             <div class="country-header">El Salvador</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -221,8 +203,8 @@
         <div class="rl-card" data-pais="ni">
             <div class="country-header">Nicaragua</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -230,8 +212,8 @@
         <div class="rl-card" data-pais="hn">
             <div class="country-header">Honduras</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -239,8 +221,8 @@
         <div class="rl-card" data-pais="cr">
             <div class="country-header">Costa Rica</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -248,8 +230,8 @@
         <div class="rl-card" data-pais="cu">
             <div class="country-header">Cuba</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -257,8 +239,8 @@
         <div class="rl-card" data-pais="do">
             <div class="country-header">República Dominicana</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -266,8 +248,8 @@
         <div class="rl-card" data-pais="pr">
             <div class="country-header">Puerto Rico</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -275,8 +257,8 @@
         <div class="rl-card" data-pais="us">
             <div class="country-header">Estados Unidos</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -284,8 +266,8 @@
         <div class="rl-card" data-pais="es">
             <div class="country-header">España</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -293,8 +275,8 @@
         <div class="rl-card" data-pais="fr">
             <div class="country-header">Francia</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
 
@@ -302,14 +284,13 @@
         <div class="rl-card" data-pais="de">
             <div class="country-header">Alemania</div>
             <div class="channels-scroll">
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_1', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 1</span></div>
-                <div class="logo-box" onclick="reproducirCanal('URL_DE_TU_EMISOR_2', 'hls')"><img src="RUTA_DE_TU_LOGO.png" alt=""><span>Canal 2</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 1</span></div>
+                <div class="logo-box" onclick="reproducirCanal('URL_AQUÍ', 'hls')"><span>Canal 2</span></div>
             </div>
         </div>
-
     </div>
 
-    <!-- Script de Control de Filtrado Dinámico y Ocultación Automática -->
+    <!-- Script de Control -->
     <script>
     function filtrarRadar(codigoPais, elemento) {
         document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
@@ -330,11 +311,6 @@
     }
 
     function reproducirCanal(url, tipo) {
-        const posterInicio = document.getElementById('poster-inicio-radar');
-        if (posterInicio) {
-            posterInicio.style.display = 'none';
-        }
-
         const iframePlayer = document.getElementById('main-video-player');
         const hlsPlayer = document.getElementById('hls-video-player');
 
