@@ -12,7 +12,7 @@
         .r1-carrusel-centrado::-webkit-scrollbar { display: none; }
         .btn-pais { flex: 0 0 auto; display: flex !important; flex-direction: column !important; align-items: center !important; min-width: 50px; cursor: pointer; background: transparent; border: none; padding: 0; -webkit-tap-highlight-color: transparent; }
         
-        /* Selectores para forzar el tamaño visible de las imágenes del carrusel */
+        /* Forzar el tamaño exacto de tus banderas al cargar tus links */
         .btn-pais img, .world-icon { width: 44px !important; height: 32px !important; border-radius: 6px; border: 2px solid transparent; object-fit: cover; display: block !important; }
         .btn-pais.active img, .btn-pais.active .world-icon { border-color: #4CAF50; box-shadow: 0 0 10px #4CAF50; }
         .btn-pais span { font-size: 10px; color: #777; margin-top: 5px; font-weight: bold; text-transform: uppercase; }
@@ -32,7 +32,7 @@
         .channels-scroll { display: flex !important; overflow-x: auto !important; gap: 15px !important; padding: 0 15px 10px !important; -webkit-overflow-scrolling: touch; }
         .channels-scroll::-webkit-scrollbar { display: none; }
         
-        /* Cajas de Diarios */
+        /* Tarjetas de Diarios */
         .portal-link { text-decoration: none !important; color: inherit !important; display: block; flex: 0 0 auto !important; }
         .logo-box { width: 130px; height: 130px; background: #111417; border: 1px solid #222; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; box-sizing: border-box; }
         .portal-link:hover .logo-box { border-color: #4CAF50; box-shadow: 0 0 8px rgba(76, 175, 80, 0.4); }
@@ -51,34 +51,34 @@
 </head>
 <body>
 
-    <!-- Menú Superior con tus Direcciones de Banderas Originales con Dimensiones Blindadas -->
+    <!-- Menú Superior preparado para Carga Manual de Banderas -->
     <div id="rl-container-fuerza">
         <div class="r1-carrusel-centrado">
-            <div class="btn-pais active" onclick="filtrarRadar('all', this)"><div class="world-icon" style="background:#222; display:flex; align-items:center; justify-content:center; width: 44px; height: 32px;">🌐</div><span>TODOS</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="flagcdn.com" width="44" height="32"><span>ARG</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="flagcdn.com" width="44" height="32"><span>CHI</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="flagcdn.com" width="44" height="32"><span>URU</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="flagcdn.com" width="44" height="32"><span>PAR</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('br', this)"><img src="flagcdn.com" width="44" height="32"><span>BRA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pe', this)"><img src="flagcdn.com" width="44" height="32"><span>PER</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('bo', this)"><img src="flagcdn.com" width="44" height="32"><span>BOL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ec', this)"><img src="flagcdn.com" width="44" height="32"><span>ECU</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ve', this)"><img src="flagcdn.com" width="44" height="32"><span>VEN</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('co', this)"><img src="flagcdn.com" width="44" height="32"><span>COL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('mx', this)"><img src="flagcdn.com" width="44" height="32"><span>MEX</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pa', this)"><img src="flagcdn.com" width="44" height="32"><span>PAN</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('gt', this)"><img src="flagcdn.com" width="44" height="32"><span>GUA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('sv', this)"><img src="flagcdn.com" width="44" height="32"><span>SAL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ni', this)"><img src="flagcdn.com" width="44" height="32"><span>NIC</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="flagcdn.com" width="44" height="32"><span>HON</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cr', this)"><img src="flagcdn.com" width="44" height="32"><span>COS</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cu', this)"><img src="flagcdn.com" width="44" height="32"><span>CUB</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="flagcdn.com" width="44" height="32"><span>DOM</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pr', this)"><img src="flagcdn.com" width="44" height="32"><span>PUE</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('us', this)"><img src="flagcdn.com" width="44" height="32"><span>USA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="flagcdn.com" width="44" height="32"><span>ESP</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="flagcdn.com" width="44" height="32"><span>FRA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="flagcdn.com" width="44" height="32"><span>ALE</span></div>
+            <div class="btn-pais active" onclick="filtrarRadar('all', this)"><div class="world-icon" style="background:#222; display:flex; align-items:center; justify-content:center;">🌐</div><span>TODOS</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://flagcdn.com/w80/ar.png"><span>ARG</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://flagcdn.com/w80/cl.png"><span>CHI</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="https://flagcdn.com/w80/uy.png"><span>URU</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="https://flagcdn.com/w80/py.png"><span>PAR</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('br', this)"><img src="https://flagcdn.com/w80/br.png"><span>BRA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pe', this)"><img src="https://flagcdn.com/w80/pe.png"><span>PER</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('bo', this)"><img src="https://flagcdn.com/w80/bo.png"><span>BOL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ec', this)"><img src="https://flagcdn.com/w80/ec.png"><span>ECU</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ve', this)"><img src="https://flagcdn.com/w80/ve.png"><span>VEN</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('co', this)"><img src="https://flagcdn.com/w80/co.png"><span>COL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('mx', this)"><img src="https://flagcdn.com/w80/mx.png"><span>MEX</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pa', this)"><img src="https://flagcdn.com/w80/pa.png"><span>PAN</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('gt', this)"><img src="https://flagcdn.com/w80/gt.png"><span>GUA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('sv', this)"><img src="https://flagcdn.com/w80/sv.png"><span>SAL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ni', this)"><img src="https://flagcdn.com/w80/ni.png"><span>NIC</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="https://flagcdn.com/w80/hn.png"><span>HON</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cr', this)"><img src="https://flagcdn.com/w80/cr.png"><span>COS</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cu', this)"><img src="https://flagcdn.com/w80/cu.png"><span>CUB</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="https://flagcdn.com/w80/do.png"><span>DOM</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pr', this)"><img src="https://flagcdn.com/w80/pr.png"><span>PUE</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('us', this)"><img src="https://flagcdn.com/w80/us.png"><span>USA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="https://flagcdn.com/w80/es.png"><span>ESP</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="https://flagcdn.com/w80/fr.png"><span>FRA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://flagcdn.com/w80/de.png"><span>ALE</span></div>
         </div>
     </div>
 
@@ -129,50 +129,197 @@
         </div>
 
         <!-- PARAGUAY -->
-        <div class="rl-card" data-pais="py"><div class="country-header">Paraguay</div><div class="channels-scroll"><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a></div></div>
+        <div class="rl-card" data-pais="py">
+            <div class="country-header">Paraguay</div>
+            <div class="channels-scroll">
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
+            </div>
+        </div>
+
         <!-- BRASIL -->
-        <div class="rl-card" data-pais="br"><div class="country-header">Brasil</div><div class="channels-scroll"><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a></div></div>
+        <div class="rl-card" data-pais="br">
+            <div class="country-header">Brasil</div>
+            <div class="channels-scroll">
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
+            </div>
+        </div>
+
         <!-- PERÚ -->
-        <div class="rl-card" data-pais="pe"><div class="country-header">Perú</div><div class="channels-scroll"><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a></div></div>
+        <div class="rl-card" data-pais="pe">
+            <div class="country-header">Perú</div>
+            <div class="channels-scroll">
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
+            </div>
+        </div>
+
         <!-- BOLIVIA -->
-        <div class="rl-card" data-pais="bo"><div class="country-header">Bolivia</div><div class="channels-scroll"><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a></div></div>
+        <div class="rl-card" data-pais="bo">
+            <div class="country-header">Bolivia</div>
+            <div class="channels-scroll">
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
+            </div>
+        </div>
+
         <!-- ECUADOR -->
-        <div class="rl-card" data-pais="ec"><div class="country-header">Ecuador</div><div class="channels-scroll"><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a></div></div>
+        <div class="rl-card" data-pais="ec">
+            <div class="country-header">Ecuador</div>
+            <div class="channels-scroll">
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
+            </div>
+        </div>
+
         <!-- VENEZUELA -->
-        <div class="rl-card" data-pais="ve"><div class="country-header">Venezuela</div><div class="channels-scroll"><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a></div></div>
+        <div class="rl-card" data-pais="ve">
+            <div class="country-header">Venezuela</div>
+            <div class="channels-scroll">
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
+            </div>
+        </div>
+
         <!-- COLOMBIA -->
-        <div class="rl-card" data-pais="co"><div class="country-header">Colombia</div><div class="channels-scroll"><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a></div></div>
+        <div class="rl-card" data-pais="co">
+            <div class="country-header">Colombia</div>
+            <div class="channels-scroll">
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
+            </div>
+        </div>
+
         <!-- MÉXICO -->
-        <div class="rl-card" data-pais="mx"><div class="country-header">México</div><div class="channels-scroll"><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a></div></div>
+        <div class="rl-card" data-pais="mx">
+            <div class="country-header">México</div>
+            <div class="channels-scroll">
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqua" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
+            </div>
+        </div>
+
         <!-- PANAMÁ -->
-        <div class="rl-card" data-pais="pa"><div class="country-header">Panamá</div><div class="channels-scroll"><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a></div></div>
+        <div class="rl-card" data-pais="pa">
+            <div class="country-header">Panamá</div>
+            <div class="channels-scroll">
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
+            </div>
+        </div>
+
         <!-- GUATEMALA -->
-        <div class="rl-card" data-pais="gt"><div class="country-header">Guatemala</div><div class="channels-scroll"><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a></div></div>
+        <div class="rl-card" data-pais="gt">
+            <div class="country-header">Guatemala</div>
+            <div class="channels-scroll">
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
+            </div>
+        </div>
+
         <!-- EL SALVADOR -->
-        <div class="rl-card" data-pais="sv"><div class="country-header">El Salvador</div><div class="channels-scroll"><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a></div></div>
+        <div class="rl-card" data-pais="sv">
+            <div class="country-header">El Salvador</div>
+            <div class="channels-scroll">
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
+            </div>
+        </div>
+
         <!-- NICARAGUA -->
-        <div class="rl-card" data-pais="ni"><div class="country-header">Nicaragua</div><div class="channels-scroll"><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a></div></div>
+        <div class="rl-card" data-pais="ni">
+            <div class="country-header">Nicaragua</div>
+            <div class="channels-scroll">
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
+            </div>
+        </div>
+
         <!-- HONDURAS -->
-        <div class="rl-card" data-pais="hn"><div class="country-header">Honduras</div><div class="channels-scroll"><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a></div></div>
+        <div class="rl-card" data-pais="hn">
+            <div class="country-header">Honduras</div>
+            <div class="channels-scroll">
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
+            </div>
+        </div>
+
         <!-- COSTA RICA -->
-        <div class="rl-card" data-pais="cr"><div class="country-header">Costa Rica</div><div class="channels-scroll"><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a></div></div>
+        <div class="rl-card" data-pais="cr">
+            <div class="country-header">Costa Rica</div>
+            <div class="channels-scroll">
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
+            </div>
+        </div>
+
         <!-- CUBA -->
-        <div class="rl-card" data-pais="cu"><div class="country-header">Cuba</div><div class="channels-scroll"><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a></div></div>
+        <div class="rl-card" data-pais="cu">
+            <div class="country-header">Cuba</div>
+            <div class="channels-scroll">
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
+            </div>
+        </div>
+
         <!-- REPÚBLICA DOMINICANA -->
-        <div class="rl-card" data-pais="do"><div class="country-header">República Dominicana</div><div class="channels-scroll"><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a></div></div>
+        <div class="rl-card" data-pais="do">
+            <div class="country-header">República Dominicana</div>
+            <div class="channels-scroll">
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
+            </div>
+        </div>
+
         <!-- PUERTO RICO -->
-        <div class="rl-card" data-pais="pr"><div class="country-header">Puerto Rico</div><div class="channels-scroll"><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a></div></div>
+        <div class="rl-card" data-pais="pr">
+            <div class="country-header">Puerto Rico</div>
+            <div class="channels-scroll">
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
+            </div>
+        </div>
+
         <!-- ESTADOS UNIDOS -->
-        <div class="rl-card" data-pais="us"><div class="country-header">Estados Unidos</div><div class="channels-scroll"><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a></div></div>
+        <div class="rl-card" data-pais="us">
+            <div class="country-header">Estados Unidos</div>
+            <div class="channels-scroll">
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
+            </div>
+        </div>
+
         <!-- ESPAÑA -->
-        <div class="rl-card" data-pais="es"><div class="country-header">España</div><div class="channels-scroll"><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a></div></div>
+        <div class="rl-card" data-pais="es">
+            <div class="country-header">España</div>
+            <div class="channels-scroll">
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
+            </div>
+        </div>
+
         <!-- FRANCIA -->
-        <div class="rl-card" data-pais="fr"><div class="country-header">Francia</div><div class="channels-scroll"><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a></div></div>
+        <div class="rl-card" data-pais="fr">
+            <div class="country-header">Francia</div>
+            <div class="channels-scroll">
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
+            </div>
+        </div>
+
         <!-- ALEMANIA -->
-        <div class="rl-card" data-pais="de"><div class="country-header">Alemania</div><div class="channels-scroll"><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a><a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a></div></div>
+        <div class="rl-card" data-pais="de">
+            <div class="country-header">Alemania</div>
+            <div class="channels-scroll">
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
+            </div>
+        </div>
+
     </div>
 
-    <!-- Menú inferior fijo e inamovible corregido con etiquetas de cierre seguras -->
+    <!-- Menú de Navegación Inferior Fijo -->
     <div class='radar-nav-bottom'>
       <div class='nav-btn active'><a href='github.io' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> RADIO</a></div>
       <div class='nav-btn'><a href='github.io' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> TV VIVO</a></div>
