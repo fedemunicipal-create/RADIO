@@ -1,37 +1,112 @@
 <div id="rl-container-fuerza">
   <div class="rl-carrusel-centrado">
     <button class="btn-pais active" onclick="navegarYFiltrar('all', this)" aria-label="Todos los países">
-      <div class="world-icon" aria-hidden="true">🌐</div>
+      <div class="radar-icon-box" aria-hidden="true">
+        <!-- Icono de Radar / Red Global -->
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="12" cy="12" r="6" stroke="currentColor" stroke-width="1" fill="none"/><circle cx="12" cy="12" r="2" fill="currentColor"/><path d="M12 2v20M2 12h20" stroke="currentColor" stroke-width="1"/></svg>
+      </div>
       <span>TODOS</span>
     </button>
-    <button class="btn-pais" onclick="navegarYFiltrar('ar', this)"><img src="openclipart.org" alt="ARG"><span>ARG</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('cl', this)"><img src="openclipart.org" alt="CHI"><span>CHI</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('uy', this)"><img src="openclipart.org" alt="URU"><span>URU</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('py', this)"><img src="openclipart.org" alt="PAR"><span>PAR</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('br', this)"><img src="openclipart.org" alt="BRA"><span>BRA</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('pe', this)"><img src="openclipart.org" alt="PER"><span>PER</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('bo', this)"><img src="openclipart.org" alt="BOL"><span>BOL</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('ec', this)"><img src="openclipart.org" alt="ECU"><span>ECU</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('ve', this)"><img src="openclipart.org" alt="VEN"><span>VEN</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('co', this)"><img src="openclipart.org" alt="COL"><span>COL</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('mx', this)"><img src="openclipart.org" alt="MEX"><span>MEX</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('pa', this)"><img src="openclipart.org" alt="PAN"><span>PAN</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('gt', this)"><img src="openclipart.org" alt="GUA"><span>GUA</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('sv', this)"><img src="openclipart.org" alt="SAL"><span>SAL</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('ni', this)"><img src="openclipart.org" alt="NIC"><span>NIC</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('hn', this)"><img src="openclipart.org" alt="HON"><span>HON</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('cr', this)"><img src="openclipart.org" alt="COS"><span>COS</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('cu', this)"><img src="openclipart.org" alt="CUB"><span>CUB</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('do', this)"><img src="openclipart.org" alt="DOM"><span>DOM</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('pr', this)"><img src="openclipart.org" alt="PUE"><span>PUE</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('us', this)"><img src="openclipart.org" alt="USA"><span>USA</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('es', this)"><img src="openclipart.org" alt="ESP"><span>ESP</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('fr', this)"><img src="openclipart.org" alt="FRA"><span>FRA</span></button>
-    <button class="btn-pais" onclick="navegarYFiltrar('de', this)"><img src="openclipart.org" alt="ALE"><span>ALE</span></button>
+    <button class="btn-pais" onclick="navegarYFiltrar('ar', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h16v3H4zm0 5h16v3H4zm0 5h16v3H4z" fill="currentColor" opacity="0.4"/><circle cx="12" cy="12" r="2" fill="currentColor"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4" stroke="currentColor" stroke-width="1"/></svg></div>
+      <span>ARG</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('cl', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h6v6H4zm6 0h10v6H10zm-6 6h16v6H4z" fill="currentColor" opacity="0.4"/><path d="M7 8l1 3-2.5-2h3.2L7 8z" fill="currentColor"/></svg></div>
+      <span>CHI</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('uy', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 4h16v2H4zm0 4h16v2H4zm0 4h16v2H4z" fill="currentColor" opacity="0.3"/><rect x="4" y="6" width="7" height="7" fill="currentColor" opacity="0.6"/><circle cx="7.5" cy="9.5" r="1.5" fill="currentColor"/></svg></div>
+      <span>URU</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('py', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h16v4H4zm0 8h16v4H4z" fill="currentColor" opacity="0.4"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg></div>
+      <span>PAR</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('br', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z" fill="currentColor" opacity="0.2"/><path d="M12 7l6 5-6 5-6-5z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="2.5" fill="currentColor"/></svg></div>
+      <span>BRA</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('pe', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h4v12H4zm12 0h4v12h-4z" fill="currentColor" opacity="0.5"/><path d="M8 6h8v12H8z" fill="currentColor" opacity="0.2"/></svg></div>
+      <span>PER</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('bo', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h16v4H4zm0 4h16v4H4zm0 4h16v4H4z" fill="currentColor" opacity="0.4"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg></div>
+      <span>BOL</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('ec', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h16v5H4zm0 5h16v4H4zm0 4h16v3H4z" fill="currentColor" opacity="0.4"/><path d="M11 11.5l1-1 1 1-0.5 1.5h-1z" fill="currentColor"/></svg></div>
+      <span>ECU</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('ve', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h16v4H4zm0 4h16v4H4zm0 4h16v4H4z" fill="currentColor" opacity="0.4"/><circle cx="10" cy="11" r="0.5" fill="currentColor"/><circle cx="12" cy="10.5" r="0.5" fill="currentColor"/><circle cx="14" cy="11" r="0.5" fill="currentColor"/></svg></div>
+      <span>VEN</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('co', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h16v6H4zm0 6h16v3H4zm0 3h16v3H4z" fill="currentColor" opacity="0.4"/></svg></div>
+      <span>COL</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('mx', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h5.3v12H4zm10.7 0H20v12h-5.3z" fill="currentColor" opacity="0.4"/><circle cx="12" cy="12" r="2" fill="currentColor" opacity="0.7"/></svg></div>
+      <span>MEX</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('pa', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h8v6H4zm8 6h8v6h-8z" fill="currentColor" opacity="0.3"/><circle cx="8" cy="9" r="1" fill="currentColor"/><circle cx="16" cy="15" r="1" fill="currentColor"/></svg></div>
+      <span>PAN</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('gt', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h5v12H4zm11 0h5v12h-5z" fill="currentColor" opacity="0.4"/><path d="M11 10h2v4h-2z" fill="currentColor"/></svg></div>
+      <span>GUA</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('sv', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h16v4H4zm0 8h16v4H4z" fill="currentColor" opacity="0.4"/><path d="M11 11h2v2h-2z" fill="currentColor"/></svg></div>
+      <span>SAL</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('ni', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h16v4H4zm0 8h16v4H4z" fill="currentColor" opacity="0.4"/><path d="M12 10.5l1 2.5h-2z" fill="currentColor"/></svg></div>
+      <span>NIC</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('hn', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h16v4H4zm0 8h16v4H4z" fill="currentColor" opacity="0.4"/><circle cx="12" cy="12" r="0.5" fill="currentColor"/><circle cx="9" cy="11" r="0.5" fill="currentColor"/><circle cx="9" cy="13" r="0.5" fill="currentColor"/><circle cx="15" cy="11" r="0.5" fill="currentColor"/><circle cx="15" cy="13" r="0.5" fill="currentColor"/></svg></div>
+      <span>HON</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('cr', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 2h16v2H4zm0 6h16v2H4zm0 2h16v2H4z" fill="currentColor" opacity="0.4"/></svg></div>
+      <span>COS</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('cu', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 4h16v2H4zm0 4h16v2H4zm0 4h16v2H4z" fill="currentColor" opacity="0.3"/><path d="M4 6l6 6-6 6z" fill="currentColor" opacity="0.5"/><path d="M6 11l1 2-2-1.5h2.5z" fill="currentColor"/></svg></div>
+      <span>CUB</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('do', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h8v6H4zm8 6h8v6h-8z" fill="currentColor" opacity="0.4"/><path d="M11 11h2v2h-2z" fill="currentColor" opacity="0.8"/></svg></div>
+      <span>DOM</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('pr', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 4h16v2H4zm0 4h16v2H4zm0 4h16v2H4z" fill="currentColor" opacity="0.3"/><path d="M4 6l7 6-7 6z" fill="currentColor" opacity="0.5"/><path d="M6 11l1 2-2-1.5h2.5z" fill="currentColor"/></svg></div>
+      <span>PUE</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('us', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h7v6H4zm7 0h9v2H11zm0 4h9v2H11zm-7 8h16v-4H4z" fill="currentColor" opacity="0.4"/><circle cx="6" cy="8" r="0.5" fill="currentColor"/><circle cx="9" cy="10" r="0.5" fill="currentColor"/></svg></div>
+      <span>USA</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('es', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h16v3H4zm0 9h16v3H4z" fill="currentColor" opacity="0.4"/><path d="M7 11h3v2H7z" fill="currentColor" opacity="0.7"/></svg></div>
+      <span>ESP</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('fr', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h5.3v12H4zm10.7 0H20v12h-5.3z" fill="currentColor" opacity="0.4"/></svg></div>
+      <span>FRA</span>
+    </button>
+    <button class="btn-pais" onclick="navegarYFiltrar('de', this)">
+      <div class="radar-icon-box"><svg viewBox="0 0 24 24"><path d="M4 6h16v4H4zm0 8h16v4H4z" fill="currentColor" opacity="0.5"/></svg></div>
+      <span>ALE</span>
+    </button>
   </div>
 </div>
 
-<!-- Contenedor de Archivos (Estilo Radar) -->
+<!-- Bloque de Destino: Lista de Archivos -->
 <div id="contenedor-archivos-radar">
   <div class="bloque-pais" data-pais="ar">
     <div class="radar-header-bloque">// ARCHIVOS_SISTEMA_ARGENTINA</div>
@@ -47,6 +122,13 @@
       <li><span class="prompt">></span> <a href="#">MONITOR_SANTIAGO_LOG.TXT</a></li>
     </ul>
   </div>
+  
+  <div class="bloque-pais" data-pais="uy">
+    <div class="radar-header-bloque">// ARCHIVOS_SISTEMA_URUGUAY</div>
+    <ul class="lista-terminal">
+      <li><span class="prompt">></span> <a href="#">DATOS_TELEMETRIA_MVD.DAT</a></li>
+    </ul>
+  </div>
 </div>
 
 <style>
@@ -55,9 +137,10 @@
   width: 100%;
   overflow-x: auto;
   padding: 16px 0 0 0;
-  background-color: #000000;
+  background-color: #000000; /* Fondo Negro */
   -webkit-overflow-scrolling: touch;
-  border-bottom: 2px solid #00ff66; /* Línea verde que llega al 100% de la pantalla */
+  border-bottom: 2px solid #00ff66; /* Línea verde al 100% */
+  box-sizing: border-box;
 }
 
 #rl-container-fuerza::-webkit-scrollbar {
@@ -84,27 +167,28 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-/* DOBLE TAMAÑO: Iconos grandes de 144px de ancho */
-.btn-pais img, 
-.world-icon {
+/* CAJA DE ICONOS CON TAMAÑO DUPLICADO (144px x 92px) */
+.radar-icon-box {
   width: 144px;   
   height: 92px;
-  object-fit: cover;
+  background: linear-gradient(135deg, #06150a, #010502);
+  border: 1px solid #005522; /* Borde verde apagado */
   border-radius: 4px;
-  border: 1px solid #11331a;
-  box-sizing: border-box;
-}
-
-.world-icon {
-  background: linear-gradient(135deg, #0b2212, #020a04);
-  border: 1px solid #00aa44;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 42px;
+  color: #00aa44; /* Icono verde por defecto */
+  box-sizing: border-box;
+  padding: 12px;
+  transition: all 0.15s ease;
 }
 
-/* Tipografía de Consola de Comando */
+.radar-icon-box svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Tipografía Consola de Comando */
 .btn-pais span {
   font-family: 'Courier New', Courier, monospace;
   font-size: 14px;
@@ -113,10 +197,13 @@
   letter-spacing: 1px;
 }
 
-/* Enfoque Activo: Recuadro Verde Fluorescente */
-.btn-pais.active img,
-.btn-pais.active .world-icon {
-  outline: 3px solid #00ff66;
+/* Enfoque Activo: El Icono e Identificador se iluminan en Verde Neón */
+.btn-pais.active .radar-icon-box {
+  border-color: #00ff66;
+  color: #00ff66;
+  background: linear-gradient(135deg, #0d3116, #020a04);
+  box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
+  outline: 2px solid #00ff66;
   outline-offset: 4px;
 }
 
@@ -125,7 +212,7 @@
   text-shadow: 0 0 8px #00ff66;
 }
 
-/* --- ESTÉTIQUES DE ARCHIVOS INTEGRADAS --- */
+/* --- ESTILOS DE LA LISTA DE ARCHIVOS TERMINAL --- */
 #contenedor-archivos-radar {
   background-color: #000000;
   padding: 30px 20px;
@@ -133,7 +220,7 @@
 }
 
 .bloque-pais {
-  display: block;
+  display: block; /* Modificado dinámicamente por JS */
   border: 1px solid #003311;
   background-color: #020603;
   padding: 20px;
@@ -180,15 +267,17 @@
 
 <script>
 function navegarYFiltrar(codigoPais, elemento) {
+  // Ejecuta la función nativa que ya tengas implementada en tu sitio
   if (typeof filtrarRadar === "function") {
     filtrarRadar(codigoPais, elemento);
   }
 
+  // Intercambia estados visuales de los botones
   document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
   elemento.classList.add('active');
 
+  // Filtra las cajas de archivos en la parte inferior
   const bloques = document.querySelectorAll('.bloque-pais');
-  
   if (codigoPais === 'all') {
     bloques.forEach(bloque => bloque.style.display = 'block');
   } else {
@@ -201,6 +290,7 @@ function navegarYFiltrar(codigoPais, elemento) {
     });
   }
 
+  // Desplazamiento táctil suave hacia la sección de descargas
   document.getElementById('contenedor-archivos-radar').scrollIntoView({ 
     behavior: 'smooth', 
     block: 'start' 
