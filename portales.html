@@ -47,55 +47,6 @@
         /* Indicador táctico rojo parpadeante independiente */
         .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 8px #f00; animation: parpadeo 1.5s infinite; flex-shrink: 0; }
         @keyframes parpadeo { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-
-.rss-container {
-    display: flex;
-    align-items: center;
-    background-color: #000;
-    color: #fff;
-    overflow: hidden;
-    height: 35px; /* Altura fija para que no deforme */
-    border-bottom: 1px solid #333;
-    width: 100%;
-}
-
-.rss-header {
-    background-color: #f00;
-    color: #fff;
-    padding: 0 10px;
-    white-space: nowrap;
-    font-weight: bold;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-}
-
-.rss-ticker-wrapper {
-    overflow: hidden;
-    flex: 1;
-    height: 100%;
-}
-
-.rss-ticker-content {
-    display: flex;
-    white-space: nowrap;
-    align-items: center;
-    height: 100%;
-    animation: ticker-move 80s linear infinite;
-}
-
-@keyframes ticker-move {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-}
-
-.ticker-item {
-    padding-right: 40px;
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-}
     </style>
 </head>
 <body>
@@ -128,51 +79,30 @@
             <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="https://flagcdn.com/w80/es.png"><span>ESP</span></div>
             <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="https://flagcdn.com/w80/fr.png"><span>FRA</span></div>
             <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://flagcdn.com/w80/de.png"><span>ALE</span></div>
-      
-            <!-- Espacio del Lector RSS Automatizado -->
-<div class="rss-container">
-    <div id="rss-header-pais" class="rss-header">NOTICIAS EN VIVO</div>
-    <div class="rss-ticker-wrapper">
-        <div id="rss-contenido-dinamico" class="rss-ticker-content">
-            <!-- Las noticias se cargarán aquí -->
         </div>
     </div>
-</div>
-        </div>
-  <script>
-<script>
-const rssFeeds = [
-    { pais: 'ARGENTINA', url: 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.lanoticia.ar%2Fnoticias%2Ffeed%2F' },
-    { pais: 'MÉXICO', url: 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.lapoliticaonline.com%2Ffiles%2Frss%2Fultimasnoticias-mx.xml' },
-    { pais: 'ESPAÑA', url: 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Felpais.com%2Frss%2Felpais%2Fportada.xml' }
-];
 
-async function cargarNoticias() {
-    try {
-        const respuestas = await Promise.all(
-            rssFeeds.map(feed => 
-                fetch(feed.url)
-                    .then(res => res.json())
-                    .then(data => data.items.map(item => ({ ...item, pais: feed.pais })))
-            )
-        );
-        
-        let todas = respuestas.flat().sort(() => Math.random() - 0.5);
+    <!-- Espacio del Lector RSS Automatizado -->
+    <div class="rss-container">
+        <div id="rss-header-pais" class="rss-header">// NOTICIAS EN VIVO</div>
+        <div id="rss-contenido-dinamico" class="rss-ticker">
+            <script>
+            fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.lanoticia.ar%2Fnoticias%2Ffeed%2F')
+      .then(response => response.json())
+      .then(data => {
         const ticker = document.getElementById('rss-contenido-dinamico');
-        
-        const html = todas.map(item => `
-            <a href="${item.link}" target="_blank" class="ticker-item">
-                <span style="color:red; font-weight:bold;">${item.pais}:</span> ${item.title}
-            </a>
-        `).join('');
-
-        ticker.innerHTML = html + html;
-    } catch (e) {
-        console.error(e);
-    }
-}
-cargarNoticias();
-</script>
+        ticker.innerHTML = data.items.map(item => 
+          `<a href="${item.link}" target="_blank" style="color: white; text-decoration: none; margin-right: 20px;">
+            ${item.title}
+           </a>`
+        ).join(' • ');
+      })
+      .catch(err => {
+        document.getElementById('rss-contenido-dinamico').innerHTML = "Error al cargar noticias locales.";
+      });
+  </script>
+</div>
+</div>
 
     <!-- Contenido Principal: Los 24 carruseles de diarios y portales -->
     <div class="main-content">
@@ -472,3 +402,4 @@ cargarNoticias();
     </script>
 </body>
 </html>
+
