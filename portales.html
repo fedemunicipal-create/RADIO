@@ -144,7 +144,7 @@
 
     <!-- Espacio del Lector RSS Automatizado -->
     <div class="rss-container">
-    <div id="rss-header-pais" class="rss-header">NOTICIAS EN VIVO</div>
+    <div id="rss-header-pais" class="rss-header">NOTICIAS CARGANDO...</div>
     <div class="rss-ticker-wrapper">
         <div id="rss-contenido-dinamico" class="rss-ticker-content">
             <!-- Las noticias se cargarán aquí -->
@@ -157,7 +157,7 @@
 const rssFeeds = [
     'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.lanoticia.ar%2Fnoticias%2Ffeed%2F', // Argentina
     'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.lapoliticaonline.com%2Ffiles%2Frss%2Fultimasnoticias-mx.xml', // México
-    ' https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Ffeeds.elpais.com%2Fmrss-s%2Fpages%2Fep%2Fsite%2Felpais.com%2Fportada', // España
+    'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Ffeeds.elpais.com%2Fmrss-s%2Fpages%2Fep%2Fsite%2Felpais.com%2Fportada', // España
 ];
 
 async function cargarNoticias() {
