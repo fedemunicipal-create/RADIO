@@ -59,28 +59,34 @@
 }
 
 /* Encabezado estático */
+/* Encabezado más sutil */
 .rss-header {
     background-color: #f00;
-    padding: 10px;
+    color: #fff;
+    padding: 0 10px;
     white-space: nowrap;
+    font-weight: bold;
     z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 13px; /* Tamaño reducido para celular */
 }
 
-/* Ventana que oculta el desborde del texto */
 .rss-ticker-wrapper {
     overflow: hidden;
-    width: 100%;
+    flex-grow: 1;
     position: relative;
+    height: 100%;
 }
 
-/* Contenedor que se desplaza */
 .rss-ticker-content {
     display: flex;
     white-space: nowrap;
-    padding-left: 100%;
-    animation: ticker-move 100s linear infinite;
+    padding-left: 10px;
+    animation: ticker-move 120s linear infinite; /* Aumenté el tiempo para que sea más lento y legible */
 }
-
+        
 /* Elemento de noticia individual */
 .ticker-item {
     color: white;
@@ -88,13 +94,10 @@
     padding-right: 40px;
 }
 
-.ticker-item::after {
-    content: " •";
-    padding-left: 40px;
-}
-
-/* Animación del movimiento */
 @keyframes ticker-move {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); } /* El truco del 50% elimina el reinicio brusco */
+}
     0% {
         transform: translate3d(0, 0, 0);
     }
@@ -149,41 +152,47 @@
         <div id="rss-contenido-dinamico" class="rss-ticker-content">
             <!-- Las noticias se cargarán aquí -->
         </div>
-    </div>
-</div>
-
-<script>
-// Lista de países (puedes agregar más URLs aquí)
+  <script>
+// Lista con el nombre del país para identificar cada noticia
 const rssFeeds = [
-    'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.lanoticia.ar%2Fnoticias%2Ffeed%2F', // Argentina
-    'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.lapoliticaonline.com%2Ffiles%2Frss%2Fultimasnoticias-mx.xml', // México
-    'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Ffeeds.elpais.com%2Fmrss-s%2Fpages%2Fep%2Fsite%2Felpais.com%2Fportada', // España
+    { pais: 'ARGENTINA', url: 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.lanoticia.ar%2Fnoticias%2Ffeed%2F' },
+    { pais: 'MÉXICO', url: 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.lapoliticaonline.com%2Ffiles%2Frss%2Fultimasnoticias-mx.xml' },
+    { pais: 'ESPAÑA', url: 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Felpais.com%2Frss%2Felpais%2Fportada.xml' }
 ];
 
 async function cargarNoticias() {
     try {
-        // Carga todas las fuentes al mismo tiempo
-        const respuestas = await Promise.all(rssFeeds.map(url => fetch(url).then(res => res.json())));
+        const respuestas = await Promise.all(
+            rssFeeds.map(feed => 
+                fetch(feed.url)
+                    .then(res => res.json())
+                    .then(data => data.items.map(item => ({ ...item, pais: feed.pais })))
+            )
+        );
         
-        // Une todas las noticias en un solo array
-        let todasLasNoticias = respuestas.flatMap(data => data.items);
-
-        // Mezcla aleatoria (para que no salgan por bloques de países)
+        let todasLasNoticias = respuestas.flat();
         todasLasNoticias.sort(() => Math.random() - 0.5);
 
         const ticker = document.getElementById('rss-contenido-dinamico');
-        ticker.innerHTML = todasLasNoticias.map(item => `
-            <a href="${item.link}" target="_blank" class="ticker-item">
-                ${item.title}
+        
+        // Creamos el contenido con el formato PAÍS: Noticia
+        const noticiasHTML = todasLasNoticias.map(item => `
+            <a href="${item.link}" target="_blank" class="ticker-item" style="margin-right: 50px; text-decoration: none; color: white;">
+                <strong style="color: #f00;">${item.pais}:</strong> ${item.title}
             </a>
         `).join('');
 
+        // IMPORTANTE: Duplicamos el contenido para que el loop sea infinito sin saltos
+        ticker.innerHTML = noticiasHTML + noticiasHTML;
+
     } catch (err) {
-        console.error("Error:", err);
-        document.getElementById('rss-contenido-dinamico').innerHTML = "Error al cargar el feed.";
+        console.error("Error al cargar:", err);
+        document.getElementById('rss-contenido-dinamico').innerHTML = "Error al actualizar noticias.";
     }
 }
 
+cargarNoticias();
+</script>
 // Ejecutar al cargar la página
 cargarNoticias();
 </script>
