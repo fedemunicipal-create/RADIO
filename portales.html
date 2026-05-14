@@ -18,7 +18,6 @@
         .btn-pais span { font-size: 10px; color: #777; margin-top: 5px; font-weight: bold; text-transform: uppercase; }
         .btn-pais.active span { color: #4CAF50; }
         
-
         /* Contenedor de Portales */
         .main-content { padding: 10px 0; }
         .rl-card { margin-bottom: 30px; display: block; content-visibility: auto; contain-intrinsic-size: 0 180px; }
@@ -315,6 +314,7 @@
     </div>
 
    <script>
+        };
        async function filtrarRadar(codigoPais, elemento) {
         document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
         elemento.classList.add('active');
