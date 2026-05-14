@@ -48,67 +48,53 @@
         .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 8px #f00; animation: parpadeo 1.5s infinite; flex-shrink: 0; }
         @keyframes parpadeo { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* Contenedor principal del lector */
 .rss-container {
     display: flex;
     align-items: center;
     background-color: #000;
     color: #fff;
     overflow: hidden;
-    font-family: sans-serif;
+    height: 35px; /* Altura fija para que no deforme */
+    border-bottom: 1px solid #333;
+    width: 100%;
 }
 
-/* Encabezado estático */
-/* Encabezado más sutil */
 .rss-header {
     background-color: #f00;
     color: #fff;
     padding: 0 10px;
     white-space: nowrap;
     font-weight: bold;
-    z-index: 2;
     height: 100%;
     display: flex;
     align-items: center;
-    font-size: 13px; /* Tamaño reducido para celular */
+    font-size: 12px;
 }
 
 .rss-ticker-wrapper {
     overflow: hidden;
-    flex-grow: 1;
-    position: relative;
+    flex: 1;
     height: 100%;
 }
 
 .rss-ticker-content {
     display: flex;
     white-space: nowrap;
-    padding-left: 10px;
-    animation: ticker-move 120s linear infinite; /* Aumenté el tiempo para que sea más lento y legible */
-}
-        
-/* Elemento de noticia individual */
-.ticker-item {
-    color: white;
-    text-decoration: none;
-    padding-right: 40px;
+    align-items: center;
+    height: 100%;
+    animation: ticker-move 80s linear infinite;
 }
 
 @keyframes ticker-move {
-    0% { transform: translate3d(0, 0, 0); }
-    100% { transform: translate3d(-50%, 0, 0); } /* El truco del 50% elimina el reinicio brusco */
-}
-    0% {
-        transform: translate3d(0, 0, 0);
-    }
-    100% {
-        transform: translate3d(-100%, 0, 0);
-    }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
-/* Pausar el movimiento al pasar el mouse */
-.rss-ticker-wrapper:hover .rss-ticker-content {
-    animation-play-state: paused;
+.ticker-item {
+    padding-right: 40px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
 }
     </style>
 </head>
@@ -142,18 +128,19 @@
             <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="https://flagcdn.com/w80/es.png"><span>ESP</span></div>
             <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="https://flagcdn.com/w80/fr.png"><span>FRA</span></div>
             <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://flagcdn.com/w80/de.png"><span>ALE</span></div>
-        </div>
-    </div>
-
-    <!-- Espacio del Lector RSS Automatizado -->
-    <div class="rss-container">
-    <div id="rss-header-pais" class="rss-header">NOTICIAS CARGANDO...</div>
+      
+            <!-- Espacio del Lector RSS Automatizado -->
+<div class="rss-container">
+    <div id="rss-header-pais" class="rss-header">NOTICIAS EN VIVO</div>
     <div class="rss-ticker-wrapper">
         <div id="rss-contenido-dinamico" class="rss-ticker-content">
             <!-- Las noticias se cargarán aquí -->
         </div>
+    </div>
+</div>
+        </div>
   <script>
-// Lista con el nombre del país para identificar cada noticia
+<script>
 const rssFeeds = [
     { pais: 'ARGENTINA', url: 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.lanoticia.ar%2Fnoticias%2Ffeed%2F' },
     { pais: 'MÉXICO', url: 'https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.lapoliticaonline.com%2Ffiles%2Frss%2Fultimasnoticias-mx.xml' },
@@ -170,30 +157,20 @@ async function cargarNoticias() {
             )
         );
         
-        let todasLasNoticias = respuestas.flat();
-        todasLasNoticias.sort(() => Math.random() - 0.5);
-
+        let todas = respuestas.flat().sort(() => Math.random() - 0.5);
         const ticker = document.getElementById('rss-contenido-dinamico');
         
-        // Creamos el contenido con el formato PAÍS: Noticia
-        const noticiasHTML = todasLasNoticias.map(item => `
-            <a href="${item.link}" target="_blank" class="ticker-item" style="margin-right: 50px; text-decoration: none; color: white;">
-                <strong style="color: #f00;">${item.pais}:</strong> ${item.title}
+        const html = todas.map(item => `
+            <a href="${item.link}" target="_blank" class="ticker-item">
+                <span style="color:red; font-weight:bold;">${item.pais}:</span> ${item.title}
             </a>
         `).join('');
 
-        // IMPORTANTE: Duplicamos el contenido para que el loop sea infinito sin saltos
-        ticker.innerHTML = noticiasHTML + noticiasHTML;
-
-    } catch (err) {
-        console.error("Error al cargar:", err);
-        document.getElementById('rss-contenido-dinamico').innerHTML = "Error al actualizar noticias.";
+        ticker.innerHTML = html + html;
+    } catch (e) {
+        console.error(e);
     }
 }
-
-cargarNoticias();
-</script>
-// Ejecutar al cargar la página
 cargarNoticias();
 </script>
 
