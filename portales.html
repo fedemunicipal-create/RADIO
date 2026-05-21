@@ -19,20 +19,11 @@
         .btn-pais.active span { color: #4CAF50; }
         
         /* Sector de Noticias RSS Automatizado */
-        .rss-container { background: #0b0e11; padding: 15px; border-bottom: 1px solid #222; min-height: 90px; font-family: monospace; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box; overflow: hidden; }
+        .rss-container { background: #0b0e11; padding: 15px; border-bottom: 1px solid #222; min-height: 90px; font-family: monospace; }
         .rss-header { font-size: 0.75rem; color: #4CAF50; font-weight: bold; margin-bottom: 8px; letter-spacing: 1px; }
-        
-        /* ANIMACIÓN DE TICKER DE PASO RÁPIDO PERO LEGIBLE */
-        .rss-wrapper-ticker { overflow: hidden; width: 100%; white-space: nowrap; display: flex; position: relative; }
-        .rss-ticker { font-size: 0.95rem; color: #adbeaf; line-height: 1.4; display: inline-block; padding-left: 100%; animation: ticker-scroll-veloz 18s linear infinite; }
-        .rss-ticker:hover { animation-play-state: paused; } /* Pausa táctica para leer con calma */
-        .rss-ticker a { color: #ffffff; text-decoration: none; font-weight: bold; margin-right: 40px; display: inline-block; white-space: nowrap; }
-        .rss-ticker a:hover { text-decoration: underline; color: #00ff66; }
-
-        @keyframes ticker-scroll-veloz {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-100%, 0, 0); }
-        }
+        .rss-ticker { font-size: 0.95rem; color: #adbeaf; line-height: 1.4; }
+        .rss-ticker a { color: #00ff66; text-decoration: none; font-weight: bold; }
+        .rss-ticker a:hover { text-decoration: underline; }
 
         /* Contenedor de Portales */
         .main-content { padding: 10px 0; }
@@ -64,57 +55,71 @@
     <div id="rl-container-fuerza">
         <div class="r1-carrusel-centrado">
             <div class="btn-pais active" onclick="filtrarRadar('all', this)"><div class="world-icon" style="background:#222; display:flex; align-items:center; justify-content:center;">🌐</div><span>TODOS</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://flagcdn.com"><span>ARG</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://flagcdn.com"><span>CHI</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="https://flagcdn.com"><span>URU</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="https://flagcdn.com"><span>PAR</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('br', this)"><img src="https://flagcdn.com"><span>BRA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pe', this)"><img src="https://flagcdn.com"><span>PER</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('bo', this)"><img src="https://flagcdn.com"><span>BOL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ec', this)"><img src="https://flagcdn.com"><span>ECU</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ve', this)"><img src="https://flagcdn.com"><span>VEN</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('co', this)"><img src="https://flagcdn.com"><span>COL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('mx', this)"><img src="https://flagcdn.com"><span>MEX</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pa', this)"><img src="https://flagcdn.com"><span>PAN</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('gt', this)"><img src="https://flagcdn.com"><span>GUA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('sv', this)"><img src="https://flagcdn.com"><span>SAL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ni', this)"><img src="https://flagcdn.com"><span>NIC</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="https://flagcdn.com"><span>HON</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cr', this)"><img src="https://flagcdn.com"><span>COS</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cu', this)"><img src="https://flagcdn.com"><span>CUB</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="https://flagcdn.com"><span>DOM</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pr', this)"><img src="https://flagcdn.com"><span>PUE</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('us', this)"><img src="https://flagcdn.com"><span>USA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="https://flagcdn.com"><span>ESP</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="https://flagcdn.com"><span>FRA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://flagcdn.com"><span>ALE</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://flagcdn.com/w80/ar.png"><span>ARG</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://flagcdn.com/w80/cl.png"><span>CHI</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="https://flagcdn.com/w80/uy.png"><span>URU</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="https://flagcdn.com/w80/py.png"><span>PAR</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('br', this)"><img src="https://flagcdn.com/w80/br.png"><span>BRA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pe', this)"><img src="https://flagcdn.com/w80/pe.png"><span>PER</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('bo', this)"><img src="https://flagcdn.com/w80/bo.png"><span>BOL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ec', this)"><img src="https://flagcdn.com/w80/ec.png"><span>ECU</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ve', this)"><img src="https://flagcdn.com/w80/ve.png"><span>VEN</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('co', this)"><img src="https://flagcdn.com/w80/co.png"><span>COL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('mx', this)"><img src="https://flagcdn.com/w80/mx.png"><span>MEX</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pa', this)"><img src="https://flagcdn.com/w80/pa.png"><span>PAN</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('gt', this)"><img src="https://flagcdn.com/w80/gt.png"><span>GUA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('sv', this)"><img src="https://flagcdn.com/w80/sv.png"><span>SAL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ni', this)"><img src="https://flagcdn.com/w80/ni.png"><span>NIC</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="https://flagcdn.com/w80/hn.png"><span>HON</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cr', this)"><img src="https://flagcdn.com/w80/cr.png"><span>COS</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cu', this)"><img src="https://flagcdn.com/w80/cu.png"><span>CUB</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="https://flagcdn.com/w80/do.png"><span>DOM</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pr', this)"><img src="https://flagcdn.com/w80/pr.png"><span>PUE</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('us', this)"><img src="https://flagcdn.com/w80/us.png"><span>USA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="https://flagcdn.com/w80/es.png"><span>ESP</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="https://flagcdn.com/w80/fr.png"><span>FRA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://flagcdn.com/w80/de.png"><span>ALE</span></div>
         </div>
     </div>
 
     <!-- Espacio del Lector RSS Automatizado -->
     <div class="rss-container">
         <div id="rss-header-pais" class="rss-header">// NOTICIAS EN VIVO</div>
-        <div class="rss-wrapper-ticker">
-            <div id="rss-contenido-dinamico" class="rss-ticker">Sincronizando flujos informativos mundiales...</div>
-        </div>
-    </div>
+        <div id="rss-contenido-dinamico" class="rss-ticker">
+            <script>
+            fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.lanoticia.ar%2Fnoticias%2Ffeed%2F')
+      .then(response => response.json())
+      .then(data => {
+        const ticker = document.getElementById('rss-contenido-dinamico');
+        ticker.innerHTML = data.items.map(item => 
+          `<a href="${item.link}" target="_blank" style="color: white; text-decoration: none; margin-right: 20px;">
+            ${item.title}
+           </a>`
+        ).join(' • ');
+      })
+      .catch(err => {
+        document.getElementById('rss-contenido-dinamico').innerHTML = "Error al cargar noticias locales.";
+      });
+  </script>
+</div>
+</div>
 
-    <!-- Contenido Principal: Los carruseles de diarios y portales -->
+    <!-- Contenido Principal: Los 24 carruseles de diarios y portales -->
     <div class="main-content">
         
         <!-- ARGENTINA -->
         <div class="rl-card" data-pais="ar">
             <div class="country-header">Argentina</div>
             <div class="channels-scroll">
-                <a href="https://infobae.com" target="_blank" class="portal-link">
+                <a href="https://www.infobae.com/?noredirect" target="_blank" class="portal-link">
                     <div class="logo-box">
-                        <img src="https://wikimedia.org" alt="">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Infobae_logo.svg/1920px-Infobae_logo.svg.png" alt="">
                         <span>Infobae</span>
                     </div>
                 </a>
-                <a href="https://clarin.com" target="_blank" class="portal-link">
+                <a href="https://www.clarin.com" target="_blank" class="portal-link">
                     <div class="logo-box">
-                        <img src="https://wikimedia.org" alt="">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Clar%C3%ADn_logo.svg/1920px-Clar%C3%ADn_logo.svg.png" alt="">
                         <span>Clarin</span>
                     </div>
                 </a>
@@ -125,8 +130,8 @@
         <div class="rl-card" data-pais="cl">
             <div class="country-header">Chile</div>
             <div class="channels-scroll">
-                <a href="https://emol.com" target="_blank" class="portal-link"><div class="logo-box"><img src="https://nocookie.net" alt=""><span>Emol</span></div></a>
-                <a href="https://biobiochile.cl" target="_blank" class="portal-link"><div class="logo-box"><img src="https://gstatic.com" alt=""><span>BIO BIO</span></div></a>
+                <a href="https://www.emol.com/nacional" target="_blank" class="portal-link"><div class="logo-box"><img src="https://static.wikia.nocookie.net/logopedia/images/1/1c/Emol_2008.png/revision/latest?cb=20210706214321&path-prefix=es" alt=""><span>Emol</span></div></a>
+                <a href="https://www.biobiochile.cl" target="_blank" class="portal-link"><div class="logo-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJZ8nDZWLXzZpgb0OitiNC8bcBOqNMYneV3A&s" alt=""><span>BIO BIO</span></div></a>
             </div>
         </div>
 
@@ -134,8 +139,8 @@
         <div class="rl-card" data-pais="uy">
             <div class="country-header">Uruguay</div>
             <div class="channels-scroll">
-                <a href="https://elpais.com.uy" target="_blank" class="portal-link"><div class="logo-box"><img src="https://wikimedia.org" alt=""><span>El Pais</span></div></a>
-                <a href="https://montevideo.com.uy" target="_blank" class="portal-link"><div class="logo-box"><img src="https://wp.com" alt=""><span>Montevideo portal</span></div></a>
+                <a href="https://www.elpais.com.uy" target="_blank" class="portal-link"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/El_Pais_Uruguay.svg/1920px-El_Pais_Uruguay.svg.png" alt=""><span>El Pais</span></div></a>
+                <a href="https://www.montevideo.com.uy" target="_blank" class="portal-link"><div class="logo-box"><img src="https://i0.wp.com/montevideo.wordcamp.org/2018/files/2018/11/logo_mvdportal_naranja.png?fit=852%2C233&ssl=1" alt=""><span>Montevideo portal</span></div></a>
             </div>
         </div>
 
@@ -143,8 +148,8 @@
         <div class="rl-card" data-pais="py">
             <div class="country-header">Paraguay</div>
             <div class="channels-scroll">
-                <a href="https://abc.com.py" target="_blank" class="portal-link"><div class="logo-box"><img src="https://wikimedia.org" alt=""><span>ABC Color</span></div></a>
-                <a href="https://ultimahora.com" target="_blank" class="portal-link"><div class="logo-box"><img src="https://wikimedia.org" alt=""><span>Ultima Hora</span></div></a>
+                <a href="https://www.abc.com.py" target="_blank" class="portal-link"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Abc_color.PNG" alt=""><span>ABC Color</span></div></a>
+                <a href="https://www.ultimahora.com" target="_blank" class="portal-link"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Uhora_logos.jpg" alt=""><span>Ultima Hora</span></div></a>
             </div>
         </div>
 
@@ -152,8 +157,8 @@
         <div class="rl-card" data-pais="br">
             <div class="country-header">Brasil</div>
             <div class="channels-scroll">
-                <a href="https://globo.com" target="_blank" class="portal-link"><div class="logo-box"><img src="https://wikimedia.org" alt=""><span>Globo Noticias</span></div></a>
-                <a href="https://uol.com.br" target="_blank" class="portal-link"><div class="logo-box"><img src="https://wikimedia.org" alt=""><span>UOL</span></div></a>
+                <a href="https://www.globo.com" target="_blank" class="portal-link"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Logotipo_da_GloboNews.png" alt=""><span>Globo Noticias</span></div></a>
+                <a href="https://noticias.uol.com.br" target="_blank" class="portal-link"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/b/bd/UOL_logo.png" alt=""><span>UOL</span></div></a>
             </div>
         </div>
 
@@ -161,8 +166,8 @@
         <div class="rl-card" data-pais="pe">
             <div class="country-header">Perú</div>
             <div class="channels-scroll">
-                <a href="https://rpp.pe" target="_blank" class="portal-link"><div class="logo-box"><img src="https://wikimedia.org" alt=""><span>RPP Noticias</span></div></a>
-                <a href="https://larepublica.pe" target="_blank" class="portal-link"><div class="logo-box"><img src="https://wikimedia.org" alt=""><span>La Republica</span></div></a>
+                <a href="https://rpp.pe" target="_blank" class="portal-link"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/RPP_logo.png/960px-RPP_logo.png" alt=""><span>RPP Noticias</span></div></a>
+                <a href="https://larepublica.pe" target="_blank" class="portal-link"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/La_Rep%C3%BAblica_Logo.svg/1920px-La_Rep%C3%BAblica_Logo.svg.png" alt=""><span>La Republica</span></div></a>
             </div>
         </div>
 
@@ -170,8 +175,8 @@
         <div class="rl-card" data-pais="bo">
             <div class="country-header">Bolivia</div>
             <div class="channels-scroll">
-                <a href="https://eldeber.com.bo" target="_blank" class="portal-link"><div class="logo-box"><img src="https://gstatic.com" alt=""><span>El deber</span></div></a>
-                <a href="https://larazon.bo" target="_blank" class="portal-link"><div class="logo-box"><img src="https://wikimedia.org" alt=""><span>La Razon</span></div></a>
+                <a href="https://eldeber.com.bo" target="_blank" class="portal-link"><div class="logo-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcKKfKmmIGZ5werB0ry5Cl7h-67Kk8KN8V_Q&s" alt=""><span>El deber</span></div></a>
+                <a href="https://larazon.bo" target="_blank" class="portal-link"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/La_Raz%C3%B3n_Logo.svg/960px-La_Raz%C3%B3n_Logo.svg.png" alt=""><span>La Razon</span></div></a>
             </div>
         </div>
 
@@ -179,8 +184,8 @@
         <div class="rl-card" data-pais="ec">
             <div class="country-header">Ecuador</div>
             <div class="channels-scroll">
-                <a href="https://eluniverso.com" target="_blank" class="portal-link"><div class="logo-box"><img src="https://gstatic.com" alt=""><span>El Universo</span></div></a>
-                <a href="https://elcomercio.com" target="_blank" class="portal-link"><div class="logo-box"><img src="https://wikimedia.org" alt=""><span>El comercio</span></div></a>
+                <a href="https://www.eluniverso.com" target="_blank" class="portal-link"><div class="logo-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdycmieu23zv2HjU74PPq2UPTPBL8IHnK2MQ&s" alt=""><span>El Universo</span></div></a>
+                <a href="https://www.elcomercio.com" target="_blank" class="portal-link"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Logo-ec.png" alt=""><span>El comercio</span></div></a>
             </div>
         </div>
 
@@ -188,8 +193,8 @@
         <div class="rl-card" data-pais="ve">
             <div class="country-header">Venezuela</div>
             <div class="channels-scroll">
-                <a href="https://laiguana.tv" target="_blank" class="portal-link"><div class="logo-box"><img src="https://googleusercontent.com" alt=""><span>La Iguana</span></div></a>
-                <a href="https://elnacional.com" target="_blank" class="portal-link"><div class="logo-box"><img src="https://wikimedia.org" alt=""><span>El Nacional</span></div></a>
+                <a href="https://www.laiguana.tv" target="_blank" class="portal-link"><div class="logo-box"><img src="https://yt3.googleusercontent.com/IFWJ3933PTGvrFNI2FgGuswQ-ezBT28ILJekk6cVCp5AyJ5yy30CsDdWktiowL9nYcGNmfpyzgc=s900-c-k-c0x00ffffff-no-rj" alt=""><span>La Iguana</span></div></a>
+                <a href="https://www.elnacional.com" target="_blank" class="portal-link"><div class="logo-box"><img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/El-Nacional-logo_300x250.png" alt=""><span>El Nacional</span></div></a>
             </div>
         </div>
 
@@ -197,8 +202,8 @@
         <div class="rl-card" data-pais="co">
             <div class="country-header">Colombia</div>
             <div class="channels-scroll">
-                <a href="https://noticiascaracol.com" target="_blank" class="portal-link"><div class="logo-box"><img src="https://gstatic.com" alt=""><span>Caracol</span></div></a>
-                <a href="https://eltiempo.com" target="_blank" class="portal-link"><div class="logo-box"><img src="https://gstatic.com" alt=""><span>El Tiempo</span></div></a>
+                <a href="https://www.noticiascaracol.com" target="_blank" class="portal-link"><div class="logo-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxSPZNbfMfslYorPvuXFaLwKAQ2VPXyErlUw&s" alt=""><span>Caracol</span></div></a>
+                <a href="https://www.eltiempo.com" target="_blank" class="portal-link"><div class="logo-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsBsiB8odjPySBkDHO8b2NU4QpLkEOD1vtxg&s" alt=""><span>El Tiempo</span></div></a>
             </div>
         </div>
 
@@ -206,8 +211,8 @@
         <div class="rl-card" data-pais="mx">
             <div class="country-header">México</div>
             <div class="channels-scroll">
-                <a href="https://eluniversal.com.mx" target="_blank" class="portal-link"><div class="logo-box"><img src="https://gstatic.com" alt=""><span>El Universal</span></div></a>
-                <a href="https://heraldodemexico.com.mx" target="_blank" class="portal-link"><div class="logo-box"><img src="https://gstatic.com" alt=""><span>El Heraldo de Mexico</span></div></a>
+                <a href="https://www.eluniversal.com.mx" target="_blank" class="portal-link"><div class="logo-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTs_qgVqIS4eOXLwTZ1fMR9rsmbd802pPZ4uw&s" alt=""><span>El Universal</span></div></a>
+                <a href="https://heraldodemexico.com.mx" target="_blank" class="portal-link"><div class="logo-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM181qF7yAgy5fNtlDHvkPs25sDMJ1D42qQw&s" alt=""><span>El Heraldo de Mexico</span></div></a>
             </div>
         </div>
 
@@ -224,7 +229,7 @@
         <div class="rl-card" data-pais="gt">
             <div class="country-header">Guatemala</div>
             <div class="channels-scroll">
-                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo iki" alt=""><span>Nombre Diario 1</span></div></a>
+                <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 1</span></div></a>
                 <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
             </div>
         </div>
@@ -332,20 +337,68 @@
 
     <!-- Menú de Navegación Inferior Fijo -->
     <div class='radar-nav-bottom'>
-      <div class='nav-btn active'><a href='https://github.io' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> RADIO</a></div>
-      <div class='nav-btn'><a href='https://github.iotv-vivo.html' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> TV VIVO</a></div>
-      <div class='nav-btn'><a href='https://blogspot.com' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> VOLVER</a></div>
+      <div class='nav-btn active'><a href='https://fedemunicipal-create.github.io/RADIO/' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> RADIO</a></div>
+      <div class='nav-btn'><a href='https://fedemunicipal-create.github.io/RADIO/tv-vivo.html' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> TV VIVO</a></div>
+      <div class='nav-btn'><a href='https://radarlat.blogspot.com' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> VOLVER</a></div>
     </div>
 
     <!-- Script de Automatización de Feeds RSS -->
     <script>
-    /**********************************************************************
-     * 🟢 COLOCAR RSS AQUÍ DE FORMA SENCILLA Y DIRECTA
-     * El motor convierte los enlaces XML en cadenas JSON de manera automática.
-     **********************************************************************/
     const urlsFeedsReales = {
-        "all": "https://google.com",
-        "ar": "https://clarin.com/rss/ultimo/",
-        "cl": "https://biobiochile.cl/lista/categorias/nacional?rss",
-        "uy": "https://elobservador.com.uy",
-        "py": "https://abc.com.py/arc/outboundfeeds/rss/?outputType
+        "ar": "infobae.com",
+        "cl": "latercera.com",
+        "uy": "elpais.com.uy"
+    };
+
+    async function filtrarRadar(codigoPais, elemento) {
+        document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
+        elemento.classList.add('active');
+        
+        const tarjetas = document.querySelectorAll('.rl-card');
+        tarjetas.forEach(tarjeta => {
+            if (codigoPais === 'all') {
+                tarjeta.style.display = 'block';
+            } else {
+                tarjeta.style.display = (tarjeta.getAttribute('data-pais') === codigoPais) ? 'block' : 'none';
+            }
+        });
+
+        const headerRSS = document.getElementById('rss-header-pais');
+        const contenidoRSS = document.getElementById('rss-contenido-dinamico');
+        let paisAProcesar = codigoPais;
+
+        if (codigoPais === 'all') {
+            headerRSS.innerText = "// CANAL_RSS: MONITOREO_GLOBAL_ALEATORIO";
+            const codigosDisponibles = Object.keys(urlsFeedsReales);
+            paisAProcesar = codigosDisponibles[Math.floor(Math.random() * codigosDisponibles.length)];
+        } else {
+            headerRSS.innerText = `// CANAL_RSS: MONITOREO_TACTICO_[${codigoPais.toUpperCase()}]`;
+        }
+
+        if (urlsFeedsReales[paisAProcesar]) {
+            contenidoRSS.innerHTML = "Sincronizando feed táctico con el servidor del diario...";
+            try {
+                const proxyUrl = `rss2json.com{encodeURIComponent(urlsFeedsReales[paisAProcesar])}`;
+                const respuesta = await fetch(proxyUrl);
+                const datos = await respuesta.json();
+
+                if (datos.status === 'ok' && datos.items.length > 0) {
+                    const noticia = datos.items;
+                    contenidoRSS.innerHTML = `<strong>NUEVO_TITULAR:</strong> ${noticia.title} — <a href="${noticia.link}" target="_blank">LEER EN EL DIARIO ></a>`;
+                } else {
+                    contenidoRSS.innerHTML = "ERROR: No se pudieron procesar los flujos de texto del feed.";
+                }
+            } catch (error) {
+                contenidoRSS.innerHTML = "ERROR_CONEXION: Servidor de noticias no responde o tiene bloqueos perimetrales.";
+            }
+        } else {
+            contenidoRSS.innerHTML = `NODO_VACÍO: Canal de noticias en vivo para [${paisAProcesar.toUpperCase()}] listo para conectar enlace XML.`;
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        filtrarRadar('all', document.querySelector('.btn-pais.active'));
+    });
+    </script>
+</body>
+</html>
