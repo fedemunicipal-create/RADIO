@@ -42,32 +42,7 @@
         .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 8px #f00; animation: parpadeo 1.5s infinite; flex-shrink: 0; }
         @keyframes parpadeo { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        <div class="rss-container">
-    <div id="rss-header-pais" class="rss-header">// NOTICIAS EN VIVO</div>
-    <div class="rss-ticker-wrapper">
-        <div id="rss-contenido-dinamico" class="rss-ticker-content">
-            <!-- Las noticias se cargarán aquí -->
-        </div>
-    </div>
-</div>
-
-<script>
-fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.lanoticia.ar%2Fnoticias%2Ffeed%2F')
-  .then(response => response.json())
-  .then(data => {
-    const ticker = document.getElementById('rss-contenido-dinamico');
-    ticker.innerHTML = data.items.map(item => 
-      `<a href="${item.link}" target="_blank" class="ticker-item">
-        ${item.title}
-       </a>`
-    ).join('');
-  })
-  .catch(err => {
-    document.getElementById('rss-contenido-dinamico').innerHTML = "Error al cargar noticias locales.";
-  });
-</script>
-      
-    </style>
+        
 </head>
 <body>
 
@@ -332,14 +307,7 @@ fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.lanoticia.
                 <a href="pega el link aqui" target="_blank" class="portal-link"><div class="logo-box"><img src="pegar link logo aqui" alt=""><span>Nombre Diario 2</span></div></a>
             </div>
         </div>
-         <!-- Sector de Noticias RSS Automatizado -->
-<div class="rss-container">
-    <div id="rss-header-pais" class="rss-header">// CANAL_RSS: CONECTANDO...</div>
-    <div class="rss-wrapper-marve">
-        <div id="rss-contenido-dinamico" class="rss-ticker">Sincronizando flujos de información satelital...</div>
-    </div>
-</div>
-
+       
   
     <!-- Menú de Navegación Inferior Fijo -->
     <div class='radar-nav-bottom'>
@@ -347,102 +315,6 @@ fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.lanoticia.
       <div class='nav-btn'><a href='https://fedemunicipal-create.github.io/RADIO/tv-vivo.html' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> TV VIVO</a></div>
       <div class='nav-btn'><a href='https://radarlat.blogspot.com' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> VOLVER</a></div>
     </div>
-    </script>
-   /**********************************************************************
- * 🟢 BASE DE DATOS RSS: CONFIGURA TUS LINKS DE FORMA SENCILLA AQUÍ
- * Solo asocia el código del país con la dirección web de su RSS XML.
- **********************************************************************/
-const urlsFeedsReales = {
-    "all": "https://google.com", // Global por defecto
-    "ar": "https://clarin.com",
-    "cl": "https://biobiochile.cl",
-    "uy": "https://elobservador.com.uy",
-    "py": "https://abc.com.py",
-    "br": "https://globo.com",
-    "pe": "https://elcomercio.pe",
-    "bo": "https://eldeber.com.bo",
-    "ec": "https://eluniverso.com",
-    "ve": "https://el-nacional.com",
-    "co": "https://eltiempo.com",
-    "mx": "https://eluniversal.com.mx",
-    "pa": "https://prensa.com",
-    "gt": "https://prensalibre.com",
-    "sv": "https://elsalvador.com",
-    "ni": "https://laprensa.com.ni",
-    "hn": "https://elheraldo.hn",
-    "cr": "https://nacion.com",
-    "cu": "https://cubadebate.cu",
-    "do": "https://listindiario.com",
-    "pr": "https://elnuevodia.com",
-    "us": "https://nytimes.com",
-    "es": "https://elpais.com",
-    "fr": "https://lemonde.fr",
-    "de": "https://dw.com"
-};
-
-async function filtrarRadar(codigoPais, elemento) {
-    // 1. Manejo visual de botones de banderas intacto
-    document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
-    elemento.classList.add('active');
-    
-    // 2. Filtrado de tarjetas de portales (usando tu atributo data-pais original)
-    const tarjetas = document.querySelectorAll('.rl-card');
-    tarjetas.forEach(tarjeta => {
-        if (codigoPais === 'all') {
-            tarjeta.style.display = 'block';
-        } else {
-            tarjeta.style.display = (tarjeta.getAttribute('data-pais') === codigoPais) ? 'block' : 'none';
-        }
-    });
-
-    // 3. Motor del Ticker de Noticias Integrado
-    const headerRSS = document.getElementById('rss-header-pais');
-    const contenidoRSS = document.getElementById('rss-contenido-dinamico');
-
-    if (codigoPais === 'all') {
-        headerRSS.innerText = "// CANAL_RSS: MONITOREO_GLOBAL";
-    } else {
-        headerRSS.innerText = `// CANAL_RSS: MONITOREO_TACTICO_[${codigoPais.toUpperCase()}]`;
-    }
-
-    const fuenteUrl = urlsFeedsReales[codigoPais] || urlsFeedsReales['all'];
-    contenidoRSS.innerHTML = "Sincronizando feed táctico con el servidor de noticias...";
-
-    try {
-        // Conversión a JSON en tiempo de ejecución de manera limpia
-        const apiConversor = `https://rss2json.com{encodeURIComponent(fuenteUrl)}`;
-        const respuesta = await fetch(apiConversor);
-        const datos = await respuesta.json();
-
-        if (datos.status === 'ok' && datos.items.length > 0) {
-            let acumuladorHTML = "";
-            // Filtra y monta hasta un máximo de 10 titulares de forma veloz
-            datos.items.slice(0, 10).forEach(noticia => {
-                const tituloSeguro = noticia.title.replace(/"/g, '&quot;');
-                acumuladorHTML += `<a href="${noticia.link}" target="_blank">🔥 ${tituloSeguro}</a>`;
-            });
-            contenidoRSS.innerHTML = acumuladorHTML;
-
-            // Reinicio de animación dinámico para recalcular los largos de texto sin bucles visuales
-            contenidoRSS.style.animation = 'none';
-            contenidoRSS.offsetHeight; 
-            contenidoRSS.style.animation = 'ticker-tactico 15s linear infinite';
-        } else {
-            contenidoRSS.innerHTML = `<a>⚠️ Nodo vacío: Sin transmisiones disponibles en este momento para ${codigoPais.toUpperCase()}.</a>`;
-        }
-    } catch (error) {
-        console.error("Fallo de red RSS:", error);
-        contenidoRSS.innerHTML = `<a>⚠️ Error de enlace: Servidor remoto de noticias fuera de rango.</a>`;
-    }
-}
-
-// Inicialización automática global al cargar la interfaz
-window.addEventListener('DOMContentLoaded', () => {
-    const botonActivo = document.querySelector('.btn-pais.active');
-    if (botonActivo) {
-        filtrarRadar('all', botonActivo);
-    }
-});
-        </script>
+ 
 </body>
 </html>
