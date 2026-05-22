@@ -101,24 +101,24 @@
         .radio-name { color: #fff; font-size: 10px; text-align: center; font-weight: 500; line-height: 1.2; }
         .radio-country { color: #666; font-size: 9px; text-align: center; margin-top: 2px; }
 
-        /* 3. MENÚ INFERIOR: TOTALMENTE CONGELADO ABAJO (75PX DE ALTO) */
+       /* 3. MENÚ INFERIOR: TOTALMENTE CONGELADO ABAJO (75PX DE ALTO) */
         .radar-nav-bottom { 
-            position: fixed; 
-            bottom: 0; 
-            left: 0; 
-            width: 100%; 
+            position: fixed !important; /* 👈 Forzamos la fijación absoluta sobre el vidrio */
+            bottom: 0 !important;       /* 👈 Atornillado estrictamente al piso de la pantalla */
+            left: 0 !important;
+            width: 100% !important; 
             height: 75px; 
             background: #000; 
             display: flex; 
             justify-content: space-around; 
             align-items: center; 
             border-top: 1px solid #1a1a1a; 
-            z-index: 9999; 
-            padding: 0;
-            margin: 0;
+            z-index: 99999; /* 👈 Máxima prioridad para que nada pase por delante del menú */
+            padding: 0 !important;
+            margin: 0 !important;
             box-sizing: border-box; 
+            transform: translate3d(0, 0, 0); /* 👈 Truco técnico: Fuerza al teléfono a usar su chip gráfico para congelar el menú */
         }
-        .nav-btn { display: flex; align-items: center; justify-content: center; height: 100%; }
         
         /* RESTAURADA LA FUENTE EXACTA A 18PX DE FORMA ABSOLUTA */
         .nav-btn a { 
