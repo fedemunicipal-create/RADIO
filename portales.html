@@ -18,12 +18,6 @@
         .btn-pais span { font-size: 10px; color: #777; margin-top: 5px; font-weight: bold; text-transform: uppercase; }
         .btn-pais.active span { color: #4CAF50; }
         
-        /* Sector de Noticias RSS Automatizado */
-        .rss-container { background: #0b0e11; padding: 15px; border-bottom: 1px solid #222; min-height: 90px; font-family: monospace; }
-        .rss-header { font-size: 0.75rem; color: #4CAF50; font-weight: bold; margin-bottom: 8px; letter-spacing: 1px; }
-        .rss-ticker { font-size: 0.95rem; color: #adbeaf; line-height: 1.4; }
-        .rss-ticker a { color: #00ff66; text-decoration: none; font-weight: bold; }
-        .rss-ticker a:hover { text-decoration: underline; }
 
         /* Contenedor de Portales */
         .main-content { padding: 10px 0; }
@@ -354,65 +348,7 @@ fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.lanoticia.
       <div class='nav-btn'><a href='https://radarlat.blogspot.com' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> VOLVER</a></div>
     </div>
 
-    <!-- Script de Automatización de Feeds RSS -->
-    <script>
-    const urlsFeedsReales = {
-        "ar": "infobae.com",
-        "cl": "latercera.com",
-        "uy": "elpais.com.uy"
-    };
-
-    async function filtrarRadar(codigoPais, elemento) {
-        document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
-        elemento.classList.add('active');
-        
-        const tarjetas = document.querySelectorAll('.rl-card');
-        tarjetas.forEach(tarjeta => {
-            if (codigoPais === 'all') {
-                tarjeta.style.display = 'block';
-            } else {
-                tarjeta.style.display = (tarjeta.getAttribute('data-pais') === codigoPais) ? 'block' : 'none';
-            }
-        });
-
-        const headerRSS = document.getElementById('rss-header-pais');
-        const contenidoRSS = document.getElementById('rss-contenido-dinamico');
-        let paisAProcesar = codigoPais;
-
-        if (codigoPais === 'all') {
-            headerRSS.innerText = "// CANAL_RSS: MONITOREO_GLOBAL_ALEATORIO";
-            const codigosDisponibles = Object.keys(urlsFeedsReales);
-            paisAProcesar = codigosDisponibles[Math.floor(Math.random() * codigosDisponibles.length)];
-        } else {
-            headerRSS.innerText = `// CANAL_RSS: MONITOREO_TACTICO_[${codigoPais.toUpperCase()}]`;
-        }
-
-        if (urlsFeedsReales[paisAProcesar]) {
-            contenidoRSS.innerHTML = "Sincronizando feed táctico con el servidor del diario...";
-            try {
-                const proxyUrl = `rss2json.com{encodeURIComponent(urlsFeedsReales[paisAProcesar])}`;
-                const respuesta = await fetch(proxyUrl);
-                const datos = await respuesta.json();
-
-                if (datos.status === 'ok' && datos.items.length > 0) {
-                    const noticia = datos.items;
-                    contenidoRSS.innerHTML = `<strong>NUEVO_TITULAR:</strong> ${noticia.title} — <a href="${noticia.link}" target="_blank">LEER EN EL DIARIO ></a>`;
-                } else {
-                    contenidoRSS.innerHTML = "ERROR: No se pudieron procesar los flujos de texto del feed.";
-                }
-            } catch (error) {
-                contenidoRSS.innerHTML = "ERROR_CONEXION: Servidor de noticias no responde o tiene bloqueos perimetrales.";
-            }
-        } else {
-            contenidoRSS.innerHTML = `NODO_VACÍO: Canal de noticias en vivo para [${paisAProcesar.toUpperCase()}] listo para conectar enlace XML.`;
-        }
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-        filtrarRadar('all', document.querySelector('.btn-pais.active'));
-    });
-    </script>
-    /**********************************************************************
+   /**********************************************************************
  * 🟢 BASE DE DATOS RSS: CONFIGURA TUS LINKS DE FORMA SENCILLA AQUÍ
  * Solo asocia el código del país con la dirección web de su RSS XML.
  **********************************************************************/
