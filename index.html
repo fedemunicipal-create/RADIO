@@ -137,10 +137,9 @@
     </div>
     
     <div class="content">
-
         <a href="#" class="category-label">ARGENTINA ></a>
-        <div class="grid-radios" data-pais="ar">
-            <div class="radio-item" onclick="playRadio('Radio Mitre', 'https://playerservices.streamtheworld.com/api/livestream-redirect/AM790_56AAC_SC')">
+               <div class="grid-radios" data-pais="ar">
+                <div class="radio-item" onclick="playRadio('Radio Mitre', 'https://playerservices.streamtheworld.com/api/livestream-redirect/AM790_56AAC_SC')">
                 <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Logo_Mitre_SA.svg/1280px-Logo_Mitre_SA.svg.png"></div>
                 <div class="radio-name">Radio Mitre</div>
                 <div class="radio-country">Argentina</div>
@@ -644,26 +643,40 @@
         reproductor.play().catch(err => console.log("Interacción requerida por el navegador"));
     }
 
+   // NUEVO FILTRO INTELIGENTE ADAPTADO A TU CÓDIGO ACTUAL
     function filtrarRadar(codigoPais, elementoBoton) {
+        // 1. Manejo visual del botón activo en el menú superior
         document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
         elementoBoton.classList.add('active');
         
-        const tarjetas = document.querySelectorAll('.rl-card');
-        tarjetas.forEach(tarjeta => {
+        // 2. Control de visibilidad de tus carruseles directos
+        const carruseles = document.querySelectorAll('.grid-radios');
+        carruseles.forEach(carrusel => {
+            // Buscamos el título que está justo arriba de cada carrusel
+            const tituloPais = carrusel.previousElementSibling;
+            
             if (codigoPais === 'all') {
-                tarjeta.style.display = 'block';
+                // Muestra todo junto
+                carrusel.style.display = 'flex';
+                if (tituloPais && tituloPais.classList.contains('category-label')) {
+                    tituloPais.style.display = 'inline-block';
+                }
             } else {
-                tarjeta.style.display = (tarjeta.getAttribute('data-pais') === codigoPais) ? 'block' : 'none';
+                // Filtra por país
+                if (carrusel.getAttribute('data-pais') === codigoPais) {
+                    carrusel.style.display = 'flex';
+                    if (tituloPais && tituloPais.classList.contains('category-label')) {
+                        tituloPais.style.display = 'inline-block'; // Muestra el título del país elegido
+                    }
+                } else {
+                    carrusel.style.display = 'none';
+                    if (tituloPais && tituloPais.classList.contains('category-label')) {
+                        tituloPais.style.display = 'none'; // Oculta los títulos de los demás países
+                    }
+                }
             }
         });
     }
-
-    window.addEventListener('DOMContentLoaded', () => {
-        const botonInicial = document.querySelector('.btn-pais.active');
-        if (botonInicial) {
-            filtrarRadar('all', botonInicial);
-        }
-    });
     </script>
 
   
