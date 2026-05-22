@@ -141,34 +141,40 @@
     </style>
 </head>
 <body>
-      <!-- Menú Superior con tus Direcciones de Banderas Solicitadas Exactas -->
+     <!-- 1. REPRODUCTOR DE AUDIO FIJO EN EL TOPE SUPERIOR -->
+    <div class="player-header">
+        <div id="radio-title"><span class="dot"></span> SELECCIONA UNA EMISORA</div>
+        <audio id="audio-player" controls autoplay></audio>
+    </div>
+
+    <!-- 2. MENÚ DE BANDERAS FIJO JUSTO DEBAJO DEL REPRODUCTOR -->
     <div id="rl-container-fuerza">
         <div class="r1-carrusel-centrado">
             <div class="btn-pais active" onclick="filtrarRadar('all', this)"><div class="world-icon" style="background:#222; display:flex; align-items:center; justify-content:center;">🌐</div><span>TODOS</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://flagcdn.com/w80/ar.png"><span>ARG</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://flagcdn.com/w80/cl.png"><span>CHI</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="https://flagcdn.com/w80/uy.png"><span>URU</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="https://flagcdn.com/w80/py.png"><span>PAR</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('br', this)"><img src="https://flagcdn.com/w80/br.png"><span>BRA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pe', this)"><img src="https://flagcdn.com/w80/pe.png"><span>PER</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('bo', this)"><img src="https://flagcdn.com/w80/bo.png"><span>BOL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ec', this)"><img src="https://flagcdn.com/w80/ec.png"><span>ECU</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ve', this)"><img src="https://flagcdn.com/w80/ve.png"><span>VEN</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('co', this)"><img src="https://flagcdn.com/w80/co.png"><span>COL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('mx', this)"><img src="https://flagcdn.com/w80/mx.png"><span>MEX</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pa', this)"><img src="https://flagcdn.com/w80/pa.png"><span>PAN</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('gt', this)"><img src="https://flagcdn.com/w80/gt.png"><span>GUA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('sv', this)"><img src="https://flagcdn.com/w80/sv.png"><span>SAL</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('ni', this)"><img src="https://flagcdn.com/w80/ni.png"><span>NIC</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="https://flagcdn.com/w80/hn.png"><span>HON</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cr', this)"><img src="https://flagcdn.com/w80/cr.png"><span>COS</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('cu', this)"><img src="https://flagcdn.com/w80/cu.png"><span>CUB</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="https://flagcdn.com/w80/do.png"><span>DOM</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('pr', this)"><img src="https://flagcdn.com/w80/pr.png"><span>PUE</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('us', this)"><img src="https://flagcdn.com/w80/us.png"><span>USA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="https://flagcdn.com/w80/es.png"><span>ESP</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="https://flagcdn.com/w80/fr.png"><span>FRA</span></div>
-            <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://flagcdn.com/w80/de.png"><span>ALE</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ar', this)"><img src="https://flagcdn.com"><span>ARG</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cl', this)"><img src="https://flagcdn.com"><span>CHI</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('uy', this)"><img src="https://flagcdn.com"><span>URU</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('py', this)"><img src="https://flagcdn.com"><span>PAR</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('br', this)"><img src="https://flagcdn.com"><span>BRA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pe', this)"><img src="https://flagcdn.com"><span>PER</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('bo', this)"><img src="https://flagcdn.com"><span>BOL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ec', this)"><img src="https://flagcdn.com"><span>ECU</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ve', this)"><img src="https://flagcdn.com"><span>VEN</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('co', this)"><img src="https://flagcdn.com"><span>COL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('mx', this)"><img src="https://flagcdn.com"><span>MEX</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pa', this)"><img src="https://flagcdn.com"><span>PAN</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('gt', this)"><img src="https://flagcdn.com"><span>GUA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('sv', this)"><img src="https://flagcdn.com"><span>SAL</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('ni', this)"><img src="https://flagcdn.com"><span>NIC</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('hn', this)"><img src="https://flagcdn.com"><span>HON</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cr', this)"><img src="https://flagcdn.com"><span>COS</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('cu', this)"><img src="https://flagcdn.com"><span>CUB</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('do', this)"><img src="https://flagcdn.com"><span>DOM</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('pr', this)"><img src="https://flagcdn.com"><span>PUE</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('us', this)"><img src="https://flagcdn.com"><span>USA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('es', this)"><img src="https://flagcdn.com"><span>ESP</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('fr', this)"><img src="https://flagcdn.com"><span>FRA</span></div>
+            <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://flagcdn.com"><span>ALE</span></div>
         </div>
     </div>
 
@@ -182,7 +188,7 @@
     <div class="content">
 
         <a href="#" class="category-label">ARGENTINA ></a>
-        <div class="grid-radios">
+        <div class="grid-radios" data-pais="ar">>
             <div class="radio-item" onclick="playRadio('Radio Mitre', 'https://playerservices.streamtheworld.com/api/livestream-redirect/AM790_56AAC_SC')">
                 <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Logo_Mitre_SA.svg/1280px-Logo_Mitre_SA.svg.png"></div>
                 <div class="radio-name">Radio Mitre</div>
@@ -251,7 +257,7 @@
         </div>
 
         <a href="#" class="category-label">CHILE ></a>
-        <div class="grid-radios">
+        <div class="grid-radios" data-pais="cl">
             <div class="radio-item" onclick="playRadio('Radio Bio Bio', 'https://unlimited3-cl.dps.live/biobiosantiago/mp3/icecast.audio')">
                 <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Logo_Biob%C3%ADo_Chile.png/960px-Logo_Biob%C3%ADo_Chile.png"></div>
                 <div class="radio-name">Bio Bio</div>
@@ -280,7 +286,7 @@
         </div>
 
         <a href="#" class="category-label">URUGUAY ></a>
-        <div class="grid-radios">
+        <div class="grid-radios" data-pais="uy">
             <div class="radio-item" onclick="playRadio('Radio Sarandí', 'https://radiolatina.live:10977/sarandi')">
                 <div class="icon-box"><img src="https://alba-uy-sarandi.cdn.mediatiquepress.com/wp-content/uploads/2019/04/Logo-Sarand%c3%ad.jpg"></div>
                 <div class="radio-name">Sarandí</div>
@@ -309,7 +315,7 @@
         </div>
 
         <a href="#" class="category-label">PARAGUAY ></a>
-        <div class="grid-radios">
+        <div class="grid-radios" data-pais="py">
              <div class="radio-item" onclick="playRadio('Monumental1080AM', 'https://mdstrm.com/audio/62d81ca6a459e4082203c95b/icecast.audio')">
                 <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Radiofuturo_monumental.png"></div>
                 <div class="radio-name">Monumental1080AM</div>
@@ -328,7 +334,7 @@
         </div>
 
         <a href="#" class="category-label">BRASIL ></a>
-        <div class="grid-radios">
+        <div class="grid-radios" data-pais="br">
             <div class="radio-item" onclick="playRadio('Jovem Pan', 'https://stream.zeno.fm/c45wbq2us3buv')">
                 <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Jovem_Pan_logo_2018.svg/1280px-Jovem_Pan_logo_2018.svg.png"></div>
                 <div class="radio-name">Jovem Pan</div>
@@ -347,7 +353,7 @@
         </div>
 
         <a href="#" class="category-label">PERÚ ></a>
-        <div class="grid-radios">
+        <div class="grid-radios" data-pais="pe">
                 <div class="radio-item" onclick="playRadio('Radio RPP Noticias', 'https://mdstrm.com/audio/5fab3416b5f9ef165cfab6e9/icecast.audio')">
                 <div class="icon-box"><img src="https://mds.rpp-noticias.io/static/img/favicons/apple-touch-icon-120x120.png"></div>
                 <div class="radio-name">Radio RPP Noticias</div>
@@ -367,7 +373,7 @@
 
 
         <a href="#" class="category-label">BOLIVIA ></a>
-        <div class="grid-radios">
+        <div class="grid-radios" data-pais="bo">
         <div class="radio-item" onclick="playRadio('Radio Panamericana', 'https://stream.zeno.fm/pnwpbyfambruv')">
                 <div class="icon-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiesoAC6eZgmJbThcf6xftyAa8Sr59BYJlKg&s"></div>
                 <div class="radio-name">Radio Panamericana</div>
@@ -386,7 +392,7 @@
           </div>
 
         <a href="#" class="category-label">ECUADOR ></a>
-        <div class="grid-radios">
+        <div class="grid-radios" data-pais="ec">
      <div class="radio-item" onclick="playRadio('La voz del Tomebamba', 'https://streamingecuador.com:8074/lavozdeltomebamba')">
                 <div class="icon-box"><img src="https://cdn-profiles.tunein.com/s103041/images/logog.jpg?t=159162"></div>
                 <div class="radio-name">La voz del Tomebamba</div>
@@ -405,7 +411,7 @@
         </div>
 
         <a href="#" class="category-label">VENEZUELA ></a>
-        <div class="grid-radios">
+        <div class="grid-radios" data-pais="ve">
          <div class="radio-item" onclick="playRadio('KYS FM', 'https://server6.globalhostla.com:9068/stream')">
                 <div class="icon-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrr6NiqNUhm9Rm0HSA5UUGfm6REvmeRHT7ig&s"></div>
                 <div class="radio-name">KYS FM</div>
@@ -424,7 +430,7 @@
         </div>
 
         <a href="#" class="category-label">COLOMBIA ></a>
-        <div class="grid-radios">
+        <div class="grid-radios" data-pais="co">
             <div class="radio-item" onclick="playRadio('Radioacktiva Bogotá', 'https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_ACTIVAAAC.aac')">
                 <div class="icon-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTukLz950NTXXIIPpwHZBsNuENENL5-qvV7CQ&s"></div>
                 <div class="radio-name">Radioacktiva Bogotá</div>
@@ -444,7 +450,7 @@
 
 
         <a href="#" class="category-label">MÉXICO ></a>
-        <div class="grid-radios">
+        <div class="grid-radios" data-pais="mx">
              <div class="radio-item" onclick="playRadio('Radio Fórmula 103.3', 'https://mdstrm.com/audio/6102ce7ef33d0b0830ec3adc/live.m3u8')">
                 <div class="icon-box"><img src="https://static2.mytuner.mobi/media/tvos_radios/zLeRLNuTeJ.png"></div>
                 <div class="radio-name">Radio Fórmula 103.3</div>
@@ -463,7 +469,7 @@
         </div>
 
         <a href="#" class="category-label">PANAMÁ ></a>
-        <div class="grid-radios">
+        <div class="grid-radios" data-pais="pa">
              <div class="radio-item" onclick="playRadio('Beat Life Panama', 'https://cast4.asurahosting.com/proxy/ondabra2/stream')">
                 <div class="icon-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSfC7XVvdCVSgRhqy6MIoqeW7JKS7pMlbLxQ&s"></div>
                 <div class="radio-name">Beat Life Panama</div>
@@ -477,7 +483,7 @@
         </div>
 
         <a href="#" class="category-label">GUATEMALA ></a>
-        <div class="grid-radios">
+        <div class="grid-radios" data-pais="gt">
              <div class="radio-item" onclick="playRadio('Globo 98.9', 'https://playerservices.streamtheworld.com/api/livestream-redirect/GLOBO_989AAC.aac')">
                 <div class="icon-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNMl0z_nAI_sN57ASYKNMtvtceQUZ9SWArnA&s"></div>
                 <div class="radio-name">Globo 98.9</div>
@@ -496,7 +502,7 @@
         </div>
 
         <a href="#" class="category-label">EL SALVADOR ></a>
-        <div class="grid-radios">
+        <div class="grid-radios" data-pais="sv">
              <div class="radio-item" onclick="playRadio('Radio Legislativa', 'https://streaming.asamblea.gob.sv/stream')">
                 <div class="icon-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxJbkFL2RZsNRLrdV3NRWczLfahXpeMakM4A&s"></div>
                 <div class="radio-name">Radio Legislativa</div>
@@ -515,7 +521,7 @@
         </div>
 
         <a href="#" class="category-label">NICARAGUA ></a>
-        <div class="grid-radios">
+        <div class="grid-radios" data-pais="ni">
              <div class="radio-item" onclick="playRadio('Nova FM 100.7', 'https://d269h0m26cgrwi.cloudfront.net/index.m3u8')">
                 <div class="icon-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXZxamb6eNDpUkfzP-DJibZsNbDJM4tnkXVQ&s"></div>
                 <div class="radio-name">Nova FM 100.7</div>
@@ -534,7 +540,7 @@
         </div>
 
         <a href="#" class="category-label">HONDURAS ></a>
-        <div class="grid-radios">
+        <div class="grid-radios" data-pais="hn">
              <div class="radio-item" onclick="playRadio('EXA FM', 'https://stream.zeno.fm/0n4tnx3wd5zuv')">
                 <div class="icon-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQ7XKsIbRdj_yS0RbdEWRIA-pHPu1sRDjtBQ&s"></div>
                 <div class="radio-name">EXA FM</div>
@@ -553,7 +559,7 @@
         </div>
 
         <a href="#" class="category-label">COSTA RICA ></a>
-        <div class="grid-radios">
+        <div class="grid-radios" data-pais="cr">
              <div class="radio-item" onclick="playRadio('Teletica Radio', 'https://g2qd375ol7an-hls-live.5centscdn.com/Radio/eae835e83c0494a376229f254f7d3392.sdp/chunks.m3u8')">
                 <div class="icon-box"><img src="https://www.teleticaradio.com/img/Logo-Color.png"></div>
                 <div class="radio-name">Teletica Radio</div>
@@ -572,7 +578,7 @@
         </div>
 
         <a href="#" class="category-label">CUBA ></a>
-        <div class="grid-radios">
+        <div class="grid-radios" data-pais="cu">
                 <div class="radio-item" onclick="playRadio('ATodaMecha', 'https://stream.zeno.fm/gjexooyemj3uv')">
                 <div class="icon-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeuDZeRIOUEWTEY-YP5EMhkKqDW7R7WN5NDA&s"></div>
                 <div class="radio-name">ATodaMecha</div>
@@ -586,7 +592,7 @@
         </div>
 
         <a href="#" class="category-label">DOMINICANA ></a>
-        <div class="grid-radios">
+        <div class="grid-radios" data-pais="do">
              <div class="radio-item" onclick="playRadio('La Voz del Pacoredo', 'https://stream-50.zeno.fm/9zxyvh9vrhruv')">
                 <div class="icon-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqHUmVvzFgGWQkDjt2rtSN8sJJnLXsT4VTJA&s"></div>
                 <div class="radio-name">La Voz del Pacoredo</div>
@@ -605,7 +611,7 @@
         </div>
 
         <a href="#" class="category-label">PUERTO RICO ></a>
-         <div class="grid-radios">
+         <div class="grid-radios" data-pais="pr">
                 <div class="radio-item" onclick="playRadio('Isla Rock', 'https://listen.radioking.com/radio/418162/stream/471250?n=1')">
                 <div class="icon-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTf4CyzvIghdB35WmO998ctUEj0lnZ-11PQ7w&s"></div>
                 <div class="radio-name">Isla Rock</div>
@@ -619,7 +625,7 @@
         </div>
 
         <a href="#" class="category-label">EEUU ></a>
-        <div class="grid-radios">
+        <div class="grid-radios" data-pais="us">
              <div class="radio-item" onclick="playRadio('MundoRadio', 'https://mundoradio.fm/listen/mundoradio/radio.mp3')">
                 <div class="icon-box"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB5V1XCqdjcBvDcvemL2yTKZizn6nj7qencA&s"></div>
                 <div class="radio-name">MundoRadio</div>
@@ -638,7 +644,7 @@
         </div>
 
         <a href="#" class="category-label">ESPAÑA ></a>
-        <div class="grid-radios">
+        <div class="grid-radios" data-pais="es">
              <div class="radio-item" onclick="playRadio('Radio España', 'https://stream.zeno.fm/7ywx2u45vv8uv')">
                 <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e3/Radio_Espa%C3%B1a.png"></div>
                 <div class="radio-name">Radio España</div>
@@ -657,7 +663,7 @@
         </div>
 
         <a href="#" class="category-label">FRANCIA ></a>
-        <div class="grid-radios"> <div class="radio-item" onclick="playRadio('RADIO FRANCIA INTERNACIONAL', 'https://rfienespagnol64k.ice.infomaniak.ch/rfienespagnol-64.mp3')">
+        <div class="grid-radios" data-pais="fr"> <div class="radio-item" onclick="playRadio('RADIO FRANCIA INTERNACIONAL', 'https://rfienespagnol64k.ice.infomaniak.ch/rfienespagnol-64.mp3')">
                 <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/RFI_logo_2013.svg/960px-RFI_logo_2013.svg.png"></div>
                 <div class="radio-name">RADIO FRANCIA INTERNACIONAL</div>
                 <div class="radio-country">Francia</div>
@@ -665,7 +671,7 @@
         </div>
 
         <a href="#" class="category-label">ALEMANIA ></a>
-        <div class="grid-radios"></div>
+        <div class="grid-radios" data-pais="de"></div>
 
          <!-- Menú de Navegación Inferior Fijo -->
     <div class='radar-nav-bottom'>
@@ -678,20 +684,46 @@
     </div>
 
     <script>
-    function playRadio(name, url) {
-        const player = document.getElementById('audio-player');
-        const source = document.getElementById('audio-source');
-        const title = document.getElementById('radio-title');
+    // MOTOR DE REPRODUCCIÓN ULTRA-LIMPIO Y DIRECTO
+    function playRadio(nombreEmisora, urlStreaming) {
+        const reproductor = document.getElementById('audio-player');
+        const barraTitulo = document.getElementById('radio-title');
         
-        // Esto cambia el texto por el nombre de la radio (ej: RADIO MITRE)
-        title.innerText = "ESCUCHANDO: " + name;
+        // Actualiza el indicador dinámico en pantalla
+        barraTitulo.innerHTML = `<span class="dot"></span> ESCUCHANDO: ${nombreEmisora.toUpperCase()}`;
         
-        // Esto carga la URL en el reproductor
-        source.src = url;
-        player.load();
-        player.play();
+        // Inyección directa de la señal sin intermediarios para evitar cortes
+        reproductor.src = urlStreaming;
+        reproductor.load();
+        reproductor.play().catch(error => console.log("Reproducción inicial pausada por el navegador"));
     }
-</script>
+
+    // SISTEMA DE FILTRADO TÁCTICO PARA TUS EMISORAS
+    function filtrarRadar(codigoPais, elementoBoton) {
+        // Alternar el estado visual activo en el carrusel superior
+        document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
+        elementoBoton.classList.add('active');
+        
+        // Oculta o muestra las envolturas nacionales (.rl-card)
+        const tarjetasPaises = document.querySelectorAll('.rl-card');
+        tarjetasPaises.forEach(tarjeta => {
+            if (codigoPais === 'all') {
+                tarjeta.style.display = 'block'; // Muestra todos los carruseles juntos
+            } else {
+                // Muestra únicamente el país seleccionado, ocultando los demás
+                tarjeta.style.display = (tarjeta.getAttribute('data-pais') === codigoPais) ? 'block' : 'none';
+            }
+        });
+    }
+
+    // Arranque automatizado global al cargar la interfaz
+    window.addEventListener('DOMContentLoaded', () => {
+        const botonPorDefecto = document.querySelector('.btn-pais.active');
+        if (botonPorDefecto) {
+            filtrarRadar('all', botonPorDefecto);
+        }
+    });
+    </script>
 
   
 </body>
