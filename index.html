@@ -5,28 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RADARLAT RADIO</title>
     <style>
-       /* BASE Y FONDO GENERAL */
-        body { 
+       /* BASE Y FONDO GENERAL BLOQUEADO CONTRA REBOTES */
+        html, body {
             background-color: #000 !important; 
             color: #fff; 
             font-family: -apple-system, system-ui, sans-serif; 
             margin: 0; 
             padding: 0; 
+            width: 100%;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: auto; /* Desactiva el rebote elástico de iOS/Android */
+        }
+
+        body { 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
+            padding-top: 126px; /* 👈 Colchón exacto para que tus radios nazcan abajo del bloque fijo superior */
             padding-bottom: 120px; 
-            overflow-x: hidden; 
+            box-sizing: border-box;
         }
 
-        /* 1. EL MENÚ DE BANDERAS QUEDA FIJO EN EL TOPE ABSOLUTO (TOP: 0) */
+        /* 1. MENÚ DE BANDERAS: ATORNILLADO AL TOPE ABSOLUTO (54PX DE ALTO) */
         #rl-container-fuerza { 
-            position: sticky; 
+            position: fixed; /* 👈 Soldado al vidrio de la pantalla, cero movimiento */
             top: 0; 
+            left: 0;
             width: 100%; 
+            height: 54px;
             background: #0b0e11; 
             border-bottom: 2px solid #4CAF50; 
-            z-index: 2100; /* Capa superior de prioridad */
+            z-index: 9999; /* Capa de prioridad máxima */
             box-sizing: border-box;
         }
         .r1-carrusel-centrado { 
@@ -36,6 +45,8 @@
             gap: 20px; 
             padding: 10px 15px; 
             align-items: center; 
+            height: 100%;
+            box-sizing: border-box;
             -webkit-overflow-scrolling: touch; 
         }
         .r1-carrusel-centrado::-webkit-scrollbar { display: none; }
@@ -58,24 +69,25 @@
         .btn-pais span { font-size: 10px; color: #777; margin-top: 5px; font-weight: bold; text-transform: uppercase; }
         .btn-pais.active span { color: #4CAF50; }
 
-        /* 2. EL REPRODUCTOR SE ACOPLA FIJO EXACTAMENTE ABAJO DEL MENÚ DE BANDERAS */
+        /* 2. REPRODUCTOR: ATORNILLADO FIJO ABAJO DE LAS BANDERAS (62PX DE ALTO) */
         .player-header {
-            position: sticky;
-            top: 54px; /* Altura exacta que ocupa tu menú superior de banderas */
+            position: fixed; /* 👈 Bloqueado contra microdesplazamientos */
+            top: 54px; /* Se acopla exactamente abajo de los 54px de las banderas */
+            left: 0;
             width: 100%;
+            height: 62px;
             background: #111;
-            padding: 12px 0;
-            z-index: 2000; 
+            padding: 8px 0;
+            z-index: 9998; /* Una capa abajo de las banderas para un ensamble perfecto */
             text-align: center;
             border-bottom: 1px solid #333;
             box-sizing: border-box;
         }
-        #radio-title { font-size: 11px; color: #888; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; }
-        audio { width: 90%; max-width: 400px; height: 32px; filter: invert(100%); }
+        #radio-title { font-size: 11px; color: #888; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; }
+        audio { width: 90%; max-width: 400px; height: 30px; filter: invert(100%); }
 
         /* CONTENEDOR DE EMISORAS */
         .content { width: 100%; max-width: 600px; padding: 10px; box-sizing: border-box; }
-        .rl-card { display: block; margin-bottom: 20px; }
         .category-label { display: inline-block; font-weight: bold; font-size: 14px; color: #aaa; margin: 20px 0 10px 10px; text-decoration: none; text-transform: uppercase; }
         .category-label:hover { color: #fff; }
 
@@ -88,10 +100,36 @@
         .radio-name { color: #fff; font-size: 10px; text-align: center; font-weight: 500; line-height: 1.2; }
         .radio-country { color: #666; font-size: 9px; text-align: center; margin-top: 2px; }
 
-        /* MENÚ DE NAVEGACIÓN INFERIOR FIJO */
-        .radar-nav-bottom { position: fixed; bottom: 0; left: 0; width: 100%; height: 75px; background: #000; display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #1a1a1a; z-index: 9999; box-sizing: border-box; }
-        .nav-btn { display: flex; align-items: center; justify-content: center; }
-        .nav-btn a { font-size: 16px; font-weight: bold; color: #ffffff !important; text-decoration: none !important; display: inline-flex; align-items: center; text-transform: uppercase; }
+        /* 3. MENÚ INFERIOR: TOTALMENTE CONGELADO ABAJO (75PX DE ALTO) */
+        .radar-nav-bottom { 
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 75px; 
+            background: #000; 
+            display: flex; 
+            justify-content: space-around; 
+            align-items: center; 
+            border-top: 1px solid #1a1a1a; 
+            z-index: 9999; 
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box; 
+        }
+        .nav-btn { display: flex; align-items: center; justify-content: center; height: 100%; }
+        
+        /* RESTAURADA LA FUENTE EXACTA A 18PX DE FORMA ABSOLUTA */
+        .nav-btn a { 
+            font-size: 18px !important; 
+            font-weight: bold; 
+            color: #ffffff !important; 
+            text-decoration: none !important; 
+            display: inline-flex; 
+            align-items: center; 
+            text-transform: uppercase; 
+            font-family: sans-serif;
+        }
         
         /* INDICADOR ROJO PARPADEANTE */
         .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 8px #f00; animation: parpadeo 1.5s infinite; flex-shrink: 0; }
