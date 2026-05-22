@@ -24,9 +24,9 @@
         /* Indicador táctico rojo parpadeante independiente */
         .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 8px #f00; animation: parpadeo 1.5s infinite; flex-shrink: 0; }
         @keyframes parpadeo { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-        
-        /* Contenedor del Reproductor */
-        .video-container { width: 100%; aspect-ratio: 16/9; background: #000; position: relative; overflow: hidden; border-bottom: 1px solid #222; }
+
+           /* Contenedor del Reproductor */
+        .video-container { width: 100%; aspect-ratio: 16/9; background: #000; position: sticky; top: 62px; z-index: 1900; overflow: hidden; border-bottom: 1px solid #222; }
         #main-video-player, #hls-video-player { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: none; z-index: 2; }
         #main-video-player.active, #hls-video-player.active { display: block; }
         
