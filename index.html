@@ -21,23 +21,24 @@
             display: flex; 
             flex-direction: column; 
             align-items: center; 
-            padding-top: 126px; /* 👈 Colchón exacto para que tus radios nazcan abajo del bloque fijo superior */
+            padding-top: 138px; /* 👈 Se aumentó para dar espacio a la nueva separación superior */
             padding-bottom: 120px; 
             box-sizing: border-box;
         }
 
-        /* 1. MENÚ DE BANDERAS: ATORNILLADO AL TOPE ABSOLUTO (54PX DE ALTO) */
+        /* 1. EL MENÚ DE BANDERAS BAJA PARA NO QUEDAR PEGADO AL BORDE SUPERIOR */
         #rl-container-fuerza { 
-            position: fixed; /* 👈 Soldado al vidrio de la pantalla, cero movimiento */
-            top: 0; 
+            position: fixed; 
+            top: 12px; /* 👈 Baja exactamente 12 píxeles (equivalente a unos 3mm) */
             left: 0;
             width: 100%; 
             height: 54px;
             background: #0b0e11; 
             border-bottom: 2px solid #4CAF50; 
-            z-index: 9999; /* Capa de prioridad máxima */
+            z-index: 9999; 
             box-sizing: border-box;
         }
+
         .r1-carrusel-centrado { 
             display: flex !important; 
             flex-direction: row !important; 
@@ -69,16 +70,16 @@
         .btn-pais span { font-size: 10px; color: #777; margin-top: 5px; font-weight: bold; text-transform: uppercase; }
         .btn-pais.active span { color: #4CAF50; }
 
-        /* 2. REPRODUCTOR: ATORNILLADO FIJO ABAJO DE LAS BANDERAS (62PX DE ALTO) */
+       /* 2. EL REPRODUCTOR SE ACOPLA PERFECTAMENTE ABAJO DE LAS BANDERAS */
         .player-header {
-            position: fixed; /* 👈 Bloqueado contra microdesplazamientos */
-            top: 54px; /* Se acopla exactamente abajo de los 54px de las banderas */
+            position: fixed; 
+            top: 66px; /* 👈 Se recalculó (12px de separación + 54px del menú) para que encaje abajo */
             left: 0;
             width: 100%;
             height: 62px;
             background: #111;
             padding: 8px 0;
-            z-index: 9998; /* Una capa abajo de las banderas para un ensamble perfecto */
+            z-index: 9998; 
             text-align: center;
             border-bottom: 1px solid #333;
             box-sizing: border-box;
