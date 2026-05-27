@@ -67,6 +67,10 @@
     </div>
     
     <script>
+          async function filtrarRadar(codigoPais, elemento) {
+        document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
+        elemento.classList.add('active');
+            
       
      window.addEventListener('DOMContentLoaded', () => {
         filtrarRadar('all', document.querySelector('.btn-pais.active'));
