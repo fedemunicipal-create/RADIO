@@ -17,6 +17,18 @@
         .btn-pais.active img, .btn-pais.active .world-icon { border-color: #4CAF50; box-shadow: 0 0 10px #4CAF50; }
         .btn-pais span { font-size: 10px; color: #777; margin-top: 5px; font-weight: bold; text-transform: uppercase; }
         .btn-pais.active span { color: #4CAF50; }
+        /* Menú de Navegación Inferior Fijo e Inamovible */
+        .radar-nav-bottom { position: fixed; bottom: 0; left: 0; width: 100%; height: 75px; background: #000; display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #1a1a1a; z-index: 3000; box-sizing: border-box; }
+        .nav-btn { display: flex; align-items: center; justify-content: center; }
+        .nav-btn a { font-size: 0.85rem; font-weight: bold; display: inline-flex; align-items: center; text-transform: uppercase; font-family: sans-serif; }
+        
+        /* Indicador táctico rojo parpadeante independiente */
+        .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 8px #f00; animation: parpadeo 1.5s infinite; flex-shrink: 0; }
+        @keyframes parpadeo { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+    </style>
+</head>
+<body>
+
 
 <!-- Menú Superior con tus Direcciones de Banderas Solicitadas Exactas -->
     <div id="rl-container-fuerza">
