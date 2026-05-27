@@ -18,15 +18,7 @@
         .btn-pais span { font-size: 10px; color: #777; margin-top: 5px; font-weight: bold; text-transform: uppercase; }
         .btn-pais.active span { color: #4CAF50; }
         
-        /* Sector de Noticias RSS Automatizado */
-        
-
-        /* Contenedor de Portales */
-       
-        
-        /* Tarjetas de Diarios */
-        
-
+     
         /* Menú de Navegación Inferior Fijo e Inamovible */
         .radar-nav-bottom { position: fixed; bottom: 0; left: 0; width: 100%; height: 75px; background: #000; display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #1a1a1a; z-index: 3000; box-sizing: border-box; }
         .nav-btn { display: flex; align-items: center; justify-content: center; }
@@ -70,58 +62,8 @@
         </div>
     </div>
 
-    <!-- Espacio del Lector RSS Automatizado -->
-    
-            <script>
-            fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.lanoticia.ar%2Fnoticias%2Ffeed%2F')
-      .then(response => response.json())
-      .then(data => {
-        const ticker = document.getElementById('rss-contenido-dinamico');
-        ticker.innerHTML = data.items.map(item => 
-          `<a href="${item.link}" target="_blank" style="color: white; text-decoration: none; margin-right: 20px;">
-            ${item.title}
-           </a>`
-        ).join(' • ');
-      })
-      .catch(err => {
-        document.getElementById('rss-contenido-dinamico').innerHTML = "Error al cargar noticias locales.";
-      });
-  </script>
-</div>
-</div>
-
-    <!-- Contenido Principal: Los 24 carruseles de diarios y portales -->
-
-        
-        <!-- ARGENTINA -->
-                     <!-- CHILE -->
-              <!-- URUGUAY -->
-              <!-- PARAGUAY -->
-              <!-- BRASIL -->
-              <!-- PERÚ -->
-              <!-- BOLIVIA -->
-              <!-- ECUADOR -->
-              <!-- VENEZUELA -->
-               <!-- COLOMBIA -->
-              <!-- MÉXICO -->
-             <!-- PANAMÁ -->
-              <!-- GUATEMALA -->
-              <!-- EL SALVADOR -->
-               <!-- NICARAGUA -->
-             <!-- HONDURAS -->
-                <!-- COSTA RICA -->
-             <!-- CUBA -->
-               <!-- REPÚBLICA DOMINICANA -->
-             <!-- PUERTO RICO -->
-               <!-- ESTADOS UNIDOS -->
-             <!-- ESPAÑA -->
-             <!-- FRANCIA -->
-              <!-- ALEMANIA -->
-        
-
-    </div>
-
-    <!-- Menú de Navegación Inferior Fijo -->
+   
+     <!-- Menú de Navegación Inferior Fijo -->
     <div class='radar-nav-bottom'>
       <div class='nav-btn active'><a href='https://fedemunicipal-create.github.io/RADIO/' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> RADIO</a></div>
       <div class='nav-btn'><a href='https://fedemunicipal-create.github.io/RADIO/tv-vivo.html' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> TV VIVO</a></div>
@@ -144,8 +86,7 @@
             }
         });
 
-    
-    window.addEventListener('DOMContentLoaded', () => {
+     window.addEventListener('DOMContentLoaded', () => {
         filtrarRadar('all', document.querySelector('.btn-pais.active'));
     });
     </script>
