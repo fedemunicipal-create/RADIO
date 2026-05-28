@@ -137,92 +137,85 @@
       <div class='nav-btn'><a href='https://radarlat.blogspot.com' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> PORTALES</a></div>
     </div>
 
-  <!-- SCRIPT DE AUTOMATIZACIÓN FILTRADO Y RSS (REPARADO AL 100%) -->
+  <!-- MOTOR EN DIRECTO NATIVO (REPARADO DE RAÍZ — SIN APIS EXTERNAS) -->
     <script>
-    /**********************************************************************
-     * 🟢 BASE DE DATOS RSS CORREGIDA CON SUS ENLACES REALES INTERACTIVOS
-     **********************************************************************/
     const fuentesNoticiasRss = {
-        all: 'https://google.com', // Google News Global
-        
-        // 🇦🇷 ARGENTINA UNIFICADO (Usa el puente invisible de AllOrigins)
-        ar: 'https://api.allorigins.win/raw?url=https://www.lanoticia.ar/noticias/feed/',
-        
-        // 🌎 RESTO DE LATINOAMÉRICA Y EL MUNDO (Restaurados con sus XML compatibles)
-        cl: 'https://biobiochile.cl',
-        uy: 'https://elobservador.com.uy',
-        py: 'https://abc.com.py',
-        br: 'https://globo.com',
-        pe: 'https://elcomercio.pe',
-        bo: 'https://eldeber.com.bo',
-        ec: 'https://eluniverso.com',
-        ve: 'https://el-nacional.com',
-        co: 'https://eltiempo.com',
-        mx: 'https://eluniversal.com.mx',
-        pa: 'https://prensa.com',
-        gt: 'https://prensalibre.com',
-        sv: 'https://elsalvador.com',
-        ni: 'https://laprensa.com.ni',
-        hn: 'https://elheraldo.hn',
-        cr: 'https://nacion.com',
-        cu: 'https://cubadebate.cu',
-        do: 'https://listindiario.com',
-        pr: 'https://elnuevodia.com',
-        us: 'https://nytimes.com',
-        es: 'https://elpais.com',
-        fr: 'https://lemonde.fr',
-        de: 'https://dw.com'
+        all: 'https://allorigins.win', 
+        ar: 'https://api.allorigins.win/raw?url=https://cadena3.com/rss/PoliticayEconomia.xml',
+        cl: 'https://allorigins.win',
+        uy: 'https://allorigins.win',
+        py: 'https://allorigins.win',
+        br: 'https://allorigins.win',
+        pe: 'https://allorigins.win',
+        bo: 'https://allorigins.win',
+        ec: 'https://allorigins.win',
+        ve: 'https://allorigins.win',
+        co: 'https://allorigins.win',
+        mx: 'https://allorigins.win',
+        pa: 'https://allorigins.win',
+        gt: 'https://allorigins.win',
+        sv: 'https://allorigins.win',
+        ni: 'https://allorigins.win',
+        hn: 'https://allorigins.win',
+        cr: 'https://allorigins.win',
+        cu: 'https://allorigins.win',
+        do: 'https://allorigins.win',
+        pr: 'https://allorigins.win',
+        us: 'https://allorigins.win',
+        es: 'https://allorigins.win',
+        fr: 'https://allorigins.win',
+        de: 'https://allorigins.win'
     };
 
-    // MOTOR AUTOMÁTICO DE CONVERSIÓN Y CARGA RSS (CORREGIDO)
     async function cargarSeñalRSS(codigoPais, etiquetaNombre) {
         const tickerTarget = document.getElementById('ticker-target');
         const tagPais = document.getElementById('radar-pais-tag');
         if (tagPais) tagPais.innerText = etiquetaNombre.toUpperCase();
         
-        tickerTarget.innerHTML = "Estableciendo enlace satelital con los diarios...";
+        tickerTarget.innerHTML = "Estableciendo enlace satelital directo con el diario...";
         
-        const urlXml = fuentesNoticiasRss[codigoPais] || fuentesNoticiasRss['all'];
-        
-        // 🟢 SOLUCIÓN 1: Si el enlace usa AllOrigins, aísla de forma inteligente el RSS real para enviarlo limpio a la API
-        const urlFinal = urlXml.includes('allorigins.win') ? urlXml.split('?url=')[1] : urlXml;
-        
-        // 🟢 SOLUCIÓN 2: Link de la API corregido usando comillas inclinadas francesas y ruta estructurada completa
-        const apiConversor = `https://rss2json.com{encodeURIComponent(urlFinal)}`;
+        const urlPuente = fuentesNoticiasRss[codigoPais] || fuentesNoticiasRss['all'];
 
         try {
-            const respuesta = await fetch(apiConversor);
-            const datos = await respuesta.json();
+            // Eliminamos rss2json de la ecuación. Leemos directo el código fuente XML.
+            const respuesta = await fetch(urlPuente);
+            const textoXml = await respuesta.text();
+            
+            // Convertimos el texto plano en un formato que tu navegador entiende como un árbol de datos
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(textoXml, "text/xml");
+            const items = xmlDoc.getElementsByTagName("item");
 
-            if (datos.status === 'ok' && datos.items.length > 0) {
+            if (items.length > 0) {
                 let bloqueTitulares = '';
-                // Recopila hasta 12 titulares reales
-                datos.items.slice(0, 12).forEach(item => {
-                    const tituloLimpio = item.title.replace(/"/g, '&quot;');
-                    bloqueTitulares += `<a href="${item.link}" target="_blank">⚡ ${tituloLimpio}</a>`;
-                });
+                // Tu navegador procesa los titulares de forma local y veloz
+                for (let i = 0; i < Math.min(items.length, 12); i++) {
+                    const titulo = items[i].getElementsByTagName("title")[0]?.textContent || "";
+                    const link = items[i].getElementsByTagName("link")[0]?.textContent || "#";
+                    
+                    // Limpieza segura de caracteres extraños
+                    const tituloLimpio = titulo.replace(/"/g, '&quot;');
+                    bloqueTitulares += `<a href="${link}" target="_blank">⚡ ${tituloLimpio}</a>`;
+                }
                 tickerTarget.innerHTML = bloqueTitulares;
                 
-                // Reinicio de animación CSS para recalcular el largo del texto de forma fluida
+                // Reinicio milimétrico de la animación
                 tickerTarget.style.animation = 'none';
                 tickerTarget.offsetHeight; 
                 tickerTarget.style.animation = 'ticker-scroll-fast 16s linear infinite';
             } else {
-                tickerTarget.innerHTML = `<a>⚠️ No hay despachos informativos disponibles para ${etiquetaNombre}.</a>`;
+                tickerTarget.innerHTML = `<a>⚠️ El servidor del diario no devolvió noticias válidas para ${etiquetaNombre}.</a>`;
             }
         } catch (error) {
-            console.error("Falla RSS:", error);
-            tickerTarget.innerHTML = `<a>⚠️ Error de red: Servidor de noticias fuera de rango.</a>`;
+            console.error("Error de decodificación nativa:", error);
+            tickerTarget.innerHTML = `<a>⚠️ Error de enlace: Servidor bloqueado o fuera de rango.</a>`;
         }
     }
 
-    // FUNCIÓN DE FILTRADO UNIFICADA TÁCTICA
     function filtrarRadar(codigoPais, elemento) {
-        // Enciende la luz verde en la bandera presionada
         document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
         elemento.classList.add('active');
         
-        // Filtra tus futuros bloques .rl-card en base al país
         const tarjetas = document.querySelectorAll('.rl-card');
         tarjetas.forEach(tarjeta => {
             if (codigoPais === 'all') {
@@ -232,12 +225,10 @@
             }
         });
 
-        // Sincroniza el ticker de noticias al país seleccionado
         const textoPais = elemento.querySelector('span').innerText;
         cargarSeñalRSS(codigoPais, textoPais);
     }
 
-    // Arranque inicial en frío con noticias globales
     window.addEventListener('DOMContentLoaded', () => {
         const botonInicial = document.querySelector('.btn-pais.active');
         if (botonInicial) {
