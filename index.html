@@ -18,7 +18,6 @@
         .btn-pais span { font-size: 10px; color: #777; margin-top: 5px; font-weight: bold; text-transform: uppercase; }
         .btn-pais.active span { color: #4CAF50; }
         
-     
         /* Menú de Navegación Inferior Fijo e Inamovible */
         .radar-nav-bottom { position: fixed; bottom: 0; left: 0; width: 100%; height: 75px; background: #000; display: flex; justify-content: space-around; align-items: center; border-top: 1px solid #1a1a1a; z-index: 3000; box-sizing: border-box; }
         .nav-btn { display: flex; align-items: center; justify-content: center; }
@@ -27,21 +26,26 @@
         /* Indicador táctico rojo parpadeante independiente */
         .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 8px #f00; animation: parpadeo 1.5s infinite; flex-shrink: 0; }
         @keyframes parpadeo { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-                /* ESTILO PARA EL BANNER DINÁMICO COMPLETAMENTE RESPONSIVO */
+        
+        /* ESTILO PARA EL BANNER DINÁMICO COMPLETAMENTE RESPONSIVO */
         .banner-radar {
-            width: 100%;             /* 👈 Obliga a la imagen a estirarse al ancho disponible */
-            max-width: 480px;        /* 👈 Tamaño máximo ideal para que no se vea gigante en la PC */
-            height: auto;            /* 👈 Mantiene la proporción original para que no se deforme */
+            width: 100%;             
+            max-width: 480px;        
+            height: auto;            
             display: block;
-            margin: 0 auto;          /* 👈 Centra el banner perfectamente en pantallas grandes */
+            margin: 0 auto;          
             box-sizing: border-box;
-            padding: 10px 15px;      /* 👈 Pequeño margen interno elegante para que no toque los bordes del celular */
+            padding: 10px 15px;      
         }
+
+        /* Contenedor para el contenido del index */
+        .main-content { padding: 10px 0; }
+        .rl-card { margin-bottom: 30px; display: block; }
     </style>
 </head>
 <body>
 
-    <!-- Menú Superior preparado para Carga Manual de Banderas -->
+    <!-- Menú Superior con tus Direcciones de Banderas Solicitadas Exactas -->
     <div id="rl-container-fuerza">
         <div class="r1-carrusel-centrado">
             <div class="btn-pais active" onclick="filtrarRadar('all', this)"><div class="world-icon" style="background:#222; display:flex; align-items:center; justify-content:center;">🌐</div><span>TODOS</span></div>
@@ -72,43 +76,29 @@
         </div>
     </div>
 
-    <body>
-
-   <body>
-
-    <!-- ESCUDO NEGRO CONFIGURADO SOLO PARA EL GROSOR DE LAS BANDERAS -->
-    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 54px; background: #000; z-index: 9990;"></div>
-
-    <!-- Tu menú de banderas (Ahora sí quedará visible al frente) -->
-    <div id="rl-container-fuerza">
-
-    <!-- 2. EL MENÚ DE BANDERAS QUE SE QUEDA CONGELADO ARRIBA (position: fixed) -->
-    <div id="rl-container-fuerza">
-        <div class="r1-carrusel-centrado">
-            <!-- ... todas tus banderas ... -->
-        </div>
-    </div>
-
-
-    <!-- 🟢 3. AQUÍ INSERTAS TU NUEVO BANNER (Nace abajo de las banderas y se mueve con el scroll) -->
+    <!-- 🟢 AQUÍ QUEDÓ TU BANNER (Se desplaza de forma fluida y responsiva) -->
     <img src="banner.jpg" alt="RadarLat - Comando Unificado de Noticias" class="banner-radar">
 
-
+    <!-- CONTENEDOR PRINCIPAL: Aquí puedes colocar las tarjetas de accesos o portales -->
+    <div class="main-content">
+        <!-- Deja este espacio listo para tus bloques con la clase class="rl-card" data-pais="codigo" -->
+    </div>
    
-     <!-- Menú de Navegación Inferior Fijo -->
+    <!-- Menú de Navegación Inferior Fijo -->
     <div class='radar-nav-bottom'>
       <div class='nav-btn active'><a href='https://fedemunicipal-create.github.io/RADIO/radio-vivo.html' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> RADIO</a></div>
       <div class='nav-btn'><a href='https://fedemunicipal-create.github.io/RADIO/tv-vivo.html' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> TV VIVO</a></div>
       <div class='nav-btn'><a href='https://radarlat.blogspot.com' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> PORTALES</a></div>
     </div>
 
- 
+    <!-- SCRIPT DE AUTOMATIZACIÓN FILTRADO (Totalmente Corregido) -->
     <script>
-   
-    async function filtrarRadar(codigoPais, elemento) {
+    function filtrarRadar(codigoPais, elemento) {
+        // Enciende la luz verde en la bandera presionada
         document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
         elemento.classList.add('active');
         
+        // Filtra las futuras tarjetas .rl-card que coloques en tu index
         const tarjetas = document.querySelectorAll('.rl-card');
         tarjetas.forEach(tarjeta => {
             if (codigoPais === 'all') {
@@ -117,9 +107,14 @@
                 tarjeta.style.display = (tarjeta.getAttribute('data-pais') === codigoPais) ? 'block' : 'none';
             }
         });
+    }
 
-     window.addEventListener('DOMContentLoaded', () => {
-        filtrarRadar('all', document.querySelector('.btn-pais.active'));
+    // Arranque seguro cuando el documento está listo
+    window.addEventListener('DOMContentLoaded', () => {
+        const botonInicial = document.querySelector('.btn-pais.active');
+        if (botonInicial) {
+            filtrarRadar('all', botonInicial);
+        }
     });
     </script>
 </body>
