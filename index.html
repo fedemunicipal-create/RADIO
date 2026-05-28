@@ -27,6 +27,16 @@
         /* Indicador táctico rojo parpadeante independiente */
         .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 8px #f00; animation: parpadeo 1.5s infinite; flex-shrink: 0; }
         @keyframes parpadeo { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+                /* ESTILO PARA EL BANNER DINÁMICO COMPLETAMENTE RESPONSIVO */
+        .banner-radar {
+            width: 100%;             /* 👈 Obliga a la imagen a estirarse al ancho disponible */
+            max-width: 480px;        /* 👈 Tamaño máximo ideal para que no se vea gigante en la PC */
+            height: auto;            /* 👈 Mantiene la proporción original para que no se deforme */
+            display: block;
+            margin: 0 auto;          /* 👈 Centra el banner perfectamente en pantallas grandes */
+            box-sizing: border-box;
+            padding: 10px 15px;      /* 👈 Pequeño margen interno elegante para que no toque los bordes del celular */
+        }
     </style>
 </head>
 <body>
@@ -73,6 +83,7 @@
             <!-- ... todas tus banderas ... -->
         </div>
     </div>
+
 
     <!-- 🟢 3. AQUÍ INSERTAS TU NUEVO BANNER (Nace abajo de las banderas y se mueve con el scroll) -->
     <img src="banner.jpg" alt="RadarLat - Comando Unificado de Noticias" class="banner-radar">
