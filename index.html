@@ -268,13 +268,13 @@
             if (hlsPlayer) { hlsPlayer.src = canalElegido.url; hlsPlayer.classList.add('active'); hlsPlayer.play().catch(e => console.log("Autoplay retenido")); }
         }
     }
- async function cargarSeñalRSS(codigoPais, etiquetaNombre) {
+ // 🟢 MOTOR REPARADO: EXTRAE TÍTULOS, FECHAS E IMÁGENES XML SIN ERRORES
+    async function cargarSeñalRSS(codigoPais, etiquetaNombre) {
         const tickerTarget = document.getElementById('ticker-target');
         const listaTarget = document.getElementById('noticias-target-lista');
         const tagPaisNoticias = document.getElementById('radar-noticias-pais');
         const tagPaisTicker = document.getElementById('radar-pais-tag');
         
-        // Actualizar nombres de cabeceras
         if (tagPaisTicker) tagPaisTicker.innerText = etiquetaNombre.toUpperCase();
         if (tagPaisNoticias) tagPaisNoticias.innerText = etiquetaNombre.toUpperCase();
         
@@ -301,48 +301,54 @@
                     const link = item.getElementsByTagName("link")[0]?.textContent || "#";
                     const fechaRaw = item.getElementsByTagName("pubDate")[0]?.textContent || "";
                     
-                    // 🟢 DETECTOR INTELIGENTE DE IMÁGENES DENTRO DEL FEED RSS
+                    // 🟢 EXTRACCIÓN SEGURO DE IMÁGENES MULTI-FORMATO CORREGIDA
                     let urlImagen = '';
                     
-                    // Intento 1: Buscar en etiqueta enclosure estándar (usada por WordPress y Clarín)
+                    // Intento 1: Buscar en etiqueta enclosure estándar con índice correcto
                     const enclosure = item.getElementsByTagName("enclosure")[0];
-                    if (enclosure && enclosure.getAttribute("type")?.includes("image")) {
-                        urlImagen = enclosure.getAttribute("url");
+                    if (enclosure) {
+                        const typeAttr = enclosure.getAttribute("type") || "";
+                        if (typeAttr.includes("image") || !typeAttr) {
+                            urlImagen = enclosure.getAttribute("url") || "";
+                        }
                     }
                     
-                    // Intento 2: Buscar en formato extendido media:content
+                    // Intento 2: Buscar de forma segura usando Namespace universal (*) para media:content o content
                     if (!urlImagen) {
-                        const mediaContent = item.getElementsByTagName("media:content")[0] || item.getElementsByTagName("content")[0];
+                        const mediaContent = item.getElementsByTagNameNS("*", "content")[0];
                         if (mediaContent) {
-                            urlImagen = mediaContent.getAttribute("url");
+                            urlImagen = mediaContent.getAttribute("url") || "";
                         }
                     }
 
-                    // Intento 3: Buscar miniaturas alternativas (thumbnail)
+                    // Intento 3: Buscar miniaturas alternativas media:thumbnail de forma segura
                     if (!urlImagen) {
-                        urlImagen = item.getElementsByTagName("media:thumbnail")[0]?.getAttribute("url") || "";
+                        const mediaThumbnail = item.getElementsByTagNameNS("*", "thumbnail")[0];
+                        if (mediaThumbnail) {
+                            urlImagen = mediaThumbnail.getAttribute("url") || "";
+                        }
                     }
 
-                    // Si definitivamente el diario no provee foto, colocamos una silueta de RadarLat por defecto
+                    // Si el diario no provee foto, colocamos una silueta gris limpia de RadarLat por defecto
                     if (!urlImagen) {
                         urlImagen = 'https://wikimedia.org';
                     }
 
-                    // formatear la fecha de manera compacta (Ej: 14:20 - Hace instantes)
+                    // Formatear la fecha de manera compacta sin desbordes
                     let fechaCorta = "RECIENTE";
                     if (fechaRaw) {
                         const partesFecha = fechaRaw.split(' ');
                         if (partesFecha.length > 4) {
-                            fechaCorta = `${partesFecha[4].substring(0,5)} - ${partesFecha[1]} ${partesFecha[2]}`;
+                            fechaCorta = `${partesFecha[4].substring(0,5)} hs - ${partesFecha[1]} ${partesFecha[2]}`;
                         }
                     }
 
                     const tituloLimpio = titulo.replace(/"/g, '&quot;');
 
-                    // 1. Alimentar el Ticker de arriba (Sigue funcionando igual)
+                    // 1. Alimentar el Ticker de arriba
                     bloqueTicker += `<a href="${link}" target="_blank">⚡ ${tituloLimpio}</a>`;
 
-                    // 2. Alimentar el nuevo contenedor visual idéntico al de tu imagen
+                    // 2. Alimentar el nuevo contenedor visual con fotos
                     bloqueListaConFotos += `
                         <a href="${link}" target="_blank" class="noticia-card-row">
                             <div class="noticia-img-box">
@@ -356,11 +362,9 @@
                     `;
                 }
 
-                // Inyectar resultados finales de forma sincronizada
                 if (tickerTarget && bloqueTicker !== '') tickerTarget.innerHTML = bloqueTicker;
                 if (listaTarget && bloqueListaConFotos !== '') listaTarget.innerHTML = bloqueListaConFotos;
                 
-                // Reiniciar animación del ticker superior
                 if (tickerTarget) {
                     tickerTarget.style.animation = 'none';
                     tickerTarget.offsetHeight; 
@@ -371,12 +375,13 @@
                 if (listaTarget) listaTarget.innerHTML = `<p style='text-align:center; font-size:12px;'>No hay despachos visuales.</p>`;
             }
         } catch (error) {
-            console.error(error);
+            console.error("Falla en el lector:", error);
             if (tickerTarget) tickerTarget.innerHTML = `<a>⚠️ Servidor fuera de rango.</a>`;
             if (listaTarget) listaTarget.innerHTML = `<p style='text-align:center; font-size:12px; color:red;'>Error de conexión satelital.</p>`;
         }
     }
-    // Tu función original de filtrado que mantiene tus banderas y carruseles intactos
+
+    // 🟢 FUNCIÓN DE FILTRADO CORREGIDA QUE SINO TRABA EL PROCESO
     function filtrarRadar(codigoPais, elemento) {
         document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
         elemento.classList.add('active');
@@ -396,8 +401,10 @@
                 tarjeta.style.display = (tarjeta.getAttribute('data-pais') === codigoPais) ? 'block' : 'none';
             }
         });
-    }
 
+        // Lanza la recarga automática combinada de feeds
+        cargarSeñalRSS(codigoPais, textoPais);
+    }
     // Encendido automático del reproductor al cargar la pantalla
     window.addEventListener('DOMContentLoaded', () => {
         encenderCanalAleatorio();
