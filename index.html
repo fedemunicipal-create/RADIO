@@ -87,7 +87,80 @@
         }
         #main-video-player, #hls-video-player { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: none; z-index: 2; }
         #main-video-player.active, #hls-video-player.active { display: block; }
-        
+        /* ======================================================================
+           NUEVO CONTENEDOR DE NOTICIAS CON IMÁGENES (ESTILO RECOLECTOR VISUAL)
+           ====================================================================== */
+        .noticias-feed-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 10px 15px;
+            box-sizing: border-box;
+            background: #000;
+        }
+        .feed-header-title {
+            font-size: 0.85rem;
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            border-left: 4px solid #4CAF50;
+            padding-left: 10px;
+        }
+        /* Cada fila de noticia */
+        .noticia-card-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #1a1a1a;
+            text-decoration: none !important;
+            color: inherit;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        .noticia-card-row:hover {
+            background: #0b0e11;
+        }
+        /* Contenedor fijo de la imagen */
+        .noticia-img-box {
+            flex: 0 0 90px;
+            width: 90px;
+            height: 65px;
+            background: #111;
+            border-radius: 6px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .noticia-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        /* Textos de la derecha */
+        .noticia-text-box {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .noticia-headline {
+            font-size: 0.95rem;
+            color: #fff;
+            font-weight: 500;
+            line-height: 1.3;
+            margin: 0;
+        }
+        .noticia-meta-date {
+            font-size: 0.7rem;
+            color: #666;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
     </style>
 </head>
 <body>
@@ -143,8 +216,14 @@
         <video id="hls-video-player" controls autoplay playsinline muted></video> <!-- 👈 Se le agregó la palabra 'muted' aquí -->
     </div>
     
-    <!-- CONTENEDOR PRINCIPAL: Aquí puedes colocar las tarjetas de accesos o portales -->
-    <div class="main-content">
+        <!-- CONTENEDOR DONDE SE VAN A CARGAR LAS NOTICIAS CON FOTO -->
+    <div class="noticias-feed-container">
+        <div class="feed-header-title">
+            <span class="dot"></span> NOTICIAS EN VIVO | <span id="radar-noticias-pais">LATINOAMÉRICA</span>
+        </div>
+        <!-- El JavaScript llenará este div vacío automáticamente -->
+        <div id="noticias-target-lista"></div>
+    </div>
 
     <!-- CONTENEDOR PRINCIPAL: Aquí puedes colocar las tarjetas de accesos o portales -->
     <div class="main-content">
@@ -189,7 +268,114 @@
             if (hlsPlayer) { hlsPlayer.src = canalElegido.url; hlsPlayer.classList.add('active'); hlsPlayer.play().catch(e => console.log("Autoplay retenido")); }
         }
     }
+ async function cargarSeñalRSS(codigoPais, etiquetaNombre) {
+        const tickerTarget = document.getElementById('ticker-target');
+        const listaTarget = document.getElementById('noticias-target-lista');
+        const tagPaisNoticias = document.getElementById('radar-noticias-pais');
+        const tagPaisTicker = document.getElementById('radar-pais-tag');
+        
+        // Actualizar nombres de cabeceras
+        if (tagPaisTicker) tagPaisTicker.innerText = etiquetaNombre.toUpperCase();
+        if (tagPaisNoticias) tagPaisNoticias.innerText = etiquetaNombre.toUpperCase();
+        
+        if (tickerTarget) tickerTarget.innerHTML = "Estableciendo enlace satelital...";
+        if (listaTarget) listaTarget.innerHTML = "<p style='font-size:12px; color:#555; text-align:center;'>Cargando despacho visual de prensa...</p>";
+        
+        const urlPuente = fuentesNoticiasRss[codigoPais] || fuentesNoticiasRss['all'];
 
+        try {
+            const respuesta = await fetch(urlPuente);
+            const textoXml = await respuesta.text();
+            
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(textoXml, "text/xml");
+            const items = xmlDoc.getElementsByTagName("item");
+
+            if (items.length > 0) {
+                let bloqueTicker = '';
+                let bloqueListaConFotos = '';
+
+                for (let i = 0; i < Math.min(items.length, 12); i++) {
+                    const item = items[i];
+                    const titulo = item.getElementsByTagName("title")[0]?.textContent || "";
+                    const link = item.getElementsByTagName("link")[0]?.textContent || "#";
+                    const fechaRaw = item.getElementsByTagName("pubDate")[0]?.textContent || "";
+                    
+                    // 🟢 DETECTOR INTELIGENTE DE IMÁGENES DENTRO DEL FEED RSS
+                    let urlImagen = '';
+                    
+                    // Intento 1: Buscar en etiqueta enclosure estándar (usada por WordPress y Clarín)
+                    const enclosure = item.getElementsByTagName("enclosure")[0];
+                    if (enclosure && enclosure.getAttribute("type")?.includes("image")) {
+                        urlImagen = enclosure.getAttribute("url");
+                    }
+                    
+                    // Intento 2: Buscar en formato extendido media:content
+                    if (!urlImagen) {
+                        const mediaContent = item.getElementsByTagName("media:content")[0] || item.getElementsByTagName("content")[0];
+                        if (mediaContent) {
+                            urlImagen = mediaContent.getAttribute("url");
+                        }
+                    }
+
+                    // Intento 3: Buscar miniaturas alternativas (thumbnail)
+                    if (!urlImagen) {
+                        urlImagen = item.getElementsByTagName("media:thumbnail")[0]?.getAttribute("url") || "";
+                    }
+
+                    // Si definitivamente el diario no provee foto, colocamos una silueta de RadarLat por defecto
+                    if (!urlImagen) {
+                        urlImagen = 'https://wikimedia.org';
+                    }
+
+                    // formatear la fecha de manera compacta (Ej: 14:20 - Hace instantes)
+                    let fechaCorta = "RECIENTE";
+                    if (fechaRaw) {
+                        const partesFecha = fechaRaw.split(' ');
+                        if (partesFecha.length > 4) {
+                            fechaCorta = `${partesFecha[4].substring(0,5)} - ${partesFecha[1]} ${partesFecha[2]}`;
+                        }
+                    }
+
+                    const tituloLimpio = titulo.replace(/"/g, '&quot;');
+
+                    // 1. Alimentar el Ticker de arriba (Sigue funcionando igual)
+                    bloqueTicker += `<a href="${link}" target="_blank">⚡ ${tituloLimpio}</a>`;
+
+                    // 2. Alimentar el nuevo contenedor visual idéntico al de tu imagen
+                    bloqueListaConFotos += `
+                        <a href="${link}" target="_blank" class="noticia-card-row">
+                            <div class="noticia-img-box">
+                                <img src="${urlImagen}" alt="RadarLat">
+                            </div>
+                            <div class="noticia-text-box">
+                                <h3 class="noticia-headline">${tituloLimpio}</h3>
+                                <span class="noticia-meta-date">⏱️ ${fechaCorta} | ${etiquetaNombre.toUpperCase()}</span>
+                            </div>
+                        </a>
+                    `;
+                }
+
+                // Inyectar resultados finales de forma sincronizada
+                if (tickerTarget && bloqueTicker !== '') tickerTarget.innerHTML = bloqueTicker;
+                if (listaTarget && bloqueListaConFotos !== '') listaTarget.innerHTML = bloqueListaConFotos;
+                
+                // Reiniciar animación del ticker superior
+                if (tickerTarget) {
+                    tickerTarget.style.animation = 'none';
+                    tickerTarget.offsetHeight; 
+                    tickerTarget.style.animation = 'ticker-scroll-fast 16s linear infinite';
+                }
+            } else {
+                if (tickerTarget) tickerTarget.innerHTML = `<a>⚠️ No hay noticias para ${etiquetaNombre}.</a>`;
+                if (listaTarget) listaTarget.innerHTML = `<p style='text-align:center; font-size:12px;'>No hay despachos visuales.</p>`;
+            }
+        } catch (error) {
+            console.error(error);
+            if (tickerTarget) tickerTarget.innerHTML = `<a>⚠️ Servidor fuera de rango.</a>`;
+            if (listaTarget) listaTarget.innerHTML = `<p style='text-align:center; font-size:12px; color:red;'>Error de conexión satelital.</p>`;
+        }
+    }
     // Tu función original de filtrado que mantiene tus banderas y carruseles intactos
     function filtrarRadar(codigoPais, elemento) {
         document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
