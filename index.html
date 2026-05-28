@@ -140,31 +140,21 @@
   <!-- MOTOR EN DIRECTO NATIVO (REPARADO DE RAÍZ — SIN APIS EXTERNAS) -->
     <script>
     const fuentesNoticiasRss = {
+        // 🌐 GLOBAL / TODOS (Usa Google News de forma segura con el puente para el arranque)
         all: 'https://allorigins.win', 
+        
+        // 🇦🇷 ARGENTINA (Tu línea unificada de Cadena 3)
         ar: 'https://api.allorigins.win/raw?url=https://cadena3.com/rss/PoliticayEconomia.xml',
-        cl: 'https://allorigins.win',
-        uy: 'https://allorigins.win',
-        py: 'https://allorigins.win',
-        br: 'https://allorigins.win',
-        pe: 'https://allorigins.win',
-        bo: 'https://allorigins.win',
-        ec: 'https://allorigins.win',
-        ve: 'https://allorigins.win',
-        co: 'https://allorigins.win',
-        mx: 'https://allorigins.win',
-        pa: 'https://allorigins.win',
-        gt: 'https://allorigins.win',
-        sv: 'https://allorigins.win',
-        ni: 'https://allorigins.win',
-        hn: 'https://allorigins.win',
-        cr: 'https://allorigins.win',
-        cu: 'https://allorigins.win',
-        do: 'https://allorigins.win',
-        pr: 'https://allorigins.win',
-        us: 'https://allorigins.win',
-        es: 'https://allorigins.win',
-        fr: 'https://allorigins.win',
-        de: 'https://allorigins.win'
+        
+        // Marcadores de posición temporales para evitar errores de sintaxis
+        cl: 'https://allorigins.win', uy: 'https://allorigins.win', py: 'https://allorigins.win',
+        br: 'https://allorigins.win', pe: 'https://allorigins.win', bo: 'https://allorigins.win',
+        ec: 'https://allorigins.win', ve: 'https://allorigins.win', co: 'https://allorigins.win',
+        mx: 'https://allorigins.win', pa: 'https://allorigins.win', gt: 'https://allorigins.win',
+        sv: 'https://allorigins.win', ni: 'https://allorigins.win', hn: 'https://allorigins.win',
+        cr: 'https://allorigins.win', cu: 'https://allorigins.win', do: 'https://allorigins.win',
+        pr: 'https://allorigins.win', us: 'https://allorigins.win', es: 'https://allorigins.win',
+        fr: 'https://allorigins.win', de: 'https://allorigins.win'
     };
 
     async function cargarSeñalRSS(codigoPais, etiquetaNombre) {
@@ -177,27 +167,36 @@
         const urlPuente = fuentesNoticiasRss[codigoPais] || fuentesNoticiasRss['all'];
 
         try {
-            // Eliminamos rss2json de la ecuación. Leemos directo el código fuente XML.
             const respuesta = await fetch(urlPuente);
             const textoXml = await respuesta.text();
             
-            // Convertimos el texto plano en un formato que tu navegador entiende como un árbol de datos
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(textoXml, "text/xml");
             const items = xmlDoc.getElementsByTagName("item");
 
             if (items.length > 0) {
                 let bloqueTitulares = '';
-                // Tu navegador procesa los titulares de forma local y veloz
                 for (let i = 0; i < Math.min(items.length, 12); i++) {
-                    const titulo = items[i].getElementsByTagName("title")[0]?.textContent || "";
-                    const link = items[i].getElementsByTagName("link")[0]?.textContent || "#";
+                    // 🟢 EXTRACCIÓN SEGURO DE CONTENIDO DIRECTO
+                    const itemElement = items[i];
+                    const titleElement = itemElement.getElementsByTagName("title")[0];
+                    const linkElement = itemElement.getElementsByTagName("link")[0];
                     
-                    // Limpieza segura de caracteres extraños
-                    const tituloLimpio = titulo.replace(/"/g, '&quot;');
-                    bloqueTitulares += `<a href="${link}" target="_blank">⚡ ${tituloLimpio}</a>`;
+                    const titulo = titleElement ? titleElement.textContent : "";
+                    const link = linkElement ? linkElement.textContent : "#";
+                    
+                    if (titulo) {
+                        const tituloLimpio = titulo.replace(/"/g, '&quot;');
+                        bloqueTitulares += `<a href="${link}" target="_blank">⚡ ${tituloLimpio}</a>`;
+                    }
                 }
-                tickerTarget.innerHTML = bloqueTitulares;
+                
+                // Evita que el ticker quede vacío si hay errores en el bucle
+                if (bloqueTitulares !== '') {
+                    tickerTarget.innerHTML = bloqueTitulares;
+                } else {
+                    tickerTarget.innerHTML = `<a>⚠️ No se pudieron procesar los textos del diario ${etiquetaNombre}.</a>`;
+                }
                 
                 // Reinicio milimétrico de la animación
                 tickerTarget.style.animation = 'none';
