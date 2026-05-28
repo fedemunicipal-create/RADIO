@@ -139,12 +139,82 @@
 
     <!-- SCRIPT DE AUTOMATIZACIÓN FILTRADO (Totalmente Corregido) -->
     <script>
+    /**********************************************************************
+     * 🟢 COLOCAR RSS AQUÍ DE FORMA SENCILLA E INTUITIVA
+     * Mapeo de feeds para cada bandera de tu menú superior.
+     **********************************************************************/
+    const fuentesNoticiasRss = {
+        all: 'https://google.com', // Global
+        ar: 'https://clarin.com',
+        cl: 'https://biobiochile.cl',
+        uy: 'https://elobservador.com.uy',
+        py: 'https://abc.com.py',
+        br: 'https://globo.com',
+        pe: 'https://elcomercio.pe',
+        bo: 'https://eldeber.com.bo',
+        ec: 'https://eluniverso.com',
+        ve: 'https://el-nacional.com',
+        co: 'https://eltiempo.com',
+        mx: 'https://eluniversal.com.mx',
+        pa: 'https://prensa.com',
+        gt: 'https://prensalibre.com',
+        sv: 'https://elsalvador.com',
+        ni: 'https://laprensa.com.ni',
+        hn: 'https://elheraldo.hn',
+        cr: 'https://nacion.com',
+        cu: 'https://cubadebate.cu',
+        do: 'https://listindiario.com',
+        pr: 'https://elnuevodia.com',
+        us: 'https://nytimes.com',
+        es: 'https://elpais.com',
+        fr: 'https://lemonde.fr',
+        de: 'https://dw.com'
+    };
+
+    // MOTOR AUTOMÁTICO DE CONVERSIÓN Y CARGA RSS
+    async function cargarSeñalRSS(codigoPais, etiquetaNombre) {
+        const tickerTarget = document.getElementById('ticker-target');
+        const tagPais = document.getElementById('radar-pais-tag');
+        if (tagPais) tagPais.innerText = etiquetaNombre.toUpperCase();
+        
+        tickerTarget.innerHTML = "Estableciendo enlace satelital con los diarios...";
+        
+        const urlXml = fuentesNoticiasRss[codigoPais] || fuentesNoticiasRss['all'];
+        const apiConversor = `https://rss2json.com{encodeURIComponent(urlXml)}`;
+
+        try {
+            const respuesta = await fetch(apiConversor);
+            const datos = await respuesta.json();
+
+            if (datos.status === 'ok' && datos.items.length > 0) {
+                let bloqueTitulares = '';
+                // Recopila hasta 12 titulares reales
+                datos.items.slice(0, 12).forEach(item => {
+                    const tituloLimpio = item.title.replace(/"/g, '&quot;');
+                    bloqueTitulares += `<a href="${item.link}" target="_blank">⚡ ${tituloLimpio}</a>`;
+                });
+                tickerTarget.innerHTML = bloqueTitulares;
+                
+                // Reinicio de animación CSS para recalcular el largo del texto de forma fluida
+                tickerTarget.style.animation = 'none';
+                tickerTarget.offsetHeight; 
+                tickerTarget.style.animation = 'ticker-scroll-fast 16s linear infinite';
+            } else {
+                tickerTarget.innerHTML = `<a>⚠️ No hay despachos informativos disponibles para ${etiquetaNombre}.</a>`;
+            }
+        } catch (error) {
+            console.error("Falla RSS:", error);
+            tickerTarget.innerHTML = `<a>⚠️ Error de red: Servidor de noticias fuera de rango.</a>`;
+        }
+    }
+
+    // FUNCIÓN DE FILTRADO UNIFICADA TÁCTICA
     function filtrarRadar(codigoPais, elemento) {
         // Enciende la luz verde en la bandera presionada
         document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
         elemento.classList.add('active');
         
-        // Filtra las futuras tarjetas .rl-card que coloques en tu index
+        // Filtra tus futuros bloques .rl-card en base al país
         const tarjetas = document.querySelectorAll('.rl-card');
         tarjetas.forEach(tarjeta => {
             if (codigoPais === 'all') {
@@ -153,9 +223,13 @@
                 tarjeta.style.display = (tarjeta.getAttribute('data-pais') === codigoPais) ? 'block' : 'none';
             }
         });
+
+        // Sincroniza el ticker de noticias al país seleccionado
+        const textoPais = elemento.querySelector('span').innerText;
+        cargarSeñalRSS(codigoPais, textoPais);
     }
 
-    // Arranque seguro cuando el documento está listo
+    // Arranque inicial en frío con noticias globales
     window.addEventListener('DOMContentLoaded', () => {
         const botonInicial = document.querySelector('.btn-pais.active');
         if (botonInicial) {
