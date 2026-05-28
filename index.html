@@ -41,6 +41,37 @@
         /* Contenedor para el contenido del index */
         .main-content { padding: 10px 0; }
         .rl-card { margin-bottom: 30px; display: block; }
+
+        /* ======================================================================
+           NUEVOS ESTILOS PARA EL TICKER EN EL INDEX (MOVIMIENTO VELOZ Y LEGIBLE)
+           ====================================================================== */
+        .rss-container {
+            background: #0b0e11;
+            padding: 12px 15px;
+            border-bottom: 1px solid #222;
+            border-top: 1px solid #222;
+            min-height: 60px;
+            font-family: monospace;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-sizing: border-box;
+            overflow: hidden;
+            width: 100%;
+            max-width: 600px; /* Alineado al ancho del contenido central */
+            margin: 10px auto 20px auto;
+        }
+        .rss-header { font-size: 0.75rem; color: #4CAF50; font-weight: bold; margin-bottom: 4px; letter-spacing: 1px; display: flex; align-items: center; z-index: 2; }
+        .rss-wrapper-ticker { overflow: hidden; width: 100%; white-space: nowrap; display: flex; position: relative; }
+        .rss-ticker { font-size: 0.95rem; color: #adbeaf; display: inline-block; padding-left: 100%; animation: ticker-scroll-fast 16s linear infinite; }
+        .rss-ticker:hover { animation-play-state: paused; } /* Pausa al tocar para leer con calma */
+        .rss-ticker a { color: #00ff66; text-decoration: none; font-weight: bold; margin-right: 50px; display: inline-block; white-space: nowrap; }
+        .rss-ticker a:hover { text-decoration: underline; }
+
+        @keyframes ticker-scroll-fast {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
     </style>
 </head>
 <body>
