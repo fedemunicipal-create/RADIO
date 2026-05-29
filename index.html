@@ -115,9 +115,10 @@
       <div class='nav-btn active'><a href='https://github.io' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> RADIO</a></div>
       <div class='nav-btn'><a href='https://github.io' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> TV VIVO</a></div>
       <div class='nav-btn'><a href='https://blogspot.com' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> PORTALES</a></div>
-<!-- MOTOR JAVASCRIPT SIMPLIFICADO AL 100% Y TOTALMENTE OPERATIVO -->
+
+         <!-- MOTOR JAVASCRIPT CORREGIDO CON TU FORMATO COMPATIBLE -->
     <script>
-    // BASE DE DATOS DE TUS 6 CANALES CON AUTO-ARRANQUE SILENCIOSO
+    // BASE DE DATOS CON TU FORMATO CONFIRMADO Y OPERATIVO
     const canalesRadarIndex = [
         { url: 'https://www.youtube.com/embed/AhBefTxKY-o?autoplay=1&mute=1', tipo: 'youtube' }, // Canal 2 (LatinaTV)
         { url: 'https://www.youtube.com/embed/cb12KmMMDJA?autoplay=1&mute=1', tipo: 'youtube' }, // Canal 3 (TN)
@@ -126,21 +127,21 @@
         { url: 'https://www.youtube.com/embed/V4C7VNfRATA?autoplay=1&mute=1', tipo: 'youtube' }, // Canal 6 (N+Univision)
     ];
 
-    // Función que selecciona un canal de la lista al azar al cargar la página
+    // Función aleatoria reparada con el índice .url correspondiente
     function encenderCanalAleatorio() {
         const player = document.getElementById('main-video-player');
-        if (player) {
+        if (player && canalesRadarIndex.length > 0) {
             const indiceAzar = Math.floor(Math.random() * canalesRadarIndex.length);
-            player.src = canalesRadarIndex[indiceAzar];
+            // 🟢 SOLUCIÓN: Extrae la propiedad .url del objeto sorteado
+            player.src = canalesRadarIndex[indiceAzar].url;
         }
     }
 
     // Función original de filtrado que controla tus banderas e ilumina en verde
     function filtrarRadar(codigoPais, elemento) {
         document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
-        element = elemento;
-        if (element) {
-            element.classList.add('active');
+        if (elemento) {
+            elemento.classList.add('active');
         }
         
         const tarjetas = document.querySelectorAll('.rl-card');
