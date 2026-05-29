@@ -112,12 +112,11 @@
     <script>
     // BASE DE DATOS DE TUS 6 CANALES CON AUTO-ARRANQUE SILENCIOSO
     const canalesRadarIndex = [
-        "https://youtube.com", // Canal 1 (C5N)
-        "https://youtube.com", // Canal 2 (LatinaTV)
-        "https://youtube.com", // Canal 3 (TN)
-        "https://youtube.com", // Canal 4 (Euronews)
-        "https://youtube.com", // Canal 5 (CNN español)
-        "https://youtube.com"  // Canal 6 (N+Univision)
+        { url: 'https://www.youtube.com/embed/AhBefTxKY-o?autoplay=1&mute=1', tipo: 'youtube' }, // Canal 2 (LatinaTV)
+        { url: 'https://www.youtube.com/embed/cb12KmMMDJA?autoplay=1&mute=1', tipo: 'youtube' }, // Canal 3 (TN)
+        { url: 'https://www.youtube.com/embed/O9mOtdZ-nSk?autoplay=1&mute=1', tipo: 'youtube' }, // Canal 4 (Euronews)
+        { url: 'https://www.youtube.com/embed/Qr61waJ6AZg?autoplay=1&mute=1', tipo: 'youtube' }, // Canal 5 (CNN español)
+        { url: 'https://www.youtube.com/embed/V4C7VNfRATA?autoplay=1&mute=1', tipo: 'youtube' }, // Canal 6 (N+Univision)
     ];
 
     // Función que selecciona un canal de la lista al azar al cargar la página
