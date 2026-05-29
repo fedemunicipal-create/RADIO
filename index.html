@@ -237,8 +237,10 @@
       <div class='nav-btn'><a href='https://radarlat.blogspot.com' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> PORTALES</a></div>
     </div>
 
-  <script>
-    // 🟢 CARGA AQUÍ TUS 10 CANALES (YouTube o señales directas .m3u8)
+  <script>   
+    <!-- MOTOR DE AUTOMATIZACIÓN (VIDEO ALEATORIO + RECOLECTOR RSS VISUAL) -->
+    <script>
+    // 1. BASE DE DATOS DE TUS 6 CANALES CON AUTO-ARRANQUE SILENCIOSO
     const canalesRadarIndex = [
         { url: 'https://www.youtube.com/embed/VWhQ6xspnSc?autoplay=1&mute=1', tipo: 'youtube' }, // Canal 1 (C5N)
         { url: 'https://www.youtube.com/embed/AhBefTxKY-o?autoplay=1&mute=1', tipo: 'youtube' }, // Canal 2 (LatinaTV)
@@ -246,17 +248,27 @@
         { url: 'https://www.youtube.com/embed/O9mOtdZ-nSk?autoplay=1&mute=1', tipo: 'youtube' }, // Canal 4 (Euronews)
         { url: 'https://www.youtube.com/embed/Qr61waJ6AZg?autoplay=1&mute=1', tipo: 'youtube' }, // Canal 5 (CNN español)
         { url: 'https://www.youtube.com/embed/V4C7VNfRATA?autoplay=1&mute=1', tipo: 'youtube' }, // Canal 6 (N+Univision)
-        { url: 'URL_AQUÍ', tipo: 'hls' },
-        { url: 'URL_AQUÍ', tipo: 'hls' },
-        { url: 'URL_AQUÍ', tipo: 'hls' },
-        { url: 'URL_AQUÍ', tipo: 'hls' }
     ];
 
+    // 2. BASE DE DATOS RSS (CON EL LINK DE LA BBC Y CADENA 3 YA INTEGRADOS)
+    const fuentesNoticiasRss = {
+        all: 'https://api.allorigins.win/raw?url=https://www.bbc.co.uk/mundo/temas/america_latina/index.xml', 
+        ar: 'https://allorigins.win',
+        cl: 'https://allorigins.win', uy: 'https://allorigins.win', py: 'https://allorigins.win',
+        br: 'https://allorigins.win', pe: 'https://allorigins.win', bo: 'https://allorigins.win',
+        ec: 'https://allorigins.win', ve: 'https://allorigins.win', co: 'https://allorigins.win',
+        mx: 'https://allorigins.win', pa: 'https://allorigins.win', gt: 'https://allorigins.win',
+        sv: 'https://allorigins.win', ni: 'https://allorigins.win', hn: 'https://allorigins.win',
+        cr: 'https://allorigins.win', cu: 'https://allorigins.win', do: 'https://allorigins.win',
+        pr: 'https://allorigins.win', us: 'https://allorigins.win', es: 'https://allorigins.win',
+        fr: 'https://allorigins.win', de: 'https://allorigins.win'
+    };
+
+    // 3. FUNCIÓN QUE ENCIENDE UN CANAL AL AZAR
     function encenderCanalAleatorio() {
         const iframePlayer = document.getElementById('main-video-player');
         const hlsPlayer = document.getElementById('hls-video-player');
 
-        // Elige una posición al azar de la lista superior
         const indiceAzar = Math.floor(Math.random() * canalesRadarIndex.length);
         const canalElegido = canalesRadarIndex[indiceAzar];
 
@@ -268,7 +280,8 @@
             if (hlsPlayer) { hlsPlayer.src = canalElegido.url; hlsPlayer.classList.add('active'); hlsPlayer.play().catch(e => console.log("Autoplay retenido")); }
         }
     }
- // 🟢 MOTOR REPARADO: EXTRAE TÍTULOS, FECHAS E IMÁGENES XML SIN ERRORES
+
+    // 4. MOTOR NATIVO: EXTRAE TÍTULOS, FECHAS E IMÁGENES XML
     async function cargarSeñalRSS(codigoPais, etiquetaNombre) {
         const tickerTarget = document.getElementById('ticker-target');
         const listaTarget = document.getElementById('noticias-target-lista');
@@ -297,85 +310,14 @@
 
                 for (let i = 0; i < Math.min(items.length, 12); i++) {
                     const item = items[i];
-                    const titulo = item.getElementsByTagName("title")[0]?.textContent || "";
-                    const link = item.getElementsByTagName("link")[0]?.textContent || "#";
-                    const fechaRaw = item.getElementsByTagName("pubDate")[0]?.textContent || "";
                     
-                    // 🟢 EXTRACCIÓN SEGURO DE IMÁGENES MULTI-FORMATO CORREGIDA
-                    let urlImagen = '';
+                    const titleNode = item.getElementsByTagName("title")[0];
+                    const linkNode = item.getElementsByTagName("link")[0];
+                    const dateNode = item.getElementsByTagName("pubDate")[0];
                     
-                    // Intento 1: Buscar en etiqueta enclosure estándar con índice correcto
-                    const enclosure = item.getElementsByTagName("enclosure")[0];
-                    if (enclosure) {
-                        const typeAttr = enclosure.getAttribute("type") || "";
-                        if (typeAttr.includes("image") || !typeAttr) {
-                            urlImagen = enclosure.getAttribute("url") || "";
-                        }
-                    }
-                    
-                    // Intento 2: Buscar de forma segura usando Namespace universal (*) para media:content o content
-                    if (!urlImagen) {
-                        const mediaContent = item.getElementsByTagNameNS("*", "content")[0];
-                        if (mediaContent) {
-                            urlImagen = mediaContent.getAttribute("url") || "";
-                        }
-                    }
-
-    // ======================================================================
-    // 1. BASE DE DATOS RSS (CON EL LINK DE LA BBC Y CADENA 3 YA INTEGRADOS)
-    // ======================================================================
-    const fuentesNoticiasRss = {
-        // 🌐 GLOBAL / TODOS (Usa el puente seguro de AllOrigins con tu link de la BBC)
-        all: 'https://allorigins.win', 
-        
-        // 🇦🇷 ARGENTINA (Tu línea de Cadena 3)
-        ar: 'https://allorigins.win',
-        
-        // Marcadores de posición temporales para evitar errores de sintaxis
-        cl: 'https://allorigins.win', uy: 'https://allorigins.win', py: 'https://allorigins.win',
-        br: 'https://allorigins.win', pe: 'https://allorigins.win', bo: 'https://allorigins.win',
-        ec: 'https://allorigins.win', ve: 'https://allorigins.win', co: 'https://allorigins.win',
-        mx: 'https://allorigins.win', pa: 'https://allorigins.win', gt: 'https://allorigins.win',
-        sv: 'https://allorigins.win', ni: 'https://allorigins.win', hn: 'https://allorigins.win',
-        cr: 'https://allorigins.win', cu: 'https://allorigins.win', do: 'https://allorigins.win',
-        pr: 'https://allorigins.win', us: 'https://allorigins.win', es: 'https://allorigins.win',
-        fr: 'https://allorigins.win', de: 'https://allorigins.win'
-    };
-
-    // ======================================================================
-    // 2. MOTOR REPARADO: EXTRAE TÍTULOS, FECHAS E IMÁGENES XML
-    // ======================================================================
-    async function cargarSeñalRSS(codigoPais, etiquetaNombre) {
-        const tickerTarget = document.getElementById('ticker-target');
-        const listaTarget = document.getElementById('noticias-target-lista');
-        const tagPaisNoticias = document.getElementById('radar-noticias-pais');
-        const tagPaisTicker = document.getElementById('radar-pais-tag');
-        
-        if (tagPaisTicker) tagPaisTicker.innerText = etiquetaNombre.toUpperCase();
-        if (tagPaisNoticias) tagPaisNoticias.innerText = etiquetaNombre.toUpperCase();
-        
-        if (tickerTarget) tickerTarget.innerHTML = "Estableciendo enlace satelital...";
-        if (listaTarget) listaTarget.innerHTML = "<p style='font-size:12px; color:#555; text-align:center;'>Cargando despacho visual de prensa...</p>";
-        
-        const urlPuente = fuentesNoticiasRss[codigoPais] || fuentesNoticiasRss['all'];
-
-        try {
-            const respuesta = await fetch(urlPuente);
-            const textoXml = await respuesta.text();
-            
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(textoXml, "text/xml");
-            const items = xmlDoc.getElementsByTagName("item");
-
-            if (items.length > 0) {
-                let bloqueTicker = '';
-                let bloqueListaConFotos = '';
-
-                for (let i = 0; i < Math.min(items.length, 12); i++) {
-                    const item = items[i];
-                    const titulo = item.getElementsByTagName("title")[0]?.textContent || item.getElementsByTagName("title")?.textContent || "";
-                    const link = item.getElementsByTagName("link")[0]?.textContent || item.getElementsByTagName("link")?.textContent || "#";
-                    const fechaRaw = item.getElementsByTagName("pubDate")[0]?.textContent || item.getElementsByTagName("pubDate")?.textContent || "";
+                    const titulo = titleNode ? titleNode.textContent : "";
+                    const link = linkNode ? linkNode.textContent : "#";
+                    const fechaRaw = dateNode ? dateNode.textContent : "";
                     
                     let urlImagen = '';
                     
@@ -437,7 +379,7 @@
                 }
             } else {
                 if (tickerTarget) tickerTarget.innerHTML = `<a>⚠️ No hay noticias para ${etiquetaNombre}.</a>`;
-                if (listaTarget) listaTarget.innerHTML = `<p style='text-align:center; font-size:12px;'>No hay despachos visuales.</p>`;
+                if (listaTarget) install.innerHTML = `<p style='text-align:center; font-size:12px;'>No hay despachos visuales.</p>`;
             }
         } catch (error) {
             console.error(error);
@@ -446,9 +388,7 @@
         }
     }
 
-    // ======================================================================
-    // 3. 🟢 FUNCIÓN DE FILTRADO Y ACTUALIZACIÓN (ESTA PARTE FALTABA)
-    // ======================================================================
+    // 5. FUNCIÓN DE FILTRADO Y ACTUALIZACIÓN GENERAL
     function filtrarRadar(codigoPais, elemento) {
         document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
         elemento.classList.add('active');
@@ -469,19 +409,12 @@
             }
         });
 
-        // Lanza la recarga del RSS
         cargarSeñalRSS(codigoPais, textoPais);
     }
 
-    // ======================================================================
-    // 4. DISPARADOR DE INICIO (ESTA PARTE TAMBIÉN FALTABA)
-    // ======================================================================
+    // 6. DISPARADOR AL CARGAR LA PÁGINA
     window.addEventListener('DOMContentLoaded', () => {
-        // Enciende tu tómbola de video que ya tenías arriba en tu código
-        if (typeof encenderCanalAleatorio === 'function') {
-            encenderCanalAleatorio();
-        }
-        // Inicia el lector RSS con la opción global TODOS
+        encenderCanalAleatorio();
         const botonInicial = document.querySelector('.btn-pais.active');
         if (botonInicial) {
             filtrarRadar('all', botonInicial);
