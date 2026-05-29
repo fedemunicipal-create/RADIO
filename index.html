@@ -321,12 +321,12 @@
                         }
                     }
 
-                   // ======================================================================
-    // 🟢 AQUÍ ESTÁ LA SECCIÓN DONDE SE CARGAN LOS LINKS (CON EL DE LA BBC YA PUESTO)
+    // ======================================================================
+    // 1. BASE DE DATOS RSS (CON EL LINK DE LA BBC Y CADENA 3 YA INTEGRADOS)
     // ======================================================================
     const fuentesNoticiasRss = {
         // 🌐 GLOBAL / TODOS (Usa el puente seguro de AllOrigins con tu link de la BBC)
-        all: 'https://api.allorigins.win/raw?url=https://www.bbc.co.uk/mundo/temas/america_latina/index.xml', 
+        all: 'https://allorigins.win', 
         
         // 🇦🇷 ARGENTINA (Tu línea de Cadena 3)
         ar: 'https://allorigins.win',
@@ -342,7 +342,9 @@
         fr: 'https://allorigins.win', de: 'https://allorigins.win'
     };
 
-    // 🟢 MOTOR REPARADO: EXTRAE TÍTULOS, FECHAS E IMÁGENES XML SIN ERRORES
+    // ======================================================================
+    // 2. MOTOR REPARADO: EXTRAE TÍTULOS, FECHAS E IMÁGENES XML
+    // ======================================================================
     async function cargarSeñalRSS(codigoPais, etiquetaNombre) {
         const tickerTarget = document.getElementById('ticker-target');
         const listaTarget = document.getElementById('noticias-target-lista');
@@ -371,18 +373,15 @@
 
                 for (let i = 0; i < Math.min(items.length, 12); i++) {
                     const item = items[i];
-                    const titulo = item.getElementsByTagName("title")[0]?.textContent || "";
-                    const link = item.getElementsByTagName("link")[0]?.textContent || "#";
-                    const fechaRaw = item.getElementsByTagName("pubDate")[0]?.textContent || "";
+                    const titulo = item.getElementsByTagName("title")[0]?.textContent || item.getElementsByTagName("title")?.textContent || "";
+                    const link = item.getElementsByTagName("link")[0]?.textContent || item.getElementsByTagName("link")?.textContent || "#";
+                    const fechaRaw = item.getElementsByTagName("pubDate")[0]?.textContent || item.getElementsByTagName("pubDate")?.textContent || "";
                     
                     let urlImagen = '';
                     
                     const enclosure = item.getElementsByTagName("enclosure")[0];
                     if (enclosure) {
-                        const typeAttr = enclosure.getAttribute("type") || "";
-                        if (typeAttr.includes("image") || !typeAttr) {
-                            urlImagen = enclosure.getAttribute("url") || "";
-                        }
+                        urlImagen = enclosure.getAttribute("url") || "";
                     }
                     
                     if (!urlImagen) {
@@ -443,9 +442,13 @@
         } catch (error) {
             console.error(error);
             if (tickerTarget) tickerTarget.innerHTML = `<a>⚠️ Servidor fuera de rango.</a>`;
-            if (listaTarget) listaTarget.innerHTML = `<p style='text-align:center; font-size:12px; color:red;'>Error de conexión satelital.</p>
+            if (listaTarget) listaTarget.innerHTML = `<p style='text-align:center; font-size:12px; color:red;'>Error de conexión satelital.</p>`;
+        }
+    }
 
-    // 🟢 FUNCIÓN DE FILTRADO CORREGIDA QUE SINO TRABA EL PROCESO
+    // ======================================================================
+    // 3. 🟢 FUNCIÓN DE FILTRADO Y ACTUALIZACIÓN (ESTA PARTE FALTABA)
+    // ======================================================================
     function filtrarRadar(codigoPais, elemento) {
         document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
         elemento.classList.add('active');
@@ -466,13 +469,24 @@
             }
         });
 
-        // Lanza la recarga automática combinada de feeds
+        // Lanza la recarga del RSS
         cargarSeñalRSS(codigoPais, textoPais);
     }
-    // Encendido automático del reproductor al cargar la pantalla
+
+    // ======================================================================
+    // 4. DISPARADOR DE INICIO (ESTA PARTE TAMBIÉN FALTABA)
+    // ======================================================================
     window.addEventListener('DOMContentLoaded', () => {
-        encenderCanalAleatorio();
+        // Enciende tu tómbola de video que ya tenías arriba en tu código
+        if (typeof encenderCanalAleatorio === 'function') {
+            encenderCanalAleatorio();
+        }
+        // Inicia el lector RSS con la opción global TODOS
+        const botonInicial = document.querySelector('.btn-pais.active');
+        if (botonInicial) {
+            filtrarRadar('all', botonInicial);
+        }
     });
-    </script>   
+    </script>
 </body>
 </html>
