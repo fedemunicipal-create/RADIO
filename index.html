@@ -321,7 +321,77 @@
                         }
                     }
 
-                    // Intento 3: Buscar miniaturas alternativas media:thumbnail de forma segura
+                   // ======================================================================
+    // 🟢 AQUÍ ESTÁ LA SECCIÓN DONDE SE CARGAN LOS LINKS (CON EL DE LA BBC YA PUESTO)
+    // ======================================================================
+    const fuentesNoticiasRss = {
+        // 🌐 GLOBAL / TODOS (Usa el puente seguro de AllOrigins con tu link de la BBC)
+        all: 'https://api.allorigins.win/raw?url=https://www.bbc.co.uk/mundo/temas/america_latina/index.xml', 
+        
+        // 🇦🇷 ARGENTINA (Tu línea de Cadena 3)
+        ar: 'https://allorigins.win',
+        
+        // Marcadores de posición temporales para evitar errores de sintaxis
+        cl: 'https://allorigins.win', uy: 'https://allorigins.win', py: 'https://allorigins.win',
+        br: 'https://allorigins.win', pe: 'https://allorigins.win', bo: 'https://allorigins.win',
+        ec: 'https://allorigins.win', ve: 'https://allorigins.win', co: 'https://allorigins.win',
+        mx: 'https://allorigins.win', pa: 'https://allorigins.win', gt: 'https://allorigins.win',
+        sv: 'https://allorigins.win', ni: 'https://allorigins.win', hn: 'https://allorigins.win',
+        cr: 'https://allorigins.win', cu: 'https://allorigins.win', do: 'https://allorigins.win',
+        pr: 'https://allorigins.win', us: 'https://allorigins.win', es: 'https://allorigins.win',
+        fr: 'https://allorigins.win', de: 'https://allorigins.win'
+    };
+
+    // 🟢 MOTOR REPARADO: EXTRAE TÍTULOS, FECHAS E IMÁGENES XML SIN ERRORES
+    async function cargarSeñalRSS(codigoPais, etiquetaNombre) {
+        const tickerTarget = document.getElementById('ticker-target');
+        const listaTarget = document.getElementById('noticias-target-lista');
+        const tagPaisNoticias = document.getElementById('radar-noticias-pais');
+        const tagPaisTicker = document.getElementById('radar-pais-tag');
+        
+        if (tagPaisTicker) tagPaisTicker.innerText = etiquetaNombre.toUpperCase();
+        if (tagPaisNoticias) tagPaisNoticias.innerText = etiquetaNombre.toUpperCase();
+        
+        if (tickerTarget) tickerTarget.innerHTML = "Estableciendo enlace satelital...";
+        if (listaTarget) listaTarget.innerHTML = "<p style='font-size:12px; color:#555; text-align:center;'>Cargando despacho visual de prensa...</p>";
+        
+        const urlPuente = fuentesNoticiasRss[codigoPais] || fuentesNoticiasRss['all'];
+
+        try {
+            const respuesta = await fetch(urlPuente);
+            const textoXml = await respuesta.text();
+            
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(textoXml, "text/xml");
+            const items = xmlDoc.getElementsByTagName("item");
+
+            if (items.length > 0) {
+                let bloqueTicker = '';
+                let bloqueListaConFotos = '';
+
+                for (let i = 0; i < Math.min(items.length, 12); i++) {
+                    const item = items[i];
+                    const titulo = item.getElementsByTagName("title")[0]?.textContent || "";
+                    const link = item.getElementsByTagName("link")[0]?.textContent || "#";
+                    const fechaRaw = item.getElementsByTagName("pubDate")[0]?.textContent || "";
+                    
+                    let urlImagen = '';
+                    
+                    const enclosure = item.getElementsByTagName("enclosure")[0];
+                    if (enclosure) {
+                        const typeAttr = enclosure.getAttribute("type") || "";
+                        if (typeAttr.includes("image") || !typeAttr) {
+                            urlImagen = enclosure.getAttribute("url") || "";
+                        }
+                    }
+                    
+                    if (!urlImagen) {
+                        const mediaContent = item.getElementsByTagNameNS("*", "content")[0];
+                        if (mediaContent) {
+                            urlImagen = mediaContent.getAttribute("url") || "";
+                        }
+                    }
+
                     if (!urlImagen) {
                         const mediaThumbnail = item.getElementsByTagNameNS("*", "thumbnail")[0];
                         if (mediaThumbnail) {
@@ -329,12 +399,10 @@
                         }
                     }
 
-                    // Si el diario no provee foto, colocamos una silueta gris limpia de RadarLat por defecto
                     if (!urlImagen) {
                         urlImagen = 'https://wikimedia.org';
                     }
 
-                    // Formatear la fecha de manera compacta sin desbordes
                     let fechaCorta = "RECIENTE";
                     if (fechaRaw) {
                         const partesFecha = fechaRaw.split(' ');
@@ -345,10 +413,8 @@
 
                     const tituloLimpio = titulo.replace(/"/g, '&quot;');
 
-                    // 1. Alimentar el Ticker de arriba
                     bloqueTicker += `<a href="${link}" target="_blank">⚡ ${tituloLimpio}</a>`;
 
-                    // 2. Alimentar el nuevo contenedor visual con fotos
                     bloqueListaConFotos += `
                         <a href="${link}" target="_blank" class="noticia-card-row">
                             <div class="noticia-img-box">
@@ -375,11 +441,9 @@
                 if (listaTarget) listaTarget.innerHTML = `<p style='text-align:center; font-size:12px;'>No hay despachos visuales.</p>`;
             }
         } catch (error) {
-            console.error("Falla en el lector:", error);
+            console.error(error);
             if (tickerTarget) tickerTarget.innerHTML = `<a>⚠️ Servidor fuera de rango.</a>`;
-            if (listaTarget) listaTarget.innerHTML = `<p style='text-align:center; font-size:12px; color:red;'>Error de conexión satelital.</p>`;
-        }
-    }
+            if (listaTarget) listaTarget.innerHTML = `<p style='text-align:center; font-size:12px; color:red;'>Error de conexión satelital.</p>
 
     // 🟢 FUNCIÓN DE FILTRADO CORREGIDA QUE SINO TRABA EL PROCESO
     function filtrarRadar(codigoPais, elemento) {
