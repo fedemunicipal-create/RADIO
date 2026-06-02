@@ -75,15 +75,19 @@
         .main-content { padding: 10px 0; }
         .rl-card { margin-bottom: 30px; display: block; }
 
-        /* MENÚ SUPERIOR DE SECCIONES - DISEÑO CLONADO DEL MENÚ INFERIOR */
+       /* MENÚ SUPERIOR DE SECCIONES - FIJO E INDEPENDIENTE SIN TOCAR BANDERAS */
         .radar-menu-superior {
+            position: -webkit-sticky; /* Compatibilidad con Safari/iPhone */
+            position: sticky;
+            top: 0;                   /* Se congela exactamente al tocar el borde superior */
+            z-index: 2500;            /* Capa alta para flotar libremente sobre el contenido */
             width: 100%;
             height: 50px; 
-            background: #000000; /* Negro absoluto como el inferior */
+            background: #000000;      /* Fondo negro absoluto como el inferior */
             display: flex;
             justify-content: space-around;
             align-items: center;
-            border-top: none; /* CORREGIDO: Eliminado para soldarse perfectamente al bloque de las banderas */
+            border-top: 1px solid #1a1a1a;
             border-bottom: 1px solid #1a1a1a;
             box-sizing: border-box;
         }
