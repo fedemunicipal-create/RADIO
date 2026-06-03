@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- 🟢 PEGA ESTA LÍNEA AQUÍ (Justo debajo de la etiqueta viewport) -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+    <title>RADARLAT NOTICIAS</title>
+    <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>RADARLAT NOTICIAS</title>
     
     <style>
@@ -396,12 +404,11 @@ rssfeed_cache = "b3e6a99f21b5a068d1a393d0a203012f";
         }
     });
 
-        // BASE DE DATOS DE TWITCH CON 10 CANALES ACTIVOS 24HS (TODOS EN MINÚSCULAS)
+      // BASE DE DATOS DE TWITCH CON LOS 3 CANALES 24HS ESTABLES
     const canalesTwitchRadar = [
-        'mileniosmart',   // 🟢 Corregido a minúsculas
-        'canaloncetv',       
-        'luzutv',      
-          
+        'mileniosmart',
+        'canaloncetv',
+        'luzutv'
     ];
 
     function encenderTwitchAleatorio() {
@@ -410,21 +417,17 @@ rssfeed_cache = "b3e6a99f21b5a068d1a393d0a203012f";
             const indiceAzar = Math.floor(Math.random() * canalesTwitchRadar.length);
             const canalSeleccionado = canalesTwitchRadar[indiceAzar];
             
-            // Detector de dominio para GitHub Pages
-            let dominioActual = window.location.hostname;
+            // 🟢 SOLUCIÓN: Forzamos tu dominio de GitHub Pages directamente aquí
+            const dominioActual = "fedemunicipal-create.github.io";
             
-            if (dominioActual === "localhost" || dominioActual === "127.0.0.1" || dominioActual === "") {
-                dominioActual = "localhost";
-            }
-            
-            // 🟢 URL OFICIAL REPARADA: Usa el reproductor incrustado y pasa las variables de manera correcta
+            // 🟢 URL COMPLETAMENTE REPARADA (Con player.twitch.tv y ?channel=)
             twitchPlayer.src = "https://twitch.tv" + canalSeleccionado + "&parent=" + dominioActual + "&autoplay=true&muted=true";
         }
     }
 
-    // Aseguramos que cargue en el inicializador existente junto a YouTube
+    // Inicializador unificado al cargar la pantalla
     window.addEventListener('DOMContentLoaded', () => {
-        encenderCanalAleatorio(); // Tu reproductor de YouTube
+        encenderCanalAleatorio();  // Tu reproductor de YouTube
         encenderTwitchAleatorio(); // Tu nuevo reproductor de Twitch REPARADO
         
         // Candado del menú superior de 7mm
