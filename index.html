@@ -197,6 +197,20 @@
 </script>
 <script src="https://www.highperformanceformat.com/2518913e078a8274472eea34aba82089/invoke.js"></script>
  <!-- FIN DEL CONTENEDOR CENTRADO --
+
+      <!-- REPRODUCTOR DE TWITCH AJUSTADO AL ANCHO CELULAR (DEBAJO DE ADSTERRA) -->
+    <div class="video-container">
+        <!-- Importante: El parámetro parent debe ser tu dominio de GitHub Pages para que funcione correctamente -->
+        <iframe 
+            id="twitch-video-player" 
+            src="" 
+            allowfullscreen="true" 
+            scrolling="no" 
+            height="100%" 
+            width="100%" 
+            style="border: none; position: absolute; top: 0; left: 0;">
+        </iframe>
+    </div>
     
     <!-- CONTENEDOR PRINCIPAL -->
     <div class="main-content">
@@ -376,6 +390,49 @@ rssfeed_cache = "b3e6a99f21b5a068d1a393d0a203012f";
         const menuSuperior = document.querySelector('.radar-menu-superior');
         if (menuSuperior) {
             // Fuerza el tamaño físico absoluto de 58px para anular cualquier cálculo del navegador
+            menuSuperior.style.height = '58px';
+            menuSuperior.style.minHeight = '58px';
+            menuSuperior.style.maxHeight = '58px';
+        }
+    });
+
+          // BASE DE DATOS DE TWITCH CON 10 CANALES 24HS (NOTICIAS, DEPORTES Y CONTEXTO)
+    const canalesTwitchRadar = [
+        'elchiringuitotv',   // Deportes 24hs / Debates
+        'kingsleague',       // Deportes / Eventos en vivo
+        'gerardromero',      // Deportes / Noticias minuto a minuto
+        'relevo',            // Información deportiva internacional
+        'vortex_tv',         // Transmisiones variadas / Entretenimiento
+        'rtve',              // Noticias de España y el mundo (cuando transmite)
+        'luzutv',            // Streaming en vivo / Programación diaria
+        'olgaenvivo',        // Canales de streaming de alta audiencia
+        'blender_tv',        // Contenido en vivo / Debates diarios
+        'lacasastreaming'    // Variedades y transmisiones en vivo
+    ];
+
+    // Función para encender un canal de Twitch al azar
+    function encenderTwitchAleatorio() {
+        const twitchPlayer = document.getElementById('twitch-video-player');
+        if (twitchPlayer && canalesTwitchRadar.length > 0) {
+            const indiceAzar = Math.floor(Math.random() * canalesTwitchRadar.length);
+            const canalSeleccionado = canalesTwitchRadar[indiceAzar];
+            
+            // 🟢 REQUISITO DE TWITCH: Extrae dinámicamente el dominio actual de tu GitHub Pages
+            const dominioActual = window.location.hostname;
+            
+            // Construye la URL oficial de incrustación de Twitch
+            twitchPlayer.src = `https://twitch.tv{canalSeleccionado}&parent=${dominioActual}&autoplay=true&muted=true`;
+        }
+    }
+
+    // Modificamos tu inicializador seguro existente para que cargue AMBOS reproductores
+    window.addEventListener('DOMContentLoaded', () => {
+        encenderCanalAleatorio(); // Tu reproductor de YouTube original
+        encenderTwitchAleatorio(); // 2026: Tu nuevo reproductor de Twitch aleatorio
+        
+        // Mantener el candado de tamaño de 7mm que fijamos antes
+        const menuSuperior = document.querySelector('.radar-menu-superior');
+        if (menuSuperior) {
             menuSuperior.style.height = '58px';
             menuSuperior.style.minHeight = '58px';
             menuSuperior.style.maxHeight = '58px';
