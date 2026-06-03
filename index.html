@@ -396,9 +396,9 @@ rssfeed_cache = "b3e6a99f21b5a068d1a393d0a203012f";
         }
     });
 
-         // BASE DE DATOS DE TWITCH CON 10 CANALES ACTIVOS 24HS
+        // BASE DE DATOS DE TWITCH CON 10 CANALES ACTIVOS 24HS (TODOS EN MINÚSCULAS)
     const canalesTwitchRadar = [
-        'ElChiringuitoTV',   
+        'elchiringuitotv',   // 🟢 Corregido a minúsculas
         'kingsleague',       
         'gerardromero',      
         'relevo',            
@@ -416,23 +416,22 @@ rssfeed_cache = "b3e6a99f21b5a068d1a393d0a203012f";
             const indiceAzar = Math.floor(Math.random() * canalesTwitchRadar.length);
             const canalSeleccionado = canalesTwitchRadar[indiceAzar];
             
-            // 🟢 DETECTOR DE DOMINIO REFORZADO PARA GITHUB PAGES Y MÓVILES
+            // Detector de dominio para GitHub Pages
             let dominioActual = window.location.hostname;
             
-            // Si estás probando de forma local en tu computadora, esto evita que falle
             if (dominioActual === "localhost" || dominioActual === "127.0.0.1" || dominioActual === "") {
                 dominioActual = "localhost";
             }
             
-            // 🟢 URL CORRECTA CON PARÁMETROS DE REPRODUCCIÓN AUTOMÁTICA Y SILENCIADO COMPLETOS
-            twitchPlayer.src = `https://twitch.tv{canalSeleccionado}&parent=${dominioActual}&autoplay=true&muted=true`;
+            // 🟢 URL OFICIAL REPARADA: Usa el reproductor incrustado y pasa las variables de manera correcta
+            twitchPlayer.src = "https://twitch.tv" + canalSeleccionado + "&parent=" + dominioActual + "&autoplay=true&muted=true";
         }
     }
 
     // Aseguramos que cargue en el inicializador existente junto a YouTube
     window.addEventListener('DOMContentLoaded', () => {
         encenderCanalAleatorio(); // Tu reproductor de YouTube
-        encenderTwitchAleatorio(); // Tu nuevo reproductor de Twitch corregido
+        encenderTwitchAleatorio(); // Tu nuevo reproductor de Twitch REPARADO
         
         // Candado del menú superior de 7mm
         const menuSuperior = document.querySelector('.radar-menu-superior');
@@ -442,7 +441,6 @@ rssfeed_cache = "b3e6a99f21b5a068d1a393d0a203012f";
             menuSuperior.style.maxHeight = '58px';
         }
     });
-      	
     </script>
 </body>
 </html>
