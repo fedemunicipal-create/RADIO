@@ -75,18 +75,23 @@
         .main-content { padding: 10px 0; }
         .rl-card { margin-bottom: 30px; display: block; }
 
-   /* MENÚ SUPERIOR DE SECCIONES - AJUSTE LIMPIO */
+   /* MENÚ SUPERIOR DE SECCIONES - CAPA UNIFICADA SIN OCULTAMIENTO */
         .radar-menu-superior {
             position: -webkit-sticky; 
             position: sticky;
             top: 62px;                
-            z-index: 1999;            
+            
+            /* 🟢 SOLUCIÓN: Igualamos el z-index al mismo nivel exacto de tus banderas (2000) */
+            z-index: 2000 !important; 
+            
             width: 100%;
-            background: #000000;      
+            background: #000000;      /* Fondo negro absoluto para mimetizarse con el fondo del body */
             display: flex;
             justify-content: space-around;
             align-items: center;
-            border-top: 1px solid #1a1a1a;
+            
+            /* Bordes tácticos oscuros para delimitar el menú sin alterar su tamaño */
+            border-top: 1px solid #111111; 
             border-bottom: 1px solid #1a1a1a;
             box-sizing: border-box;
         }
