@@ -408,10 +408,11 @@ rssfeed_cache = "b3e6a99f21b5a068d1a393d0a203012f";
             const indiceAzar = Math.floor(Math.random() * canalesDeportesRadar.length);
             const linkBase = canalesDeportesRadar[indiceAzar];
             
-            // 🟢 SOLUCIÓN: Agrega los parámetros de reproducción y muteo obligatorios al enlace directo
-            deportesPlayer.src = linkBase + "?autoplay=1&mute=1";
+            // 🟢 SOLUCCIÓN AL PLAY: Agrega autoplay, muteo y la orden "playsinline" obligatoria para celulares
+            deportesPlayer.src = linkBase + "?autoplay=1&mute=1&playsinline=1";
         }
     }
+
 
     // Ejecuta de forma aislada sin entorpecer tus otras funciones
     if (document.readyState === 'loading') {
