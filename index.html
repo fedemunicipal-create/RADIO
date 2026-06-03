@@ -396,23 +396,30 @@ rssfeed_cache = "b3e6a99f21b5a068d1a393d0a203012f";
         }
     });
 
-      // Lista simple de canales de deportes/noticias 24hs
-    const canalesTwitchRadar = ['mileniosmart', 'canaloncetv', 'elchiringuitotv'];
+    // Lista de 3 canales de noticias/streaming estables de Twitch 24hs
+    const canalesTwitchRadar = ['mileniosmart', 'canaloncetv', 'luzutv'];
 
     function encenderTwitchAleatorio() {
         const twitchPlayer = document.getElementById('twitch-video-player');
         if (twitchPlayer && canalesTwitchRadar.length > 0) {
-            // Elige un canal al azar de la lista
+            // Sorteo aleatorio del canal
             const indiceAzar = Math.floor(Math.random() * canalesTwitchRadar.length);
             const canalSeleccionado = canalesTwitchRadar[indiceAzar];
             
-            // 🟢 FORMATO SIMPLE DIRECTO: Sin detectar hostnames ni códigos raros
-            twitchPlayer.src = "https://twitch.tv" + canalSeleccionado + "&autoplay=true&muted=true";
+            // 🟢 EL CANDADO EXIGIDO: Tu dominio real de GitHub Pages para romper el bloqueo de IP de Twitch
+            const dominioFijo = "fedemunicipal-create.github.io";
+            
+            // URL oficial obligatoria con autoplay y silenciado activo para navegadores móviles
+            twitchPlayer.src = "https://player.twitch.tv/?channel=" + canalSeleccionado + "&parent=" + dominioFijo + "&autoplay=true&muted=true";
         }
     }
 
-    // Activa la función agregando esta línea dentro de tu 'DOMContentLoaded' o 'window.onload' actual:
-    encenderTwitchAleatorio();
+    // Ejecutar la función de Twitch de forma aislada e independiente
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', encenderTwitchAleatorio);
+    } else {
+        encenderTwitchAleatorio();
+    }
     </script>
 </body>
 </html>
