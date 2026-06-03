@@ -75,30 +75,34 @@
         .main-content { padding: 10px 0; }
         .rl-card { margin-bottom: 30px; display: block; }
 
-   /* MENÚ SUPERIOR DE SECCIONES - CAPA UNIFICADA SIN OCULTAMIENTO */
+    /* MENÚ SUPERIOR DE SECCIONES - ALTURA DE 7MM Y BORDE VERDE REFORZADO */
         .radar-menu-superior {
             position: -webkit-sticky; 
             position: sticky;
-            top: 62px;                
-            
-            /* 🟢 SOLUCIÓN: Igualamos el z-index al mismo nivel exacto de tus banderas (2000) */
+            top: 60px; /* Se acopla justo al borde inferior del bloque de países */               
             z-index: 2000 !important; 
-            
             width: 100%;
-            background: #000000;      /* Fondo negro absoluto para mimetizarse con el fondo del body */
+            
+            /* 🟢 SOLUCIÓN 1: Dimensiones fijas a 58px (Equivale a ~7mm reales en pantallas móviles estándar) */
+            height: 58px !important; 
+            min-height: 58px !important;
+            max-height: 58px !important;
+            
+            background: #000000; /* Fondo negro absoluto */
             display: flex;
             justify-content: space-around;
             align-items: center;
-            
-            /* Bordes tácticos oscuros para delimitar el menú sin alterar su tamaño */
-            border-top: 1px solid #111111; 
-            border-bottom: 1px solid #1a1a1a;
             box-sizing: border-box;
+            
+            /* 🟢 SOLUCIÓN 2: Traspasamos el borde verde aquí para que sirva de base y nunca se borre al subir */
+            border-top: none;
+            border-bottom: 2px solid #4CAF50 !important; 
         }
         .radar-menu-superior .nav-btn {
             display: flex;
             align-items: center;
             justify-content: center;
+            height: 100%;
         }
         .radar-menu-superior .nav-btn a {
             font-size: 0.85rem; 
@@ -364,17 +368,14 @@ rssfeed_cache = "b3e6a99f21b5a068d1a393d0a203012f";
     window.addEventListener('DOMContentLoaded', () => {
         encenderCanalAleatorio();
     });
-        // 🟢 CANDADO INALTERABLE: Bloquea los píxeles exactos del menú para evitar la deformación por scroll móvil
+       // CANDADO DE TAMAÑO FIJO EN 7MM (58PX)
     window.addEventListener('DOMContentLoaded', () => {
         const menuSuperior = document.querySelector('.radar-menu-superior');
         if (menuSuperior) {
-            // Lee la altura real renderizada en el celular (usualmente 50px o 52px incluyendo bordes)
-            const alturaReal = menuSuperior.offsetHeight; 
-            
-            // Inyecta el tamaño de forma estricta y permanente en el elemento
-            menuSuperior.style.height = `${alturaReal}px`;
-            menuSuperior.style.minHeight = `${alturaReal}px`;
-            menuSuperior.style.maxHeight = `${alturaReal}px`;
+            // Fuerza el tamaño físico absoluto de 58px para anular cualquier cálculo del navegador
+            menuSuperior.style.height = '58px';
+            menuSuperior.style.minHeight = '58px';
+            menuSuperior.style.maxHeight = '58px';
         }
     });
       	
