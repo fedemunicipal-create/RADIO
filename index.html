@@ -75,20 +75,13 @@
         .main-content { padding: 10px 0; }
         .rl-card { margin-bottom: 30px; display: block; }
 
-     /* MENÚ SUPERIOR DE SECCIONES - TAMAÑO RÍGIDO INALTERABLE */
+   /* MENÚ SUPERIOR DE SECCIONES - AJUSTE LIMPIO */
         .radar-menu-superior {
             position: -webkit-sticky; 
             position: sticky;
             top: 62px;                
             z-index: 1999;            
             width: 100%;
-            
-            /* 🟢 SOLUCIÓN: Triple blindaje de altura para evitar que se encoja o expanda */
-            height: 50px !important; 
-            min-height: 50px !important;
-            max-height: 50px !important;
-            flex-shrink: 0 !important; /* Evita que contenedores flexibles externos lo compriman */
-            
             background: #000000;      
             display: flex;
             justify-content: space-around;
@@ -101,7 +94,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100%; /* Forza a los botones a ocupar el alto total sin estirarse */
         }
         .radar-menu-superior .nav-btn a {
             font-size: 0.85rem; 
@@ -366,6 +358,19 @@ rssfeed_cache = "b3e6a99f21b5a068d1a393d0a203012f";
     // Inicializador seguro al cargar la pantalla
     window.addEventListener('DOMContentLoaded', () => {
         encenderCanalAleatorio();
+    });
+        // 🟢 CANDADO INALTERABLE: Bloquea los píxeles exactos del menú para evitar la deformación por scroll móvil
+    window.addEventListener('DOMContentLoaded', () => {
+        const menuSuperior = document.querySelector('.radar-menu-superior');
+        if (menuSuperior) {
+            // Lee la altura real renderizada en el celular (usualmente 50px o 52px incluyendo bordes)
+            const alturaReal = menuSuperior.offsetHeight; 
+            
+            // Inyecta el tamaño de forma estricta y permanente en el elemento
+            menuSuperior.style.height = `${alturaReal}px`;
+            menuSuperior.style.minHeight = `${alturaReal}px`;
+            menuSuperior.style.maxHeight = `${alturaReal}px`;
+        }
     });
       	
     </script>
