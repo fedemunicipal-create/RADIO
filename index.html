@@ -198,7 +198,7 @@
 <script src="https://www.highperformanceformat.com/2518913e078a8274472eea34aba82089/invoke.js"></script>
  <!-- FIN DEL CONTENEDOR CENTRADO --
 
-     <!-- REPRODUCTOR DE TWITCH CORREGIDO AL ANCHO CELULAR -->
+    <!-- REPRODUCTOR DE TWITCH INDEPENDIENTE Y SENCILLO -->
     <div class="video-container">
         <iframe 
             id="twitch-video-player" 
@@ -396,40 +396,23 @@ rssfeed_cache = "b3e6a99f21b5a068d1a393d0a203012f";
         }
     });
 
-      // BASE DE DATOS DE TWITCH CON LOS 3 CANALES 24HS ESTABLES
-    const canalesTwitchRadar = [
-        'mileniosmart',
-        'canaloncetv',
-        'luzutv'
-    ];
+      // Lista simple de canales de deportes/noticias 24hs
+    const canalesTwitchRadar = ['mileniosmart', 'canaloncetv', 'elchiringuitotv'];
 
     function encenderTwitchAleatorio() {
         const twitchPlayer = document.getElementById('twitch-video-player');
         if (twitchPlayer && canalesTwitchRadar.length > 0) {
+            // Elige un canal al azar de la lista
             const indiceAzar = Math.floor(Math.random() * canalesTwitchRadar.length);
             const canalSeleccionado = canalesTwitchRadar[indiceAzar];
             
-            // 🟢 SOLUCIÓN: Forzamos tu dominio de GitHub Pages directamente aquí
-            const dominioActual = "fedemunicipal-create.github.io";
-            
-            // 🟢 URL COMPLETAMENTE REPARADA (Con player.twitch.tv y ?channel=)
-            twitchPlayer.src = "https://twitch.tv" + canalSeleccionado + "&parent=" + dominioActual + "&autoplay=true&muted=true";
+            // 🟢 FORMATO SIMPLE DIRECTO: Sin detectar hostnames ni códigos raros
+            twitchPlayer.src = "https://twitch.tv" + canalSeleccionado + "&autoplay=true&muted=true";
         }
     }
 
-    // Inicializador unificado al cargar la pantalla
-    window.addEventListener('DOMContentLoaded', () => {
-        encenderCanalAleatorio();  // Tu reproductor de YouTube
-        encenderTwitchAleatorio(); // Tu nuevo reproductor de Twitch REPARADO
-        
-        // Candado del menú superior de 7mm
-        const menuSuperior = document.querySelector('.radar-menu-superior');
-        if (menuSuperior) {
-            menuSuperior.style.height = '58px';
-            menuSuperior.style.minHeight = '58px';
-            menuSuperior.style.maxHeight = '58px';
-        }
-    });
+    // Activa la función agregando esta línea dentro de tu 'DOMContentLoaded' o 'window.onload' actual:
+    encenderTwitchAleatorio();
     </script>
 </body>
 </html>
