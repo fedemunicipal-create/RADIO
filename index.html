@@ -75,15 +75,15 @@
         .main-content { padding: 10px 0; }
         .rl-card { margin-bottom: 30px; display: block; }
 
-    /* MENÚ SUPERIOR DE SECCIONES - ALTURA DE 7MM Y BORDE VERDE REFORZADO */
+   /* MENÚ SUPERIOR DE SECCIONES - ESCUDO PROTECTOR DE LÍNEA VERDE */
         .radar-menu-superior {
             position: -webkit-sticky; 
             position: sticky;
-            top: 60px; /* Se acopla justo al borde inferior del bloque de países */               
-            z-index: 2000 !important; 
+            top: 62px; /* Se posiciona exactamente donde termina el bloque de banderas */               
+            z-index: 1999 !important; /* Un nivel justo por debajo de las banderas (2000) para no taparlas */
             width: 100%;
             
-            /* 🟢 SOLUCIÓN 1: Dimensiones fijas a 58px (Equivale a ~7mm reales en pantallas móviles estándar) */
+            /* Altura exacta de 7mm (58px) */
             height: 58px !important; 
             min-height: 58px !important;
             max-height: 58px !important;
@@ -94,9 +94,12 @@
             align-items: center;
             box-sizing: border-box;
             
-            /* 🟢 SOLUCIÓN 2: Traspasamos el borde verde aquí para que sirva de base y nunca se borre al subir */
-            border-top: none;
-            border-bottom: 2px solid #4CAF50 !important; 
+            /* 🟢 SOLUCONADO: Eliminamos el borde verde de abajo que no querías */
+            border-bottom: none !important; 
+            
+            /* 🟢 SOLUCIÓN DEFINTIVA: Borde transparente arriba de 2px (el grosor exacto de tu línea verde). 
+               Esto actúa como un espaciador invisible que evita que el fondo negro tape la línea verde de arriba */
+            border-top: 2px solid transparent !important; 
         }
         .radar-menu-superior .nav-btn {
             display: flex;
