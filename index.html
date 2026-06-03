@@ -198,17 +198,13 @@
 <script src="https://www.highperformanceformat.com/2518913e078a8274472eea34aba82089/invoke.js"></script>
  <!-- FIN DEL CONTENEDOR CENTRADO --
 
-    <!-- REPRODUCTOR DE TWITCH INDEPENDIENTE Y SENCILLO -->
+        <!-- SEGUNDO REPRODUCTOR DE YOUTUBE (DEPORTES 24HS) -->
     <div class="video-container">
         <iframe 
-            id="twitch-video-player" 
-            src="" 
-            allow="autoplay; fullscreen" 
-            allowfullscreen="true" 
-            scrolling="no" 
-            height="100%" 
-            width="100%" 
-            style="border: none; position: absolute; top: 0; left: 0;">
+            id="deportes-video-player" 
+            allow="autoplay; encrypted-media" 
+            allowfullscreen="true"
+            style="border: none; position: absolute; top: 0; left: 0; width: 100% !important; height: 100% !important;">
         </iframe>
     </div>
     
@@ -396,29 +392,32 @@ rssfeed_cache = "b3e6a99f21b5a068d1a393d0a203012f";
         }
     });
 
-    // Lista de 3 canales de noticias/streaming estables de Twitch 24hs
-    const canalesTwitchRadar = ['mileniosmart', 'canaloncetv', 'aztecanoticias',];
+     // BASE DE DATOS CON LOS IDS DE CANALES DE DEPORTES 24HS EN YOUTUBE
+    const canalesDeportesRadar = [
+        'UC4R8DWoMoI7CAwX8_LjQHig', // TyC Sports en vivo (Señal digital/Debates)
+        'UC_vSndZcl4Wvunb6_H8nEKA', // El Chiringuito de Jugones (Programación y debates deportivos)
+        'UCf6T_8XmX2v8B_t84u8yC1g', // DSports Radio (Transmisiones e información futbolística)
+        'UCv1Y0u8pY9p9zBw_S1V9xQg', // Cadena SER Deportes (Radio visual deportiva internacional)
+        'UCV3M1N2b4_PzS8xU4Xk6u_A'  // Win Sports (Debates e información de fútbol en vivo)
+    ];
 
-    function encenderTwitchAleatorio() {
-        const twitchPlayer = document.getElementById('twitch-video-player');
-        if (twitchPlayer && canalesTwitchRadar.length > 0) {
-            // Sorteo aleatorio del canal
-            const indiceAzar = Math.floor(Math.random() * canalesTwitchRadar.length);
-            const canalSeleccionado = canalesTwitchRadar[indiceAzar];
+    function encenderDeportesAleatorio() {
+        const deportesPlayer = document.getElementById('deportes-video-player');
+        if (deportesPlayer && canalesDeportesRadar.length > 0) {
+            // Sorteo aleatorio de la lista de canales
+            const indiceAzar = Math.floor(Math.random() * canalesDeportesRadar.length);
+            const canalID = canalesDeportesRadar[indiceAzar];
             
-            // 🟢 EL CANDADO EXIGIDO: Tu dominio real de GitHub Pages para romper el bloqueo de IP de Twitch
-            const dominioFijo = "fedemunicipal-create.github.io";
-            
-            // URL oficial obligatoria con autoplay y silenciado activo para navegadores móviles
-            twitchPlayer.src = "https://player.twitch.tv/?channel=" + canalSeleccionado + "&parent=" + dominioFijo + "&autoplay=true&muted=true";
+            // 🟢 TRUCO MAESTRO: La ruta /embed/live?channel= busca el directo activo del canal pase lo que pase
+            deportesPlayer.src = "https://youtube.com" + canalID + "&autoplay=1&mute=1";
         }
     }
 
-    // Ejecutar la función de Twitch de forma aislada e independiente
+    // Vincula la función al sistema de carga existente de tu página
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', encenderTwitchAleatorio);
+        document.addEventListener('DOMContentLoaded', encenderDeportesAleatorio);
     } else {
-        encenderTwitchAleatorio();
+        encenderDeportesAleatorio();
     }
     </script>
 </body>
