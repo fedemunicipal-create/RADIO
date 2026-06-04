@@ -336,14 +336,8 @@
       <div class='nav-btn'><a href='https://radarlat.blogspot.com' style='color: #ffffff !important; text-decoration: none !important;'><span class='dot'></span> VOLVER</a></div>
     </div>
 
-    <!-- Script de Automatización de Feeds RSS -->
-    <script>
-    const urlsFeedsReales = {
-        "ar": "infobae.com",
-        "cl": "latercera.com",
-        "uy": "elpais.com.uy"
-    };
-
+  
+<script>
     async function filtrarRadar(codigoPais, elemento) {
         document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
         elemento.classList.add('active');
