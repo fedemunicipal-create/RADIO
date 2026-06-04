@@ -74,7 +74,7 @@
             <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://flagcdn.com/w80/de.png"><span>ALE</span></div>
         </div>
     </div>
-<script>
+
     <!-- Contenido Principal: Los 24 carruseles de diarios y portales -->
     <div class="main-content">
         
@@ -315,7 +315,12 @@
 
    
     <script>
-    
+         const urlsFeedsReales = {
+        "ar": "infobae.com",
+        "cl": "latercera.com",
+        "uy": "elpais.com.uy"
+    };
+
     async function filtrarRadar(codigoPais, elemento) {
         document.querySelectorAll('.btn-pais').forEach(btn => btn.classList.remove('active'));
         elemento.classList.add('active');
