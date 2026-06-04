@@ -75,8 +75,9 @@
             <div class="btn-pais" onclick="filtrarRadar('de', this)"><img src="https://flagcdn.com/w80/de.png"><span>ALE</span></div>
         </div>
     </div>
+   
     <!-- RSS vertical -->
-    <div class="rss-radarlat-container" style="background: #000000; color: #ffffff; font-family: 'Segoe UI', Roboto, sans-serif; padding: 15px; border-radius: 8px; border: 1px solid #222; max-width: 100%; margin: 0 auto; position: relative; z-index: 1;">
+<div class="rss-radarlat-container" style="background: #000000; color: #ffffff; font-family: 'Segoe UI', Roboto, sans-serif; padding: 15px; border-radius: 8px; border: 1px solid #222; max-width: 100%; margin: 0 auto; position: relative; z-index: 1;">
     
     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; background: #000;">
         <div style="display: flex; align-items: center;">
@@ -109,44 +110,48 @@
 
 <script>
 (function() {
-    const defaultRss = 'https://feeds.bbci.co.uk/mundo/latinoamerica/rss.xml';
-    const refreshTime = 30 * 60 * 1000;
+    // 1. Configuración de múltiples fuentes RSS con sus respectivos nombres
+    const rssSources = [
+        { name: 'BBC Mundo', url: 'https://bbci.co.uk' },
+        { name: 'El País', url: 'https://elpais.com' },
+        { name: 'Clarín', url: 'https://clarin.com' },
+        { name: 'Latinus', url: 'https://latinus.us' }
+    ];
+    
+    // TIEMPO DE ACTUALIZACIÓN ACELERADO: Ajustado a 5 minutos (5 * 60 * 1000)
+    const refreshTime = 5 * 60 * 1000;
 
-    async function fetchRSS() {
-        const container = document.getElementById('rssContent');
-        const status = document.getElementById('rss-status');
-        
+    // Función interna para descargar de forma individual cada dirección RSS de la API
+    async function singleFetch(source) {
         try {
-            const response = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(defaultRss)}&t=${new Date().getTime()}`);
+            const response = await fetch(`https://rss2json.com{encodeURIComponent(source.url)}&t=${new Date().getTime()}`);
             const data = await response.json();
-
             if (data.status === 'ok') {
-                container.innerHTML = '';
-                data.items.forEach(item => {
-                    const article = document.createElement('div');
-                    article.className = 'news-card';
-                    const image = item.thumbnail || 'https://via.placeholder.com/80x60/1a1a1a/666666?text=RadarLat';
-                    const date = new Date(item.pubDate).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-                    
-                    article.innerHTML = `
-                        <img src="${image}" class="news-thumb" alt="news">
-                        <div class="news-text">
-                            <a href="${item.link}" target="_blank">${item.title}</a>
-                            <span>Hoy • ${date} • BBC Mundo</span>
-                        </div>`;
-                    container.appendChild(article);
-                });
-                status.innerText = "Actualizado: " + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                // Inyectamos el nombre correspondiente de la fuente a cada noticia individual
+                return data.items.map(item => ({ ...item, sourceName: source.name }));
             }
+            return [];
         } catch (e) {
-            console.error("Error RSS");
+            console.error("Error cargando fuente: " + source.name);
+            return [];
         }
     }
-    fetchRSS();
-    setInterval(fetchRSS, refreshTime);
-})();
-</script>
-<script>
+
+    // Algoritmo matemático para intercalar los resultados de los feeds de forma equitativa
+    function mixNewsInterleaved(arrays) {
+        let mixed = [];
+        let maxLength = Math.max(...arrays.map(arr => arr.length));
+        
+        for (let i = 0; i < maxLength; i++) {
+            for (let j = 0; j < arrays.length; j++) {
+                if (arrays[j][i]) {
+                    mixed.push(arrays[j][i]);
+                }
+            }
+        }
+        return mixed;
+    }
+
     async function fetchRSS() {
         const container = document.getElementById('rssContent');
         const status = document.getElementById('rss-status');
@@ -156,7 +161,7 @@
             const promises = rssSources.map(source => singleFetch(source));
             const allResults = await Promise.all(promises);
 
-            // Intercala los resultados obtenidos
+            // Intercala y combina los arreglos obtenidos
             const blendedNews = mixNewsInterleaved(allResults);
 
             if (blendedNews.length > 0) {
@@ -165,8 +170,8 @@
                     const article = document.createElement('div');
                     article.className = 'news-card';
                     
-                    // Prioriza la imagen del feed o busca una alternativa en el contenido
-                    const image = item.thumbnail || (item.enclosure && item.enclosure.link) || 'https://via.placeholder.com/80x60/1a1a1a/666666?text=RadarLat';
+                    // Busca rutas alternativas para la imagen miniatura si "thumbnail" viene vacío
+                    const image = item.thumbnail || (item.enclosure && item.enclosure.link) || 'https://placeholder.com';
                     const date = new Date(item.pubDate).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
                     
                     article.innerHTML = `
