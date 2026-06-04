@@ -76,7 +76,7 @@
         </div>
     </div>
    
-   <!-- RSS vertical -->
+ <!-- RSS vertical -->
 <div class="rss-radarlat-container" style="background: #000000; color: #ffffff; font-family: 'Segoe UI', Roboto, sans-serif; padding: 15px; border-radius: 8px; border: 1px solid #222; max-width: 100%; margin: 0 auto; position: relative; z-index: 1;">
     
     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; background: #000;">
@@ -112,36 +112,38 @@
         { name: 'BBC Mundo', url: 'https://feeds.bbci.co.uk/mundo/latinoamerica/rss.xml' },
         { name: 'El País', url: 'https://elpais.com/arc/outboundfeeds/rss/tags_slug/latinoamerica-a/?outputType=xml' },
         { name: 'Clarín', url: 'https://www.clarin.com/rss/mundo/' },
-        { name: 'Latinus', url: 'https://www.clarin.com/rss/mundo/' }
+        { name: 'Latinus', url: 'https://latinus.us/rss/feed.html?r=15' }
     ];
     
-    // TIEMPO DE ACTUALIZACIÓN ACELERADO A 30 SEGUNDOS
+    // TIEMPO DE ACTUALIZACIÓN: Cada 30 segundos
     const refreshTime = 30 * 1000;
 
     async function singleFetch(source) {
         try {
-            const response = await fetch(`https://allorigins.win{encodeURIComponent(source.url)}&t=${new Date().getTime()}`);
+            // Usamos un proxy directo mucho más estable y veloz
+            const response = await fetch(`https://corsproxy.io{encodeURIComponent(source.url)}&t=${new Date().getTime()}`);
             if (!response.ok) return [];
-            const data = await response.json();
+            const textData = await response.text();
             
             const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(data.contents, "text/xml");
-            const items = xmlDoc.getElementsByTagName("item");
+            const xmlDoc = parser.parseFromString(textData, "text/xml");
+            const items = xmlDoc.querySelectorAll("item");
             
             let extractedItems = [];
-            for (let i = 0; i < items.length; i++) {
-                const title = items[i].getElementsByTagName("title")[0]?.textContent || '';
-                const link = items[i].getElementsByTagName("link")[0]?.textContent || '#';
-                const pubDate = items[i].getElementsByTagName("pubDate")[0]?.textContent || '';
+            items.forEach(item => {
+                const title = item.querySelector("title")?.textContent || '';
+                const link = item.querySelector("link")?.textContent || '#';
+                const pubDate = item.querySelector("pubDate")?.textContent || '';
                 
+                // Buscador inteligente de imágenes adaptable a cualquier periódico
                 let image = 'https://placeholder.com';
-                const mediaContent = items[i].getElementsByTagName("media:content")[0];
-                const enclosure = items[i].getElementsByTagName("enclosure")[0];
+                const enclosure = item.querySelector("enclosure");
+                const mediaContent = item.querySelector("*|content") || item.querySelector("content");
                 
-                if (mediaContent && mediaContent.getAttribute("url")) {
-                    image = mediaContent.getAttribute("url");
-                } else if (enclosure && enclosure.getAttribute("url")) {
+                if (enclosure && enclosure.getAttribute("url")) {
                     image = enclosure.getAttribute("url");
+                } else if (mediaContent && mediaContent.getAttribute("url")) {
+                    image = mediaContent.getAttribute("url");
                 }
 
                 extractedItems.push({
@@ -151,10 +153,10 @@
                     thumbnail: image,
                     sourceName: source.name
                 });
-            }
+            });
             return extractedItems;
         } catch (e) {
-            console.error("Error cargando fuente de: " + source.name, e);
+            console.error("Error cargando fuente: " + source.name, e);
             return [];
         }
     }
@@ -206,7 +208,7 @@
                 });
                 status.innerText = "Actualizado: " + new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
             } else {
-                container.innerHTML = '<p style="text-align: center; color: #555; font-size: 14px;">No se encontraron noticias temporales.</p>';
+                container.innerHTML = '<p style="text-align: center; color: #555; font-size: 14px;">Error al conectar con los servidores. Reintentando...</p>';
             }
         } catch (e) {
             console.error("Error general procesando los RSS");
