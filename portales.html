@@ -109,9 +109,14 @@
 
 <script>
 (function() {
-    const defaultRss = 'https://feeds.bbci.co.uk/mundo/latinoamerica/rss.xml';
+    // Lista de fuentes configurada con múltiples medios y países
+    const rssSources = [
+        { name: 'BBC Mundo', url: 'https://feeds.bbci.co.uk/mundo/latinoamerica/rss.xml' },
+        { name: 'El País', url: 'https://elpais.com/arc/outboundfeeds/rss/tags_slug/latinoamerica-a/?outputType=xml' },
+        { name: 'Clarín', url: 'https://www.clarin.com/rss/mundo/' },
+        { name: 'Latinus', url: 'https://latinus.us/rss/feed.html?r=15' }
+    ];
     const refreshTime = 30 * 60 * 1000;
-
     async function fetchRSS() {
         const container = document.getElementById('rssContent');
         const status = document.getElementById('rss-status');
