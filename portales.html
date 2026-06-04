@@ -351,6 +351,36 @@
         const contenidoRSS = document.getElementById('rss-contenido-dinamico');
         let paisAProcesar = codigoPais;
 
+          if (codigoPais === 'all') {
+            headerRSS.innerText = "// CANAL_RSS: MONITOREO_GLOBAL_ALEATORIO";
+            const codigosDisponibles = Object.keys(urlsFeedsReales);
+            paisAProcesar = codigosDisponibles[Math.floor(Math.random() * codigosDisponibles.length)];
+        } else {
+            headerRSS.innerText = `// CANAL_RSS: MONITOREO_TACTICO_[${codigoPais.toUpperCase()}]`;
+        }
+
+        if (urlsFeedsReales[paisAProcesar]) {
+            contenidoRSS.innerHTML = "Sincronizando feed táctico con el servidor del diario...";
+            try {
+                const proxyUrl = `rss2json.com{encodeURIComponent(urlsFeedsReales[paisAProcesar])}`;
+                const respuesta = await fetch(proxyUrl);
+                const datos = await respuesta.json();
+
+                if (datos.status === 'ok' && datos.items.length > 0) {
+                    const noticia = datos.items;
+                    contenidoRSS.innerHTML = `<strong>NUEVO_TITULAR:</strong> ${noticia.title} — <a href="${noticia.link}" target="_blank">LEER EN EL DIARIO ></a>`;
+                } else {
+                    contenidoRSS.innerHTML = "ERROR: No se pudieron procesar los flujos de texto del feed.";
+                }
+            } catch (error) {
+                contenidoRSS.innerHTML = "ERROR_CONEXION: Servidor de noticias no responde o tiene bloqueos perimetrales.";
+            }
+        } else {
+            contenidoRSS.innerHTML = `NODO_VACÍO: Canal de noticias en vivo para [${paisAProcesar.toUpperCase()}] listo para conectar enlace XML.`;
+        }
+    }
+
+
       
     window.addEventListener('DOMContentLoaded', () => {
         filtrarRadar('all', document.querySelector('.btn-pais.active'));
