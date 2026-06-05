@@ -1,10 +1,8 @@
 <!-- Cabecera fija con imagen adaptable -->
 <div class="fixed-top-header">
     <img src="1000494291.png" alt="RadarLat Cabecera">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 </div>
-
-<!-- Espaciador obligatorio (Evita que las noticias se tapen) -->
-<div class="header-spacer"></div>
 
 <style>
     /* Estilos para la cabecera fija */
@@ -40,29 +38,14 @@
         margin: 0;
         padding: 0;
     }
+     </style>
 
-      <!-- 👇 MENÚ NUEVO: CLONADO DEL INFERIOR, FIJO Y CON ENLACES A PÁGINAS NUEVAS 👇 -->
+<script>
+   <!-- 👇 MENÚ NUEVO: CLONADO DEL INFERIOR, FIJO Y CON ENLACES A PÁGINAS NUEVAS 👇 -->
         <nav class="radar-menu-superior">
             <div class="nav-btn"><a href="deportes.html"><span class="dot"></span> DEPORTE</a></div>
             <div class="nav-btn"><a href="economia.html"><span class="dot"></span> ECONOMIA</a></div>
             <div class="nav-btn"><a href="peliculas.html"><span class="dot"></span> VOLVER</a></div>
         </nav>
         <!-- 👆 TERMINA EL MENÚ NUEVO 👆 -->
-</style>
-
-<script>
-    // Este pequeño script mide cuánto mide tu imagen en tiempo real y ajusta 
-    // el espaciador automáticamente para que nunca tape tus noticias RSS.
-    window.addEventListener('DOMContentLoaded', () => {
-        const header = document.querySelector('.fixed-top-header');
-        const spacer = document.querySelector('.header-spacer');
-        if (header && spacer) {
-            const resizeObserver = new ResizeObserver(entries => {
-                for (let entry of entries) {
-                    spacer.style.height = entry.target.clientHeight + 'px';
-                }
-            });
-            resizeObserver.observe(header);
-        }
-    });
 </script>
