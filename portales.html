@@ -41,6 +41,49 @@
         /* Indicador táctico rojo parpadeante independiente */
         .dot { height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 8px #f00; animation: parpadeo 1.5s infinite; flex-shrink: 0; }
         @keyframes parpadeo { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+          /* MENÚ SUPERIOR DE SECCIONES - ESCUDO PROTECTOR DE LÍNEA VERDE */
+        .radar-menu-superior {
+            position: -webkit-sticky; 
+            position: sticky;
+            top: 62px; /* Se posiciona exactamente donde termina el bloque de banderas */               
+            z-index: 1999 !important; /* Un nivel justo por debajo de las banderas (2000) para no taparlas */
+            width: 100%;
+            
+            /* Altura exacta de 7mm (58px) */
+            height: 58px !important; 
+            min-height: 58px !important;
+            max-height: 58px !important;
+            
+            background: #000000; /* Fondo negro absoluto */
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-sizing: border-box;
+            
+            /* 🟢 SOLUCONADO: Eliminamos el borde verde de abajo que no querías */
+            border-bottom: none !important; 
+            
+            /* 🟢 SOLUCIÓN DEFINTIVA: Borde transparente arriba de 2px (el grosor exacto de tu línea verde). 
+               Esto actúa como un espaciador invisible que evita que el fondo negro tape la línea verde de arriba */
+            border-top: 2px solid transparent !important; 
+        }
+        .radar-menu-superior .nav-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        .radar-menu-superior .nav-btn a {
+            font-size: 0.85rem; 
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            text-transform: uppercase;
+            font-family: sans-serif;
+            color: #ffffff !important;
+            text-decoration: none !important;
+        }
     </style>
 </head>
 <body>
