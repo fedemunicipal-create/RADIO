@@ -161,7 +161,7 @@
 
 <script>
 (function() {
-    const defaultRss = 'https://feeds.bbci.co.uk/mundo/latinoamerica/rss.xml';
+    const defaultRss = 'https://rss.app/feeds/U9PVvHe737kbAmpA.xml';
     const refreshTime = 30 * 60 * 1000;
 
     async function fetchRSS() {
@@ -184,7 +184,7 @@
                         <img src="${image}" class="news-thumb" alt="news">
                         <div class="news-text">
                             <a href="${item.link}" target="_blank">${item.title}</a>
-                            <span>Hoy • ${date} • BBC Mundo</span>
+                            <span>Hoy • ${date} • RT </span>
                         </div>`;
                     container.appendChild(article);
                 });
