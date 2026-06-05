@@ -204,18 +204,8 @@
             </div>
         </div>
     </div>
-
-    <!-- MENÚ DESPLEGABLE FIJO DE GÉNEROS -->
-<div class="genre-selector-container" style="display: flex !important; align-items: center; justify-content: center; padding: 10px 15px; background-color: #050505; border-top: 1px solid #111; border-bottom: 1px solid #222; position: relative; z-index: 99999 !important; width: 100%; box-sizing: border-box;">
-    <select id="genreFilter" style="background-color: #111111; color: #ffffff; border: 1px solid #333333; padding: 8px 16px; font-size: 14px; border-radius: 4px; outline: none; cursor: pointer; font-weight: bold; width: 90%; max-width: 350px; font-family: sans-serif; text-align: center; text-transform: uppercase;">
-        <option value="todos">Seleccionar Género</option>
-        <option value="terror">Terror</option>
-        <option value="accion">Acción</option>
-        <option value="drama">Drama</option>
-    </select>
-</div>
-    
-    <!-- Espaciador adaptativo (Evita de forma automática que los carruseles se escondan) -->
+   
+        <!-- Espaciador adaptativo (Evita de forma automática que los carruseles se escondan) -->
     <div class="top-spacer"></div>
 
     <!-- SECCIÓN DE CARRUSELES INFINITOS (Deslizan por debajo del reproductor) -->
@@ -291,10 +281,21 @@
             }
         });
 
-       
+
+    </script>
+     <!-- MENÚ DESPLEGABLE FIJO DE GÉNEROS -->
+<div class="genre-selector-container" style="display: flex !important; align-items: center; justify-content: center; padding: 10px 15px; background-color: #050505; border-top: 1px solid #111; border-bottom: 1px solid #222; position: relative; z-index: 99999 !important; width: 100%; box-sizing: border-box;">
+    <select id="genreFilter" style="background-color: #111111; color: #ffffff; border: 1px solid #333333; padding: 8px 16px; font-size: 14px; border-radius: 4px; outline: none; cursor: pointer; font-weight: bold; width: 90%; max-width: 350px; font-family: sans-serif; text-align: center; text-transform: uppercase;">
+        <option value="todos">Seleccionar Género</option>
+        <option value="terror">Terror</option>
+        <option value="accion">Acción</option>
+        <option value="drama">Drama</option>
+    </select>
+</div>
+    <script>
 window.addEventListener('DOMContentLoaded', () => {
     const filterSelect = document.getElementById('genreFilter');
-    const rows = document.querySelectorAll('.genre-row, [data-genre]');
+    const rows = document.querySelectorAll('.genre-row');
 
     if (filterSelect) {
         filterSelect.addEventListener('change', (e) => {
@@ -303,24 +304,23 @@ window.addEventListener('DOMContentLoaded', () => {
             rows.forEach(row => {
                 const rowGenre = row.getAttribute('data-genre');
                 
-                // Si elige "Seleccionar Género" (todos), muestra todo el catálogo de nuevo
+                // Si elige "Seleccionar Género" (todos), muestra todo de nuevo
                 if (selectedValue === 'todos') {
                     row.style.display = 'block';
                 } 
-                // Si elige uno específico, muestra SOLO el carrusel que coincida exactamente
+                // Muestra únicamente el carrusel que coincida exactamente
                 else if (rowGenre === selectedValue) {
-                    row.style.style.display = 'block';
+                    row.style.display = 'block';
                 } 
-                // Oculta por completo los demás carruseles que no fueron seleccionados
+                // Oculta los géneros que no corresponden
                 else {
-                    row.style.style.display = 'none';
+                    row.style.display = 'none';
                 }
             });
         });
     }
 
-    // AJUSTE DE MEDIDAS AUTOMÁTICO: Mide la altura del (Banner + Menú + Video + Selector)
-    // e impide físicamente que se monten o se tapen las noticias/carruseles.
+    // AJUSTE DE MEDIDAS: Mide todo el bloque fijo y empuja los carruseles hacia abajo
     const header = document.querySelector('.fixed-top-section');
     const spacer = document.querySelector('.top-spacer');
     if (header && spacer) {
@@ -332,7 +332,6 @@ window.addEventListener('DOMContentLoaded', () => {
         resizeObserver.observe(header);
     }
 });
-
-    </script>
+</script>
 </body>
 </html>
