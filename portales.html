@@ -126,8 +126,8 @@
         </nav>
         <!-- 👆 TERMINA EL MENÚ NUEVO 👆 -->
 
-     <!-- RSS  -->
-    <div class="rss-radarlat-container" style="background: #000000; color: #ffffff; font-family: 'Segoe UI', Roboto, sans-serif; padding: 15px; border-radius: 8px; border: 1px solid #222; max-width: 100%; margin: 0 auto; position: relative; z-index: 1;">
+    <!-- RSS  -->
+<div class="rss-radarlat-container" style="background: #000000; color: #ffffff; font-family: 'Segoe UI', Roboto, sans-serif; padding: 15px; border-radius: 8px; border: 1px solid #222; max-width: 100%; margin: 0 auto; position: relative; z-index: 1;">
     
     <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; background: #000;">
         <div style="display: flex; align-items: center;">
@@ -176,11 +176,30 @@
                 data.items.forEach(item => {
                     const article = document.createElement('div');
                     article.className = 'news-card';
-                    const image = item.thumbnail || 'https://via.placeholder.com/80x60/1a1a1a/666666?text=RadarLat';
+                    
+                    // CORRECCIÓN DE IMÁGENES: Busca en thumbnail, luego en enclosure y finalmente si hay una etiqueta img oculta en la descripción
+                    let image = item.thumbnail || '';
+                    
+                    if (!image && item.enclosure && item.enclosure.link) {
+                        image = item.enclosure.link;
+                    }
+                    
+                    if (!image && item.description) {
+                        const srcMatch = item.description.match(/<img[^>]+src="([^">]+)"/);
+                        if (srcMatch && srcMatch[1]) {
+                            image = srcMatch[1];
+                        }
+                    }
+                    
+                    // Si de plano no encuentra ninguna foto, usa la de respaldo por defecto
+                    if (!image) {
+                        image = 'https://via.placeholder.com/80x60/1a1a1a/666666?text=RadarLat';
+                    }
+                    
                     const date = new Date(item.pubDate).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
                     
                     article.innerHTML = `
-                        <img src="${image}" class="news-thumb" alt="news">
+                        <img src="${image}" class="news-thumb" alt="news" onerror="this.src='https://via.placeholder.com/80x60/1a1a1a/666666?text=RadarLat'">
                         <div class="news-text">
                             <a href="${item.link}" target="_blank">${item.title}</a>
                             <span>Hoy • ${date} • RT </span>
@@ -196,11 +215,9 @@
     fetchRSS();
     setInterval(fetchRSS, refreshTime);
 })();
-     </script>
-</div>
-</div>
+</script>
   
-   <div style="display: flex; justify-content: center; align-items: center; width: 100%; margin: 15px auto; min-height: 50px;">
+<div style="display: flex; justify-content: center; align-items: center; width: 100%; margin: 15px auto; min-height: 50px;">
     <script>
       atOptions = {
         'key' : '2518913e078a8274472eea34aba82089',
@@ -212,7 +229,6 @@
     </script>
     <script src="https://www.highperformanceformat.com/2518913e078a8274472eea34aba82089/invoke.js"></script>
 </div>
-
      
     <!-- Contenido Principal: Los 24 carruseles de diarios y portales -->
     <div class="main-content">
