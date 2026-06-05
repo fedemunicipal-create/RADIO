@@ -15,7 +15,9 @@
             overflow-x: hidden;
         }
 
-        /* BLOQUE FIJO SUPERIOR COMPLETO (Banner + Menú Nav) */
+        /* ========================================================
+           1. BLOQUE SUPERIOR 100% FIJO (Banner + Menú + Reproductor)
+           ======================================================== */
         .fixed-top-section {
             position: fixed;
             top: 0;
@@ -23,6 +25,7 @@
             width: 100%;
             background-color: #000000;
             z-index: 9999;
+            border-bottom: 1px solid #1a1a1a;
         }
 
         /* Banner adaptable de Github */
@@ -32,7 +35,7 @@
             display: block;
         }
 
-        /* ESTILO CLONADO RESPETANDO TU ESTRETEGIA VISUAL */
+        /* Menú superior con tus estilos exactos */
         .radar-menu-superior {
             width: 100%;
             height: 58px !important; 
@@ -65,28 +68,21 @@
             text-decoration: none !important;
         }
 
-        /* Pequeño indicador de punto si es que deseas usarlo en el futuro */
         .radar-menu-superior .dot {
             width: 6px;
             height: 6px;
-            background-color: #ff0000; /* Punto rojo de alerta en vivo o indicador */
+            background-color: #ff0000;
             border-radius: 50%;
             margin-right: 6px;
             display: inline-block;
         }
 
-        /* Espaciador dinámico automatizado */
-        .top-spacer {
-            background-color: #000000;
-            width: 100%;
-        }
-
-        /* REPRODUCTOR DE VIDEO COMPATIBLE */
+        /* Contenedor del Reproductor Inmóvil */
         .video-container {
             max-width: 100%;
-            margin: 15px auto;
-            padding: 0 15px;
+            padding: 5px 15px 15px 15px;
             box-sizing: border-box;
+            background-color: #000000;
         }
 
         .video-player-wrapper {
@@ -108,9 +104,17 @@
             border: 0;
         }
 
-        /* CONTENEDOR DE CARRUSELES LATERALES */
+        /* ========================================================
+           2. SECCIÓN DE CONTENIDO MÓVIL (Carruseles abajo)
+           ======================================================== */
+        /* Espaciador dinámico automatizado */
+        .top-spacer {
+            background-color: #000000;
+            width: 100%;
+        }
+
         .genres-container {
-            padding: 10px 15px 30px 15px;
+            padding: 15px 15px 30px 15px;
         }
 
         .genre-row {
@@ -133,7 +137,7 @@
             overflow-x: auto;
             padding-bottom: 10px;
             scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch; /* Desplazamiento ultra fluido en móviles */
+            -webkit-overflow-scrolling: touch;
         }
 
         .carousel-track::-webkit-scrollbar {
@@ -146,7 +150,7 @@
 
         /* Tarjeta de Película */
         .movie-card {
-            flex: 0 0 110px; /* Ancho fijo para mantener simetría infinita */
+            flex: 0 0 110px;
             background: #0a0a0a;
             border-radius: 6px;
             overflow: hidden;
@@ -180,31 +184,30 @@
 </head>
 <body>
 
-    <!-- CABECERA PRINCIPAL UNIFICADA -->
+    <!-- BLOQUE COMPLETO ANCLADO ARRIBA -->
     <div class="fixed-top-section">
         <!-- Banner de GitHub -->
-        <img src="1000494291.png" alt="RadarLat">
+        <img src="TU_ENLACE_RAW_DE_GITHUB_AQUÍ" alt="RadarLat">
         
-        <!-- Tu menú original integrado -->
+        <!-- Tu menú original -->
         <nav class="radar-menu-superior">
             <div class="nav-btn"><a href="deportes.html"><span class="dot"></span> DEPORTE</a></div>
             <div class="nav-btn"><a href="economia.html"><span class="dot"></span> ECONOMIA</a></div>
             <div class="nav-btn"><a href="peliculas.html"><span class="dot"></span> PELICULAS</a></div>
         </nav>
-    </div>
 
-    <!-- Espaciador adaptativo -->
-    <div class="top-spacer"></div>
-
-    <!-- REPRODUCTOR DE VIDEO FIJO -->
-    <div class="video-container">
-        <div class="video-player-wrapper">
-            <!-- Inserta aquí tu reproductor embebido o link .mp4 -->
-            <iframe src="https://youtube.com" allowfullscreen></iframe>
+        <!-- REPRODUCTOR SE MOVIÓ AQUÍ: Ahora es 100% fijo abajo del menú -->
+        <div class="video-container">
+            <div class="video-player-wrapper">
+                <iframe id="main-player" src="https://youtube.com" allowfullscreen></iframe>
+            </div>
         </div>
     </div>
 
-    <!-- SECCIÓN DE CARRUSELES INFINITOS -->
+    <!-- Espaciador adaptativo (Evita de forma automática que los carruseles se escondan) -->
+    <div class="top-spacer"></div>
+
+    <!-- SECCIÓN DE CARRUSELES INFINITOS (Deslizan por debajo del reproductor) -->
     <div class="genres-container">
 
         <!-- GÉNERO 1: TERROR -->
@@ -219,7 +222,6 @@
                     <img src="https://placeholder.com" class="movie-poster" alt="peli">
                     <div class="movie-title">Siniestro</div>
                 </div>
-                <!-- Agrega cuantas tarjetas de película desees aquí dentro... -->
             </div>
         </div>
 
@@ -251,9 +253,9 @@
 
     </div>
 
-    <!-- SCRIPTS DE PROTECCIÓN Y AJUSTE DE TAMAÑO -->
+    <!-- SCRIPTS DE AJUSTE DE MEDIDAS -->
     <script>
-        // Tu script de candado físico fijo en 58px
+        // Candado físico fijo en 58px para tu menú
         window.addEventListener('DOMContentLoaded', () => {
             const menuSuperior = document.querySelector('.radar-menu-superior');
             if (menuSuperior) {
@@ -263,7 +265,8 @@
             }
         });
 
-        // Script de medición inteligente para que el banner estirable no tape el reproductor
+        // Este script mide todo el bloque de arriba (Banner + Menú + Video)
+        // y empuja los carruseles hacia abajo la distancia justa en cualquier celular
         window.addEventListener('DOMContentLoaded', () => {
             const header = document.querySelector('.fixed-top-section');
             const spacer = document.querySelector('.top-spacer');
