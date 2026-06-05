@@ -104,19 +104,7 @@
             border: 0;
         }
 
-        <!-- 👇 PESTAÑA Y MENÚ DESPLEGABLE FIJO (Añade aquí los géneros que quieras) 👇 -->
-<div class="genre-selector-container" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; background-color: #050505; border-top: 1px solid #111; border-bottom: 1px solid #222;">
-    <span class="genre-selector-label" style="font-size: 13px; font-weight: bold; color: #ccc; letter-spacing: 0.5px; text-transform: uppercase;">Seleccionar Género:</span>
-    <select id="genreFilter" class="genre-select" style="background-color: #111111; color: #ffffff; border: 1px solid #333333; padding: 6px 12px; font-size: 13px; border-radius: 4px; outline: none; cursor: pointer; font-weight: 500; max-width: 60%;">
-        <option value="todos">Todos los géneros</option>
-        <option value="terror">Terror</option>
-        <option value="accion">Acción</option>
-        <option value="drama">Drama</option>
-        <!-- Puedes seguir agregando más opciones (<option>) aquí abajo -->
-    </select>
-</div>
-<!-- 👆 TERMINA EL MENÚ DESPLEGABLE DE GÉNEROS 👆 -->
-
+       
         /* ========================================================
            2. SECCIÓN DE CONTENIDO MÓVIL (Carruseles abajo)
            ======================================================== */
@@ -217,6 +205,17 @@
         </div>
     </div>
 
+    <!-- PESTAÑA Y MENÚ DESPLEGABLE FIJO CON PROTECCIÓN DE CAPA -->
+<div class="genre-selector-container" style="display: flex !important; align-items: center; justify-content: space-between; padding: 10px 15px; background-color: #050505; border-top: 1px solid #111; border-bottom: 1px solid #222; position: relative; z-index: 99999 !important; width: 100%; box-sizing: border-box;">
+    <span class="genre-selector-label" style="font-size: 13px; font-weight: bold; color: #ccc; letter-spacing: 0.5px; text-transform: uppercase; font-family: sans-serif;">Seleccionar Género:</span>
+    <select id="genreFilter" style="background-color: #111111; color: #ffffff; border: 1px solid #333333; padding: 6px 12px; font-size: 13px; border-radius: 4px; outline: none; cursor: pointer; font-weight: 500; max-width: 60%; font-family: sans-serif;">
+        <option value="todos">Todos los géneros</option>
+        <option value="terror">Terror</option>
+        <option value="accion">Acción</option>
+        <option value="drama">Drama</option>
+    </select>
+</div>
+
     <!-- Espaciador adaptativo (Evita de forma automática que los carruseles se escondan) -->
     <div class="top-spacer"></div>
 
@@ -292,6 +291,46 @@
                 resizeObserver.observe(header);
             }
         });
+
+        <script>
+window.addEventListener('DOMContentLoaded', () => {
+    // A. LÓGICA DEL FILTRO DE GÉNEROS (JavaScript)
+    const filterSelect = document.getElementById('genreFilter');
+    
+    // Busca todos tus carruseles que tengan la clase .genre-row o el atributo data-genre
+    const rows = document.querySelectorAll('.genre-row, [data-genre]');
+
+    if (filterSelect) {
+        filterSelect.addEventListener('change', (e) => {
+            const selectedValue = e.target.value;
+
+            rows.forEach(row => {
+                // Lee el atributo data-genre del carrusel (ej: terror, accion, drama)
+                const rowGenre = row.getAttribute('data-genre') || row.innerText.toLowerCase();
+                
+                if (selectedValue === 'todos' || rowGenre.includes(selectedValue)) {
+                    row.style.display = 'block'; // Muestra el carrusel elegido
+                } else {
+                    row.style.display = 'none';  // Oculta los demás carruseles
+                }
+            });
+        });
+    }
+
+    // B. CORRECCIÓN VISUAL: Ajuste automático de altura para que el menú sea visible
+    const header = document.querySelector('.fixed-top-section');
+    const spacer = document.querySelector('.top-spacer');
+    if (header && spacer) {
+        const resizeObserver = new ResizeObserver(entries => {
+            for (let entry of entries) {
+                // Mide el banner + menú + video + selector y empuja el contenido hacia abajo
+                spacer.style.height = entry.target.clientHeight + 'px';
+            }
+        });
+        resizeObserver.observe(header);
+    }
+});
+</script>
     </script>
 </body>
 </html>
