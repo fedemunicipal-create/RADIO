@@ -207,7 +207,62 @@
             style="border: none; position: absolute; top: 0; left: 0; width: 100% !important; height: 100% !important;">
         </iframe>
     </div>
+
+      <!-- CÓDIGO DEL BOTÓN "VIVO AHORA" -->
+<a href="#" class="boton-vivo-ahora" onclick="alert('Vinculo activado!'); return false;">
+  VIVO AHORA
+</a>
+
+<!-- CÓDIGO CSS (ESTILO Y ANIMACIÓN) -->
+<style>
+  .boton-vivo-ahora {
+    /* Forma y Tamaño */
+    display: block;
+    width: 320px; /* Tamaño similar al banner */
+    height: 60px;
+    margin: 20px auto; /* Centrado y con margen superior/inferior */
     
+    /* Colores y Estilo de Borde (Efecto Consola) */
+    background: #ff0000; /* Rojo base intenso */
+    border: 3px solid #660000; /* Borde rojo oscuro para profundidad */
+    border-radius: 8px; /* Bordes ligeramente redondeados */
+    text-decoration: none; /* Quita el subrayado del vínculo */
+    
+    /* Texto */
+    color: white;
+    font-family: Arial, sans-serif; /* O la fuente que uses en tu sitio */
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 60px; /* Centrado vertical del texto */
+    text-align: center; /* Centrado horizontal */
+    
+    /* Efecto de Brillo (Glow) */
+    box-shadow: 0 0 15px #ff0000, 0 0 25px #ff0000;
+    
+    /* Transición suave para interactividad */
+    transition: box-shadow 0.3s ease;
+  }
+
+  /* Efecto al pasar el cursor (Hover) */
+  .boton-vivo-ahora:hover {
+    box-shadow: 0 0 20px #ff3333, 0 0 35px #ff3333;
+    cursor: pointer;
+  }
+
+  /* Animación de Parpadeo */
+  @keyframes blinker {
+    50% {
+      opacity: 0.7; /* Brillo ligeramente atenuado */
+      box-shadow: 0 0 10px #ff0000, 0 0 15px #ff0000;
+    }
+  }
+
+  /* Aplicación de la animación */
+  .boton-vivo-ahora {
+    animation: blinker 1.5s linear infinite;
+  }
+</style>
+      
     <!-- CONTENEDOR PRINCIPAL -->
     <div class="main-content">
         <!-- Deja este espacio libre para colocar tus tarjetas de accesos manuales -->
