@@ -104,6 +104,19 @@
             border: 0;
         }
 
+        <!-- 👇 PESTAÑA Y MENÚ DESPLEGABLE FIJO (Añade aquí los géneros que quieras) 👇 -->
+<div class="genre-selector-container" style="display: flex; align-items: center; justify-content: space-between; padding: 10px 15px; background-color: #050505; border-top: 1px solid #111; border-bottom: 1px solid #222;">
+    <span class="genre-selector-label" style="font-size: 13px; font-weight: bold; color: #ccc; letter-spacing: 0.5px; text-transform: uppercase;">Seleccionar Género:</span>
+    <select id="genreFilter" class="genre-select" style="background-color: #111111; color: #ffffff; border: 1px solid #333333; padding: 6px 12px; font-size: 13px; border-radius: 4px; outline: none; cursor: pointer; font-weight: 500; max-width: 60%;">
+        <option value="todos">Todos los géneros</option>
+        <option value="terror">Terror</option>
+        <option value="accion">Acción</option>
+        <option value="drama">Drama</option>
+        <!-- Puedes seguir agregando más opciones (<option>) aquí abajo -->
+    </select>
+</div>
+<!-- 👆 TERMINA EL MENÚ DESPLEGABLE DE GÉNEROS 👆 -->
+
         /* ========================================================
            2. SECCIÓN DE CONTENIDO MÓVIL (Carruseles abajo)
            ======================================================== */
