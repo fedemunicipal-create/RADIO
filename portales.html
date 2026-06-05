@@ -441,6 +441,17 @@
         }
     }
 
+       // CANDADO DE TAMAÑO FIJO EN 7MM (58PX)
+    window.addEventListener('DOMContentLoaded', () => {
+        const menuSuperior = document.querySelector('.radar-menu-superior');
+        if (menuSuperior) {
+            // Fuerza el tamaño físico absoluto de 58px para anular cualquier cálculo del navegador
+            menuSuperior.style.height = '58px';
+            menuSuperior.style.minHeight = '58px';
+            menuSuperior.style.maxHeight = '58px';
+        }
+    });
+
 
       
     window.addEventListener('DOMContentLoaded', () => {
