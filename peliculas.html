@@ -103,9 +103,7 @@
             height: 100%;
             border: 0;
         }
-
-       
-        /* ========================================================
+/* ========================================================
            2. SECCIÓN DE CONTENIDO MÓVIL (Carruseles abajo)
            ======================================================== */
         /* Espaciador dinámico automatizado */
@@ -157,6 +155,7 @@
             overflow: hidden;
             border: 1px solid #111;
             transition: transform 0.2s;
+            cursor: pointer;
         }
 
         .movie-card:hover {
@@ -197,15 +196,18 @@
             <div class="nav-btn"><a href="peliculas.html"><span class="dot"></span> VOLVER</a></div>
         </nav>
 
-        <!-- REPRODUCTOR SE MOVIÓ AQUÍ: Ahora es 100% fijo abajo del menú -->
+        <!-- REPRODUCTOR COMPLETO: Con permisos y video inicial funcional -->
         <div class="video-container">
             <div class="video-player-wrapper">
-                <iframe id="main-player" src="https://youtube.com" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe id="main-player" 
+                        src="https://youtube.com" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
             </div>
         </div>
     </div>
-   
-        <!-- Espaciador adaptativo (Evita de forma automática que los carruseles se escondan) -->
+    <!-- Espaciador adaptativo (Evita de forma automática que los carruseles se escondan) -->
     <div class="top-spacer"></div>
 
     <!-- SECCIÓN DE CARRUSELES INFINITOS (Deslizan por debajo del reproductor) -->
@@ -215,11 +217,11 @@
         <div class="genre-row">
             <div class="genre-title">Terror</div>
             <div class="carousel-track">
-                <div class="movie-card">
+                <div class="movie-card" data-youtube="">
                     <img src="https://placeholder.com" class="movie-poster" alt="peli">
                     <div class="movie-title">el conjuro</div>
                 </div>
-                <div class="movie-card">
+                <div class="movie-card" data-youtube="">
                     <img src="https://placeholder.com" class="movie-poster" alt="peli">
                     <div class="movie-title">Siniestro</div>
                 </div>
@@ -230,11 +232,11 @@
         <div class="genre-row">
             <div class="genre-title">Acción</div>
             <div class="carousel-track">
-                <div class="movie-card">
+                <div class="movie-card" data-youtube="">
                     <img src="https://placeholder.com" class="movie-poster" alt="peli">
                     <div class="movie-title">John Wick 4</div>
                 </div>
-                <div class="movie-card">
+                <div class="movie-card" data-youtube="">
                     <img src="https://placeholder.com" class="movie-poster" alt="peli">
                     <div class="movie-title">Mad Max</div>
                 </div>
@@ -245,16 +247,15 @@
         <div class="genre-row">
             <div class="genre-title">Ciencia Ficcion</div>
             <div class="carousel-track">
-                <div class="movie-card" data-youtube="https://www.youtube.com/embed/6qiBk6oQ1RI?si=XC8GHzCyVdOvTUN7">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW5xsrUWyvm6lWqDuogdUZWnOBpKuUvYQKZA&s" class="movie-poster" alt="peli">
+                <div class="movie-card" data-youtube="https://youtube.com">
+                    <img src="https://gstatic.com" class="movie-poster" alt="peli">
                     <div class="movie-title">Metropolis 1927</div>
                 </div>
             </div>
         </div>
 
     </div>
-
-    <!-- SCRIPTS DE AJUSTE DE MEDIDAS -->
+     <!-- SCRIPTS DE AJUSTE Y CONTROL DEL REPRODUCTOR -->
     <script>
         // Candado físico fijo en 58px para tu menú
         window.addEventListener('DOMContentLoaded', () => {
@@ -279,6 +280,24 @@
                 });
                 resizeObserver.observe(header);
             }
+        });
+
+        // INTERACTUADOR INTEGRADOR PARA EL REPRODUCTOR
+        window.addEventListener('DOMContentLoaded', () => {
+            const player = document.getElementById('main-player');
+            const cards = document.querySelectorAll('.movie-card');
+
+            cards.forEach(card => {
+                const ejecutarCambio = () => {
+                    const videoUrl = card.getAttribute('data-youtube');
+                    if (videoUrl && videoUrl.trim() !== "" && player) {
+                        player.setAttribute('src', videoUrl);
+                    }
+                };
+
+                card.addEventListener('click', ejecutarCambio);
+                card.addEventListener('touchend', ejecutarCambio);
+            });
         });
     </script>
 </body>
