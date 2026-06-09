@@ -35,7 +35,7 @@
             display: block;
         }
 
-        /* Menú superior con tus estilos exactos */
+        /* Menú superior con corrección de capas para toques táctiles */
         .radar-menu-superior {
             width: 100%;
             height: 58px !important; 
@@ -47,7 +47,9 @@
             align-items: center;
             box-sizing: border-box;
             border-bottom: none !important; 
-            border-top: 2px solid transparent !important; 
+            border-top: 2px solid transparent !important;
+            position: relative;
+            z-index: 10000;
         }
 
         .radar-menu-superior .nav-btn {
@@ -55,6 +57,8 @@
             align-items: center;
             justify-content: center;
             height: 100%;
+            position: relative;
+            z-index: 10001;
         }
 
         .radar-menu-superior .nav-btn a {
@@ -66,6 +70,7 @@
             font-family: sans-serif;
             color: #ffffff !important;
             text-decoration: none !important;
+            padding: 10px;
         }
 
         .radar-menu-superior .dot {
@@ -103,7 +108,7 @@
             height: 100%;
             border: 0;
         }
-/* ========================================================
+         /* ========================================================
            2. SECCIÓN DE CONTENIDO MÓVIL (Carruseles abajo)
            ======================================================== */
         /* Espaciador dinámico automatizado */
@@ -129,7 +134,7 @@
             text-transform: uppercase;
         }
 
-        /* Carrusel infinito lateral */
+        /* Carrusel infinito lateral optimizado para celulares */
         .carousel-track {
             display: flex;
             gap: 12px;
@@ -137,6 +142,7 @@
             padding-bottom: 10px;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
+            touch-action: pan-x;
         }
 
         .carousel-track::-webkit-scrollbar {
@@ -147,7 +153,7 @@
             border-radius: 4px;
         }
 
-        /* Tarjeta de Película */
+        /* Tarjeta de Película adaptada para control por JavaScript táctil */
         .movie-card {
             flex: 0 0 110px;
             background: #0a0a0a;
@@ -155,12 +161,8 @@
             overflow: hidden;
             border: 1px solid #111;
             transition: transform 0.2s;
-            cursor: pointer;
-        }
-
-        .movie-card:hover {
-            transform: scale(1.03);
-            border-color: #333;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         .movie-poster {
@@ -169,6 +171,7 @@
             object-fit: cover;
             background: #1a1a1a;
             display: block;
+            pointer-events: none;
         }
 
         .movie-title {
@@ -179,6 +182,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
             color: #bbb;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -189,11 +193,11 @@
         <!-- Banner de GitHub -->
         <img src="1000494291.png" alt="RadarLat">
         
-        <!-- Tu menú original -->
+        <!-- Tu menú original con enlaces restaurados -->
         <nav class="radar-menu-superior">
             <div class="nav-btn"><a href="deportes.html"><span class="dot"></span> DEPORTE</a></div>
             <div class="nav-btn"><a href="economia.html"><span class="dot"></span> ECONOMIA</a></div>
-            <div class="nav-btn"><a href="https://fedemunicipal-create.github.io/RadarLat/index.html"><span class="dot"></span> VOLVER</a></div>
+            <div class="nav-btn"><a href="https://github.io"><span class="dot"></span> VOLVER</a></div>
         </nav>
 
         <!-- REPRODUCTOR COMPLETO: Con permisos y video inicial funcional -->
@@ -212,8 +216,7 @@
 
     <!-- SECCIÓN DE CARRUSELES INFINITOS (Deslizan por debajo del reproductor) -->
     <div class="genres-container">
-
-        <!-- GÉNERO 1: TERROR -->
+         <!-- GÉNERO 1: TERROR -->
         <div class="genre-row">
             <div class="genre-title">Terror</div>
             <div class="carousel-track">
@@ -228,10 +231,11 @@
                 <div class="movie-card" data-youtube="https://www.youtube.com/embed/cxtswm5yVN4?si=ytQ2kyqh9TiDwgT_">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz7xeWsa-GP4QHWNAXb_GvQe7V10muuNTspg&s" class="movie-poster" alt="peli">
                     <div class="movie-title">House of haunted hill 1959</div>
-                 </div>
-                    <div class="movie-card" data-youtube="https://www.youtube.com/embed/yviqjYaayj4?si=G_nn1WQYPFOU2_oT">
+                </div>
+                <div class="movie-card" data-youtube="https://www.youtube.com/embed/yviqjYaayj4?si=G_nn1WQYPFOU2_oT">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8wY9U-L8EzMsJc5GwcJTUYp8s6xHeM3y3xA&s" class="movie-poster" alt="peli">
                     <div class="movie-title">El carnaval de las almas 1962</div>
+                </div>
             </div>
         </div>
 
@@ -257,7 +261,7 @@
                      </div>
         </div>
 
-        <!-- GÉNERO 3: CIENCIA FICCION -->
+         <!-- GÉNERO 3: CIENCIA FICCION -->
         <div class="genre-row">
             <div class="genre-title">Ciencia Ficcion</div>
             <div class="carousel-track">
@@ -275,9 +279,10 @@
         </div>
 
     </div>
-     <!-- SCRIPTS DE AJUSTE Y CONTROL DEL REPRODUCTOR -->
+
+    </div>
+    <!-- SCRIPTS DE AJUSTE Y CONTROL DEL REPRODUCTOR -->
     <script>
-        
         // Candado físico fijo en 58px para tu menú
         window.addEventListener('DOMContentLoaded', () => {
             const menuSuperior = document.querySelector('.radar-menu-superior');
@@ -303,51 +308,67 @@
             }
         });
 
-        // INTERACTUADOR INTEGRADOR PARA EL REPRODUCTOR
+        // INTERACTUADOR INTEGRADOR CON DOBLE TOQUE INTELIGENTE PARA CELULARES
         window.addEventListener('DOMContentLoaded', () => {
             const player = document.getElementById('main-player');
             const cards = document.querySelectorAll('.movie-card');
+            
+            let ultimoToque = 0;
+            let startX = 0;
+            let startY = 0;
 
             cards.forEach(card => {
-                const ejecutarCambio = () => {
-                    const videoUrl = card.getAttribute('data-youtube');
+                // Captura el punto exacto donde inicia el dedo en la pantalla del celular
+                card.addEventListener('touchstart', (e) => {
+                    startX = e.touches.clientX;
+                    startY = e.touches.clientY;
+                }, { passive: true });
+
+                // Controla la salida del dedo evaluando si hubo arrastre o doble toque
+                card.addEventListener('touchend', function(e) {
+                    const endX = e.changedTouches.clientX;
+                    const endY = e.changedTouches.clientY;
+
+                    // Calcula la distancia recorrida en píxeles
+                    const diffX = Math.abs(endX - startX);
+                    const diffY = Math.abs(endY - startY);
+
+                    // Si el usuario movió el dedo más de 10 píxeles, está deslizando el carrusel.
+                    // Cancelamos la acción y salimos para que no se cambie la película.
+                    if (diffX > 10 || diffY > 10) {
+                        return;
+                    }
+
+                    const tiempoActual = Date.now();
+                    const intervalo = tiempoActual - ultimoToque;
+
+                    // PRIMER TOQUE FIRME: Bloqueamos el cambio inmediato y guardamos el tiempo
+                    if (intervalo >= 300 || intervalo === 0) {
+                        ultimoToque = tiempoActual;
+                        return;
+                    }
+
+                    // SEGUNDO TOQUE CONSECUTIVO (Doble toque en menos de 0.3s): Se ejecuta el cambio de película
+                    e.preventDefault();
+                    ultimoToque = 0; // Resetea el temporizador
+
+                    const videoUrl = this.getAttribute('data-youtube');
                     if (videoUrl && videoUrl.trim() !== "" && player) {
                         player.setAttribute('src', videoUrl);
                     }
-                };
+                });
 
-                card.addEventListener('click', ejecutarCambio);
-                card.addEventListener('touchend', ejecutarCambio);
+                // Respaldo para computadoras de escritorio (Clic normal sigue funcionando a la primera)
+                card.addEventListener('click', function(e) {
+                    if ('ontouchstart' in window) return;
+                    
+                    const videoUrl = this.getAttribute('data-youtube');
+                    if (videoUrl && videoUrl.trim() !== "" && player) {
+                        player.setAttribute('src', videoUrl);
+                    }
+                });
             });
         });
     </script>
-<script>
-(function() {
-    let ultimoToque = 0;
-
-    // Escucha los toques en la pantalla ANTES de que el navegador procese el enlace tradicional
-    document.addEventListener('click', function(e) {
-        // Busca si el usuario tocó un enlace de película (ajusta '.tarjeta-pelicula' si usas otra clase)
-        const tarjeta = e.target.closest('.tarjeta-pelicula') || e.target.closest('a');
-        
-        if (tarjeta) {
-            const tiempoActual = Date.now();
-            const intervalo = tiempoActual - ultimoToque;
-
-            // Si es el primer toque (o pasó más de 0.3 segundos), CONGELAMOS el clic
-            if (intervalo >= 300 || intervalo === 0) {
-                e.preventDefault(); // Detiene la apertura de la película
-                e.stopPropagation(); // Evita que el carrusel se vuelva loco
-                ultimoToque = tiempoActual;
-                return false;
-            }
-
-            // Si llega aquí, es el SEGUNDO TOQUE consecutivo
-            ultimoToque = 0; // Resetea el contador para el próximo uso
-            // El navegador ahora sí tiene permiso de abrir la película de forma normal
-        }
-    }, true); // El parámetro 'true' es el secreto: intercepta el toque antes que nadie
-})();
-</script>
 </body>
 </html>
