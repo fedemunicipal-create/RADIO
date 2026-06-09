@@ -321,5 +321,38 @@
             });
         });
     </script>
+            <script>
+let ultimoToque = 0;
+
+// Escucha el toque en cualquier parte del documento
+document.addEventListener('touchend', function(e) {
+    // Busca si el elemento tocado (o su contenedor) tiene la clase .tarjeta-pelicula
+    const tarjeta = e.target.closest('.tarjeta-pelicula');
+    
+    if (tarjeta) {
+        const tiempoActual = new Date().getTime();
+        const intervaloCitas = tiempoActual - ultimoToque;
+
+        // Si es un toque simple (primer toque), bloqueamos cualquier acción del navegador
+        if (intervaloCitas >= 300 || intervaloCitas === 0) {
+            // Guardamos el momento de este primer toque
+            ultimoToque = tiempoActual;
+            return; 
+        }
+
+        // Si llega aquí, es porque el segundo toque ocurrió en menos de 300ms (Doble toque)
+        e.preventDefault();
+        e.stopPropagation();
+
+        const urlPelicula = tarjeta.getAttribute('data-url');
+        if (urlPelicula) {
+            window.location.href = urlPelicula;
+        }
+
+        // Reseteamos el contador
+        ultimoToque = 0;
+    }
+});
+</script>
 </body>
 </html>
