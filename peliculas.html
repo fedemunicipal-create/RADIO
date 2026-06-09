@@ -108,7 +108,7 @@
             height: 100%;
             border: 0;
         }
- /* ========================================================
+  /* ========================================================
            2. SECCIÓN DE CONTENIDO MÓVIL (Carruseles abajo)
            ======================================================== */
         /* Espaciador dinámico automatizado */
@@ -134,15 +134,14 @@
             text-transform: uppercase;
         }
 
-        /* Carrusel infinito lateral optimizado para celulares */
+        /* Carrusel infinito lateral con desplazamiento nativo restaurado */
         .carousel-track {
             display: flex;
             gap: 12px;
             overflow-x: auto;
             padding-bottom: 10px;
             scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            touch-action: pan-x;
+            -webkit-overflow-scrolling: touch; /* Movimiento inercial ultra suave en iPhone */
         }
 
         .carousel-track::-webkit-scrollbar {
@@ -153,7 +152,7 @@
             border-radius: 4px;
         }
 
-        /* Tarjeta de Película adaptada para control por JavaScript táctil */
+        /* Tarjeta de Película limpia sin bloqueos táctiles */
         .movie-card {
             flex: 0 0 110px;
             background: #0a0a0a;
@@ -197,7 +196,7 @@
         <nav class="radar-menu-superior">
             <div class="nav-btn"><a href="deportes.html"><span class="dot"></span> DEPORTE</a></div>
             <div class="nav-btn"><a href="economia.html"><span class="dot"></span> ECONOMIA</a></div>
-            <div class="nav-btn"><a href="https://github.io"><span class="dot"></span> VOLVER</a></div>
+            <div class="nav-btn"><a href="https://fedemunicipal-create.github.io/RadarLat/index.html"><span class="dot"></span> VOLVER</a></div>
         </nav>
 
         <!-- REPRODUCTOR COMPLETO: Con permisos y video inicial funcional -->
@@ -310,7 +309,7 @@
             }
         });
 
-        // SISTEMA FLUIDO DE RASTREO TÁCTIL (Libera scroll vertical y horizontal)
+        // REPRODUCTOR FLUIDO: RASTREO TÁCTIL SIN INTERFERENCIA DE SCROLL
         window.addEventListener('DOMContentLoaded', () => {
             const player = document.getElementById('main-player');
             const cards = document.querySelectorAll('.movie-card');
@@ -319,38 +318,36 @@
             let startY = 0;
 
             cards.forEach(card => {
-                // Registrar posición inicial del dedo (Permite el scroll nativo libre)
+                // Registrar posición inicial al apoyar el dedo de forma pasiva (permite scroll)
                 card.addEventListener('touchstart', (e) => {
                     startX = e.touches[0].clientX;
                     startY = e.touches[0].clientY;
                 }, { passive: true });
 
-                // Evaluar la acción al levantar el dedo sin bloquear el navegador
+                // Evaluar la acción al levantar el dedo sin interferir con el navegador
                 card.addEventListener('touchend', function(e) {
                     const endX = e.changedTouches[0].clientX;
                     const endY = e.changedTouches[0].clientY;
 
-                    // Calcular distancia en píxeles del movimiento
                     const distanciaX = Math.abs(endX - startX);
                     const distanciaY = Math.abs(endY - startY);
 
-                    // UMBRAL DE MOVIMIENTO: Si el dedo se movió más de 8 píxeles en cualquier dirección,
-                    // significa que el usuario está haciendo scroll (subiendo, bajando o deslizando el carrusel).
-                    // Detenemos la reproducción para que la navegación sea cómoda.
-                    if (distanciaX > 8 || distanciaY > 8) {
+                    // Si el usuario movió el dedo más de 10 píxeles, está haciendo scroll 
+                    // horizontal en el carrusel o vertical en la página. Detenemos la carga del video.
+                    if (distanciaX > 10 || distanciaY > 10) {
                         return; 
                     }
 
-                    // SI EL DEDO SE QUEDÓ FIJO: Es un toque limpio intencional para cargar la película
+                    // Si no hubo movimiento, es un toque limpio e intencional en el póster
                     const videoUrl = this.getAttribute('data-youtube');
                     if (videoUrl && videoUrl.trim() !== "" && player) {
                         player.setAttribute('src', videoUrl);
                     }
                 });
 
-                // Respaldo clásico para computadoras de escritorio
+                // Respaldo para computadoras de escritorio
                 card.addEventListener('click', function(e) {
-                    if ('ontouchstart' in window) return; // Ignorar clics simulados por navegadores móviles
+                    if ('ontouchstart' in window) return; // Ignorar en pantallas táctiles
                     
                     const videoUrl = this.getAttribute('data-youtube');
                     if (videoUrl && videoUrl.trim() !== "" && player) {
@@ -359,6 +356,9 @@
                 });
             });
         });
+    </script>
+</body>
+</html>
     </script>
 </body>
 </html>
