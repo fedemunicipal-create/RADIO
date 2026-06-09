@@ -320,28 +320,6 @@
                 card.addEventListener('touchend', ejecutarCambio);
             });
         });
-
-         // Selecciona todas las tarjetas o pósteres de películas
-    const peliculas = document.querySelectorAll('.tarjeta-pelicula');
-
-    peliculas.forEach(pelicula => {
-        let ultimoToque = 0;
-
-        pelicula.addEventListener('touchend', function(e) {
-            const tiempoActual = new Date().getTime();
-            const intervaloCitas = tiempoActual - ultimoToque;
-
-            if (intervaloCitas < 300 && intervaloCitas > 0) {
-                e.preventDefault(); 
-                
-                const urlPelicula = this.getAttribute('data-url');
-                if (urlPelicula) {
-                    window.location.href = urlPelicula;
-                }
-            }
-            ultimoToque = tiempoActual;
-        });
-    });
     </script>
 </body>
 </html>
