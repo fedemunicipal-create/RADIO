@@ -321,38 +321,33 @@
             });
         });
     </script>
-            <script>
-let ultimoToque = 0;
+<script>
+(function() {
+    let ultimoToque = 0;
 
-// Escucha el toque en cualquier parte del documento
-document.addEventListener('touchend', function(e) {
-    // Busca si el elemento tocado (o su contenedor) tiene la clase .tarjeta-pelicula
-    const tarjeta = e.target.closest('.tarjeta-pelicula');
-    
-    if (tarjeta) {
-        const tiempoActual = new Date().getTime();
-        const intervaloCitas = tiempoActual - ultimoToque;
+    // Escucha los toques en la pantalla ANTES de que el navegador procese el enlace tradicional
+    document.addEventListener('click', function(e) {
+        // Busca si el usuario tocó un enlace de película (ajusta '.tarjeta-pelicula' si usas otra clase)
+        const tarjeta = e.target.closest('.tarjeta-pelicula') || e.target.closest('a');
+        
+        if (tarjeta) {
+            const tiempoActual = Date.now();
+            const intervalo = tiempoActual - ultimoToque;
 
-        // Si es un toque simple (primer toque), bloqueamos cualquier acción del navegador
-        if (intervaloCitas >= 300 || intervaloCitas === 0) {
-            // Guardamos el momento de este primer toque
-            ultimoToque = tiempoActual;
-            return; 
+            // Si es el primer toque (o pasó más de 0.3 segundos), CONGELAMOS el clic
+            if (intervalo >= 300 || intervalo === 0) {
+                e.preventDefault(); // Detiene la apertura de la película
+                e.stopPropagation(); // Evita que el carrusel se vuelva loco
+                ultimoToque = tiempoActual;
+                return false;
+            }
+
+            // Si llega aquí, es el SEGUNDO TOQUE consecutivo
+            ultimoToque = 0; // Resetea el contador para el próximo uso
+            // El navegador ahora sí tiene permiso de abrir la película de forma normal
         }
-
-        // Si llega aquí, es porque el segundo toque ocurrió en menos de 300ms (Doble toque)
-        e.preventDefault();
-        e.stopPropagation();
-
-        const urlPelicula = tarjeta.getAttribute('data-url');
-        if (urlPelicula) {
-            window.location.href = urlPelicula;
-        }
-
-        // Reseteamos el contador
-        ultimoToque = 0;
-    }
-});
+    }, true); // El parámetro 'true' es el secreto: intercepta el toque antes que nadie
+})();
 </script>
 </body>
 </html>
