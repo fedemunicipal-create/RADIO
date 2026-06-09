@@ -108,7 +108,7 @@
             height: 100%;
             border: 0;
         }
-         /* ========================================================
+ /* ========================================================
            2. SECCIÓN DE CONTENIDO MÓVIL (Carruseles abajo)
            ======================================================== */
         /* Espaciador dinámico automatizado */
@@ -216,7 +216,8 @@
 
     <!-- SECCIÓN DE CARRUSELES INFINITOS (Deslizan por debajo del reproductor) -->
     <div class="genres-container">
-         <!-- GÉNERO 1: TERROR -->
+   
+<!-- GÉNERO 1: TERROR -->
         <div class="genre-row">
             <div class="genre-title">Terror</div>
             <div class="carousel-track">
@@ -231,15 +232,15 @@
                 <div class="movie-card" data-youtube="https://www.youtube.com/embed/cxtswm5yVN4?si=ytQ2kyqh9TiDwgT_">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz7xeWsa-GP4QHWNAXb_GvQe7V10muuNTspg&s" class="movie-poster" alt="peli">
                     <div class="movie-title">House of haunted hill 1959</div>
-                </div>
-                <div class="movie-card" data-youtube="https://www.youtube.com/embed/yviqjYaayj4?si=G_nn1WQYPFOU2_oT">
+                 </div>
+                    <div class="movie-card" data-youtube="https://www.youtube.com/embed/yviqjYaayj4?si=G_nn1WQYPFOU2_oT">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8wY9U-L8EzMsJc5GwcJTUYp8s6xHeM3y3xA&s" class="movie-poster" alt="peli">
                     <div class="movie-title">El carnaval de las almas 1962</div>
-                </div>
             </div>
         </div>
+        </div>
 
-        <!-- GÉNERO 2: ACCIÓN -->
+         <!-- GÉNERO 2: ACCIÓN -->
         <div class="genre-row">
             <div class="genre-title">Acción</div>
             <div class="carousel-track">
@@ -260,6 +261,7 @@
                     <div class="movie-title">Diablo 2011</div>
                      </div>
         </div>
+        </div>
 
          <!-- GÉNERO 3: CIENCIA FICCION -->
         <div class="genre-row">
@@ -277,13 +279,13 @@
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUu5F87a_h1lD9OUMC1WwYU2Yj_4SCGlpWow&s" class="movie-poster" alt="peli">
                     <div class="movie-title">Plan 9 del espacio exterior</div>
         </div>
-
-    </div>
+            </div>
+        </div>
 
     </div>
     <!-- SCRIPTS DE AJUSTE Y CONTROL DEL REPRODUCTOR -->
     <script>
-        // Candado físico fijo en 58px para tu menú
+ // Candado físico fijo en 58px para tu menú
         window.addEventListener('DOMContentLoaded', () => {
             const menuSuperior = document.querySelector('.radar-menu-superior');
             if (menuSuperior) {
@@ -308,59 +310,47 @@
             }
         });
 
-        // INTERACTUADOR INTEGRADOR CON DOBLE TOQUE INTELIGENTE PARA CELULARES
+        // SISTEMA FLUIDO DE RASTREO TÁCTIL (Libera scroll vertical y horizontal)
         window.addEventListener('DOMContentLoaded', () => {
             const player = document.getElementById('main-player');
             const cards = document.querySelectorAll('.movie-card');
             
-            let ultimoToque = 0;
             let startX = 0;
             let startY = 0;
 
             cards.forEach(card => {
-                // Captura el punto exacto donde inicia el dedo en la pantalla del celular
+                // Registrar posición inicial del dedo (Permite el scroll nativo libre)
                 card.addEventListener('touchstart', (e) => {
-                    startX = e.touches.clientX;
-                    startY = e.touches.clientY;
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
                 }, { passive: true });
 
-                // Controla la salida del dedo evaluando si hubo arrastre o doble toque
+                // Evaluar la acción al levantar el dedo sin bloquear el navegador
                 card.addEventListener('touchend', function(e) {
-                    const endX = e.changedTouches.clientX;
-                    const endY = e.changedTouches.clientY;
+                    const endX = e.changedTouches[0].clientX;
+                    const endY = e.changedTouches[0].clientY;
 
-                    // Calcula la distancia recorrida en píxeles
-                    const diffX = Math.abs(endX - startX);
-                    const diffY = Math.abs(endY - startY);
+                    // Calcular distancia en píxeles del movimiento
+                    const distanciaX = Math.abs(endX - startX);
+                    const distanciaY = Math.abs(endY - startY);
 
-                    // Si el usuario movió el dedo más de 10 píxeles, está deslizando el carrusel.
-                    // Cancelamos la acción y salimos para que no se cambie la película.
-                    if (diffX > 10 || diffY > 10) {
-                        return;
+                    // UMBRAL DE MOVIMIENTO: Si el dedo se movió más de 8 píxeles en cualquier dirección,
+                    // significa que el usuario está haciendo scroll (subiendo, bajando o deslizando el carrusel).
+                    // Detenemos la reproducción para que la navegación sea cómoda.
+                    if (distanciaX > 8 || distanciaY > 8) {
+                        return; 
                     }
 
-                    const tiempoActual = Date.now();
-                    const intervalo = tiempoActual - ultimoToque;
-
-                    // PRIMER TOQUE FIRME: Bloqueamos el cambio inmediato y guardamos el tiempo
-                    if (intervalo >= 300 || intervalo === 0) {
-                        ultimoToque = tiempoActual;
-                        return;
-                    }
-
-                    // SEGUNDO TOQUE CONSECUTIVO (Doble toque en menos de 0.3s): Se ejecuta el cambio de película
-                    e.preventDefault();
-                    ultimoToque = 0; // Resetea el temporizador
-
+                    // SI EL DEDO SE QUEDÓ FIJO: Es un toque limpio intencional para cargar la película
                     const videoUrl = this.getAttribute('data-youtube');
                     if (videoUrl && videoUrl.trim() !== "" && player) {
                         player.setAttribute('src', videoUrl);
                     }
                 });
 
-                // Respaldo para computadoras de escritorio (Clic normal sigue funcionando a la primera)
+                // Respaldo clásico para computadoras de escritorio
                 card.addEventListener('click', function(e) {
-                    if ('ontouchstart' in window) return;
+                    if ('ontouchstart' in window) return; // Ignorar clics simulados por navegadores móviles
                     
                     const videoUrl = this.getAttribute('data-youtube');
                     if (videoUrl && videoUrl.trim() !== "" && player) {
